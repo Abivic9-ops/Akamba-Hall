@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(uuid()) // Links to Supabase auth.users.id
+  email     String?  @unique
+  role      Role     @default(STUDENT)
+  memberType MemberType @default(STUDENT)
+  
+  // Relations
+  qrCards   QRCard[]
+  loans     Loan[]
+  holds     Hold[]
+  bookings  Booking[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  STUDENT
+  STAFF
+  EXECUTIVE
+  ASSISTANT
+  CAPTAIN
+  PREFECT
+  LIBRARY_HEAD
+  SUPER_ADMIN
+}
+
+enum MemberType {
+  STUDENT
+  STAFF
+  EXECUTIVE
+  PUBLIC
+}
+
+model QRCard {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  cardRef   String   @unique
+  status    QRStatus @default(ACTIVE)
+  
+  issuedAt     DateTime @default(now())
+  suspendedAt  DateTime?
+  revokedAt    DateTime?
+  reissuedFrom String?
+
+  @@index([cardRef])
+}
+
+enum QRStatus {
+  ACTIVE
+  SUSPENDED
+  REVOKED
+}
+
+model Book {
+  id          String   @id @default(uuid())
+  title       String
+  author      String
+  isbn        String?
+  category    String?
+  copies      Copy[]
+  holds       Hold[]
+  createdAt   DateTime @default(now())
+}
+
+model Copy {
+  id            String   @id @default(uuid())
+  bookId        String
+  book          Book     @relation(fields: [bookId], references: [id])
+  barcode       String?  @unique
+  shelfLocation String?
+  status        CopyStatus @default(AVAILABLE)
+  loans         Loan[]
+}
+
+enum CopyStatus {
+  AVAILABLE
+  LOANED
+  LOST
+  DAMAGED
+  RESERVED
+}
+
+model Loan {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  copyId       String
+  copy         Copy     @relation(fields: [copyId], references: [id])
+  
+  checkoutAt   DateTime @default(now())
+  dueAt        DateTime
+  returnedAt   DateTime?
+  renewCount   Int      @default(0)
+  status       LoanStatus @default(ACTIVE)
+  processedBy  String?
+}
+
+enum LoanStatus {
+  ACTIVE
+  RETURNED
+  OVERDUE
+  LOST
+}
+
+model Hold {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  bookId       String
+  book         Book     @relation(fields: [bookId], references: [id])
+  
+  requestedAt  DateTime @default(now())
+  expiryAt     DateTime?
+  status       HoldStatus @default(PENDING)
+  queuePosition Int     @default(1)
+}
+
+enum HoldStatus {
+  PENDING
+  READY
+  EXPIRED
+  FULFILLED
+  CANCELLED
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  spaceId   String
+  space     Space    @relation(fields: [spaceId], references: [id])
+  
+  startAt   DateTime
+  endAt     DateTime
+  status    BookingStatus @default(APPROVED)
+  createdAt DateTime @default(now())
+}
+
+model Space {
+  id        String   @id @default(uuid())
+  name      String
+  capacity  Int
+  bookings  Booking[]
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+  NO_SHOW
+}
