@@ -31,83 +31,83 @@ export default function SuperAdminLayout({ children }: { children: React.ReactNo
           
           <div className="mb-4">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-2 px-4 block">SUPER ADMIN</span>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-[13px] transition shadow-md shadow-blue-900/50">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-[13px] transition shadow-md shadow-blue-900/50">
               <Home className="h-4 w-4" /> Dashboard
             </Link>
           </div>
 
           <div className="mb-4">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-2 px-4 block">SYSTEM MANAGEMENT</span>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Users className="h-4 w-4" /> Users & Roles
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Shield className="h-4 w-4" /> Role Permissions
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Tag className="h-4 w-4" /> Member Categories
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Building2 className="h-4 w-4" /> Departments & Houses
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Megaphone className="h-4 w-4" /> System Announcements
             </Link>
           </div>
 
           <div className="mb-4">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-2 px-4 block">LIBRARY MANAGEMENT</span>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Library className="h-4 w-4" /> Catalog Management
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Archive className="h-4 w-4" /> Inventory & Stock
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Repeat className="h-4 w-4" /> Loans & Transactions
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Calendar className="h-4 w-4" /> Reservations & Bookings
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Monitor className="h-4 w-4" /> Equipment Management
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Newspaper className="h-4 w-4" /> Newspapers / Periodicals
             </Link>
           </div>
 
           <div className="mb-4">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-2 px-4 block">SYSTEM CONFIGURATION</span>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Settings className="h-4 w-4" /> Settings & Preferences
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <FileCheck className="h-4 w-4" /> Policies & Rules
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <ToggleLeft className="h-4 w-4" /> Feature Flags
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <LinkIcon className="h-4 w-4" /> Integrations
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Bot className="h-4 w-4" /> Automation & Jobs
             </Link>
           </div>
 
           <div className="mb-2">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-wider mb-2 px-4 block">MAINTENANCE</span>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Database className="h-4 w-4" /> Database & Backups
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <Activity className="h-4 w-4" /> Logs & Monitoring
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <FileText className="h-4 w-4" /> Audit Trails
             </Link>
-            <Link href="/admin-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
+            <Link href="/super-admin/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition">
               <HeartPulse className="h-4 w-4" /> System Health
             </Link>
           </div>
@@ -116,9 +116,11 @@ export default function SuperAdminLayout({ children }: { children: React.ReactNo
 
         {/* Bottom Navigation */}
         <div className="p-4 mt-auto border-t border-white/5">
-          <Link href="/login" className="flex items-center gap-3 px-4 py-2.5 text-[13px] font-bold text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-xl transition border border-red-400/20">
-            <LogOut className="h-4 w-4" /> Sign Out
-          </Link>
+          <form action="/api/auth/logout" method="POST">
+            <button type="submit" className="w-full flex items-center gap-3 px-4 py-2.5 text-[13px] font-bold text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-xl transition border border-red-400/20">
+              <LogOut className="h-4 w-4" /> Sign Out
+            </button>
+          </form>
         </div>
       </aside>
 

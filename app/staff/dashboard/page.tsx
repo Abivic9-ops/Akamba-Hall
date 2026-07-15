@@ -174,7 +174,7 @@ export default function StaffDashboardPage() {
             <div className="flex items-center gap-2 font-bold text-[#0B1B3D]">
               <BookOpen className="h-4 w-4 text-slate-400" /> My Loans
             </div>
-            <Link href="/staff-dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
+            <Link href="/staff/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
           </div>
           
           <div className="p-5 flex flex-col gap-5 flex-1">
@@ -233,7 +233,7 @@ export default function StaffDashboardPage() {
             <div className="flex items-center gap-2 font-bold text-[#0B1B3D]">
               Hold Ready for Pickup
             </div>
-            <Link href="/staff-dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
+            <Link href="/staff/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
           </div>
           
           <div className="p-5 flex flex-col gap-4 flex-1">
@@ -303,7 +303,7 @@ export default function StaffDashboardPage() {
             <div className="flex items-center gap-2 font-bold text-[#0B1B3D]">
               <Calendar className="h-4 w-4 text-slate-400" /> Today's Schedule & Bookings
             </div>
-            <Link href="/staff-dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View Calendar</Link>
+            <Link href="/staff/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View Calendar</Link>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -466,7 +466,7 @@ export default function StaffDashboardPage() {
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
           <div className="flex justify-between items-center mb-5">
             <h3 className="text-[15px] font-bold text-[#0B1B3D]">Recent Activity</h3>
-            <Link href="/staff-dashboard" className="text-[11px] font-bold text-blue-600 hover:underline">View all</Link>
+            <Link href="/staff/dashboard" className="text-[11px] font-bold text-blue-600 hover:underline">View all</Link>
           </div>
           
           <div className="flex flex-col gap-4">
@@ -555,7 +555,7 @@ export default function StaffDashboardPage() {
         <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
           <div className="flex justify-between items-center mb-1">
             <span className="font-bold text-[15px] text-[#0B1B3D]">Recommended For You</span>
-            <Link href="/staff-dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">See more</Link>
+            <Link href="/staff/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">See more</Link>
           </div>
           <p className="text-[11px] font-bold text-blue-600 mb-4">Based on your teaching & reading history</p>
           
@@ -606,7 +606,7 @@ export default function StaffDashboardPage() {
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
           <div className="flex justify-between items-center mb-5">
             <h3 className="text-[15px] font-bold text-[#0B1B3D]">Upcoming Events</h3>
-            <Link href="/staff-dashboard" className="text-[11px] font-bold text-blue-600 hover:underline">See all</Link>
+            <Link href="/staff/dashboard" className="text-[11px] font-bold text-blue-600 hover:underline">See all</Link>
           </div>
           
           <div className="flex flex-col gap-4">

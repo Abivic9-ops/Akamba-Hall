@@ -27,80 +27,82 @@ export default function ExecutiveLayout({ children }: { children: React.ReactNod
 
           {/* OVERVIEW */}
           <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest px-3 pt-2 pb-1">Overview</p>
-          <Link href="/exec-dashboard" className="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-500/90 text-white font-bold text-[13px] shadow">
+          <Link href="/executive/dashboard" className="flex items-center justify-between px-3 py-2 rounded-lg bg-amber-500/90 text-white font-bold text-[13px] shadow">
             <div className="flex items-center gap-2.5"><LayoutDashboard className="h-4 w-4" /> Dashboard</div>
             <ChevronRight className="h-3.5 w-3.5" />
           </Link>
 
           {/* MY ACCOUNT */}
           <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest px-3 pt-4 pb-1">My Account</p>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <BookOpen className="h-4 w-4 shrink-0" /> My Loans
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Calendar className="h-4 w-4 shrink-0" /> Reservations
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <History className="h-4 w-4 shrink-0" /> Reading History
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <CreditCard className="h-4 w-4 shrink-0" /> Fines & Payments
           </Link>
 
           {/* RESERVATIONS */}
           <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest px-3 pt-4 pb-1">Reservations</p>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Building2 className="h-4 w-4 shrink-0" /> Room Bookings
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Tv className="h-4 w-4 shrink-0" /> AVR Booking
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Package className="h-4 w-4 shrink-0" /> Equipment
           </Link>
 
           {/* LIBRARY SERVICES */}
           <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest px-3 pt-4 pb-1">Library Services</p>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Search className="h-4 w-4 shrink-0" /> Catalogue Search
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Globe className="h-4 w-4 shrink-0" /> E-Resources
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Monitor className="h-4 w-4 shrink-0" /> Digital Library
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Headphones className="h-4 w-4 shrink-0" /> Research Support
           </Link>
 
           {/* COMMUNICATION */}
           <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest px-3 pt-4 pb-1">Communication</p>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Megaphone className="h-4 w-4 shrink-0" /> Announcements
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <CalendarDays className="h-4 w-4 shrink-0" /> Events
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <MessageCircle className="h-4 w-4 shrink-0" /> Ask a Librarian
           </Link>
 
           {/* PREFERENCES */}
           <p className="text-[10px] font-bold text-white/35 uppercase tracking-widest px-3 pt-4 pb-1">Preferences</p>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <User className="h-4 w-4 shrink-0" /> Profile Settings
           </Link>
-          <Link href="/exec-dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
+          <Link href="/executive/dashboard" className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 transition">
             <Bell className="h-4 w-4 shrink-0" /> Notification Settings
           </Link>
 
           {/* Sign Out */}
           <div className="mt-4 pt-3 border-t border-white/5">
-            <Link href="/login" className="flex items-center justify-between px-3 py-2.5 rounded-lg text-[13px] font-bold text-red-400 hover:bg-red-400/10 transition border border-red-400/20">
-              <div className="flex items-center gap-2.5"><LogOut className="h-4 w-4" /> Sign Out</div>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </Link>
+            <form action="/api/auth/logout" method="POST">
+              <button type="submit" className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-[13px] font-bold text-red-400 hover:bg-red-400/10 transition border border-red-400/20">
+                <div className="flex items-center gap-2.5"><LogOut className="h-4 w-4" /> Sign Out</div>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </form>
           </div>
 
         </nav>

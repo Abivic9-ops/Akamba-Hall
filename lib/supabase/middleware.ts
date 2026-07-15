@@ -66,10 +66,10 @@ export async function updateSession(request: NextRequest) {
     )
   }
 
-  // ── Authenticated user on auth pages → dashboard ──────────────────
+  // ── Authenticated user on auth pages → student dashboard (default) ─
   if (user && isAuthRoute) {
     const url = request.nextUrl.clone()
-    url.pathname = '/dashboard'
+    url.pathname = '/student/dashboard'
     return NextResponse.redirect(url)
   }
 

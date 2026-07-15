@@ -157,7 +157,7 @@ export default function StudentDashboardPage() {
                 <div className="flex items-center gap-2 font-bold text-[#0B1B3D]">
                   <BookOpen className="h-4 w-4 text-slate-400" /> My Loans
                 </div>
-                <Link href="/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
+                <Link href="/student/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
               </div>
               
               <div className="p-5 flex flex-col gap-5 flex-1">
@@ -217,7 +217,7 @@ export default function StudentDashboardPage() {
                 <div className="flex items-center gap-2 font-bold text-[#0B1B3D]">
                   <Target className="h-4 w-4 text-slate-400" /> Holds & Reservations
                 </div>
-                <Link href="/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
+                <Link href="/student/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View all</Link>
               </div>
               
               <div className="p-5 flex flex-col gap-4 flex-1">
@@ -251,7 +251,7 @@ export default function StudentDashboardPage() {
                 <div className="flex items-center gap-1 text-[12px] font-bold text-slate-600 bg-slate-100 rounded-lg px-2 py-1">
                   <ChevronLeft className="h-3 w-3 cursor-pointer" /> Today <ChevronRight className="h-3 w-3 cursor-pointer" />
                 </div>
-                <Link href="/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View Calendar</Link>
+                <Link href="/student/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View Calendar</Link>
               </div>
             </div>
 
@@ -310,7 +310,7 @@ export default function StudentDashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
             <div className="flex justify-between items-center mb-5">
               <span className="font-bold text-[15px] text-[#0B1B3D]">Recently Borrowed</span>
-              <Link href="/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View History</Link>
+              <Link href="/student/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">View History</Link>
             </div>
             <div className="flex items-center gap-4 overflow-x-auto pb-4 custom-scrollbar">
               
@@ -360,7 +360,7 @@ export default function StudentDashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mt-0">
             <div className="flex justify-between items-center mb-1">
               <span className="font-bold text-[15px] text-[#0B1B3D]">Recommended For You</span>
-              <Link href="/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">See more</Link>
+              <Link href="/student/dashboard" className="text-[12px] font-bold text-blue-600 hover:underline">See more</Link>
             </div>
             <p className="text-[11px] font-bold text-blue-600 mb-4">Based on your reading & activity</p>
             
@@ -490,7 +490,7 @@ export default function StudentDashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
             <div className="flex justify-between items-center mb-5">
               <h3 className="text-[15px] font-bold text-[#0B1B3D]">Announcements</h3>
-              <Link href="/dashboard" className="text-[11px] font-bold text-slate-400 hover:text-[#0B1B3D]">See all &rsaquo;</Link>
+              <Link href="/student/dashboard" className="text-[11px] font-bold text-slate-400 hover:text-[#0B1B3D]">See all &rsaquo;</Link>
             </div>
             
             <div className="flex flex-col gap-4">
@@ -539,7 +539,7 @@ export default function StudentDashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
             <div className="flex justify-between items-center mb-5">
               <h3 className="text-[15px] font-bold text-[#0B1B3D]">Upcoming Events</h3>
-              <Link href="/dashboard" className="text-[11px] font-bold text-slate-400 hover:text-[#0B1B3D]">See all &rsaquo;</Link>
+              <Link href="/student/dashboard" className="text-[11px] font-bold text-slate-400 hover:text-[#0B1B3D]">See all &rsaquo;</Link>
             </div>
             
             <div className="flex flex-col gap-4">
@@ -577,7 +577,7 @@ export default function StudentDashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-[15px] font-bold text-[#0B1B3D]">Library Hours</h3>
-              <Link href="/dashboard" className="text-[11px] font-bold text-blue-600 hover:underline">View full schedule &rsaquo;</Link>
+              <Link href="/student/dashboard" className="text-[11px] font-bold text-blue-600 hover:underline">View full schedule &rsaquo;</Link>
             </div>
             
             <div className="flex items-center gap-2 mb-4">

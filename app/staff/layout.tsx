@@ -71,24 +71,24 @@ export default function StaffLayout({ children }: { children: React.ReactNode })
         <aside className="w-[260px] bg-white border-r border-slate-200 hidden lg:flex flex-col h-[calc(100vh-64px)] sticky top-16 overflow-y-auto overflow-x-hidden custom-scrollbar">
           <div className="p-4 flex flex-col gap-6">
             
-            <Link href="/staff-dashboard" className="flex items-center gap-3 bg-[#0B1B3D] text-white px-4 py-3 rounded-xl font-semibold text-sm shadow-md shadow-primary/10 transition-transform hover:scale-[1.02]">
+            <Link href="/staff/dashboard" className="flex items-center gap-3 bg-[#0B1B3D] text-white px-4 py-3 rounded-xl font-semibold text-sm shadow-md shadow-primary/10 transition-transform hover:scale-[1.02]">
               <LayoutDashboard className="h-4 w-4" /> Dashboard
             </Link>
 
             <div className="flex flex-col gap-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2">My Library</span>
-              <Link href="/staff-dashboard" className="flex items-center justify-between px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center justify-between px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <div className="flex items-center gap-3"><BookOpen className="h-4 w-4" /> My Loans</div>
                 <span className="h-5 w-5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold flex items-center justify-center">2</span>
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center justify-between px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center justify-between px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <div className="flex items-center gap-3"><Target className="h-4 w-4" /> Holds & Reservations</div>
                 <span className="h-5 w-5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold flex items-center justify-center">1</span>
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Bookmark className="h-4 w-4" /> My Bookmarks
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Clock className="h-4 w-4" /> History & Fines
               </Link>
             </div>
@@ -98,55 +98,55 @@ export default function StaffLayout({ children }: { children: React.ReactNode })
               <Link href="/search" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Search className="h-4 w-4" /> Catalogue Search
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <FileText className="h-4 w-4" /> E-Resources
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Book className="h-4 w-4" /> Courses & Materials
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Newspaper className="h-4 w-4" /> Newspaper Archive
               </Link>
             </div>
 
             <div className="flex flex-col gap-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2">Spaces & Bookings</span>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Armchair className="h-4 w-4" /> Reading Seats
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <MonitorPlay className="h-4 w-4" /> AVR Booking
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Users className="h-4 w-4" /> Boardroom Booking
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <PenTool className="h-4 w-4" /> Equipment Booking
               </Link>
             </div>
 
             <div className="flex flex-col gap-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2">Requests & Support</span>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Lightbulb className="h-4 w-4" /> Book Suggestions
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <HelpCircle className="h-4 w-4" /> Ask a Librarian
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <MessageCircle className="h-4 w-4" /> Feedback & Requests
               </Link>
             </div>
 
             <div className="flex flex-col gap-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-2">Community</span>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Calendar className="h-4 w-4" /> Events & Workshops
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <Users className="h-4 w-4" /> Study Groups
               </Link>
-              <Link href="/staff-dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
+              <Link href="/staff/dashboard" className="flex items-center gap-3 px-3 py-2 text-[13px] font-medium text-slate-600 hover:text-[#0B1B3D] hover:bg-slate-50 rounded-lg transition">
                 <FileText className="h-4 w-4" /> Library News
               </Link>
             </div>

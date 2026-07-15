@@ -165,7 +165,7 @@ export default function PublicLandingPage() {
             </div>
           </Link>
 
-          <Link href="/dashboard" className="block group bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-slate-100 p-4 transition-all hover:shadow-md hover:border-slate-200">
+          <Link href="/login" className="block group bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-slate-100 p-4 transition-all hover:shadow-md hover:border-slate-200">
             <div className="flex items-center justify-between">
               <div className="flex items-start gap-4">
                 <div className="h-10 w-10 shrink-0 rounded-lg bg-orange-50 flex items-center justify-center text-orange-500">
@@ -180,7 +180,7 @@ export default function PublicLandingPage() {
             </div>
           </Link>
 
-          <Link href="/dashboard" className="block group bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-slate-100 p-4 transition-all hover:shadow-md hover:border-slate-200">
+          <Link href="/login" className="block group bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-slate-100 p-4 transition-all hover:shadow-md hover:border-slate-200">
             <div className="flex items-center justify-between">
               <div className="flex items-start gap-4">
                 <div className="h-10 w-10 shrink-0 rounded-lg bg-pink-50 flex items-center justify-center text-pink-600">
@@ -237,7 +237,7 @@ export default function PublicLandingPage() {
           <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100 flex flex-col h-[380px]">
             <div className="flex justify-between items-center mb-6 border-b border-slate-100 pb-4">
               <h3 className="text-[16px] font-bold text-[#0B1B3D]">Latest Announcements</h3>
-              <Link href="/dashboard" className="text-[13px] text-blue-600 font-medium hover:underline">View all</Link>
+              <Link href="/login" className="text-[13px] text-blue-600 font-medium hover:underline">View all</Link>
             </div>
             
             <div className="flex flex-col gap-6 flex-1">
@@ -284,7 +284,7 @@ export default function PublicLandingPage() {
               </div>
             </div>
             
-            <Link href="/dashboard" className="text-[13px] font-medium text-center text-slate-500 hover:text-[#0B1B3D] mt-2 pt-4 flex items-center justify-center gap-1 transition-colors">
+            <Link href="/login" className="text-[13px] font-medium text-center text-slate-500 hover:text-[#0B1B3D] mt-2 pt-4 flex items-center justify-center gap-1 transition-colors">
               More announcements <ArrowRight className="h-3 w-3 ml-1" />
             </Link>
           </div>

@@ -30,7 +30,7 @@ export default function GovernanceLayout({ children }: { children: React.ReactNo
         {/* Navigation */}
         <div className="px-4 py-2 flex flex-col gap-1 flex-1">
           
-          <Link href="/head-dashboard" className="flex items-center gap-3 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-[13px] transition shadow-md shadow-blue-900/50 mb-2">
+          <Link href="/library-head/dashboard" className="flex items-center gap-3 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-[13px] transition shadow-md shadow-blue-900/50 mb-2">
             <Home className="h-4 w-4" /> Overview
           </Link>
 
@@ -41,75 +41,75 @@ export default function GovernanceLayout({ children }: { children: React.ReactNo
             <span className="bg-[#F5A623] text-[#0B1B3D] text-[10px] font-extrabold px-1.5 py-0.5 rounded shadow-sm">12</span>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <Activity className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Circulation Overview
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <PieChart className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Collection Health
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <Calendar className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Bookings
             </div>
             <ChevronRight className="h-3.5 w-3.5 text-white/40" />
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <QrCode className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> QR Management
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <AlertTriangle className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Incidents
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <Archive className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Inventory
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <BarChart2 className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Reports & Analytics
             </div>
             <ChevronRight className="h-3.5 w-3.5 text-white/40" />
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <Users className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Staff Management
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <User className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Members
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <Megaphone className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> CMS / Announcements
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <FileText className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Audit Logs
             </div>
           </Link>
 
-          <Link href="/head-dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
+          <Link href="/library-head/dashboard" className="flex items-center justify-between px-4 py-2.5 text-[13px] font-medium text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition group">
             <div className="flex items-center gap-3">
               <Settings className="h-4 w-4 group-hover:text-blue-400 transition-colors" /> Settings
             </div>
@@ -119,15 +119,17 @@ export default function GovernanceLayout({ children }: { children: React.ReactNo
 
         {/* Bottom Navigation */}
         <div className="p-4 mt-auto border-t border-white/5 flex flex-col gap-1">
-          <Link href="/head-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition">
+          <Link href="/library-head/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition">
             <HelpCircle className="h-4 w-4" /> Help Center
           </Link>
-          <Link href="/head-dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition">
+          <Link href="/library-head/dashboard" className="flex items-center gap-3 px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition">
             <LifeBuoy className="h-4 w-4" /> Support
           </Link>
-          <Link href="/login" className="flex items-center gap-3 px-4 py-2 text-[13px] font-bold text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-xl transition mt-2">
-            <LogOut className="h-4 w-4" /> Log Out
-          </Link>
+          <form action="/api/auth/logout" method="POST">
+            <button type="submit" className="w-full flex items-center gap-3 px-4 py-2 text-[13px] font-bold text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-xl transition mt-2">
+              <LogOut className="h-4 w-4" /> Log Out
+            </button>
+          </form>
         </div>
       </aside>
 
