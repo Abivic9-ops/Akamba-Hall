@@ -2,23 +2,26 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  })
+  let supabaseResponse = NextResponse.next({ request })
+
+  // Gracefully bypass if Supabase env vars are missing (UI preview / local dev)
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return supabaseResponse
+  }
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         getAll() {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          )
+          supabaseResponse = NextResponse.next({ request })
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           )
@@ -32,22 +35,39 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   const { pathname } = request.nextUrl
-  
-  // Protect routes based on role
-  const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/qr-login')
-  const isPublicRoute = pathname === '/' || pathname.startsWith('/search') || pathname.startsWith('/item') || pathname.startsWith('/hours') || pathname.startsWith('/announcements') || pathname.startsWith('/help')
+
+  // ── Route categories ──────────────────────────────────────────────
+  const isAuthRoute =
+    pathname.startsWith('/login') || pathname.startsWith('/qr-login')
+
+  const isPublicRoute =
+    pathname === '/' ||
+    pathname === '/unauthorized' ||
+    pathname.startsWith('/search') ||
+    pathname.startsWith('/item') ||
+    pathname.startsWith('/hours') ||
+    pathname.startsWith('/announcements') ||
+    pathname.startsWith('/help')
+
   const isApiRoute = pathname.startsWith('/api')
-  
+
+  // ── Unauthenticated user on a protected route → /login ────────────
   if (!user && !isAuthRoute && !isPublicRoute && !isApiRoute) {
-    // no user, redirect to login
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
+  // ── Unauthenticated user hitting a protected API → 401 ────────────
+  if (!user && isApiRoute) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    )
+  }
+
+  // ── Authenticated user on auth pages → dashboard ──────────────────
   if (user && isAuthRoute) {
-    // Redirect logged-in user away from auth pages.
-    // For now, redirect to a general dashboard route which we will create next.
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)

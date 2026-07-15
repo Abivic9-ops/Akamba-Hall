@@ -4,18 +4,21 @@ import prisma from '@/lib/db/prisma'
 
 // Maps DB roles to their respective portal routes
 const ROLE_ROUTES: Record<string, string> = {
-  STUDENT:      '/member/dashboard',
-  STAFF:        '/member/dashboard',
-  EXECUTIVE:    '/member/dashboard',
-  ASSISTANT:    '/operations/dashboard',
-  CAPTAIN:      '/operations/dashboard',
-  PREFECT:      '/operations/dashboard',
-  LIBRARY_HEAD: '/governance/dashboard',
-  SUPER_ADMIN:  '/governance/dashboard',
+  STUDENT:      '/dashboard',
+  STAFF:        '/staff-dashboard',
+  EXECUTIVE:    '/dashboard',
+  ASSISTANT:    '/staff-dashboard',
+  CAPTAIN:      '/staff-dashboard',
+  PREFECT:      '/staff-dashboard',
+  LIBRARY_HEAD: '/staff-dashboard',
+  SUPER_ADMIN:  '/staff-dashboard',
 }
 
 export async function getAuthUser() {
   const supabase = await createClient()
+  // If Supabase is not configured (UI preview mode), treat as unauthenticated
+  if (!supabase) return null
+
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -53,5 +56,5 @@ export async function requireRole(allowedRoles: string[]) {
 }
 
 export function getRouteForRole(role: string): string {
-  return ROLE_ROUTES[role] ?? '/member/dashboard'
+  return ROLE_ROUTES[role] ?? '/dashboard'
 }

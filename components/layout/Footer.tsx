@@ -30,10 +30,10 @@ export function Footer() {
         <div className="flex flex-col gap-4">
           <h3 className="font-bold text-[14px] text-[#0B1B3D]">Explore</h3>
           <div className="flex flex-col gap-3">
-            <Link href="/about" className="text-[13px] text-slate-500 hover:text-primary transition-colors">About the Library</Link>
-            <Link href="/services" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Library Services</Link>
-            <Link href="/rules" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Rules & Policies</Link>
-            <Link href="/faq" className="text-[13px] text-slate-500 hover:text-primary transition-colors">FAQ</Link>
+            <Link href="/" className="text-[13px] text-slate-500 hover:text-primary transition-colors">About the Library</Link>
+            <Link href="/search" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Library Services</Link>
+            <Link href="/" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Rules & Policies</Link>
+            <Link href="/" className="text-[13px] text-slate-500 hover:text-primary transition-colors">FAQ</Link>
           </div>
         </div>
 
@@ -42,9 +42,9 @@ export function Footer() {
           <h3 className="font-bold text-[14px] text-[#0B1B3D]">Resources</h3>
           <div className="flex flex-col gap-3">
             <Link href="/search" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Catalogue Search</Link>
-            <Link href="/e-resources" className="text-[13px] text-slate-500 hover:text-primary transition-colors">E-Resources</Link>
-            <Link href="/archive" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Newspaper Archive</Link>
-            <Link href="/digital" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Digital Library</Link>
+            <Link href="/search" className="text-[13px] text-slate-500 hover:text-primary transition-colors">E-Resources</Link>
+            <Link href="/search" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Newspaper Archive</Link>
+            <Link href="/search" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Digital Library</Link>
           </div>
         </div>
 
@@ -52,10 +52,10 @@ export function Footer() {
         <div className="flex flex-col gap-4">
           <h3 className="font-bold text-[14px] text-[#0B1B3D]">Support</h3>
           <div className="flex flex-col gap-3">
-            <Link href="/ask" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Ask a Librarian</Link>
-            <Link href="/feedback" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Feedback & Suggestions</Link>
-            <Link href="/help" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Help Center</Link>
-            <Link href="/contact" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Contact Us</Link>
+            <Link href="/dashboard" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Ask a Librarian</Link>
+            <Link href="/dashboard" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Feedback & Suggestions</Link>
+            <Link href="/dashboard" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Help Center</Link>
+            <Link href="/" className="text-[13px] text-slate-500 hover:text-primary transition-colors">Contact Us</Link>
           </div>
         </div>
 
@@ -105,11 +105,11 @@ export function Footer() {
           &copy; {new Date().getFullYear()} Starehe Boys&apos; Centre - Akamba Hall Library. All rights reserved.
         </p>
         <div className="flex items-center gap-4 text-[12px] text-slate-400">
-          <Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+          <Link href="/" className="hover:text-primary transition-colors">Privacy Policy</Link>
           <span>|</span>
-          <Link href="/terms" className="hover:text-primary transition-colors">Terms of Use</Link>
+          <Link href="/" className="hover:text-primary transition-colors">Terms of Use</Link>
           <span>|</span>
-          <Link href="/sitemap" className="hover:text-primary transition-colors">Sitemap</Link>
+          <Link href="/" className="hover:text-primary transition-colors">Sitemap</Link>
         </div>
       </div>
     </footer>

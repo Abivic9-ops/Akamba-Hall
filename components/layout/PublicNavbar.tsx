@@ -33,7 +33,7 @@ export function PublicNavbar() {
         {/* NAVIGATION LINKS */}
         <nav className="hidden lg:flex items-center space-x-6 text-[13px] font-bold text-[#0B1B3D]">
           <Link href="/" className="text-primary border-b-2 border-primary pb-1">Home</Link>
-          <Link href="/about" className="hover:text-primary transition-colors">About Library</Link>
+          <Link href="/" className="hover:text-primary transition-colors">About Library</Link>
           <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors group relative">
             Resources <ChevronDown className="h-3 w-3 text-slate-400 group-hover:text-primary" />
           </div>
@@ -43,9 +43,9 @@ export function PublicNavbar() {
           <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors group relative">
             Community <ChevronDown className="h-3 w-3 text-slate-400 group-hover:text-primary" />
           </div>
-          <Link href="/events" className="hover:text-primary transition-colors">Events</Link>
-          <Link href="/news" className="hover:text-primary transition-colors">News & Blog</Link>
-          <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+          <Link href="/dashboard" className="hover:text-primary transition-colors">Events</Link>
+          <Link href="/dashboard" className="hover:text-primary transition-colors">News & Blog</Link>
+          <Link href="/" className="hover:text-primary transition-colors">Contact</Link>
         </nav>
 
         {/* RIGHT ACTIONS */}
