@@ -22,6 +22,7 @@ const protected_route_prefixes = [
   '/catalogue',
   '/members',
   '/reservations',
+  '/account',
 ]
 
 export async function updateSession(request: NextRequest) {
