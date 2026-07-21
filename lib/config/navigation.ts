@@ -57,6 +57,13 @@ export const navigationRegistry: NavItem[] = [
     section: 'Configuration',
     roles: ['SUPER_ADMIN'],
   },
+  {
+    label: 'All Dashboards',
+    icon: 'Grid3X3',
+    path: '/super-admin/dashboards',
+    section: 'Quick Access',
+    roles: ['SUPER_ADMIN'],
+  },
 
   // ─── LIBRARY HEAD ──────────────────────────────
   {

@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   LayoutDashboard, Users, Shield, Activity, ScrollText,
   Settings, CalendarCheck, Library, BriefcaseBusiness, X,
+  GraduationCap, Briefcase, Monitor, Zap, BookMarked,
+  Grid3X3,
 } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { getNavigationForRole } from '@/lib/config/navigation'
@@ -16,10 +18,30 @@ import type { Role } from '@/lib/types/role'
 const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard, Users, Shield, Activity, ScrollText,
   Settings, CalendarCheck, Library, BriefcaseBusiness,
+  GraduationCap, Briefcase, Monitor, Zap, BookMarked, Grid3X3,
 }
 
 function resolve_icon(name: string) {
   return icon_map[name] ?? LayoutDashboard
+}
+
+const path_role_map: Record<string, Role> = {
+  '/super-admin': 'SUPER_ADMIN',
+  '/library-head': 'LIBRARY_HEAD',
+  '/student': 'STUDENT',
+  '/staff': 'STAFF',
+  '/desk': 'ASSISTANT',
+  '/executive': 'EXECUTIVE',
+}
+
+function getSidebarRole(pathname: string, actualRole: Role): Role {
+  if (actualRole === 'SUPER_ADMIN') {
+    for (const [prefix, sidebarRole] of Object.entries(path_role_map)) {
+      if (pathname.startsWith(prefix)) return sidebarRole
+    }
+    return actualRole
+  }
+  return actualRole
 }
 
 interface mobile_nav_props {
@@ -30,8 +52,10 @@ interface mobile_nav_props {
 export function mobile_nav({ open, on_close }: mobile_nav_props) {
   const { user, role } = useAuth()
   const pathname = usePathname()
-  const nav_items = role ? getNavigationForRole(role as Role) : []
-  const display_role = role ? role_short_names[role as Role] : ''
+  const sidebarRole = getSidebarRole(pathname, (role as Role) ?? 'STUDENT')
+  const nav_items = getNavigationForRole(sidebarRole)
+  const display_role = role_short_names[sidebarRole] ?? ''
+  const viewingOther = sidebarRole !== role
   const user_name = user?.fullName ?? 'User'
   const initials = user_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
 
@@ -84,6 +108,15 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                 <X className="h-5 w-5" />
               </button>
             </div>
+
+            {/* viewing-as indicator */}
+            {viewingOther && (
+              <div className="mx-3 mt-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                <span className="text-[10px] font-bold text-amber-400">
+                  Viewing as {display_role}
+                </span>
+              </div>
+            )}
 
             {/* nav items */}
             <nav className="flex-1 overflow-y-auto px-3 py-4">
