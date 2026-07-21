@@ -1,4 +1,8 @@
-export default function executive_placeholder() {
+import { requireRole } from '@/lib/auth/roleGuard'
+
+export default async function executive_placeholder() {
+  await requireRole(['EXECUTIVE'])
+
   return (
     <div className="min-h-screen bg-[#F8F9FB] flex items-center justify-center p-6">
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-10 max-w-md w-full text-center space-y-4">

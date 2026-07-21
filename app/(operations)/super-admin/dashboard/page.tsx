@@ -1,3 +1,4 @@
+import { requireRole } from '@/lib/auth/roleGuard'
 import {
   get_super_admin_metrics,
   get_super_admin_activity,
@@ -42,6 +43,8 @@ const metric_keys = ['total_users', 'total_books', 'active_loans', 'pending_book
 const metric_labels = ['Total Users', 'Total Books', 'Active Loans', 'Pending Bookings'] as const
 
 export default async function super_admin_dashboard() {
+  await requireRole(['SUPER_ADMIN'])
+
   const [metrics, activity, distribution, health] = await Promise.all([
     get_super_admin_metrics(),
     get_super_admin_activity(),

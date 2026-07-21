@@ -1,3 +1,4 @@
+import { requireRole } from '@/lib/auth/roleGuard'
 import prisma from '@/lib/db/prisma'
 import {
   Users, BookOpen, CalendarCheck, Clock, AlertTriangle,
@@ -39,6 +40,8 @@ const status_colors: Record<string, string> = {
 }
 
 export default async function library_head_dashboard() {
+  await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
+
   const today_start = new Date()
   today_start.setHours(0, 0, 0, 0)
 
