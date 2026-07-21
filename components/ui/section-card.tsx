@@ -15,18 +15,18 @@ interface SectionCardProps {
 export function SectionCard({ title, icon: Icon, cta, children, className, contentClassName }: SectionCardProps) {
   return (
     <div className={cn('bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden', className)}>
-      <div className="flex items-center justify-between px-6 py-5 border-b border-slate-50">
-        <h2 className="text-[17px] font-medium text-slate-900 flex items-center gap-2.5">
-          {Icon && <Icon className="h-5 w-5 text-slate-400" />}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-50">
+        <h2 className="text-[15px] font-medium text-slate-900 flex items-center gap-2">
+          {Icon && <Icon className="h-4 w-4 text-slate-400" />}
           {title}
         </h2>
         {cta && (
-          <Link href={cta.href} className="text-[14px] font-medium text-[#2563EB] hover:underline">
+          <Link href={cta.href} className="inline-flex items-center h-7 px-3.5 rounded-full border border-[#2563EB]/20 text-[12px] font-medium text-[#2563EB] bg-[#2563EB]/5 hover:bg-[#2563EB]/10 transition-colors">
             {cta.label}
           </Link>
         )}
       </div>
-      <div className={cn('p-6', contentClassName)}>
+      <div className={cn('p-4', contentClassName)}>
         {children}
       </div>
     </div>

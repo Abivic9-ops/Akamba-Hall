@@ -36,7 +36,7 @@ export function Holds({ holds }: HoldsProps) {
           icon={Bookmark}
           message="No holds or reservations"
           action={
-            <a href="#" className="text-[14px] font-medium text-[#2563EB] hover:underline">
+            <a href="#" className="text-[13px] font-medium text-[#2563EB] hover:underline">
               Search Catalogue
             </a>
           }
@@ -46,45 +46,45 @@ export function Holds({ holds }: HoldsProps) {
           {holds.map((hold) => (
             <div
               key={hold.id}
-              className="flex items-start gap-4 py-4 border-b border-slate-50 last:border-0"
+              className="flex items-start gap-3 py-3 border-b border-slate-50 last:border-0"
             >
               {/* cover placeholder */}
-              <div className="w-[44px] h-[60px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                <Bookmark className="h-5 w-5 text-slate-400" />
+              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                <Bookmark className="h-4 w-4 text-slate-400" />
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-medium text-slate-800 truncate">{hold.title}</p>
-                <p className="text-[13px] text-slate-400">{hold.author}</p>
+                <p className="text-[14px] font-medium text-slate-800 truncate">{hold.title}</p>
+                <p className="text-[12px] text-slate-400">{hold.author}</p>
 
                 {hold.status === 'ready' ? (
-                  <div className="mt-2 space-y-1.5">
+                  <div className="mt-1.5 space-y-1">
                     <Badge variant="success" dot>Ready for Pickup</Badge>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                      <span className="text-[13px] text-slate-500">{hold.pickupLocation}</span>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <MapPin className="h-3 w-3 text-slate-400" />
+                      <span className="text-[12px] text-slate-500">{hold.pickupLocation}</span>
                     </div>
                     {hold.pickupDeadline && (
-                      <p className="text-[13px] font-medium text-red-600">
+                      <p className="text-[12px] font-medium text-red-600">
                         Pickup by {formatDeadline(hold.pickupDeadline)}
                       </p>
                     )}
                   </div>
                 ) : (
-                  <div className="mt-2">
+                  <div className="mt-1.5">
                     <Badge variant="info" dot>#{hold.queuePosition} in queue</Badge>
                   </div>
                 )}
               </div>
 
-              <div className="flex flex-col items-end gap-2 shrink-0">
+              <div className="flex flex-col items-end gap-1.5 shrink-0">
                 {hold.status === 'ready' && (
-                  <button className="h-8 px-4 rounded-lg bg-[#2563EB] text-white text-[13px] font-medium hover:bg-[#1D4ED8] transition-colors">
-                    Pick Up Now
+                  <button className="h-7 px-3 rounded-lg bg-[#2563EB] text-white text-[12px] font-medium hover:bg-[#1D4ED8] transition-colors">
+                    Pick Up
                   </button>
                 )}
-                <button className="text-[13px] font-medium text-red-500 hover:text-red-700 transition-colors">
-                  Cancel Hold
+                <button className="text-[12px] font-medium text-red-500 hover:text-red-700 transition-colors">
+                  Cancel
                 </button>
               </div>
             </div>

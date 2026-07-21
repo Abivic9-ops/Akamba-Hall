@@ -1,6 +1,6 @@
 'use client'
 
-import { BookOpen, Bookmark, CalendarCheck, Clock, AlertCircle } from 'lucide-react'
+import { BookOpen, Bookmark, CalendarCheck, Clock, AlertCircle, ArrowRight } from 'lucide-react'
 
 interface OverviewCardsProps {
   activeLoans: number
@@ -29,27 +29,30 @@ export function OverviewCards({
       value: activeLoans,
       label: 'Active Loans',
       detail: dueSoonCount > 0 ? `${dueSoonCount} due soon` : 'All on track',
-      accent: 'bg-[#2563EB]',
-      iconColor: 'text-[#2563EB]',
-      bgTint: 'bg-blue-50',
+      gradient: 'linear-gradient(135deg, #FFFFFF 0%, #F4F8FF 50%, #E8F1FF 100%)',
+      iconBg: 'bg-[#2155F5]/10',
+      iconColor: 'text-[#2155F5]',
+      btnBg: 'bg-[#2155F5]',
     },
     {
       icon: Bookmark,
       value: holdsReady,
       label: 'Holds Ready',
       detail: holdsReady > 0 ? 'Pickup before deadline' : 'No holds ready',
-      accent: 'bg-[#0D9488]',
-      iconColor: 'text-[#0D9488]',
-      bgTint: 'bg-teal-50',
+      gradient: 'linear-gradient(135deg, #FFFFFF 0%, #FFFDF6 50%, #FFF5D8 100%)',
+      iconBg: 'bg-[#F4A623]/10',
+      iconColor: 'text-[#F4A623]',
+      btnBg: 'bg-[#F4A623]',
     },
     {
       icon: CalendarCheck,
       value: upcomingBookings,
       label: 'Upcoming Bookings',
       detail: nextBookingTime ? `Next: ${nextBookingTime}` : 'No bookings',
-      accent: 'bg-amber-500',
-      iconColor: 'text-amber-500',
-      bgTint: 'bg-amber-50',
+      gradient: 'linear-gradient(135deg, #FFFFFF 0%, #F4FFF9 50%, #E7FAEF 100%)',
+      iconBg: 'bg-[#18A957]/10',
+      iconColor: 'text-[#18A957]',
+      btnBg: 'bg-[#18A957]',
     },
     overdueCount > 0
       ? {
@@ -57,18 +60,20 @@ export function OverviewCards({
           value: overdueCount,
           label: 'Late Items',
           detail: 'Overdue — return now',
-          accent: 'bg-red-600',
-          iconColor: 'text-red-600',
-          bgTint: 'bg-red-50',
+          gradient: 'linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 50%, #FFE8E8 100%)',
+          iconBg: 'bg-[#E53E3E]/10',
+          iconColor: 'text-[#E53E3E]',
+          btnBg: 'bg-[#E53E3E]',
         }
       : {
           icon: Clock,
           value: libraryIsOpen ? 'Open' : 'Closed',
           label: 'Library Hours',
           detail: libraryIsOpen ? `Closes ${libraryHours}` : 'Opens tomorrow 7:30 AM',
-          accent: 'bg-emerald-600',
-          iconColor: 'text-emerald-600',
-          bgTint: 'bg-emerald-50',
+          gradient: 'linear-gradient(135deg, #FFFFFF 0%, #FBF7FF 50%, #F3E9FF 100%)',
+          iconBg: 'bg-[#8B5CF6]/10',
+          iconColor: 'text-[#8B5CF6]',
+          btnBg: 'bg-[#8B5CF6]',
         },
   ]
 
@@ -79,28 +84,32 @@ export function OverviewCards({
         return (
           <div
             key={card.label}
-            className="relative bg-white rounded-xl border border-slate-100 shadow-sm p-6 hover:shadow-md transition-all group overflow-hidden"
+            className="relative w-full rounded-[30px] border border-[#EDF2F7] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)] p-5 flex flex-col justify-between overflow-hidden transition-shadow hover:shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.04)]"
+            style={{ background: card.gradient }}
           >
-            {/* left accent bar */}
-            <div className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-l-xl ${card.accent}`} />
-
-            <div className="flex items-start justify-between mb-4 pl-2">
-              <div className={`h-11 w-11 rounded-xl flex items-center justify-center ${card.bgTint}`}>
-                <Icon className={`h-5 w-5 ${card.iconColor}`} />
-              </div>
-              <span className="text-[13px] text-slate-400 font-normal group-hover:text-slate-600 transition-colors">→</span>
+            {/* icon */}
+            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${card.iconBg}`}>
+              <Icon className={`h-5 w-5 ${card.iconColor}`} />
             </div>
 
-            <div className="pl-2">
-              <p className="text-[32px] font-medium text-slate-900 leading-tight">
+            {/* value + label */}
+            <div>
+              <p className="text-[40px] font-bold text-slate-900 leading-none tracking-tight">
                 {card.value}
               </p>
-              <p className="text-[15px] font-normal text-slate-600 mt-1">
+              <p className="text-[15px] font-semibold text-[#1F2937] mt-1">
                 {card.label}
               </p>
-              <p className="text-[13px] text-slate-400 mt-1">
+              <p className="text-[13px] text-[#6B7280] mt-0.5">
                 {card.detail}
               </p>
+            </div>
+
+            {/* action button */}
+            <div className="flex justify-end">
+              <div className={`h-[26px] w-[26px] rounded-full ${card.btnBg} flex items-center justify-center`}>
+                <ArrowRight className="h-3 w-3 text-white" />
+              </div>
             </div>
           </div>
         )

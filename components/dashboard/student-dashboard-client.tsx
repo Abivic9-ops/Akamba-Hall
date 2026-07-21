@@ -49,7 +49,7 @@ export function StudentDashboardClient({
 
   return (
     <div className="min-h-screen bg-[#F8F9FB]">
-      <div className="max-w-[1200px] mx-auto p-6 space-y-6">
+      <div className="max-w-[1200px] mx-auto p-6 space-y-5">
 
         {/* ── Welcome Header ──────────────────────────── */}
         <WelcomeHeader firstName={firstName} />
@@ -69,12 +69,11 @@ export function StudentDashboardClient({
         {/* ── Hero Banner ─────────────────────────────── */}
         <HeroBanner />
 
-        {/* ── My Loans + QR Card ──────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <MyLoans loans={loans} />
-          </div>
-          <div>
+        {/* ── My Loans + Holds + QR Card (3-col) ──────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+          <MyLoans loans={loans} />
+          <Holds holds={holds} />
+          <div className="lg:row-span-1">
             <QRCard
               label={profile.qrCard.label}
               memberId={profile.qrCard.memberId}
@@ -84,35 +83,34 @@ export function StudentDashboardClient({
           </div>
         </div>
 
-        {/* ── Holds & Reservations ─────────────────────── */}
-        <Holds holds={holds} />
-
         {/* ── Schedule + Quick Actions ─────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
+          <div className="lg:col-span-3">
             <Schedule bookings={bookings} />
           </div>
-          <div>
+          <div className="lg:col-span-2">
             <QuickActions />
           </div>
         </div>
 
-        {/* ── Announcements + Library Hours ────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Announcements announcements={announcements} />
-          <LibraryHours
-            isOpen={libraryHours.isOpen}
-            closesAt={libraryHours.closesAt}
-            opensTomorrow={libraryHours.opensTomorrow}
-            schedule={libraryHours.schedule}
-          />
+        {/* ── Catalogue | Announcements + Hours + Support ─ */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
+          <div className="lg:col-span-2">
+            <CatalogueSearch />
+          </div>
+          <div className="lg:col-span-3 space-y-4">
+            <Announcements announcements={announcements} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+              <LibraryHours
+                isOpen={libraryHours.isOpen}
+                closesAt={libraryHours.closesAt}
+                opensTomorrow={libraryHours.opensTomorrow}
+                schedule={libraryHours.schedule}
+              />
+              <Support />
+            </div>
+          </div>
         </div>
-
-        {/* ── Catalogue Search ─────────────────────────── */}
-        <CatalogueSearch />
-
-        {/* ── Support & Help ───────────────────────────── */}
-        <Support />
 
       </div>
     </div>

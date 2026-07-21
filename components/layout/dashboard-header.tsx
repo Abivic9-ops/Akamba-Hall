@@ -161,8 +161,8 @@ export function dashboard_header({ on_menu_toggle }: dashboard_header_props) {
 
             {/* identity block */}
             <div className="hidden sm:flex flex-col items-start">
-              <span className="text-[14px] font-semibold text-[#1F2937] leading-tight">{first_name}</span>
-              <span className="text-[12px] text-[#7C869D] leading-tight">{student_info} · {display_role}</span>
+              <span className="text-[13px] font-medium text-[#1F2937] leading-tight">{first_name}</span>
+              <span className="text-[11px] text-[#7C869D] leading-tight mt-0.5">{student_info} · {display_role}</span>
             </div>
 
             {/* chevron */}

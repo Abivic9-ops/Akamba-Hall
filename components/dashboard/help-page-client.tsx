@@ -152,7 +152,7 @@ export function HelpPageClient() {
                   <p className="text-[13px] text-slate-500 mt-0.5">
                     Report a lost QR card or login problem immediately. Your card will be deactivated to prevent misuse.
                   </p>
-                  <button className="inline-flex items-center gap-1.5 mt-2 text-[13px] text-[#2563EB] font-medium hover:underline">
+                  <button className="inline-flex items-center gap-1.5 mt-2 h-7 px-3.5 rounded-full border border-[#2563EB]/20 text-[12px] text-[#2563EB] font-medium bg-[#2563EB]/5 hover:bg-[#2563EB]/10 transition-colors">
                     Report Issue <ExternalLink className="h-3 w-3" />
                   </button>
                 </div>

@@ -47,7 +47,7 @@ export function MyLoans({ loans }: MyLoansProps) {
           icon={BookOpen}
           message="No active loans"
           action={
-            <a href="#" className="text-[14px] font-medium text-[#2563EB] hover:underline">
+            <a href="#" className="text-[13px] font-medium text-[#2563EB] hover:underline">
               Search Catalogue
             </a>
           }
@@ -57,25 +57,25 @@ export function MyLoans({ loans }: MyLoansProps) {
           {loans.map((loan) => (
             <div
               key={loan.id}
-              className="flex items-center gap-4 py-4 border-b border-slate-50 last:border-0 group"
+              className="flex items-center gap-3 py-3 border-b border-slate-50 last:border-0 group"
             >
               {/* cover placeholder */}
-              <div className="w-[44px] h-[60px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                <BookOpen className="h-5 w-5 text-slate-400" />
+              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                <BookOpen className="h-4 w-4 text-slate-400" />
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-medium text-slate-800 truncate">{loan.title}</p>
-                <p className="text-[13px] text-slate-400">{loan.author}</p>
-                <p className="text-[13px] text-slate-400 mt-0.5">
+                <p className="text-[14px] font-medium text-slate-800 truncate">{loan.title}</p>
+                <p className="text-[12px] text-slate-400">{loan.author}</p>
+                <p className="text-[12px] text-slate-400 mt-0.5">
                   Due: {formatDate(loan.dueDate)}
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-2 shrink-0">
                 {dueBadge(loan.dueDate)}
                 {loan.renewable && (
-                  <button className="text-[13px] font-medium text-[#2563EB] opacity-0 group-hover:opacity-100 transition-opacity hover:underline">
+                  <button className="text-[12px] font-medium text-[#2563EB] opacity-0 group-hover:opacity-100 transition-opacity hover:underline">
                     Renew
                   </button>
                 )}
@@ -86,13 +86,13 @@ export function MyLoans({ loans }: MyLoansProps) {
       )}
 
       {loans.length > 0 && (
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-50">
-          <button className="inline-flex items-center gap-1.5 text-[14px] font-medium text-slate-600 hover:text-slate-800 transition-colors">
-            <RefreshCw className="h-4 w-4" />
+        <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50">
+          <button className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate-600 hover:text-slate-800 transition-colors">
+            <RefreshCw className="h-3.5 w-3.5" />
             Renew All Eligible
           </button>
-          <a href="#" className="text-[14px] font-medium text-[#2563EB] hover:underline">
-            Manage Loans →
+          <a href="#" className="inline-flex items-center h-7 px-3.5 rounded-full border border-[#2563EB]/20 text-[12px] font-medium text-[#2563EB] bg-[#2563EB]/5 hover:bg-[#2563EB]/10 transition-colors">
+            Manage Loans
           </a>
         </div>
       )}

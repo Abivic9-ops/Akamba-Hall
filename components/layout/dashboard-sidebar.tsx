@@ -47,6 +47,17 @@ function getSidebarRole(pathname: string, actualRole: Role): Role {
   return actualRole
 }
 
+const portal_labels: Record<string, string> = {
+  STUDENT: 'Student Portal',
+  STAFF: 'Staff Portal',
+  ASSISTANT: 'Desk Portal',
+  CAPTAIN: 'Desk Portal',
+  PREFECT: 'Desk Portal',
+  EXECUTIVE: 'Executive Portal',
+  LIBRARY_HEAD: 'Library Head Portal',
+  SUPER_ADMIN: 'Admin Portal',
+}
+
 const notification_badges: Record<string, number> = {
   '/student/loans': 2,
 }
@@ -81,6 +92,7 @@ export function dashboard_sidebar() {
   const sections = getNavigationSections(sidebarRole)
   const display_role = role_short_names[sidebarRole] ?? ''
   const viewingOther = sidebarRole !== role
+  const firstName = user?.fullName?.split(' ')[0] ?? ''
 
   return (
     <motion.aside
@@ -104,6 +116,10 @@ export function dashboard_sidebar() {
             >
               <span className="font-medium text-[#1F2937] text-[15px] leading-tight truncate">Akamba Hall</span>
               <span className="text-[#7A819A] text-[12px] font-normal leading-none mt-0.5 truncate">Library System</span>
+              <span className="mt-1.5 inline-block px-2 py-[2px] rounded bg-[#EEF4FF] text-[10px] font-medium text-[#1747D6] w-fit truncate">
+                {portal_labels[sidebarRole] ?? 'Portal'}
+              </span>
+             
             </motion.div>
           )}
         </AnimatePresence>
@@ -172,13 +188,13 @@ export function dashboard_sidebar() {
                       collapsed ? 'px-0 py-2.5 justify-center' : 'px-3 py-2.5'
                     } ${
                       is_active
-                        ? 'rounded-[18px] bg-[#EEF4FF]'
+                        ? 'rounded-[18px] bg-[#D6E4FF]'
                         : 'rounded-xl hover:bg-[#F3F7FF]'
                     }`}
                     title={collapsed ? item.label : undefined}
                   >
                     <Icon className={`h-[18px] w-[18px] shrink-0 ${
-                      is_active ? 'text-[#132859]' : 'text-[#132859]'
+                      is_active ? 'text-[#0E1F4D]' : 'text-[#132859]'
                     }`} />
                     <AnimatePresence>
                       {!collapsed && (
@@ -188,7 +204,7 @@ export function dashboard_sidebar() {
                           exit={{ opacity: 0 }}
                           className={`truncate text-[14px] ${
                             is_active
-                              ? 'text-[#132859] font-medium'
+                              ? 'text-[#0E1F4D] font-medium'
                               : 'text-[#132859] font-normal'
                           }`}
                         >

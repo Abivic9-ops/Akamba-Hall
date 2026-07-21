@@ -53,7 +53,7 @@ export function HeroBanner() {
   const slide = slides[current]
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden bg-navy shadow-lg" style={{ minHeight: 340 }}>
+    <div className="relative w-full rounded-2xl overflow-hidden bg-navy shadow-lg" style={{ minHeight: 315 }}>
       {/* background image placeholder — gradient fallback */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy-mid" />
 
@@ -61,13 +61,13 @@ export function HeroBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14]/90 via-[#0B0D14]/60 to-transparent" />
 
       {/* content */}
-      <div className="relative z-10 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-14 lg:py-18" style={{ minHeight: 340 }}>
+      <div className="relative z-10 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-10 lg:py-14" style={{ minHeight: 315 }}>
         <div className="max-w-lg">
-          <span className="inline-block text-[13px] font-medium uppercase tracking-widest text-[#F4B63D] mb-4">
+          <span className="inline-block text-[13px] font-medium uppercase tracking-widest text-[#F4B63D] mb-3">
             {slide.eyebrow}
           </span>
 
-          <h2 className="text-[40px] sm:text-[48px] lg:text-[56px] font-medium text-white leading-[1.1] mb-5 font-serif">
+          <h2 className="text-[38px] sm:text-[46px] lg:text-[52px] font-medium text-white leading-[1.1] mb-4 font-serif">
             {slide.headline.map((line, i) => (
               <span key={i}>
                 {line}
@@ -76,20 +76,20 @@ export function HeroBanner() {
             ))}
           </h2>
 
-          <p className="text-[17px] lg:text-[19px] text-white/70 leading-relaxed mb-8 max-w-md">
+          <p className="text-[16px] lg:text-[18px] text-white/70 leading-relaxed mb-6 max-w-md">
             {slide.description}
           </p>
 
           <div className="flex flex-wrap gap-3">
             <a
               href={slide.cta1.href}
-              className="inline-flex items-center justify-center h-12 px-7 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white text-[15px] font-medium shadow-lg hover:shadow-xl transition-all"
+              className="inline-flex items-center justify-center h-11 px-6 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] text-white text-[14px] font-medium shadow-lg hover:shadow-xl transition-all"
             >
               {slide.cta1.label}
             </a>
             <a
               href={slide.cta2.href}
-              className="inline-flex items-center justify-center h-12 px-7 rounded-xl border border-white/30 text-white text-[15px] font-medium hover:bg-white/10 transition-all"
+              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-white/30 text-white text-[14px] font-medium hover:bg-white/10 transition-all"
             >
               {slide.cta2.label}
             </a>

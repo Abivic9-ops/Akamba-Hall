@@ -2,6 +2,7 @@
 
 import {
   MessageCircle, ThumbsUp, ShieldAlert, CalendarX, HelpCircle,
+  ChevronRight,
 } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 
@@ -10,51 +11,65 @@ const options = [
     title: 'Ask a Librarian',
     description: 'Get real-time help from our library team',
     icon: MessageCircle,
-    color: 'text-[#2563EB]',
-    bg: 'bg-blue-50',
+    color: '#2563EB',
+    gradient: 'from-[#2563EB]/5 to-transparent',
   },
   {
     title: 'Feedback & Requests',
     description: 'Suggest a book or share your thoughts',
     icon: ThumbsUp,
-    color: 'text-[#0D9488]',
-    bg: 'bg-teal-50',
+    color: '#0D9488',
+    gradient: 'from-[#0D9488]/5 to-transparent',
   },
   {
     title: 'Lost Card / Login Help',
     description: 'Report a missing card or access issue',
     icon: ShieldAlert,
-    color: 'text-amber-500',
-    bg: 'bg-amber-50',
+    color: '#D97706',
+    gradient: 'from-[#D97706]/5 to-transparent',
   },
   {
     title: 'Booking Help',
     description: 'Questions about seats, AVR, or rooms',
     icon: CalendarX,
-    color: 'text-purple-500',
-    bg: 'bg-purple-50',
+    color: '#7C3AED',
+    gradient: 'from-[#7C3AED]/5 to-transparent',
   },
 ]
 
 export function Support() {
   return (
     <SectionCard title="Need Help?" icon={HelpCircle}>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {options.map((opt) => {
+      <div className="flex flex-col gap-2">
+        {options.map((opt, i) => {
           const Icon = opt.icon
           return (
             <button
               key={opt.title}
-              className="flex items-start gap-3 p-5 rounded-xl bg-[#F8F9FB] hover:bg-slate-100 hover:shadow-sm transition-all text-left cursor-pointer group"
+              className={`relative flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-gradient-to-r ${opt.gradient} hover:shadow-sm hover:border-slate-200 transition-all text-left cursor-pointer group`}
             >
-              <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${opt.bg}`}>
-                <Icon className={`h-5 w-5 ${opt.color}`} />
+              {/* left accent line */}
+              <div
+                className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full"
+                style={{ backgroundColor: opt.color }}
+              />
+
+              {/* icon */}
+              <div
+                className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0"
+                style={{ backgroundColor: `${opt.color}12` }}
+              >
+                <Icon className="h-5 w-5" style={{ color: opt.color }} />
               </div>
+
+              {/* text */}
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-medium text-slate-800">{opt.title}</p>
-                <p className="text-[13px] text-slate-400 mt-0.5">{opt.description}</p>
+                <p className="text-[14px] font-medium text-slate-800">{opt.title}</p>
+                <p className="text-[12px] text-slate-400 mt-0.5">{opt.description}</p>
               </div>
-              <span className="text-slate-300 group-hover:text-slate-500 transition-colors mt-1 text-lg">→</span>
+
+              {/* arrow */}
+              <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-slate-500 transition-colors shrink-0" />
             </button>
           )
         })}
