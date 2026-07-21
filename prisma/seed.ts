@@ -1,8 +1,18 @@
 import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import { createClient } from '@supabase/supabase-js'
+import { Pool } from 'pg'
+import { PrismaPg } from '@prisma/adapter-pg'
 
-const prisma = new PrismaClient()
+const connectionString = process.env.DATABASE_URL
+if (!connectionString) {
+  console.error('\x1b[31m✗ Missing DATABASE_URL in .env\x1b[0m')
+  process.exit(1)
+}
+
+const pool = new Pool({ connectionString })
+const adapter = new PrismaPg(pool)
+const prisma = new PrismaClient({ adapter })
 
 async function main() {
   const email = process.env.SUPER_ADMIN_EMAIL
@@ -30,18 +40,6 @@ async function main() {
 
   console.log('\x1b[36m→ Seeding super admin...\x1b[0m')
 
-  // check if super admin already exists in prisma
-  const existing = await prisma.user.findFirst({
-    where: { role: 'SUPER_ADMIN' },
-  })
-
-  if (existing) {
-    console.log(
-      `\x1b[33m✓ Super admin already exists (${existing.email}). Skipping.\x1b[0m`
-    )
-    return
-  }
-
   // create or get supabase auth user
   let authUserId: string
 
@@ -52,12 +50,22 @@ async function main() {
 
   if (found) {
     authUserId = found.id
+    // ensure app_metadata has the role (update if missing)
+    const currentRole = found.app_metadata?.role
+    if (currentRole !== 'SUPER_ADMIN') {
+      await supabase.auth.admin.updateUserById(authUserId, {
+        app_metadata: { role: 'SUPER_ADMIN' },
+      })
+    }
     console.log(`\x1b[33m✓ Auth user already exists (${email}). Reusing.\x1b[0m`)
   } else {
     const { data, error } = await supabase.auth.admin.createUser({
       email: email.toLowerCase(),
       password,
       email_confirm: true,
+      app_metadata: {
+        role: 'SUPER_ADMIN',
+      },
       user_metadata: {
         full_name: fullName,
       },

@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/db/prisma'
 import { createClient } from '@/lib/supabase/server'
+import { getAdminClient } from '@/lib/supabase/admin'
 
 /* ─── Types ─────────────────────────────────────── */
 
@@ -126,6 +127,14 @@ export async function sign_up_action(formData: {
     })
   } catch {
     // prisma user may already exist from trigger, that's fine
+  }
+
+  // set role in app_metadata so middleware can read it from the JWT
+  const admin = getAdminClient()
+  if (admin) {
+    await admin.auth.admin.updateUserById(auth_data.user.id, {
+      app_metadata: { role: 'STUDENT' },
+    }).catch(() => {})
   }
 
   return { success: true }

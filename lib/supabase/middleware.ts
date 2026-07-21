@@ -25,6 +25,16 @@ const protected_route_prefixes = [
   '/account',
 ]
 
+/**
+ * Reads the user's role from app_metadata in the JWT.
+ * Falls back to 'STUDENT' if not set.
+ */
+function getRoleFromUser(user: { app_metadata?: Record<string, unknown> } | null): string {
+  const role = user?.app_metadata?.role
+  if (typeof role === 'string' && role in role_route_map) return role
+  return 'STUDENT'
+}
+
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: { headers: request.headers },
@@ -65,28 +75,17 @@ export async function updateSession(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   const pathname = request.nextUrl.pathname
+  const role = getRoleFromUser(user)
 
   // redirect logged-in users away from login
   if (user && pathname.startsWith('/login')) {
-    const { data: profile } = await supabase
-      .from('User')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-
-    const home = role_route_map[profile?.role] ?? '/student/dashboard'
+    const home = role_route_map[role] ?? '/student/dashboard'
     return NextResponse.redirect(new URL(home, request.url))
   }
 
   // redirect authenticated users from root to their dashboard
   if (user && pathname === '/') {
-    const { data: profile } = await supabase
-      .from('User')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-
-    const home = role_route_map[profile?.role] ?? '/student/dashboard'
+    const home = role_route_map[role] ?? '/student/dashboard'
     return NextResponse.redirect(new URL(home, request.url))
   }
 
@@ -100,21 +99,12 @@ export async function updateSession(request: NextRequest) {
 
   // role-based route protection for authenticated users
   if (user) {
-    const { data: profile } = await supabase
-      .from('User')
-      .select('role')
-      .eq('id', user.id)
-      .single()
+    const allowed_prefixes = get_allowed_prefixes(role)
+    const is_allowed = allowed_prefixes.some(p => pathname.startsWith(p))
 
-    const role = profile?.role
-    if (role) {
-      const allowed_prefixes = get_allowed_prefixes(role)
-      const is_allowed = allowed_prefixes.some(p => pathname.startsWith(p))
-
-      if (!is_allowed && protected_route_prefixes.some(p => pathname.startsWith(p))) {
-        const home = role_route_map[role] ?? '/student/dashboard'
-        return NextResponse.redirect(new URL(home, request.url))
-      }
+    if (!is_allowed && protected_route_prefixes.some(p => pathname.startsWith(p))) {
+      const home = role_route_map[role] ?? '/student/dashboard'
+      return NextResponse.redirect(new URL(home, request.url))
     }
   }
 

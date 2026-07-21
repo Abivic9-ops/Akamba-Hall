@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/db/prisma'
 import { requireRole } from '@/lib/auth/roleGuard'
+import { getAdminClient } from '@/lib/supabase/admin'
 import type { Role } from '@/lib/types/role'
 import { all_roles } from '@/lib/types/role'
 
@@ -62,6 +63,14 @@ export async function update_user_role(
       where: { id: userId },
       data: { role: newRole as Role },
     })
+
+    // sync role in Supabase app_metadata so middleware reads it from JWT
+    const admin = getAdminClient()
+    if (admin) {
+      await admin.auth.admin.updateUserById(userId, {
+        app_metadata: { role: newRole },
+      }).catch(() => {})
+    }
 
     return { success: true }
   } catch {
