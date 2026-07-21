@@ -8,7 +8,7 @@ import {
   LayoutDashboard, Users, Shield, Activity, ScrollText,
   Settings, CalendarCheck, Library, BriefcaseBusiness, X,
   GraduationCap, Briefcase, Monitor, Zap, BookMarked,
-  Grid3X3,
+  Grid3X3, BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
 } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { getNavigationForRole } from '@/lib/config/navigation'
@@ -19,6 +19,7 @@ const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard, Users, Shield, Activity, ScrollText,
   Settings, CalendarCheck, Library, BriefcaseBusiness,
   GraduationCap, Briefcase, Monitor, Zap, BookMarked, Grid3X3,
+  BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
 }
 
 function resolve_icon(name: string) {
@@ -93,12 +94,12 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
             {/* header */}
             <div className="p-4 flex items-center justify-between border-b border-white/5">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-[11px] font-bold text-white">
+                <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-[13px] font-normal text-white">
                   {initials}
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[13px] font-bold text-white truncate">{user_name}</span>
-                  <span className="text-[10px] text-white/50 truncate">{display_role}</span>
+                  <span className="text-[14px] font-normal text-white truncate">{user_name}</span>
+                  <span className="text-[12px] text-white/40 truncate">{display_role}</span>
                 </div>
               </div>
               <button
@@ -109,12 +110,22 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
               </button>
             </div>
 
-            {/* viewing-as indicator */}
+            {/* viewing-as indicator + back to admin */}
             {viewingOther && (
-              <div className="mx-3 mt-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                <span className="text-[10px] font-bold text-amber-400">
-                  Viewing as {display_role}
-                </span>
+              <div className="mx-3 mt-3 space-y-1.5">
+                <div className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                  <span className="text-[12px] font-normal text-amber-400">
+                    Viewing as {display_role}
+                  </span>
+                </div>
+                <Link
+                  href="/super-admin/dashboard"
+                  onClick={on_close}
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] transition-all"
+                >
+                  <Shield className="h-4 w-4 shrink-0" />
+                  <span>Back to Admin</span>
+                </Link>
               </div>
             )}
 
@@ -128,13 +139,13 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                     key={item.path}
                     href={item.path}
                     onClick={on_close}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all mb-1 ${
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-normal transition-all mb-1 ${
                       is_active
-                        ? 'bg-[#E8A63C] text-[#0B1A3B] font-bold'
-                        : 'text-white/70 hover:text-white hover:bg-white/5'
+                        ? 'bg-[#E8A63C] text-[#0B1A3B] font-medium'
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
                     }`}
                   >
-                    <Icon className="h-4 w-4 shrink-0" />
+                    <Icon className="h-[18px] w-[18px] shrink-0" />
                     <span className="truncate">{item.label}</span>
                   </Link>
                 )
@@ -146,7 +157,7 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
               <form action="/api/auth/logout" method="POST">
                 <button
                   type="submit"
-                  className="w-full flex items-center gap-2 px-3 py-2.5 text-[12px] font-bold text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition cursor-pointer"
+                  className="w-full flex items-center gap-2 px-3 py-2.5 text-[13px] font-normal text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition cursor-pointer"
                 >
                   Sign Out
                 </button>

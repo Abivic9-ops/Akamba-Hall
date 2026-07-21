@@ -97,13 +97,13 @@ export default async function all_dashboards_page() {
       <div className="max-w-[1440px] mx-auto p-6 space-y-8">
         {/* header */}
         <div>
-          <h1 className="text-[22px] font-extrabold text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
-            <div className="h-9 w-9 rounded-xl bg-[#E8A63C] flex items-center justify-center">
-              <Shield className="h-4 w-4 text-white" />
+          <h1 className="text-[28px] font-medium text-slate-900 font-[var(--font-poppins)] flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-[#E8A63C] flex items-center justify-center">
+              <Shield className="h-5 w-5 text-white" />
             </div>
             All Dashboards
           </h1>
-          <p className="text-[13px] text-slate-500 mt-1 ml-11">
+          <p className="text-[15px] text-slate-500 mt-1 ml-13">
             Preview and access any role dashboard in the system
           </p>
         </div>
@@ -119,13 +119,13 @@ export default async function all_dashboards_page() {
                 className="group relative bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
               >
                 {/* gradient header */}
-                <div className={`bg-gradient-to-r ${dash.color} px-6 py-5`}>
+                <div className={`bg-gradient-to-r ${dash.color} px-6 py-6`}>
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                    <div className="h-11 w-11 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
                       <Icon className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <h2 className="text-[15px] font-extrabold text-white">
+                      <h2 className="text-[16px] font-medium text-white">
                         {dash.title}
                       </h2>
                     </div>
@@ -134,7 +134,7 @@ export default async function all_dashboards_page() {
 
                 {/* body */}
                 <div className="p-5 space-y-4">
-                  <p className="text-[12px] text-slate-500 leading-relaxed">
+                  <p className="text-[14px] text-slate-500 leading-relaxed">
                     {dash.description}
                   </p>
 
@@ -145,10 +145,10 @@ export default async function all_dashboards_page() {
                       return (
                         <div
                           key={feat}
-                          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg ${dash.bg} border ${dash.borderColor}`}
+                          className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg ${dash.bg} border ${dash.borderColor}`}
                         >
-                          <FeatIcon className={`h-3 w-3 ${dash.iconColor} shrink-0`} />
-                          <span className="text-[10px] font-semibold text-slate-600 truncate">
+                          <FeatIcon className={`h-3.5 w-3.5 ${dash.iconColor} shrink-0`} />
+                          <span className="text-[12px] font-normal text-slate-600 truncate">
                             {feat}
                           </span>
                         </div>
@@ -158,9 +158,9 @@ export default async function all_dashboards_page() {
 
                   {/* open button */}
                   <div className="flex items-center justify-between pt-2 border-t border-slate-50">
-                    <span className="text-[11px] text-slate-400">Click to open</span>
-                    <div className={`h-7 w-7 rounded-lg ${dash.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                      <ArrowRight className={`h-3.5 w-3.5 ${dash.iconColor}`} />
+                    <span className="text-[13px] text-slate-400">Click to open</span>
+                    <div className={`h-8 w-8 rounded-lg ${dash.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <ArrowRight className={`h-4 w-4 ${dash.iconColor}`} />
                     </div>
                   </div>
                 </div>

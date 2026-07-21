@@ -27,11 +27,11 @@ export default function ResourcesPageClient() {
       <FadeIn>
         <section className="bg-[#0B1A3B] py-20 px-4 pb-32">
           <div className="container mx-auto max-w-4xl text-center">
-            <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[13px] font-medium uppercase tracking-widest px-4 py-1.5 rounded-full">
               <Library className="h-3 w-3" aria-hidden="true" />
               Knowledge &amp; Discovery
             </span>
-            <h1 className="text-[40px] md:text-[52px] font-bold text-white mt-5 leading-tight tracking-tight">
+            <h1 className="text-[40px] md:text-[52px] font-medium text-white mt-5 leading-tight tracking-tight">
               Resources
             </h1>
             <p className="text-[16px] md:text-[17px] text-white/50 mt-5 max-w-2xl mx-auto leading-relaxed">
@@ -53,7 +53,7 @@ export default function ResourcesPageClient() {
         <div className="h-16 flex items-center justify-center px-4">
           <div className="flex gap-4">
             {['#catalogue', '#physical', '#digital', '#study-help', '#suggested'].map((id) => (
-              <a key={id} href={id} className="shrink-0 px-4 py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] font-semibold text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="shrink-0 px-4 py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}
@@ -66,12 +66,12 @@ export default function ResourcesPageClient() {
         <section id="catalogue" className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+              <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
                 <Search className="h-3.5 w-3.5" aria-hidden="true" />
                 Start Here
               </span>
             </div>
-            <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">
+            <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">
               Catalogue Search
             </h2>
             <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-6">
@@ -80,19 +80,19 @@ export default function ResourcesPageClient() {
 
             {/* Step-by-step */}
             <div className="mb-12">
-              <h3 className="text-[18px] font-bold text-[#101828] mb-6">How to Search</h3>
+              <h3 className="text-[18px] font-medium text-[#101828] mb-6">How to Search</h3>
               <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 {catalogueSteps.map((s, j) => (
                   <StaggerItem key={j}>
                     <ScaleOnHover>
                       <div className="relative bg-[#F5F6FA] border border-[#E4E7EE] rounded-[16px] p-6 flex flex-col items-center text-center gap-3">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 h-7 w-7 rounded-full bg-gold text-navy text-[11px] font-bold flex items-center justify-center shadow-sm">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 h-7 w-7 rounded-full bg-gold text-navy text-[13px] font-medium flex items-center justify-center shadow-sm">
                           {s.step}
                         </div>
                         <div className="h-12 w-12 rounded-full bg-gold/10 text-gold flex items-center justify-center mt-2">
                           <s.icon className="h-5 w-5" aria-hidden="true" />
                         </div>
-                        <h4 className="text-[15px] font-bold text-[#101828]">{s.title}</h4>
+                        <h4 className="text-[15px] font-medium text-[#101828]">{s.title}</h4>
                         <p className="text-[14px] text-[#5B6376] leading-relaxed">{s.desc}</p>
                       </div>
                     </ScaleOnHover>
@@ -101,14 +101,14 @@ export default function ResourcesPageClient() {
               </StaggerChildren>
             </div>
 
-            <Link href="/search" className="inline-flex items-center gap-2 mt-4 text-[15px] font-semibold text-gold hover:underline">
+            <Link href="/search" className="inline-flex items-center gap-2 mt-4 text-[15px] font-medium text-gold hover:underline">
               <Search className="h-4 w-4" aria-hidden="true" />
               Open Catalogue Search
             </Link>
 
             {/* What you can search */}
             <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[20px] p-8 mt-12">
-              <h3 className="text-[18px] font-bold text-[#101828] mb-5">What You Can Search</h3>
+              <h3 className="text-[18px] font-medium text-[#101828] mb-5">What You Can Search</h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0 m-0">
                 {[
                   'Book titles and authors — find any book in the collection by name or writer',
@@ -134,12 +134,12 @@ export default function ResourcesPageClient() {
         <section id="physical" className="py-24 px-4 bg-[#F5F6FA]">
           <div className="container mx-auto max-w-5xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+              <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
                 <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
                 On the Shelves
               </span>
             </div>
-            <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Physical Collections</h2>
+            <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Physical Collections</h2>
             <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
               The library holds over 8,400 physical items across multiple categories. Collections are organized by subject and format, with clear signage and call numbers to help you find what you need quickly. The collection is reviewed annually to remove outdated materials and add new acquisitions.
             </p>
@@ -159,9 +159,9 @@ export default function ResourcesPageClient() {
                         <div className="h-12 w-12 rounded-full bg-gold/10 text-gold flex items-center justify-center">
                           <item.icon className="h-5 w-5" aria-hidden="true" />
                         </div>
-                        <span className="text-[12px] font-bold text-gold bg-gold/10 px-2.5 py-1 rounded-full">{item.count}</span>
+                        <span className="text-[13px] font-medium text-gold bg-gold/10 px-2.5 py-1 rounded-full">{item.count}</span>
                       </div>
-                      <h3 className="text-[17px] font-bold text-[#101828]">{item.title}</h3>
+                      <h3 className="text-[17px] font-medium text-[#101828]">{item.title}</h3>
                       <p className="text-[15px] text-[#5B6376] leading-relaxed">{item.desc}</p>
                     </div>
                   </ScaleOnHover>
@@ -177,12 +177,12 @@ export default function ResourcesPageClient() {
         <section id="digital" className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+              <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
                 <Globe className="h-3.5 w-3.5" aria-hidden="true" />
                 Online Access
               </span>
             </div>
-            <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">
+            <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">
               Digital Resources
             </h2>
             <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
@@ -203,8 +203,8 @@ export default function ResourcesPageClient() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-[17px] font-bold text-[#101828]">{item.label}</h3>
-                          <span className="text-[11px] font-bold text-gold bg-gold/10 px-2 py-0.5 rounded-full">{item.count}</span>
+                          <h3 className="text-[17px] font-medium text-[#101828]">{item.label}</h3>
+                          <span className="text-[13px] font-medium text-gold bg-gold/10 px-2 py-0.5 rounded-full">{item.count}</span>
                         </div>
                         <p className="text-[15px] text-[#5B6376] leading-relaxed mt-2">{item.desc}</p>
                       </div>
@@ -222,12 +222,12 @@ export default function ResourcesPageClient() {
         <section id="study-help" className="py-24 px-4 bg-[#F5F6FA]">
           <div className="container mx-auto max-w-5xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+              <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
                 <Lightbulb className="h-3.5 w-3.5" aria-hidden="true" />
                 Learn How
               </span>
             </div>
-            <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Study Help</h2>
+            <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Study Help</h2>
             <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
               The library does not just provide materials — it teaches you how to use them effectively. These guides cover everything from finding a book to writing a research paper. Each guide is written by library staff and reviewed by teachers.
             </p>
@@ -245,7 +245,7 @@ export default function ResourcesPageClient() {
                         <div className="h-10 w-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0">
                           <item.icon className="h-5 w-5" aria-hidden="true" />
                         </div>
-                        <h3 className="text-[17px] font-bold text-[#101828]">{item.title}</h3>
+                        <h3 className="text-[17px] font-medium text-[#101828]">{item.title}</h3>
                       </div>
                       <p className="text-[15px] text-[#5B6376] leading-relaxed">{item.text}</p>
                     </div>
@@ -262,12 +262,12 @@ export default function ResourcesPageClient() {
         <section id="suggested" className="py-24 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+              <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
                 <BookPlus className="h-3.5 w-3.5" aria-hidden="true" />
                 Start Reading
               </span>
             </div>
-            <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Suggested Reading</h2>
+            <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Suggested Reading</h2>
             <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
               Staff picks and new arrivals worth your time. These books are selected by library staff and teachers based on relevance to the curriculum, popularity with students, and academic value. Each recommendation includes a brief description to help you decide.
             </p>
@@ -276,8 +276,8 @@ export default function ResourcesPageClient() {
                 <StaggerItem key={i}>
                   <ScaleOnHover>
                     <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[20px] p-7 flex flex-col gap-3 hover:shadow-lg hover:border-gold/30 transition-all duration-300">
-                      <span className="text-[11px] font-bold text-gold uppercase tracking-wider">{book.category}</span>
-                      <h3 className="text-[17px] font-bold text-[#101828]">{book.title}</h3>
+                      <span className="text-[13px] font-medium text-gold uppercase tracking-wider">{book.category}</span>
+                      <h3 className="text-[17px] font-medium text-[#101828]">{book.title}</h3>
                       <p className="text-[13px] text-[#5B6376]">{book.author}</p>
                       <p className="text-[14px] text-[#5B6376] leading-relaxed mt-1">{book.desc}</p>
                     </div>
@@ -286,7 +286,7 @@ export default function ResourcesPageClient() {
               ))}
             </StaggerChildren>
             <div className="text-center mt-12">
-              <Link href="/search" className="inline-flex items-center gap-2 text-[15px] font-semibold text-gold hover:underline">
+              <Link href="/search" className="inline-flex items-center gap-2 text-[15px] font-medium text-gold hover:underline">
                 Browse full catalogue <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

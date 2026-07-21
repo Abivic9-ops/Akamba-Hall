@@ -141,9 +141,9 @@ export function PublicNavbar() {
             <Image src="/images/starehe-logo.png" alt="Starehe Boys' Centre Crest" fill className="object-contain" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-[10px] font-semibold text-white/50 uppercase tracking-widest">Starehe Boys&apos; Centre</span>
-            <span className="font-bold text-[15px] text-white tracking-tight">Akamba Hall Library</span>
-            <span className="text-[9px] font-medium text-white/40 tracking-wide">Knowledge &bull; Character &bull; Leadership</span>
+            <span className="text-[11px] font-medium text-white/50 uppercase tracking-widest">Starehe Boys&apos; Centre</span>
+            <span className="font-medium text-[15px] text-white tracking-tight">Akamba Hall Library</span>
+            <span className="text-[10px] font-medium text-white/40 tracking-wide">Knowledge &bull; Character &bull; Leadership</span>
           </div>
         </Link>
 
@@ -157,7 +157,7 @@ export function PublicNavbar() {
                 key={item.label}
                 href={item.href}
                 className={`text-[13px] font-medium transition-colors py-2 ${
-                  isActive(item.href) ? 'text-gold font-semibold' : 'text-white/70 hover:text-white'
+                  isActive(item.href) ? 'text-gold font-medium' : 'text-white/70 hover:text-white'
                 }`}
               >
                 {item.label}
@@ -175,13 +175,13 @@ export function PublicNavbar() {
             </span>
             <Clock className="h-3.5 w-3.5 text-gold/70" />
             <div className="flex flex-col leading-tight">
-              <span className="text-[9px] font-bold text-gold uppercase tracking-widest">Open Now</span>
-              <span className="text-[10px] text-white/60">Mon – Fri, 7:30 AM – 6:00 PM</span>
+              <span className="text-[10px] font-medium text-gold uppercase tracking-widest">Open Now</span>
+              <span className="text-[11px] text-white/60">Mon – Fri, 7:30 AM – 6:00 PM</span>
             </div>
           </div>
           <div className="h-6 w-px bg-white/10" />
           <Link href="/login">
-            <Button className="gap-2 bg-gold hover:bg-gold-hover text-navy font-bold px-5 h-9 rounded-full text-[13px] shadow-md shadow-gold/20 transition-all">
+            <Button className="gap-2 bg-gold hover:bg-gold-hover text-navy font-medium px-5 h-9 rounded-full text-[13px] shadow-md shadow-gold/20 transition-all">
               <User className="h-3.5 w-3.5" />
               Portal Login
             </Button>
@@ -211,7 +211,7 @@ export function PublicNavbar() {
                     </button>
                     {mobileSection === item.label && (
                       <div className="pl-4 pb-2 flex flex-col gap-1">
-                        <Link href={item.href} className="py-1.5 text-[13px] text-gold font-semibold" onClick={() => setMobileOpen(false)}>
+                        <Link href={item.href} className="py-1.5 text-[13px] text-gold font-medium" onClick={() => setMobileOpen(false)}>
                           View all
                         </Link>
                         {item.children.map((child) => (
@@ -223,7 +223,7 @@ export function PublicNavbar() {
                     )}
                   </>
                 ) : (
-                  <Link href={item.href} className={`py-2 block transition-colors ${isActive(item.href) ? 'text-gold font-semibold' : 'text-white/70 hover:text-white'}`} onClick={() => setMobileOpen(false)}>
+                  <Link href={item.href} className={`py-2 block transition-colors ${isActive(item.href) ? 'text-gold font-medium' : 'text-white/70 hover:text-white'}`} onClick={() => setMobileOpen(false)}>
                     {item.label}
                   </Link>
                 )}
@@ -240,7 +240,7 @@ export function PublicNavbar() {
               <span className="text-[11px] text-white/60 font-medium">Mon – Fri, 7:30 AM – 6:00 PM</span>
             </div>
             <Link href="/login" onClick={() => setMobileOpen(false)}>
-              <Button className="w-full gap-2 bg-gold hover:bg-gold-hover text-navy font-bold h-10 rounded-full text-[13px]">
+              <Button className="w-full gap-2 bg-gold hover:bg-gold-hover text-navy font-medium h-10 rounded-full text-[13px]">
                 <User className="h-3.5 w-3.5" />
                 Portal Login
               </Button>

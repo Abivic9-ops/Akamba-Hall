@@ -21,7 +21,7 @@ export default function ItemDetailPage({ params }: { params: { id: string } }) {
             <div className="flex items-center gap-2 text-sm text-primary font-medium">
               <Tag className="h-4 w-4" /> Textbook
             </div>
-            <h1 className="text-3xl font-bold text-foreground">Advanced Physics 101</h1>
+            <h1 className="text-3xl font-medium text-foreground">Advanced Physics 101</h1>
             <p className="text-lg text-muted-foreground">By Dr. John Smith, Jane Doe</p>
           </div>
 

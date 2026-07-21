@@ -11,11 +11,11 @@ export default function CatalogueSearchPage() {
       <div className="max-w-3xl mx-auto flex flex-col gap-8">
         <FadeIn>
           <div className="text-center">
-            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
               <Search className="h-3.5 w-3.5" aria-hidden="true" />
               Catalogue
             </span>
-            <h1 className="text-[40px] md:text-[52px] font-bold text-[#101828] mt-5 leading-tight tracking-tight">
+            <h1 className="text-[40px] md:text-[52px] font-medium text-[#101828] mt-5 leading-tight tracking-tight">
               Catalogue Search
             </h1>
             <p className="text-[16px] text-[#5B6376] mt-5 max-w-xl mx-auto leading-relaxed">
@@ -35,7 +35,7 @@ export default function CatalogueSearchPage() {
                 aria-label="Search library catalogue"
               />
             </div>
-            <Button className="h-12 px-8 rounded-xl font-semibold bg-gold hover:bg-gold-hover text-navy" aria-label="Search catalogue">
+            <Button className="h-12 px-8 rounded-xl font-medium bg-gold hover:bg-gold-hover text-navy" aria-label="Search catalogue">
               Search
             </Button>
           </div>
@@ -44,7 +44,7 @@ export default function CatalogueSearchPage() {
         <FadeIn delay={0.2}>
           <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-[#E4E7EE] rounded-2xl bg-[#F5F6FA]/50">
             <Search className="h-12 w-12 text-[#5B6376]/30 mb-4" aria-hidden="true" />
-            <h3 className="text-[18px] font-bold text-[#101828]">Enter a search term</h3>
+            <h3 className="text-[18px] font-medium text-[#101828]">Enter a search term</h3>
             <p className="text-[15px] text-[#5B6376] max-w-sm mt-2 leading-relaxed">
               Search our entire database of physical and digital materials. Try searching for &ldquo;Machine Learning&rdquo; or &ldquo;History&rdquo;.
             </p>

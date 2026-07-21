@@ -15,23 +15,23 @@ export default async function super_admin_users_page() {
         {/* header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-[22px] font-extrabold text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
-              <Users className="h-5 w-5 text-slate-400" />
+            <h1 className="text-[28px] font-medium text-slate-900 font-[var(--font-poppins)] flex items-center gap-3">
+              <Users className="h-6 w-6 text-slate-400" />
               User Registry
             </h1>
-            <p className="text-[13px] text-slate-500 mt-1">
+            <p className="text-[15px] text-slate-500 mt-1">
               Manage user roles and permissions across the system
             </p>
           </div>
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-50 border border-red-100">
             <Shield className="h-4 w-4 text-red-500" />
-            <span className="text-[12px] font-bold text-red-600">Super Admin</span>
+            <span className="text-[14px] font-normal text-red-600">Super Admin</span>
           </div>
         </div>
 
         {/* role legend */}
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-          <h3 className="text-[13px] font-bold text-slate-700 mb-3">Role Hierarchy</h3>
+          <h3 className="text-[15px] font-medium text-slate-700 mb-3">Role Hierarchy</h3>
           <div className="flex flex-wrap gap-2">
             {[
               { role: 'SUPER_ADMIN', desc: 'Full system access' },
@@ -47,10 +47,10 @@ export default async function super_admin_users_page() {
                 key={item.role}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-100"
               >
-                <span className="text-[11px] font-bold text-slate-700">
+                <span className="text-[13px] font-normal text-slate-700">
                   {item.role.replace('_', ' ')}
                 </span>
-                <span className="text-[10px] text-slate-400">&mdash; {item.desc}</span>
+                <span className="text-[12px] text-slate-400">&mdash; {item.desc}</span>
               </div>
             ))}
           </div>

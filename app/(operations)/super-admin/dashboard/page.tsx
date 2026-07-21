@@ -66,7 +66,7 @@ export default async function super_admin_dashboard() {
       {metrics.overdue_loans > 0 && (
         <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 flex items-center gap-3">
           <AlertTriangle className="h-4 w-4 shrink-0" />
-          <span className="text-[13px] font-semibold">
+          <span className="text-[14px] font-normal">
             {metrics.overdue_loans} overdue loan{metrics.overdue_loans !== 1 ? 's' : ''} require{metrics.overdue_loans === 1 ? 's' : ''} attention
           </span>
         </div>
@@ -75,10 +75,10 @@ export default async function super_admin_dashboard() {
       <div className="max-w-[1440px] mx-auto p-6 space-y-6">
         {/* greeting */}
         <div>
-          <h1 className="text-[22px] font-extrabold text-slate-900 font-[var(--font-poppins)]">
+          <h1 className="text-[28px] font-medium text-slate-900 font-[var(--font-poppins)]">
             {greeting()}, Administrator
           </h1>
-          <p className="text-[13px] text-slate-500 mt-1">
+          <p className="text-[15px] text-slate-500 mt-1">
             Here is an overview of the library system
           </p>
         </div>
@@ -90,15 +90,15 @@ export default async function super_admin_dashboard() {
             return (
               <div key={key} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[12px] font-semibold text-slate-500">{metric_labels[i]}</span>
-                  <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${metric_color_map[i]}`}>
-                    <Icon className="h-4 w-4" />
+                  <span className="text-[14px] font-normal text-slate-500">{metric_labels[i]}</span>
+                  <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${metric_color_map[i]}`}>
+                    <Icon className="h-5 w-5" />
                   </div>
                 </div>
-                <div className="text-[28px] font-extrabold text-slate-900 font-[var(--font-poppins)] leading-tight">
+                <div className="text-[32px] font-medium text-slate-900 font-[var(--font-poppins)] leading-tight">
                   {metric_values[i]}
                 </div>
-                <p className="text-[11px] text-slate-400 mt-1">{metric_subtexts[i]}</p>
+                <p className="text-[13px] text-slate-400 mt-1">{metric_subtexts[i]}</p>
               </div>
             )
           })}
@@ -115,18 +115,18 @@ export default async function super_admin_dashboard() {
             <div key={item.label} className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-lg bg-slate-50 flex items-center justify-center">
+                  <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
                     <item.icon className={`h-4 w-4 ${item.color}`} />
                   </div>
-                  <span className="text-[12px] font-semibold text-slate-500">{item.label}</span>
+                  <span className="text-[14px] font-normal text-slate-500">{item.label}</span>
                 </div>
                 {item.trend === 'up' ? (
-                  <ArrowUpRight className="h-3.5 w-3.5 text-emerald-500" />
+                  <ArrowUpRight className="h-4 w-4 text-emerald-500" />
                 ) : (
-                  <ArrowDownRight className="h-3.5 w-3.5 text-red-400" />
+                  <ArrowDownRight className="h-4 w-4 text-red-400" />
                 )}
               </div>
-              <div className="text-[22px] font-extrabold text-slate-900 mt-2 font-[var(--font-poppins)]">
+              <div className="text-[28px] font-medium text-slate-900 mt-2 font-[var(--font-poppins)]">
                 {item.value}
               </div>
             </div>
@@ -137,26 +137,26 @@ export default async function super_admin_dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* activity feed */}
           <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
-                <Activity className="h-4 w-4 text-slate-400" />
+            <div className="px-6 py-5 border-b border-slate-50">
+              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
+                <Activity className="h-5 w-5 text-slate-400" />
                 Recent Activity
               </h2>
             </div>
             <div className="p-4 space-y-1">
               {activity.length === 0 ? (
-                <p className="text-[13px] text-slate-400 text-center py-8">No recent activity</p>
+                <p className="text-[15px] text-slate-400 text-center py-8">No recent activity</p>
               ) : (
                 activity.map((item) => (
                   <div key={item.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
-                    <div className="h-9 w-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                    <div className="h-10 w-10 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
                       <BookOpen className="h-4 w-4 text-slate-500" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-semibold text-slate-800 truncate">{item.description}</p>
-                      <p className="text-[11px] text-slate-400">{item.user_name} &middot; {time_ago(item.created_at)}</p>
+                      <p className="text-[14px] font-normal text-slate-800 truncate">{item.description}</p>
+                      <p className="text-[13px] text-slate-400">{item.user_name} · {time_ago(item.created_at)}</p>
                     </div>
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${status_colors[item.status] ?? status_colors.completed}`}>
+                    <span className={`px-2.5 py-0.5 rounded-full text-[12px] font-normal ${status_colors[item.status] ?? status_colors.completed}`}>
                       {item.status}
                     </span>
                   </div>
@@ -167,9 +167,9 @@ export default async function super_admin_dashboard() {
 
           {/* system status */}
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
-                <Shield className="h-4 w-4 text-slate-400" />
+            <div className="px-6 py-5 border-b border-slate-50">
+              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
+                <Shield className="h-5 w-5 text-slate-400" />
                 System Status
               </h2>
             </div>
@@ -177,10 +177,10 @@ export default async function super_admin_dashboard() {
               {health.map((item) => (
                 <div key={item.label} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
                   <div>
-                    <p className="text-[13px] font-semibold text-slate-800">{item.label}</p>
-                    <p className="text-[11px] text-slate-400">{item.detail}</p>
+                    <p className="text-[14px] font-normal text-slate-800">{item.label}</p>
+                    <p className="text-[13px] text-slate-400">{item.detail}</p>
                   </div>
-                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold ${status_colors[item.status]}`}>
+                  <span className={`px-2.5 py-1 rounded-full text-[12px] font-normal ${status_colors[item.status]}`}>
                     {item.status}
                   </span>
                 </div>
@@ -193,20 +193,20 @@ export default async function super_admin_dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* role distribution */}
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)]">Role Distribution</h2>
+            <div className="px-6 py-5 border-b border-slate-50">
+              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)]">Role Distribution</h2>
             </div>
             <div className="p-4 space-y-3">
               {distribution.length === 0 ? (
-                <p className="text-[13px] text-slate-400 text-center py-4">No users yet</p>
+                <p className="text-[15px] text-slate-400 text-center py-4">No users yet</p>
               ) : (
                 distribution.map((item) => (
                   <div key={item.role}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[12px] font-semibold text-slate-700">{item.role.replace('_', ' ')}</span>
-                      <span className="text-[11px] text-slate-400">{item.count}</span>
+                      <span className="text-[14px] font-normal text-slate-700">{item.role.replace('_', ' ')}</span>
+                      <span className="text-[13px] text-slate-400">{item.count}</span>
                     </div>
-                    <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-[#E8A63C] rounded-full transition-all duration-500"
                         style={{ width: `${item.percentage}%` }}
@@ -220,8 +220,8 @@ export default async function super_admin_dashboard() {
 
           {/* quick actions */}
           <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm">
-            <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)]">Quick Actions</h2>
+            <div className="px-6 py-5 border-b border-slate-50">
+              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)]">Quick Actions</h2>
             </div>
             <div className="p-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
               {[
@@ -235,7 +235,7 @@ export default async function super_admin_dashboard() {
                 <a
                   key={action.label}
                   href={action.href}
-                  className={`flex items-center gap-2 p-3 rounded-xl ${action.color} font-semibold text-[12px] hover:opacity-80 transition-opacity`}
+                  className={`flex items-center gap-2 p-3.5 rounded-xl ${action.color} font-normal text-[14px] hover:opacity-80 transition-opacity`}
                 >
                   {action.label}
                 </a>

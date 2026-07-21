@@ -44,11 +44,11 @@ export default function NewsPageClient() {
       <FadeIn>
         <section className="bg-[#0B1A3B] py-20 px-4 pb-32">
           <div className="container mx-auto max-w-4xl text-center">
-            <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[13px] font-medium uppercase tracking-widest px-4 py-1.5 rounded-full">
               <Newspaper className="h-3 w-3" aria-hidden="true" />
               Stay Informed
             </span>
-            <h1 className="text-[40px] md:text-[52px] font-bold text-white mt-5 leading-tight tracking-tight">
+            <h1 className="text-[40px] md:text-[52px] font-medium text-white mt-5 leading-tight tracking-tight">
               News &amp; Updates
             </h1>
             <p className="text-[16px] md:text-[17px] text-white/50 mt-5 max-w-2xl mx-auto leading-relaxed">
@@ -70,7 +70,7 @@ export default function NewsPageClient() {
         <div className="h-16 flex items-center justify-center px-4">
           <div className="flex gap-4">
             {['#announcements', '#arrivals', '#events', '#notices', '#campaigns'].map((id) => (
-              <a key={id} href={id} className="shrink-0 px-4 py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] font-semibold text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="shrink-0 px-4 py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}
@@ -82,12 +82,12 @@ export default function NewsPageClient() {
       <section id="announcements" className="py-24 px-4">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
               <Megaphone className="h-3.5 w-3.5" aria-hidden="true" />
               Announcements
             </span>
           </div>
-          <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Latest Announcements</h2>
+          <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Latest Announcements</h2>
           <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
             Important updates from the library team. These announcements affect borrowing, access, scheduling, and available resources. Read each one carefully to understand how it may affect your library use.
           </p>
@@ -96,17 +96,17 @@ export default function NewsPageClient() {
               <StaggerItem key={i}>
                 <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[20px] p-7 flex flex-col sm:flex-row gap-5 hover:shadow-md transition-shadow">
                   <div className="shrink-0 flex flex-col items-center w-20 h-20 rounded-2xl bg-gold/10 justify-center">
-                    <span className="text-[11px] font-bold text-gold/70 uppercase">
+                    <span className="text-[13px] font-medium text-gold/70 uppercase">
                       {a.date.split(' ')[1]}
                     </span>
-                    <span className="text-[18px] font-bold text-gold leading-none">
+                    <span className="text-[18px] font-medium text-gold leading-none">
                       {a.date.split(' ')[0]}
                     </span>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-[17px] font-bold text-[#101828]">{a.title}</h3>
-                      <span className="text-[10px] font-bold bg-gold/10 text-gold px-2.5 py-0.5 rounded-full">{a.tag}</span>
+                      <h3 className="text-[17px] font-medium text-[#101828]">{a.title}</h3>
+                      <span className="text-[13px] font-medium bg-gold/10 text-gold px-2.5 py-0.5 rounded-full">{a.tag}</span>
                     </div>
                     <p className="text-[15px] text-[#5B6376] leading-relaxed">{a.desc}</p>
                   </div>
@@ -121,12 +121,12 @@ export default function NewsPageClient() {
       <section id="arrivals" className="py-24 px-4 bg-[#F5F6FA]">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
               <BookPlus className="h-3.5 w-3.5" aria-hidden="true" />
               New Arrivals
             </span>
           </div>
-          <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">New Arrivals</h2>
+          <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">New Arrivals</h2>
           <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
             Fresh additions to the library collection. These books have been recently acquired and are available for borrowing. New arrivals are displayed on a dedicated shelf near the entrance for the first two weeks after acquisition.
           </p>
@@ -135,8 +135,8 @@ export default function NewsPageClient() {
               <StaggerItem key={i}>
                 <ScaleOnHover>
                   <div className="bg-white border border-[#E4E7EE] rounded-[20px] p-7 flex flex-col gap-3 hover:shadow-lg hover:border-gold/30 transition-all duration-300">
-                    <span className="text-[11px] font-bold text-gold uppercase tracking-wider">{book.category}</span>
-                    <h3 className="text-[17px] font-bold text-[#101828]">{book.title}</h3>
+                    <span className="text-[13px] font-medium text-gold uppercase tracking-wider">{book.category}</span>
+                    <h3 className="text-[17px] font-medium text-[#101828]">{book.title}</h3>
                     <p className="text-[13px] text-[#5B6376]">{book.author}</p>
                     <p className="text-[14px] text-[#5B6376] leading-relaxed mt-1">{book.desc}</p>
                   </div>
@@ -145,7 +145,7 @@ export default function NewsPageClient() {
             ))}
           </StaggerChildren>
           <div className="text-center mt-12">
-            <Link href="/resources#suggested" className="inline-flex items-center gap-2 text-[15px] font-semibold text-gold hover:underline">
+            <Link href="/resources#suggested" className="inline-flex items-center gap-2 text-[15px] font-medium text-gold hover:underline">
               View all resources <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -156,12 +156,12 @@ export default function NewsPageClient() {
       <section id="events" className="py-24 px-4">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
               <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
               Events Calendar
             </span>
           </div>
-          <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Events Calendar</h2>
+          <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Events Calendar</h2>
           <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
             Upcoming events at the library. Register through the portal to secure your spot. Events fill up quickly — register early to avoid missing out. All events are free for registered library members.
           </p>
@@ -170,20 +170,20 @@ export default function NewsPageClient() {
               <StaggerItem key={i}>
                 <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[20px] p-7 flex items-start gap-5 hover:shadow-md transition-shadow">
                   <div className="shrink-0 w-16 h-16 rounded-2xl bg-gold/10 flex flex-col items-center justify-center leading-none">
-                    <span className="text-[18px] font-bold text-gold">{evt.date.split(' ')[1]}</span>
-                    <span className="text-[10px] font-semibold text-gold/70 uppercase">{evt.date.split(' ')[0]}</span>
+                    <span className="text-[18px] font-medium text-gold">{evt.date.split(' ')[1]}</span>
+                    <span className="text-[13px] font-medium text-gold/70 uppercase">{evt.date.split(' ')[0]}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-[17px] font-bold text-[#101828]">{evt.title}</h3>
-                      <span className="text-[10px] font-bold bg-[#0B1A3B]/10 text-[#0B1A3B] px-2 py-0.5 rounded-full">{evt.audience}</span>
+                      <h3 className="text-[17px] font-medium text-[#101828]">{evt.title}</h3>
+                      <span className="text-[13px] font-medium bg-[#0B1A3B]/10 text-[#0B1A3B] px-2 py-0.5 rounded-full">{evt.audience}</span>
                     </div>
                     <p className="text-[13px] text-[#5B6376] flex items-center gap-1.5 mb-2">
                       <Clock className="h-3 w-3" aria-hidden="true" /> {evt.time}
                     </p>
                     <p className="text-[15px] text-[#5B6376] leading-relaxed">{evt.desc}</p>
                   </div>
-                  <span className="shrink-0 text-[11px] font-bold bg-gold/10 text-gold px-3 py-1 rounded-full">
+                  <span className="shrink-0 text-[13px] font-medium bg-gold/10 text-gold px-3 py-1 rounded-full">
                     {evt.status}
                   </span>
                 </div>
@@ -197,12 +197,12 @@ export default function NewsPageClient() {
       <section id="notices" className="py-24 px-4 bg-[#F5F6FA]">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
               <AlertCircle className="h-3.5 w-3.5" aria-hidden="true" />
               Library Notices
             </span>
           </div>
-          <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Library Notices</h2>
+          <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Library Notices</h2>
           <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
             Operational notices that affect library access, services, and availability. These notices are time-sensitive — read them promptly and follow the instructions provided.
           </p>
@@ -215,7 +215,7 @@ export default function NewsPageClient() {
                   </div>
                   <div className="flex-1">
                     <p className="text-[15px] text-[#101828] leading-relaxed">{n.text}</p>
-                    <span className="text-[12px] text-[#5B6376] mt-2 block">Published: {n.date}</span>
+                    <span className="text-[13px] text-[#5B6376] mt-2 block">Published: {n.date}</span>
                   </div>
                 </div>
               </StaggerItem>
@@ -228,12 +228,12 @@ export default function NewsPageClient() {
       <section id="campaigns" className="py-24 px-4">
         <div className="container mx-auto max-w-5xl">
           <div className="flex items-center gap-3 mb-4">
-            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+            <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
               <TrendingUp className="h-3.5 w-3.5" aria-hidden="true" />
               Reading Campaigns
             </span>
           </div>
-          <h2 className="text-[30px] md:text-[36px] font-bold text-[#101828] mt-6 mb-3">Reading Campaigns</h2>
+          <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Reading Campaigns</h2>
           <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
             Programme initiatives designed to build reading habits, encourage exploration of the collection, and reward consistent library use. Participation is open to all registered members.
           </p>
@@ -243,8 +243,8 @@ export default function NewsPageClient() {
                 <ScaleOnHover>
                   <div className="bg-[#0B1A3B] rounded-[20px] p-8 flex flex-col gap-4 hover:shadow-lg transition-shadow">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-[18px] font-bold text-white">{c.title}</h3>
-                      <span className="text-[10px] font-bold bg-gold/20 text-gold px-3 py-1 rounded-full">{c.status}</span>
+                      <h3 className="text-[18px] font-medium text-white">{c.title}</h3>
+                      <span className="text-[13px] font-medium bg-gold/20 text-gold px-3 py-1 rounded-full">{c.status}</span>
                     </div>
                     <p className="text-[15px] text-white/50 leading-relaxed">{c.desc}</p>
                     <div className="flex items-center gap-2 mt-auto pt-3 border-t border-white/10">

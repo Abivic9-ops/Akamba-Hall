@@ -1,19 +1,36 @@
 import { requireRole } from '@/lib/auth/roleGuard'
+import { StudentDashboardClient } from '@/components/dashboard/student-dashboard-client'
+import {
+  student_profile,
+  active_loans,
+  holds,
+  bookings,
+  announcements,
+  library_hours,
+  overdue_count,
+} from '@/lib/mock/student-data'
 
-export default async function student_placeholder() {
-  await requireRole(['STUDENT'])
+export const dynamic = 'force-dynamic'
+
+export default async function student_dashboard_page() {
+  await requireRole(['STUDENT', 'SUPER_ADMIN'])
+
+  const now = Date.now()
+  const due_soon_count = active_loans.filter((l) => {
+    const days = Math.ceil((new Date(l.dueDate).getTime() - now) / (1000 * 60 * 60 * 24))
+    return days >= 0 && days <= 7
+  }).length
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] flex items-center justify-center p-6">
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-10 max-w-md w-full text-center space-y-4">
-        <div className="h-16 w-16 rounded-full bg-blue-50 flex items-center justify-center mx-auto">
-          <span className="text-2xl">📚</span>
-        </div>
-        <h2 className="text-[18px] font-bold text-slate-900 font-[var(--font-poppins)]">Student Dashboard</h2>
-        <p className="text-[13px] text-slate-500 leading-relaxed">
-          This dashboard is coming soon. You will be able to browse the catalogue, manage your loans, and view your reading history.
-        </p>
-      </div>
-    </div>
+    <StudentDashboardClient
+      profile={student_profile}
+      loans={active_loans}
+      holds={holds}
+      bookings={bookings}
+      announcements={announcements}
+      libraryHours={library_hours}
+      overdueCount={overdue_count}
+      dueSoonCount={due_soon_count}
+    />
   )
 }

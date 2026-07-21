@@ -102,7 +102,7 @@ export const navigationRegistry: NavItem[] = [
     roles: ['LIBRARY_HEAD'],
   },
 
-  // ─── STUDENT (Phase 4 Scaffold) ────────────────
+  // ─── STUDENT ────────────────────────────────────
   {
     label: 'Dashboard',
     icon: 'LayoutDashboard',
@@ -110,8 +110,57 @@ export const navigationRegistry: NavItem[] = [
     section: 'Main',
     roles: ['STUDENT'],
   },
+  {
+    label: 'My Loans',
+    icon: 'BookOpen',
+    path: '/student/loans',
+    section: 'Library',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Reservations',
+    icon: 'Bookmark',
+    path: '/student/reservations',
+    section: 'Library',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Bookings',
+    icon: 'CalendarCheck',
+    path: '/student/bookings',
+    section: 'Library',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Catalogue',
+    icon: 'Search',
+    path: '/student/catalogue',
+    section: 'Library',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Events',
+    icon: 'Megaphone',
+    path: '/student/events',
+    section: 'Community',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/student/profile',
+    section: 'Account',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Help & Support',
+    icon: 'HelpCircle',
+    path: '/student/help',
+    section: 'Account',
+    roles: ['STUDENT'],
+  },
 
-  // ─── STAFF (Phase 4 Scaffold) ──────────────────
+  // ─── STAFF ──────────────────────────────────────
   {
     label: 'Dashboard',
     icon: 'LayoutDashboard',
@@ -119,8 +168,36 @@ export const navigationRegistry: NavItem[] = [
     section: 'Main',
     roles: ['STAFF'],
   },
+  {
+    label: 'Inventory',
+    icon: 'Library',
+    path: '/staff/inventory',
+    section: 'Operations',
+    roles: ['STAFF'],
+  },
+  {
+    label: 'Loans',
+    icon: 'BookOpen',
+    path: '/staff/loans',
+    section: 'Operations',
+    roles: ['STAFF'],
+  },
+  {
+    label: 'Members',
+    icon: 'Users',
+    path: '/staff/members',
+    section: 'People',
+    roles: ['STAFF'],
+  },
+  {
+    label: 'Announcements',
+    icon: 'Megaphone',
+    path: '/staff/announcements',
+    section: 'Communication',
+    roles: ['STAFF'],
+  },
 
-  // ─── DESK (Phase 4 Scaffold) ───────────────────
+  // ─── DESK ───────────────────────────────────────
   {
     label: 'Dashboard',
     icon: 'LayoutDashboard',
@@ -128,13 +205,55 @@ export const navigationRegistry: NavItem[] = [
     section: 'Main',
     roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
   },
+  {
+    label: 'Check-In / Check-Out',
+    icon: 'LogIn',
+    path: '/desk/checkin',
+    section: 'Operations',
+    roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
+  },
+  {
+    label: 'Bookings',
+    icon: 'CalendarCheck',
+    path: '/desk/bookings',
+    section: 'Operations',
+    roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
+  },
+  {
+    label: 'Members',
+    icon: 'Users',
+    path: '/desk/members',
+    section: 'People',
+    roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
+  },
 
-  // ─── EXECUTIVE (Phase 4 Scaffold) ──────────────
+  // ─── EXECUTIVE ──────────────────────────────────
   {
     label: 'Dashboard',
     icon: 'LayoutDashboard',
     path: '/executive/dashboard',
     section: 'Main',
+    roles: ['EXECUTIVE'],
+  },
+  {
+    label: 'Analytics',
+    icon: 'Activity',
+    path: '/executive/analytics',
+    section: 'Insights',
+    roles: ['EXECUTIVE'],
+  },
+  {
+    label: 'Events',
+    icon: 'Megaphone',
+    path: '/executive/events',
+    section: 'Community',
+    roles: ['EXECUTIVE'],
+  },
+  {
+    label: 'Reports',
+    icon: 'ScrollText',
+    path: '/executive/reports',
+    section: 'Insights',
     roles: ['EXECUTIVE'],
   },
 ]
