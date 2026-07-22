@@ -84,7 +84,7 @@ export const role_badge_colors: Record<Role, { bg: string; text: string }> = {
   ASSISTANT: { bg: 'bg-amber-50', text: 'text-amber-600' },
   CAPTAIN: { bg: 'bg-amber-50', text: 'text-amber-600' },
   PREFECT: { bg: 'bg-amber-50', text: 'text-amber-600' },
-  EXECUTIVE: { bg: 'bg-emerald-50', text: 'text-emerald-600' },
+  EXECUTIVE: { bg: 'bg-amber-50', text: 'text-amber-700' },
   LIBRARY_HEAD: { bg: 'bg-sky-50', text: 'text-sky-600' },
   SUPER_ADMIN: { bg: 'bg-red-50', text: 'text-red-600' },
 }

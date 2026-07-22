@@ -1,0 +1,40 @@
+'use client'
+
+import { GraduationCap, ArrowRight } from 'lucide-react'
+
+const services = [
+  { title: 'Citation Workshop', description: 'Learn proper APA, MLA, and Chicago citation formats', schedule: 'Every Tuesday, 3:00 PM', status: 'Active' },
+  { title: 'Database Training', description: 'Hands-on session with JSTOR, IEEE, and Springer', schedule: 'Every Thursday, 2:00 PM', status: 'Active' },
+  { title: 'Research Methodology', description: 'Introduction to academic research methods', schedule: 'First Monday of month', status: 'Active' },
+  { title: 'Thesis Writing Support', description: 'One-on-one thesis writing guidance', schedule: 'By appointment', status: 'Active' },
+]
+
+export function ResearchSupportClient() {
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-[28px] font-medium text-slate-900">Research Support</h1>
+        <p className="text-[15px] text-slate-500 mt-1">Academic research assistance programs</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {services.map((s, i) => (
+          <div key={i} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-10 w-10 rounded-xl bg-purple-50 flex items-center justify-center">
+                <GraduationCap className="h-5 w-5 text-[#8B5CF6]" />
+              </div>
+              <div>
+                <p className="text-[14px] font-semibold text-slate-800">{s.title}</p>
+                <p className="text-[11px] text-slate-400">{s.schedule}</p>
+              </div>
+            </div>
+            <p className="text-[12px] text-slate-500 mb-3">{s.description}</p>
+            <button className="h-8 px-4 rounded-full bg-purple-50 text-[12px] font-semibold text-[#8B5CF6] hover:bg-purple-100 inline-flex items-center gap-1.5 transition-all duration-200">
+              Learn more <ArrowRight className="h-3 w-3" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}

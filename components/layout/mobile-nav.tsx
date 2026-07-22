@@ -10,6 +10,8 @@ import {
   GraduationCap, Briefcase, Monitor, Zap, BookMarked,
   Grid3X3, BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
   Search, PackageCheck, Star, Globe, Video,
+  ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
+  FileText, UserSearch,
 } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { getNavigationForRole } from '@/lib/config/navigation'
@@ -22,6 +24,8 @@ const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
   GraduationCap, Briefcase, Monitor, Zap, BookMarked, Grid3X3,
   BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
   Search, PackageCheck, Star, Globe, Video,
+  ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
+  FileText, UserSearch,
 }
 
 function resolve_icon(name: string) {
@@ -104,12 +108,24 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                   <span className="text-[12px] text-white/40 truncate">{display_role}</span>
                 </div>
               </div>
-              <button
-                onClick={on_close}
-                className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors cursor-pointer"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                {sidebarRole === 'EXECUTIVE' && (
+                  <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-1">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                    </span>
+                    <Activity className="h-3 w-3 text-emerald-400" />
+                    <span className="text-[10px] font-semibold text-emerald-400">Healthy</span>
+                  </div>
+                )}
+                <button
+                  onClick={on_close}
+                  className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors cursor-pointer"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
             </div>
 
             {/* viewing-as indicator + back to admin */}

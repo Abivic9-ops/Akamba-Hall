@@ -12,6 +12,8 @@ import {
   Grid3X3, ChevronLeft, ChevronRight, LogOut,
   BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
   Search, PackageCheck, Star, Globe, Video,
+  ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
+  FileText, UserSearch,
 } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { getNavigationSections } from '@/lib/config/navigation'
@@ -24,6 +26,8 @@ const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
   GraduationCap, Briefcase, Monitor, Zap, BookMarked,
   Grid3X3, BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
   Search, PackageCheck, Star, Globe, Video,
+  ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
+  FileText, UserSearch,
 }
 
 function resolve_icon(name: string) {

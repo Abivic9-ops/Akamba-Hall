@@ -35,7 +35,9 @@ function Shell({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
         <DashboardHeader on_menu_toggle={() => set_mobile_open(!mobile_open)} />
         <main className="flex-1 overflow-y-auto">
-          {children}
+          <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-6">
+            {children}
+          </div>
         </main>
       </div>
     </div>

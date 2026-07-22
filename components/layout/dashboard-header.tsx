@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { usePathname } from 'next/navigation'
-import { Search, Bell, ChevronDown, Menu, Sun, Moon, User, Settings, HelpCircle, LogOut } from 'lucide-react'
+import { Search, Bell, ChevronDown, Menu, Sun, Moon, User, Settings, HelpCircle, LogOut, Activity } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { role_display_names } from '@/lib/types/role'
 import type { Role } from '@/lib/types/role'
@@ -117,6 +117,23 @@ export function dashboard_header({ on_menu_toggle }: dashboard_header_props) {
           </kbd>
         </div>
       </div>
+
+      {/* executive-specific: system health + date */}
+      {role === 'EXECUTIVE' && (
+        <div className="hidden lg:flex items-center gap-4 mx-4">
+          <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <Activity className="h-3.5 w-3.5 text-emerald-600" />
+            <span className="text-[11px] font-semibold text-emerald-700">System Healthy</span>
+          </div>
+          <div className="text-[12px] text-slate-500 font-medium">
+            {new Date().toLocaleDateString('en-KE', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
+          </div>
+        </div>
+      )}
 
       {/* right section: notifications, theme toggle, profile */}
       <div className="flex items-center gap-2 shrink-0">
