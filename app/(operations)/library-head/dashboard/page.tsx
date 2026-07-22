@@ -87,7 +87,7 @@ export default async function library_head_dashboard() {
       {overdue_loans > 0 && (
         <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 flex items-center gap-3">
           <AlertTriangle className="h-4 w-4 shrink-0" />
-          <span className="text-[13px] font-semibold">
+          <span className="text-[13px] font-medium">
             {overdue_loans} overdue loan{overdue_loans !== 1 ? 's' : ''} require{overdue_loans === 1 ? 's' : ''} follow-up
           </span>
         </div>
@@ -96,10 +96,10 @@ export default async function library_head_dashboard() {
       <div className="max-w-[1440px] mx-auto p-6 space-y-6">
         {/* greeting */}
         <div>
-          <h1 className="text-[22px] font-extrabold text-slate-900 font-[var(--font-poppins)]">
+          <h1 className="text-[28px] font-medium text-slate-900">
             {greeting()}, Library Head
           </h1>
-          <p className="text-[13px] text-slate-500 mt-1">
+          <p className="text-[15px] text-slate-500 mt-1">
             {day_name}, {date_str}
           </p>
         </div>
@@ -114,12 +114,12 @@ export default async function library_head_dashboard() {
           ].map((item) => (
             <div key={item.label} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[12px] font-semibold text-slate-500">{item.label}</span>
+                <span className="text-[13px] text-slate-400">{item.label}</span>
                 <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${item.color}`}>
                   <item.icon className="h-4 w-4" />
                 </div>
               </div>
-              <div className="text-[28px] font-extrabold text-slate-900 font-[var(--font-poppins)] leading-tight">
+              <div className="text-[28px] font-bold text-slate-900 leading-tight">
                 {item.value}
               </div>
             </div>
@@ -135,11 +135,11 @@ export default async function library_head_dashboard() {
               ) : (
                 <CheckCircle2 className="h-5 w-5 text-emerald-500" />
               )}
-              <span className={`text-[14px] font-bold ${overdue_loans > 0 ? 'text-red-700' : 'text-emerald-700'}`}>
+              <span className={`text-[15px] font-medium ${overdue_loans > 0 ? 'text-red-700' : 'text-emerald-700'}`}>
                 {overdue_loans > 0 ? 'Action Needed' : 'All Clear'}
               </span>
             </div>
-            <p className={`text-[12px] ${overdue_loans > 0 ? 'text-red-600' : 'text-emerald-600'}`}>
+            <p className={`text-[13px] ${overdue_loans > 0 ? 'text-red-600' : 'text-emerald-600'}`}>
               {overdue_loans > 0
                 ? `${overdue_loans} loan${overdue_loans !== 1 ? 's' : ''} past due`
                 : 'No overdue loans'
@@ -150,9 +150,9 @@ export default async function library_head_dashboard() {
           <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
             <div className="flex items-center gap-3 mb-2">
               <TrendingUp className="h-5 w-5 text-amber-500" />
-              <span className="text-[14px] font-bold text-amber-700">Staff Status</span>
+              <span className="text-[15px] font-medium text-amber-700">Staff Status</span>
             </div>
-            <p className="text-[12px] text-amber-600">
+            <p className="text-[13px] text-amber-600">
               {staff_on_duty} staff member{staff_on_duty !== 1 ? 's' : ''} on duty
             </p>
           </div>
@@ -160,9 +160,9 @@ export default async function library_head_dashboard() {
           <div className="bg-sky-50 border border-sky-100 rounded-2xl p-5">
             <div className="flex items-center gap-3 mb-2">
               <BarChart3 className="h-5 w-5 text-sky-500" />
-              <span className="text-[14px] font-bold text-sky-700">Collection</span>
+              <span className="text-[15px] font-medium text-sky-700">Collection</span>
             </div>
-            <p className="text-[12px] text-sky-600">
+            <p className="text-[13px] text-sky-600">
               {books_on_loan} on loan &middot; {books_available} available
             </p>
           </div>
@@ -173,7 +173,7 @@ export default async function library_head_dashboard() {
           {/* bookings */}
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
+              <h2 className="text-[15px] font-medium text-slate-900 flex items-center gap-2">
                 <CalendarCheck className="h-4 w-4 text-slate-400" />
                 Recent Bookings
               </h2>
@@ -188,14 +188,14 @@ export default async function library_head_dashboard() {
                       <CalendarCheck className="h-4 w-4 text-sky-500" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[13px] font-semibold text-slate-800 truncate">
+                      <p className="text-[14px] font-medium text-slate-800 truncate">
                         {b.space?.name ?? 'Unknown Space'}
                       </p>
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[12px] text-slate-400">
                         {b.user.fullName ?? 'Unknown'} &middot; {time_ago(b.createdAt.toISOString())}
                       </p>
                     </div>
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${status_colors[b.status] ?? ''}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${status_colors[b.status] ?? ''}`}>
                       {b.status}
                     </span>
                   </div>
@@ -207,7 +207,7 @@ export default async function library_head_dashboard() {
           {/* member activity / recent loans */}
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
+              <h2 className="text-[15px] font-medium text-slate-900 flex items-center gap-2">
                 <Activity className="h-4 w-4 text-slate-400" />
                 Recent Loans
               </h2>
@@ -225,14 +225,14 @@ export default async function library_head_dashboard() {
                         <BookOpen className="h-4 w-4 text-blue-500" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[13px] font-semibold text-slate-800 truncate">
+                        <p className="text-[14px] font-medium text-slate-800 truncate">
                           {loan.copy?.book?.title ?? 'Unknown Book'}
                         </p>
-                        <p className="text-[11px] text-slate-400">
+                        <p className="text-[12px] text-slate-400">
                           {loan.user.fullName ?? 'Unknown'} &middot; Due {format_time(loan.dueAt)}
                         </p>
                       </div>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${status_colors[loan_status]}`}>
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${status_colors[loan_status]}`}>
                         {loan_status}
                       </span>
                     </div>
@@ -248,7 +248,7 @@ export default async function library_head_dashboard() {
           {/* inventory summary */}
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)]">Inventory Summary</h2>
+              <h2 className="text-[15px] font-medium text-slate-900">Inventory Summary</h2>
             </div>
             <div className="p-6 space-y-4">
               {[
@@ -257,8 +257,8 @@ export default async function library_head_dashboard() {
                 { label: 'On Loan', value: books_on_loan },
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
-                  <span className="text-[13px] text-slate-600">{item.label}</span>
-                  <span className="text-[18px] font-extrabold text-slate-900 font-[var(--font-poppins)]">{item.value}</span>
+                  <span className="text-[13px] text-slate-400">{item.label}</span>
+                  <span className="text-[18px] font-bold text-slate-900">{item.value}</span>
                 </div>
               ))}
               {total_books > 0 && (
@@ -280,7 +280,7 @@ export default async function library_head_dashboard() {
           {/* staff overview */}
           <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)]">Staff Overview</h2>
+              <h2 className="text-[15px] font-medium text-slate-900">Staff Overview</h2>
             </div>
             <div className="p-6 space-y-4">
               {[
@@ -289,8 +289,8 @@ export default async function library_head_dashboard() {
                 { label: "Today's Bookings", value: today_bookings },
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
-                  <span className="text-[13px] text-slate-600">{item.label}</span>
-                  <span className="text-[18px] font-extrabold text-slate-900 font-[var(--font-poppins)]">{item.value}</span>
+                  <span className="text-[13px] text-slate-400">{item.label}</span>
+                  <span className="text-[18px] font-bold text-slate-900">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -300,7 +300,7 @@ export default async function library_head_dashboard() {
         {/* row 5 — quick actions */}
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
           <div className="px-6 py-4 border-b border-slate-50">
-            <h2 className="text-[15px] font-bold text-slate-900 font-[var(--font-poppins)]">Quick Actions</h2>
+            <h2 className="text-[15px] font-medium text-slate-900">Quick Actions</h2>
           </div>
           <div className="p-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
@@ -312,7 +312,7 @@ export default async function library_head_dashboard() {
               <a
                 key={action.label}
                 href={action.href}
-                className={`flex items-center justify-center gap-2 p-3 rounded-xl ${action.color} font-semibold text-[12px] hover:opacity-80 transition-opacity`}
+                className={`flex items-center justify-center gap-2 p-3 rounded-xl ${action.color} font-medium text-[12px] hover:opacity-80 transition-opacity`}
               >
                 {action.label}
               </a>

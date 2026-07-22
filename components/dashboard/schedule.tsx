@@ -11,7 +11,7 @@ interface Booking {
   location: string
   startAt: string
   endAt: string
-  status: 'Approved' | 'Pending' | 'Cancelled'
+  status: 'Approved' | 'Pending' | 'Cancelled' | 'Confirmed'
 }
 
 interface ScheduleProps {

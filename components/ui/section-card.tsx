@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { type LucideIcon } from 'lucide-react'
+import { type LucideIcon, ArrowUpRight } from 'lucide-react'
 
 interface SectionCardProps {
   title: string
@@ -21,8 +21,9 @@ export function SectionCard({ title, icon: Icon, cta, children, className, conte
           {title}
         </h2>
         {cta && (
-          <Link href={cta.href} className="inline-flex items-center h-7 px-3.5 rounded-full border border-[#2563EB]/20 text-[12px] font-medium text-[#2563EB] bg-[#2563EB]/5 hover:bg-[#2563EB]/10 transition-colors">
+          <Link href={cta.href} className="inline-flex items-center gap-1.5 h-7 px-3.5 rounded-full border border-[#2563EB]/20 text-[12px] font-medium text-[#2563EB] bg-[#2563EB]/5 hover:bg-[#2563EB]/10 transition-colors">
             {cta.label}
+            <ArrowUpRight className="h-3 w-3" />
           </Link>
         )}
       </div>
