@@ -1,10 +1,9 @@
 import { requireRole } from '@/lib/auth/roleGuard'
-import { DeskDashboardClient } from '@/components/desk/desk-dashboard-client'
+import { CataloguePageClient } from '@/components/desk/catalogue-page-client'
 
 export const dynamic = 'force-dynamic'
 
-export default async function DeskDashboardPage() {
+export default async function CataloguePage() {
   await requireRole(['ASSISTANT', 'CAPTAIN', 'PREFECT', 'SUPER_ADMIN'])
-
-  return <DeskDashboardClient />
+  return <CataloguePageClient />
 }

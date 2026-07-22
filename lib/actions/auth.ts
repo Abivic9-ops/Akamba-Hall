@@ -170,14 +170,35 @@ export async function sign_in_action(formData: {
     return { success: false, error: error.message }
   }
 
-  // update last active timestamp
+  // update last active timestamp + sync role to app_metadata for middleware
   try {
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
+      // read role from database
+      const profile = await prisma.user.findUnique({
+        where: { id: user.id },
+        select: { role: true },
+      })
+
+      // update last active
       await prisma.user.update({
         where: { id: user.id },
         data: { lastActiveAt: new Date() },
       }).catch(() => {})
+
+      // sync role to Supabase app_metadata so middleware can read it from the JWT
+      const dbRole = profile?.role ?? 'STUDENT'
+      const jwtRole = user.app_metadata?.role
+      if (jwtRole !== dbRole) {
+        const admin = getAdminClient()
+        if (admin) {
+          await admin.auth.admin.updateUserById(user.id, {
+            app_metadata: { role: dbRole },
+          }).catch(() => {})
+          // refresh the session so the new JWT carries the updated role
+          await supabase.auth.refreshSession().catch(() => {})
+        }
+      }
     }
   } catch {}
 

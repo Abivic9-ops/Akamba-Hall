@@ -13,7 +13,8 @@ import {
   BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
   Search, PackageCheck, Star, Globe, Video,
   ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
-  FileText, UserSearch,
+  FileText, UserSearch, ArrowDownToLine, RefreshCw, Package,
+  SearchCheck, Newspaper, UserPlus, CreditCard, AlertTriangle,
 } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { getNavigationSections } from '@/lib/config/navigation'
@@ -27,7 +28,8 @@ const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
   Grid3X3, BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
   Search, PackageCheck, Star, Globe, Video,
   ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
-  FileText, UserSearch,
+  FileText, UserSearch, ArrowDownToLine, RefreshCw, Package,
+  SearchCheck, Newspaper, UserPlus, CreditCard, AlertTriangle,
 }
 
 function resolve_icon(name: string) {
