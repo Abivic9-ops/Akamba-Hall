@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Poppins, Inter } from 'next/font/google'
 import { ThemeProvider } from '@/lib/contexts/theme-context'
+import { PWAInstallPrompt } from '@/components/pwa/PWAInstallPrompt'
 import './globals.css'
 
 const poppins = Poppins({
@@ -23,6 +24,15 @@ export const metadata: Metadata = {
     default: 'Akamba Hall Library',
   },
   description: 'The digital home of Akamba Hall Library — catalogue, loans, spaces, and more.',
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Akamba Hall',
+  },
+  icons: {
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({
@@ -32,8 +42,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${inter.variable}`}>
+      <head>
+        <meta name="theme-color" content="#0B1A3B" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      </head>
       <body className="font-poppins antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <PWAInstallPrompt />
+        </ThemeProvider>
       </body>
     </html>
   )
