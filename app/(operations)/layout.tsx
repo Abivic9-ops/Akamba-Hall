@@ -22,7 +22,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   if (error) return <DashboardError error={error} />
 
   return (
-    <div className="flex h-screen bg-[#F8F9FB]">
+    <div className="flex h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224] dark:bg-[#071224] transition-colors duration-300">
       {/* desktop sidebar */}
       <div className="hidden lg:block">
         <DashboardSidebar />

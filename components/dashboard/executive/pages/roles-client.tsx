@@ -14,32 +14,32 @@ export function RolesClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-[28px] font-medium text-slate-900">Role Overview</h1>
-        <p className="text-[15px] text-slate-500 mt-1">User distribution across roles</p>
+        <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Role Overview</h1>
+        <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">User distribution across roles</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {roles.map((r) => {
           const Icon = r.icon
           return (
-            <div key={r.role} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition-shadow">
+            <div key={r.role} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-5 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3 mb-4">
                 <div className={`h-10 w-10 rounded-xl ${r.bg} flex items-center justify-center`}>
                   <Icon className={`h-5 w-5 ${r.color}`} />
                 </div>
                 <div>
-                  <p className="text-[14px] font-semibold text-slate-800">{r.role}</p>
-                  <p className="text-[11px] text-slate-400">{r.count} total</p>
+                  <p className="text-[14px] font-semibold text-slate-800 dark:text-[#E2E8F0]">{r.role}</p>
+                  <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.count} total</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <div>
-                  <p className="text-[20px] font-bold text-slate-900">{r.active}</p>
-                  <p className="text-[11px] text-slate-400">Active</p>
+                  <p className="text-[20px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{r.active}</p>
+                  <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Active</p>
                 </div>
                 {r.suspended > 0 && (
                   <div>
                     <p className="text-[20px] font-bold text-red-500">{r.suspended}</p>
-                    <p className="text-[11px] text-slate-400">Suspended</p>
+                    <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Suspended</p>
                   </div>
                 )}
               </div>

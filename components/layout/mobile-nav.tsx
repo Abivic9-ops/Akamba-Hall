@@ -100,7 +100,7 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
             {/* header */}
             <div className="p-4 flex items-center justify-between border-b border-white/5">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-[13px] font-normal text-white">
+                <div className="h-9 w-9 rounded-full bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 flex items-center justify-center text-[13px] font-normal text-white">
                   {initials}
                 </div>
                 <div className="flex flex-col min-w-0">
@@ -122,7 +122,7 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                 <button
                   onClick={on_close}
                   aria-label="Close navigation"
-                  className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors cursor-pointer"
+                  className="p-2 rounded-lg hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 text-white/50 hover:text-white transition-colors cursor-pointer"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -140,7 +140,7 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                 <Link
                   href="/super-admin/dashboard"
                   onClick={on_close}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] transition-all"
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] dark:text-white dark:text-white transition-all"
                 >
                   <Shield className="h-4 w-4 shrink-0" />
                   <span>Back to Admin</span>
@@ -160,8 +160,8 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                     onClick={on_close}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-normal transition-all mb-1 ${
                       is_active
-                        ? 'bg-[#E8A63C] text-[#0B1A3B] font-medium'
-                        : 'text-white/60 hover:text-white hover:bg-white/5'
+                        ? 'bg-[#E8A63C] text-[#0B1A3B] dark:text-white dark:text-white font-medium'
+                        : 'text-white/60 hover:text-white hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/5'
                     }`}
                   >
                     <Icon className="h-[18px] w-[18px] shrink-0" />

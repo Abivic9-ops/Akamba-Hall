@@ -32,7 +32,7 @@ function time_ago(date_str: string): string {
 const status_colors: Record<string, string> = {
   healthy: 'bg-emerald-100 text-emerald-700',
   active: 'bg-blue-100 text-blue-600',
-  completed: 'bg-slate-100 text-slate-600',
+  completed: 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]',
   warning: 'bg-amber-100 text-amber-600',
   critical: 'bg-red-100 text-red-600',
 }
@@ -61,7 +61,7 @@ export default async function super_admin_dashboard() {
   ]
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       {/* conditional alert banner */}
       {metrics.overdue_loans > 0 && (
         <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 flex items-center gap-3">
@@ -75,10 +75,10 @@ export default async function super_admin_dashboard() {
       <div className="max-w-[1440px] mx-auto p-6 space-y-6">
         {/* greeting */}
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900 font-[var(--font-poppins)]">
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)]">
             {greeting()}, Administrator
           </h1>
-          <p className="text-[15px] text-slate-500 mt-1">
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
             Here is an overview of the library system
           </p>
         </div>
@@ -88,17 +88,17 @@ export default async function super_admin_dashboard() {
           {metric_keys.map((key, i) => {
             const Icon = metric_icon_map[i]
             return (
-              <div key={key} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div key={key} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl p-5 border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[14px] font-normal text-slate-500">{metric_labels[i]}</span>
+                  <span className="text-[14px] font-normal text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{metric_labels[i]}</span>
                   <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${metric_color_map[i]}`}>
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>
-                <div className="text-[32px] font-medium text-slate-900 font-[var(--font-poppins)] leading-tight">
+                <div className="text-[32px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)] leading-tight">
                   {metric_values[i]}
                 </div>
-                <p className="text-[13px] text-slate-400 mt-1">{metric_subtexts[i]}</p>
+                <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">{metric_subtexts[i]}</p>
               </div>
             )
           })}
@@ -110,15 +110,15 @@ export default async function super_admin_dashboard() {
             { label: 'Active Users Today', value: metrics.active_users_today, icon: TrendingUp, color: 'text-emerald-500', trend: 'up' },
             { label: 'Total Staff', value: metrics.total_staff, icon: Shield, color: 'text-[#5B9BD5]', trend: 'up' },
             { label: 'Total Students', value: metrics.total_students, icon: Users, color: 'text-blue-500', trend: 'up' },
-            { label: 'Overdue Loans', value: metrics.overdue_loans, icon: AlertTriangle, color: metrics.overdue_loans > 0 ? 'text-red-500' : 'text-slate-400', trend: 'down' },
+            { label: 'Overdue Loans', value: metrics.overdue_loans, icon: AlertTriangle, color: metrics.overdue_loans > 0 ? 'text-red-500' : 'text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]', trend: 'down' },
           ].map((item) => (
-            <div key={item.label} className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm">
+            <div key={item.label} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl p-4 border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
+                  <div className="h-9 w-9 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] flex items-center justify-center">
                     <item.icon className={`h-4 w-4 ${item.color}`} />
                   </div>
-                  <span className="text-[14px] font-normal text-slate-500">{item.label}</span>
+                  <span className="text-[14px] font-normal text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.label}</span>
                 </div>
                 {item.trend === 'up' ? (
                   <ArrowUpRight className="h-4 w-4 text-emerald-500" />
@@ -126,7 +126,7 @@ export default async function super_admin_dashboard() {
                   <ArrowDownRight className="h-4 w-4 text-red-400" />
                 )}
               </div>
-              <div className="text-[28px] font-medium text-slate-900 mt-2 font-[var(--font-poppins)]">
+              <div className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] mt-2 font-[var(--font-poppins)]">
                 {item.value}
               </div>
             </div>
@@ -136,25 +136,25 @@ export default async function super_admin_dashboard() {
         {/* row 3 — activity feed + system status */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* activity feed */}
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="lg:col-span-2 bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-5 border-b border-slate-50">
-              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
-                <Activity className="h-5 w-5 text-slate-400" />
+              <h2 className="text-[17px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)] flex items-center gap-2">
+                <Activity className="h-5 w-5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                 Recent Activity
               </h2>
             </div>
             <div className="p-4 space-y-1">
               {activity.length === 0 ? (
-                <p className="text-[15px] text-slate-400 text-center py-8">No recent activity</p>
+                <p className="text-[15px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] text-center py-8">No recent activity</p>
               ) : (
                 activity.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
-                    <div className="h-10 w-10 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                      <BookOpen className="h-4 w-4 text-slate-500" />
+                  <div key={item.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] rounded-xl transition-colors">
+                    <div className="h-10 w-10 rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] flex items-center justify-center shrink-0">
+                      <BookOpen className="h-4 w-4 text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[14px] font-normal text-slate-800 truncate">{item.description}</p>
-                      <p className="text-[13px] text-slate-400">{item.user_name} · {time_ago(item.created_at)}</p>
+                      <p className="text-[14px] font-normal text-slate-800 dark:text-[#E2E8F0] dark:text-[#E2E8F0] truncate">{item.description}</p>
+                      <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.user_name} · {time_ago(item.created_at)}</p>
                     </div>
                     <span className={`px-2.5 py-0.5 rounded-full text-[12px] font-normal ${status_colors[item.status] ?? status_colors.completed}`}>
                       {item.status}
@@ -166,19 +166,19 @@ export default async function super_admin_dashboard() {
           </div>
 
           {/* system status */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-5 border-b border-slate-50">
-              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)] flex items-center gap-2">
-                <Shield className="h-5 w-5 text-slate-400" />
+              <h2 className="text-[17px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)] flex items-center gap-2">
+                <Shield className="h-5 w-5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                 System Status
               </h2>
             </div>
             <div className="p-4 space-y-3">
               {health.map((item) => (
-                <div key={item.label} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl">
+                <div key={item.label} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] rounded-xl">
                   <div>
-                    <p className="text-[14px] font-normal text-slate-800">{item.label}</p>
-                    <p className="text-[13px] text-slate-400">{item.detail}</p>
+                    <p className="text-[14px] font-normal text-slate-800 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{item.label}</p>
+                    <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.detail}</p>
                   </div>
                   <span className={`px-2.5 py-1 rounded-full text-[12px] font-normal ${status_colors[item.status]}`}>
                     {item.status}
@@ -192,21 +192,21 @@ export default async function super_admin_dashboard() {
         {/* row 4 — role distribution + quick actions */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* role distribution */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-5 border-b border-slate-50">
-              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)]">Role Distribution</h2>
+              <h2 className="text-[17px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)]">Role Distribution</h2>
             </div>
             <div className="p-4 space-y-3">
               {distribution.length === 0 ? (
-                <p className="text-[15px] text-slate-400 text-center py-4">No users yet</p>
+                <p className="text-[15px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] text-center py-4">No users yet</p>
               ) : (
                 distribution.map((item) => (
                   <div key={item.role}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[14px] font-normal text-slate-700">{item.role.replace('_', ' ')}</span>
-                      <span className="text-[13px] text-slate-400">{item.count}</span>
+                      <span className="text-[14px] font-normal text-slate-700 dark:text-[#E2E8F0]">{item.role.replace('_', ' ')}</span>
+                      <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.count}</span>
                     </div>
-                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div className="h-2 bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded-full overflow-hidden">
                       <div
                         className="h-full bg-[#E8A63C] rounded-full transition-all duration-500"
                         style={{ width: `${item.percentage}%` }}
@@ -219,9 +219,9 @@ export default async function super_admin_dashboard() {
           </div>
 
           {/* quick actions */}
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="lg:col-span-2 bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-5 border-b border-slate-50">
-              <h2 className="text-[17px] font-medium text-slate-900 font-[var(--font-poppins)]">Quick Actions</h2>
+              <h2 className="text-[17px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)]">Quick Actions</h2>
             </div>
             <div className="p-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
               {[
@@ -230,7 +230,7 @@ export default async function super_admin_dashboard() {
                 { label: 'View Loans', href: '/reservations', color: 'bg-amber-50 text-amber-600' },
                 { label: 'Members', href: '/members', color: 'bg-sky-50 text-sky-600' },
                 { label: 'Reservations', href: '/reservations', color: 'bg-[#5B9BD5]/10 text-[#5B9BD5]' },
-                { label: 'System Settings', href: '/super-admin/settings', color: 'bg-slate-100 text-slate-600' },
+                { label: 'System Settings', href: '/super-admin/settings', color: 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]' },
               ].map((action) => (
                 <a
                   key={action.label}

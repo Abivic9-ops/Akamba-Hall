@@ -17,17 +17,17 @@ const type_badges: Record<string, { label: string; color: string }> = {
   special_access: { label: 'Access', color: 'bg-[#5B9BD5]/10 text-[#2563EB]' },
   policy_exception: { label: 'Policy', color: 'bg-amber-100 text-amber-700' },
   incident: { label: 'Incident', color: 'bg-red-100 text-red-600' },
-  general: { label: 'General', color: 'bg-slate-100 text-slate-600' },
+  general: { label: 'General', color: 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]' },
 }
 
 export function ApprovalQueueTable({ items }: { items: ApprovalItem[] }) {
   return (
-    <div id="approval-queue" className="bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden">
-      <div className="px-5 py-4 border-b border-slate-100">
+    <div id="approval-queue" className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none overflow-hidden">
+      <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-[15px] font-semibold text-slate-900">Approval Queue</h3>
-            <p className="text-[12px] text-slate-400 mt-0.5">{items.length} requests awaiting your review</p>
+            <h3 className="text-[15px] font-semibold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Approval Queue</h3>
+            <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{items.length} requests awaiting your review</p>
           </div>
           <button className="h-8 px-4 rounded-full bg-amber-50 text-[12px] font-semibold text-amber-600 hover:bg-amber-100 hover:text-amber-700 inline-flex items-center gap-1.5 transition-all duration-200">
             View all <ArrowRight className="h-3 w-3" />
@@ -45,7 +45,7 @@ export function ApprovalQueueTable({ items }: { items: ApprovalItem[] }) {
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-[13px] font-medium text-slate-800 truncate">{item.request}</p>
+                    <p className="text-[13px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{item.request}</p>
                     <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${badge.color}`}>
                       {badge.label}
                     </span>
@@ -55,7 +55,7 @@ export function ApprovalQueueTable({ items }: { items: ApprovalItem[] }) {
                       </span>
                     )}
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5">
+                  <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">
                     {item.requestor} · {item.context} · {item.date}
                   </p>
                 </div>
@@ -64,7 +64,7 @@ export function ApprovalQueueTable({ items }: { items: ApprovalItem[] }) {
                 <button className="h-8 px-3 rounded-lg bg-[#1A2D5A] text-white text-[12px] font-semibold hover:bg-[#1A2D5A]/90 transition-colors">
                   Approve
                 </button>
-                <button className="h-8 px-3 rounded-lg border border-slate-200 text-slate-600 text-[12px] font-semibold hover:bg-slate-50 transition-colors">
+                <button className="h-8 px-3 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] text-[12px] font-semibold hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors">
                   Decline
                 </button>
               </div>

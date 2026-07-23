@@ -25,11 +25,11 @@ const status_colors: Record<string, string> = {
 
 export function UserRoleVisibility({ roles }: { roles: RoleItem[] }) {
   return (
-    <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-5">
+    <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-[15px] font-semibold text-slate-900">User Role Visibility</h3>
-          <p className="text-[12px] text-slate-400 mt-0.5">Member distribution</p>
+          <h3 className="text-[15px] font-semibold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">User Role Visibility</h3>
+          <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">Member distribution</p>
         </div>
         <button className="text-[12px] font-semibold text-[#2563EB] hover:text-blue-700 inline-flex items-center gap-1 transition-colors">
           Manage users <ArrowRight className="h-3 w-3" />
@@ -39,13 +39,13 @@ export function UserRoleVisibility({ roles }: { roles: RoleItem[] }) {
         {roles.map((role) => {
           const Icon = icon_map[role.icon] ?? Users
           return (
-            <div key={role.role} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 transition-colors">
+            <div key={role.role} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors">
               <Icon className={`h-4 w-4 ${role.color} shrink-0`} />
               <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-medium text-slate-700">{role.role}</p>
+                <p className="text-[13px] font-medium text-slate-700 dark:text-[#E2E8F0]">{role.role}</p>
               </div>
-              <span className="text-[14px] font-bold text-slate-900">{role.count.toLocaleString()}</span>
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${status_colors[role.status] ?? 'bg-slate-100 text-slate-500'}`}>
+              <span className="text-[14px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{role.count.toLocaleString()}</span>
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${status_colors[role.status] ?? 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]'}`}>
                 {role.status}
               </span>
             </div>

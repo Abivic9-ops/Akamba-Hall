@@ -23,29 +23,29 @@ export default async function StaffHistoryPage() {
   const overdueItems = history.filter((h) => h.status === 'overdue').length
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-5">
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900">History & Fines</h1>
-          <p className="text-[15px] text-slate-500 mt-1">View your borrowing history and outstanding fines.</p>
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">History & Fines</h1>
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">View your borrowing history and outstanding fines.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <SectionCard title="Total Borrowed">
-            <p className="text-[32px] font-bold text-slate-900">{history.length}</p>
-            <p className="text-[13px] text-slate-400 mt-1">Books borrowed this term</p>
+            <p className="text-[32px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{history.length}</p>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Books borrowed this term</p>
           </SectionCard>
           <SectionCard title="Outstanding Fines">
             <p className={`text-[32px] font-bold ${totalFines > 0 ? 'text-[#DC2626]' : 'text-[#18A957]'}`}>
               KES {totalFines.toLocaleString()}
             </p>
-            <p className="text-[13px] text-slate-400 mt-1">{overdueItems} overdue return{overdueItems !== 1 ? 's' : ''}</p>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">{overdueItems} overdue return{overdueItems !== 1 ? 's' : ''}</p>
           </SectionCard>
           <SectionCard title="On-Time Returns">
             <p className="text-[32px] font-bold text-[#18A957]">
               {history.filter((h) => h.fine === 0).length}
             </p>
-            <p className="text-[13px] text-slate-400 mt-1">No fines incurred</p>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">No fines incurred</p>
           </SectionCard>
         </div>
 
@@ -55,13 +55,13 @@ export default async function StaffHistoryPage() {
               const cfg = status_config[item.status]
               const StatusIcon = cfg.icon
               return (
-                <div key={item.id} className="flex items-center gap-4 py-3 border-b border-slate-50 last:border-0 hover:bg-slate-50 rounded-lg px-2 transition-colors">
-                  <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center shrink-0">
+                <div key={item.id} className="flex items-center gap-4 py-3 border-b border-slate-50 last:border-0 hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] rounded-lg px-2 transition-colors">
+                  <div className="h-9 w-9 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] flex items-center justify-center shrink-0">
                     <StatusIcon className={`h-4 w-4 ${item.status === 'overdue' ? 'text-[#DC2626]' : 'text-[#18A957]'}`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-medium text-slate-800 truncate">{item.title}</p>
-                    <p className="text-[12px] text-slate-400 mt-0.5">
+                    <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] dark:text-[#E2E8F0] truncate">{item.title}</p>
+                    <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">
                       {item.borrowedDate} — {item.returnedDate ?? 'Not returned'}
                     </p>
                   </div>

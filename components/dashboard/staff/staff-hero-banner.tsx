@@ -29,7 +29,7 @@ export function StaffHeroBanner() {
             </a>
             <a
               href="#"
-              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-white/30 text-white text-[14px] font-medium hover:bg-white/10 transition-all"
+              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-white/30 text-white text-[14px] font-medium hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 transition-all"
             >
               View Past Papers
             </a>

@@ -47,13 +47,13 @@ export function HelpPageClient() {
   const [feedbackText, setFeedbackText] = useState('')
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-6">
 
         {/* header */}
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900">Help & Support</h1>
-          <p className="text-[15px] text-slate-500 mt-1">
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Help & Support</h1>
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
             Find answers to common questions or get in touch with the library team.
           </p>
         </div>
@@ -63,10 +63,10 @@ export function HelpPageClient() {
           {contactOptions.map((opt) => {
             const Icon = opt.icon
             return (
-              <div key={opt.label} className="bg-white rounded-xl border border-slate-100 p-4 hover:shadow-sm transition-all">
+              <div key={opt.label} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4 hover:shadow-sm dark:shadow-none dark:shadow-none transition-all">
                 <Icon className={`h-5 w-5 ${opt.color} mb-2`} />
-                <p className="text-[14px] font-medium text-slate-800">{opt.label}</p>
-                <p className="text-[13px] text-slate-500 mt-0.5">{opt.detail}</p>
+                <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0]">{opt.label}</p>
+                <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{opt.detail}</p>
               </div>
             )
           })}
@@ -75,28 +75,28 @@ export function HelpPageClient() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* FAQ */}
-          <div className="bg-white rounded-xl border border-slate-100 p-6">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-6">
             <div className="flex items-center gap-2 mb-5">
-              <HelpCircle className="h-5 w-5 text-slate-400" />
-              <h2 className="text-[17px] font-medium text-slate-900">Frequently Asked Questions</h2>
+              <HelpCircle className="h-5 w-5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+              <h2 className="text-[17px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Frequently Asked Questions</h2>
             </div>
             <div className="space-y-2">
               {faqs.map((faq, i) => (
-                <div key={i} className="border border-slate-100 rounded-lg overflow-hidden">
+                <div key={i} className="border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] rounded-lg overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 transition-colors"
+                    className="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors"
                   >
-                    <span className="text-[14px] font-normal text-slate-700 pr-4">{faq.q}</span>
+                    <span className="text-[14px] font-normal text-slate-700 dark:text-[#E2E8F0] pr-4">{faq.q}</span>
                     {openFaq === i ? (
-                      <ChevronUp className="h-4 w-4 text-slate-400 shrink-0" />
+                      <ChevronUp className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] shrink-0" />
                     ) : (
-                      <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
+                      <ChevronDown className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] shrink-0" />
                     )}
                   </button>
                   {openFaq === i && (
                     <div className="px-4 pb-4">
-                      <p className="text-[13px] text-slate-500 leading-relaxed">{faq.a}</p>
+                      <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] leading-relaxed">{faq.a}</p>
                     </div>
                   )}
                 </div>
@@ -105,19 +105,19 @@ export function HelpPageClient() {
           </div>
 
           {/* feedback form */}
-          <div className="bg-white rounded-xl border border-slate-100 p-6">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-6">
             <div className="flex items-center gap-2 mb-5">
-              <ThumbsUp className="h-5 w-5 text-slate-400" />
-              <h2 className="text-[17px] font-medium text-slate-900">Feedback & Requests</h2>
+              <ThumbsUp className="h-5 w-5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+              <h2 className="text-[17px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Feedback & Requests</h2>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="text-[13px] text-slate-500 mb-1 block">Type</label>
+                <label className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mb-1 block">Type</label>
                 <select
                   value={feedbackType}
                   onChange={(e) => setFeedbackType(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-200 text-[14px] text-slate-700 focus:outline-none focus:border-[#2563EB] transition-colors bg-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] text-slate-700 dark:text-[#E2E8F0] focus:outline-none focus:border-[#2563EB] transition-colors bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]"
                 >
                   <option value="suggestion">Book Suggestion</option>
                   <option value="feedback">General Feedback</option>
@@ -127,13 +127,13 @@ export function HelpPageClient() {
               </div>
 
               <div>
-                <label className="text-[13px] text-slate-500 mb-1 block">Your Message</label>
+                <label className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mb-1 block">Your Message</label>
                 <textarea
                   value={feedbackText}
                   onChange={(e) => setFeedbackText(e.target.value)}
                   placeholder="Describe your suggestion, feedback, or request..."
                   rows={5}
-                  className="w-full px-3 py-2.5 rounded-lg border border-slate-200 text-[14px] text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB] transition-colors resize-none"
+                  className="w-full px-3 py-2.5 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] text-slate-700 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] focus:outline-none focus:border-[#2563EB] transition-colors resize-none"
                 />
               </div>
 
@@ -144,12 +144,12 @@ export function HelpPageClient() {
             </div>
 
             {/* report card loss */}
-            <div className="mt-6 pt-5 border-t border-slate-100">
+            <div className="mt-6 pt-5 border-t border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]">
               <div className="flex items-start gap-3">
                 <ShieldAlert className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[14px] font-medium text-slate-700">Lost Card / Login Issues?</p>
-                  <p className="text-[13px] text-slate-500 mt-0.5">
+                  <p className="text-[14px] font-medium text-slate-700 dark:text-[#E2E8F0]">Lost Card / Login Issues?</p>
+                  <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">
                     Report a lost QR card or login problem immediately. Your card will be deactivated to prevent misuse.
                   </p>
                   <button className="inline-flex items-center gap-1.5 mt-2 h-7 px-3.5 rounded-full border border-[#2563EB]/20 text-[12px] text-[#2563EB] font-medium bg-[#2563EB]/5 hover:bg-[#2563EB]/10 transition-colors">

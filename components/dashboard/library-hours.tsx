@@ -38,10 +38,10 @@ export function LibraryHours({ isOpen, closesAt, opensTomorrow, schedule }: Libr
               row.isToday ? 'bg-[#2563EB]/5 font-medium' : ''
             } ${row.hours === 'Closed' ? 'opacity-50 italic' : ''}`}
           >
-            <span className={`text-[13px] ${row.isToday ? 'text-slate-900' : 'text-slate-600'}`}>
+            <span className={`text-[13px] ${row.isToday ? 'text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]' : 'text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]'}`}>
               {row.day}
             </span>
-            <span className={`text-[13px] ${row.isToday ? 'text-slate-900' : 'text-slate-500'}`}>
+            <span className={`text-[13px] ${row.isToday ? 'text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]' : 'text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]'}`}>
               {row.hours}
             </span>
           </div>

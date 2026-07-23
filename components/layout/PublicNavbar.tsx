@@ -97,7 +97,7 @@ function Dropdown({ item, isActive }: { item: typeof navItems[number]; isActive:
             <Link
               key={child.href}
               href={child.href}
-              className="block px-4 py-2 text-[12px] text-white/60 hover:text-gold hover:bg-white/5 transition-colors"
+              className="block px-4 py-2 text-[12px] text-white/60 hover:text-gold hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/5 transition-colors"
               onClick={() => setOpen(false)}
             >
               {child.label}
@@ -179,7 +179,7 @@ export function PublicNavbar() {
               <span className="text-[11px] text-white/60">Mon – Fri, 7:30 AM – 6:00 PM</span>
             </div>
           </div>
-          <div className="h-6 w-px bg-white/10" />
+          <div className="h-6 w-px bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10" />
           <Link href="/login">
             <Button className="gap-2 bg-gold hover:bg-gold-hover text-navy font-medium px-5 h-9 rounded-full text-[13px] shadow-md shadow-gold/20 transition-all">
               <User className="h-3.5 w-3.5" />

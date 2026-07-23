@@ -99,19 +99,19 @@ export function EventsPageClient() {
   })
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-6">
 
         {/* header */}
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900">Events & Announcements</h1>
-          <p className="text-[15px] text-slate-500 mt-1">
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Events & Announcements</h1>
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
             Stay updated with library events, workshops, deadlines, and community campaigns.
           </p>
         </div>
 
         {/* filter tabs */}
-        <div className="flex gap-4 border-b border-slate-100">
+        <div className="flex gap-4 border-b border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]">
           {(['all', 'upcoming', 'past'] as const).map((tab) => (
             <button
               key={tab}
@@ -119,7 +119,7 @@ export function EventsPageClient() {
               className={`pb-3 text-[14px] font-normal capitalize transition-all border-b-2 ${
                 filter === tab
                   ? 'border-[#2563EB] text-[#2563EB] font-medium'
-                  : 'border-transparent text-slate-400 hover:text-slate-600'
+                  : 'border-transparent text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] hover:text-slate-600 dark:hover:text-slate-300 dark:text-[#94A3B8] dark:hover:text-slate-300 dark:text-[#94A3B8]'
               }`}
             >
               {tab}
@@ -135,7 +135,7 @@ export function EventsPageClient() {
             return (
               <div
                 key={evt.id}
-                className="bg-white rounded-xl border border-slate-100 p-5 hover:shadow-sm transition-all"
+                className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-5 hover:shadow-sm dark:shadow-none dark:shadow-none transition-all"
               >
                 <div className="flex items-start gap-4">
                   <div className={`h-12 w-12 rounded-xl flex items-center justify-center shrink-0 ${cfg.bg}`}>
@@ -144,34 +144,34 @@ export function EventsPageClient() {
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="text-[16px] font-medium text-slate-800">{evt.title}</p>
+                      <p className="text-[16px] font-medium text-slate-800 dark:text-[#E2E8F0]">{evt.title}</p>
                       <Badge variant={evt.isUpcoming ? 'info' : 'neutral'}>
                         {cfg.label}
                       </Badge>
                       {!evt.isUpcoming && <Badge variant="neutral">Past</Badge>}
                     </div>
 
-                    <p className="text-[14px] text-slate-500 mt-1.5 leading-relaxed">
+                    <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1.5 leading-relaxed">
                       {evt.description}
                     </p>
 
                     <div className="flex items-center gap-4 mt-3 flex-wrap">
                       <div className="flex items-center gap-1.5">
-                        <CalendarDays className="h-3.5 w-3.5 text-slate-400" />
-                        <span className="text-[13px] text-slate-500">{formatDay(evt.date)}</span>
+                        <CalendarDays className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{formatDay(evt.date)}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Clock className="h-3.5 w-3.5 text-slate-400" />
-                        <span className="text-[13px] text-slate-500">{evt.time}</span>
+                        <Clock className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.time}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                        <span className="text-[13px] text-slate-500">{evt.venue}</span>
+                        <MapPin className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.venue}</span>
                       </div>
                       {evt.attendees !== null && (
                         <div className="flex items-center gap-1.5">
-                          <Users className="h-3.5 w-3.5 text-slate-400" />
-                          <span className="text-[13px] text-slate-500">{evt.attendees} attending</span>
+                          <Users className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                          <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.attendees} attending</span>
                         </div>
                       )}
                     </div>

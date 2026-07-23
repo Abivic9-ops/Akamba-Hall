@@ -68,14 +68,14 @@ export function BookingsPageClient() {
   const displayBookings = activeTab === 'upcoming' ? upcomingBookings : mockBookings
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-6">
 
         {/* header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-[28px] font-medium text-slate-900">Bookings</h1>
-            <p className="text-[15px] text-slate-500 mt-1">
+            <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Bookings</h1>
+            <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
               Reserve reading seats, the Audio Visual Room, or the boardroom for study sessions.
             </p>
           </div>
@@ -93,25 +93,25 @@ export function BookingsPageClient() {
             return (
               <button
                 key={type}
-                className="flex items-center gap-4 p-5 bg-white rounded-xl border border-slate-100 hover:shadow-md transition-all text-left group"
+                className="flex items-center gap-4 p-5 bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] hover:shadow-md transition-all text-left group"
               >
                 <div className={`h-12 w-12 rounded-xl flex items-center justify-center ${cfg.bg}`}>
                   <Icon className={`h-6 w-6 ${cfg.color}`} />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[15px] font-medium text-slate-800">{type}</p>
-                  <p className="text-[13px] text-slate-400 mt-0.5">
+                  <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0]">{type}</p>
+                  <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">
                     {count === 0 ? 'No bookings' : `${count} upcoming`}
                   </p>
                 </div>
-                <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-slate-500 transition-colors" />
+                <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] transition-colors" />
               </button>
             )
           })}
         </div>
 
         {/* tabs */}
-        <div className="flex gap-4 border-b border-slate-100">
+        <div className="flex gap-4 border-b border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]">
           {(['upcoming', 'past'] as const).map((tab) => (
             <button
               key={tab}
@@ -119,7 +119,7 @@ export function BookingsPageClient() {
               className={`pb-3 text-[14px] font-normal capitalize transition-all border-b-2 ${
                 activeTab === tab
                   ? 'border-[#2563EB] text-[#2563EB] font-medium'
-                  : 'border-transparent text-slate-400 hover:text-slate-600'
+                  : 'border-transparent text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] hover:text-slate-600 dark:hover:text-slate-300 dark:text-[#94A3B8] dark:hover:text-slate-300 dark:text-[#94A3B8]'
               }`}
             >
               {tab}
@@ -130,10 +130,10 @@ export function BookingsPageClient() {
         {/* bookings list */}
         <div className="space-y-3">
           {displayBookings.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 text-center bg-white rounded-xl border border-slate-100">
+            <div className="flex flex-col items-center justify-center py-16 text-center bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]">
               <CalendarCheck className="h-12 w-12 text-slate-300 mb-4" />
-              <p className="text-[16px] text-slate-500">No {activeTab} bookings</p>
-              <p className="text-[14px] text-slate-400 mt-1">Create a new booking to get started</p>
+              <p className="text-[16px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">No {activeTab} bookings</p>
+              <p className="text-[14px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Create a new booking to get started</p>
             </div>
           ) : (
             displayBookings.map((bk) => {
@@ -142,7 +142,7 @@ export function BookingsPageClient() {
               return (
                 <div
                   key={bk.id}
-                  className="bg-white rounded-xl border border-slate-100 p-5 hover:shadow-sm transition-all"
+                  className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-5 hover:shadow-sm dark:shadow-none dark:shadow-none transition-all"
                 >
                   <div className="flex items-start gap-4">
                     <div className={`h-12 w-12 rounded-xl flex items-center justify-center shrink-0 ${cfg.bg}`}>
@@ -151,7 +151,7 @@ export function BookingsPageClient() {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="text-[16px] font-medium text-slate-800">{bk.title}</p>
+                        <p className="text-[16px] font-medium text-slate-800 dark:text-[#E2E8F0]">{bk.title}</p>
                         <Badge
                           variant={bk.status === 'Approved' ? 'success' : bk.status === 'Pending' ? 'warning' : 'neutral'}
                         >
@@ -161,24 +161,24 @@ export function BookingsPageClient() {
 
                       <div className="flex items-center gap-4 mt-2">
                         <div className="flex items-center gap-1.5">
-                          <Clock className="h-3.5 w-3.5 text-slate-400" />
-                          <span className="text-[14px] text-slate-500">
+                          <Clock className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                          <span className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                             {formatTime(bk.startAt)} – {formatTime(bk.endAt)}
                           </span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                          <span className="text-[14px] text-slate-500">{bk.location}</span>
+                          <MapPin className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                          <span className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{bk.location}</span>
                         </div>
                       </div>
 
-                      <p className="text-[13px] text-slate-400 mt-1.5">
+                      <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1.5">
                         {formatDay(bk.startAt)}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <button className="h-8 px-4 rounded-lg border border-slate-200 text-[13px] text-slate-600 hover:bg-slate-100 transition-colors">
+                      <button className="h-8 px-4 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[13px] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] hover:bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] dark:bg-white/[0.06] transition-colors">
                         Edit
                       </button>
                       <button className="h-8 px-4 rounded-lg text-[13px] text-red-500 hover:bg-red-50 transition-colors">

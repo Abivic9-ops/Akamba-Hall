@@ -23,15 +23,15 @@ export function LibraryPerformanceSnapshot({
   const values = [collectionsUsage, spaceUtilization, equipmentUsage, userSatisfaction]
 
   return (
-    <div className="bg-gradient-to-br from-white via-white to-slate-50/50 rounded-2xl border border-slate-100 shadow-sm p-6 h-full">
+    <div className="bg-gradient-to-br from-white via-white to-slate-50/50 rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-6 h-full">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-xl bg-[#2563EB]/10 flex items-center justify-center">
             <BarChart2 className="h-5 w-5 text-[#2563EB]" />
           </div>
           <div>
-            <h3 className="text-[16px] font-semibold text-slate-900">Library Performance Snapshot</h3>
-            <p className="text-[13px] text-slate-400 mt-0.5">Monthly overview</p>
+            <h3 className="text-[16px] font-semibold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Library Performance Snapshot</h3>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">Monthly overview</p>
           </div>
         </div>
         <button className="h-8 px-4 rounded-full bg-blue-50 text-[12px] font-semibold text-[#2563EB] hover:bg-blue-100 hover:text-blue-700 inline-flex items-center gap-1.5 transition-all duration-200">
@@ -40,7 +40,7 @@ export function LibraryPerformanceSnapshot({
       </div>
       <div className="grid grid-cols-2 gap-6">
         {chart_configs.map((config, i) => (
-          <div key={config.label} className="flex flex-col items-center bg-white rounded-xl border border-slate-100 p-4 shadow-sm">
+          <div key={config.label} className="flex flex-col items-center bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4 shadow-sm dark:shadow-none dark:shadow-none">
             <DonutChart
               segments={[
                 { label: config.label, value: values[i], color: config.color },
@@ -50,8 +50,8 @@ export function LibraryPerformanceSnapshot({
               centerLabel="%"
               size={90}
             />
-            <p className="text-[13px] font-semibold text-slate-700 mt-3 text-center">{config.label}</p>
-            <div className="mt-2 h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+            <p className="text-[13px] font-semibold text-slate-700 dark:text-[#E2E8F0] mt-3 text-center">{config.label}</p>
+            <div className="mt-2 h-1.5 w-full bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded-full overflow-hidden">
               <div className="h-full rounded-full" style={{ width: `${values[i]}%`, backgroundColor: config.color }} />
             </div>
           </div>

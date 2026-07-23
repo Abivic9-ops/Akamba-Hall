@@ -22,26 +22,26 @@ export function EventsClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-[28px] font-medium text-slate-900">Events</h1>
-        <p className="text-[15px] text-slate-500 mt-1">Upcoming library events and activities</p>
+        <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Events</h1>
+        <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Upcoming library events and activities</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {events.map((e, i) => (
-          <div key={i} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition-shadow">
+          <div key={i} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-5 hover:shadow-md transition-shadow">
             <div className="flex items-start justify-between mb-3">
               <div>
-                <p className="text-[14px] font-semibold text-slate-800">{e.title}</p>
+                <p className="text-[14px] font-semibold text-slate-800 dark:text-[#E2E8F0]">{e.title}</p>
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${category_colors[e.category]}`}>{e.category}</span>
               </div>
             </div>
             <div className="space-y-1.5">
-              <div className="flex items-center gap-2 text-[12px] text-slate-500">
+              <div className="flex items-center gap-2 text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                 <CalendarCheck className="h-3.5 w-3.5" /> {e.date}
               </div>
-              <div className="flex items-center gap-2 text-[12px] text-slate-500">
+              <div className="flex items-center gap-2 text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                 <Clock className="h-3.5 w-3.5" /> {e.time}
               </div>
-              <div className="flex items-center gap-2 text-[12px] text-slate-500">
+              <div className="flex items-center gap-2 text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                 <MapPin className="h-3.5 w-3.5" /> {e.venue}
               </div>
             </div>

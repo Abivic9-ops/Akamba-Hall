@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Poppins, Inter } from 'next/font/google'
+import { ThemeProvider } from '@/lib/contexts/theme-context'
 import './globals.css'
 
 const poppins = Poppins({
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${inter.variable}`}>
       <body className="font-poppins antialiased">
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

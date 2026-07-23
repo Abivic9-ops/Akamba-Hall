@@ -118,7 +118,7 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
         </div>
 
         {/* QR code */}
-        <div className="bg-white rounded-xl p-3 flex items-center justify-center mb-4 flex-1">
+        <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl p-3 flex items-center justify-center mb-4 flex-1">
           <div className="w-full max-w-[160px] aspect-square rounded-lg flex items-center justify-center overflow-hidden">
             {displayUrl ? (
               <Image
@@ -130,7 +130,7 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
                 unoptimized
               />
             ) : (
-              <div className="w-full h-full bg-slate-100 rounded-lg flex items-center justify-center">
+              <div className="w-full h-full bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded-lg flex items-center justify-center">
                 <Loader2 className="h-6 w-6 text-slate-300 animate-spin" />
               </div>
             )}
@@ -138,7 +138,7 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
         </div>
 
         <div className="text-center mb-3">
-          <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-[12px] font-medium text-white mx-auto mb-1.5">
+          <div className="h-8 w-8 rounded-full bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 flex items-center justify-center text-[12px] font-medium text-white mx-auto mb-1.5">
             {initials}
           </div>
           <p className="text-[14px] font-medium text-white">{userName}</p>
@@ -154,7 +154,7 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
           <button
             type="button"
             onClick={() => set_viewing(true)}
-            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg border border-white/20 text-[12px] font-medium text-white hover:bg-white/10 transition-colors cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg border border-white/20 text-[12px] font-medium text-white hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 transition-colors cursor-pointer"
           >
             <Eye className="h-3.5 w-3.5" />
             View
@@ -163,7 +163,7 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
             type="button"
             onClick={handleDownload}
             disabled={downloading || !displayUrl}
-            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg border border-white/20 text-[12px] font-medium text-white hover:bg-white/10 transition-colors cursor-pointer disabled:opacity-50"
+            className="flex-1 flex items-center justify-center gap-1.5 h-8 rounded-lg border border-white/20 text-[12px] font-medium text-white hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 transition-colors cursor-pointer disabled:opacity-50"
           >
             {downloading ? (
               <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -182,12 +182,12 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
           onClick={() => set_viewing(false)}
         >
           <div
-            className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl"
+            className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl p-6 max-w-sm w-full shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="text-center mb-4">
-              <p className="text-[16px] font-medium text-[#0B1A3B]">Staff Digital Access Card</p>
-              <p className="text-[13px] text-slate-400 mt-1">Show this at the library entrance</p>
+              <p className="text-[16px] font-medium text-[#0B1A3B] dark:text-white dark:text-white">Staff Digital Access Card</p>
+              <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Show this at the library entrance</p>
             </div>
             <div className="flex justify-center mb-4">
               {displayUrl && (
@@ -202,8 +202,8 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
               )}
             </div>
             <div className="text-center mb-4">
-              <p className="text-[14px] font-medium text-[#0B1A3B]">{userName}</p>
-              <p className="text-[13px] text-slate-400">{memberId}</p>
+              <p className="text-[14px] font-medium text-[#0B1A3B] dark:text-white dark:text-white">{userName}</p>
+              <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{memberId}</p>
               {cardRef && (
                 <p className="text-[11px] text-slate-300 mt-1">Card: {cardRef}</p>
               )}
@@ -223,7 +223,7 @@ export function StaffDigitalCard({ label, memberId, userName, status, qrCodeUrl,
               </button>
               <button
                 onClick={() => set_viewing(false)}
-                className="flex-1 h-10 rounded-xl border border-slate-200 text-slate-500 text-[13px] font-medium hover:bg-slate-50 transition-colors cursor-pointer"
+                className="flex-1 h-10 rounded-xl border border-slate-200 dark:border-white/10 dark:border-white/10 text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] text-[13px] font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors cursor-pointer"
               >
                 Close
               </button>

@@ -33,7 +33,7 @@ const status_colors: Record<string, string> = {
   PENDING: 'bg-amber-100 text-amber-600',
   CANCELLED: 'bg-red-100 text-red-600',
   REJECTED: 'bg-red-100 text-red-600',
-  NO_SHOW: 'bg-slate-100 text-slate-600',
+  NO_SHOW: 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]',
   active: 'bg-blue-100 text-blue-600',
   overdue: 'bg-red-100 text-red-600',
   returned: 'bg-emerald-100 text-emerald-600',
@@ -82,7 +82,7 @@ export default async function library_head_dashboard() {
   const date_str = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       {/* conditional alert banner */}
       {overdue_loans > 0 && (
         <div className="bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 flex items-center gap-3">
@@ -96,10 +96,10 @@ export default async function library_head_dashboard() {
       <div className="max-w-[1440px] mx-auto p-6 space-y-6">
         {/* greeting */}
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900">
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">
             {greeting()}, Library Head
           </h1>
-          <p className="text-[15px] text-slate-500 mt-1">
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
             {day_name}, {date_str}
           </p>
         </div>
@@ -109,17 +109,17 @@ export default async function library_head_dashboard() {
           {[
             { label: 'Active Loans', value: active_loans, icon: BookOpen, color: 'bg-blue-50 text-blue-500' },
             { label: "Today's Bookings", value: today_bookings, icon: CalendarCheck, color: 'bg-emerald-50 text-emerald-500' },
-            { label: 'Overdue Loans', value: overdue_loans, icon: Clock, color: overdue_loans > 0 ? 'bg-red-50 text-red-500' : 'bg-slate-50 text-slate-400' },
+            { label: 'Overdue Loans', value: overdue_loans, icon: Clock, color: overdue_loans > 0 ? 'bg-red-50 text-red-500' : 'bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]' },
             { label: 'Members', value: total_members, icon: Users, color: 'bg-sky-50 text-sky-500' },
           ].map((item) => (
-            <div key={item.label} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+            <div key={item.label} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl p-5 border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[13px] text-slate-400">{item.label}</span>
+                <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.label}</span>
                 <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${item.color}`}>
                   <item.icon className="h-4 w-4" />
                 </div>
               </div>
-              <div className="text-[28px] font-bold text-slate-900 leading-tight">
+              <div className="text-[28px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] leading-tight">
                 {item.value}
               </div>
             </div>
@@ -171,27 +171,27 @@ export default async function library_head_dashboard() {
         {/* row 3 — bookings timeline + member activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* bookings */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-medium text-slate-900 flex items-center gap-2">
-                <CalendarCheck className="h-4 w-4 text-slate-400" />
+              <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] flex items-center gap-2">
+                <CalendarCheck className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                 Recent Bookings
               </h2>
             </div>
             <div className="p-4 space-y-1">
               {recent_bookings.length === 0 ? (
-                <p className="text-[13px] text-slate-400 text-center py-8">No bookings today</p>
+                <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] text-center py-8">No bookings today</p>
               ) : (
                 recent_bookings.map((b) => (
-                  <div key={b.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                  <div key={b.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] rounded-xl transition-colors">
                     <div className="h-9 w-9 rounded-lg bg-sky-50 flex items-center justify-center shrink-0">
                       <CalendarCheck className="h-4 w-4 text-sky-500" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[14px] font-medium text-slate-800 truncate">
+                      <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] dark:text-[#E2E8F0] truncate">
                         {b.space?.name ?? 'Unknown Space'}
                       </p>
-                      <p className="text-[12px] text-slate-400">
+                      <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                         {b.user.fullName ?? 'Unknown'} &middot; {time_ago(b.createdAt.toISOString())}
                       </p>
                     </div>
@@ -205,30 +205,30 @@ export default async function library_head_dashboard() {
           </div>
 
           {/* member activity / recent loans */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-medium text-slate-900 flex items-center gap-2">
-                <Activity className="h-4 w-4 text-slate-400" />
+              <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] flex items-center gap-2">
+                <Activity className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                 Recent Loans
               </h2>
             </div>
             <div className="p-4 space-y-1">
               {recent_loans.length === 0 ? (
-                <p className="text-[13px] text-slate-400 text-center py-8">No recent loans</p>
+                <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] text-center py-8">No recent loans</p>
               ) : (
                 recent_loans.map((loan) => {
                   const is_overdue = !loan.returnedAt && loan.dueAt < new Date()
                   const loan_status = loan.returnedAt ? 'returned' : is_overdue ? 'overdue' : 'active'
                   return (
-                    <div key={loan.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl transition-colors">
+                    <div key={loan.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] rounded-xl transition-colors">
                       <div className="h-9 w-9 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
                         <BookOpen className="h-4 w-4 text-blue-500" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[14px] font-medium text-slate-800 truncate">
+                        <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] dark:text-[#E2E8F0] truncate">
                           {loan.copy?.book?.title ?? 'Unknown Book'}
                         </p>
-                        <p className="text-[12px] text-slate-400">
+                        <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                           {loan.user.fullName ?? 'Unknown'} &middot; Due {format_time(loan.dueAt)}
                         </p>
                       </div>
@@ -246,9 +246,9 @@ export default async function library_head_dashboard() {
         {/* row 4 — inventory + staff overview */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* inventory summary */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-medium text-slate-900">Inventory Summary</h2>
+              <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Inventory Summary</h2>
             </div>
             <div className="p-6 space-y-4">
               {[
@@ -257,19 +257,19 @@ export default async function library_head_dashboard() {
                 { label: 'On Loan', value: books_on_loan },
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
-                  <span className="text-[13px] text-slate-400">{item.label}</span>
-                  <span className="text-[18px] font-bold text-slate-900">{item.value}</span>
+                  <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.label}</span>
+                  <span className="text-[18px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{item.value}</span>
                 </div>
               ))}
               {total_books > 0 && (
                 <div className="pt-2">
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded-full overflow-hidden">
                     <div
                       className="h-full bg-[#E8A63C] rounded-full"
                       style={{ width: `${Math.round((books_available / Math.max(total_books, 1)) * 100)}%` }}
                     />
                   </div>
-                  <p className="text-[10px] text-slate-400 mt-1">
+                  <p className="text-[10px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
                     {Math.round((books_available / Math.max(total_books, 1)) * 100)}% availability
                   </p>
                 </div>
@@ -278,9 +278,9 @@ export default async function library_head_dashboard() {
           </div>
 
           {/* staff overview */}
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
             <div className="px-6 py-4 border-b border-slate-50">
-              <h2 className="text-[15px] font-medium text-slate-900">Staff Overview</h2>
+              <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Staff Overview</h2>
             </div>
             <div className="p-6 space-y-4">
               {[
@@ -289,8 +289,8 @@ export default async function library_head_dashboard() {
                 { label: "Today's Bookings", value: today_bookings },
               ].map((item) => (
                 <div key={item.label} className="flex items-center justify-between">
-                  <span className="text-[13px] text-slate-400">{item.label}</span>
-                  <span className="text-[18px] font-bold text-slate-900">{item.value}</span>
+                  <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.label}</span>
+                  <span className="text-[18px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -298,9 +298,9 @@ export default async function library_head_dashboard() {
         </div>
 
         {/* row 5 — quick actions */}
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm">
+        <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none">
           <div className="px-6 py-4 border-b border-slate-50">
-            <h2 className="text-[15px] font-medium text-slate-900">Quick Actions</h2>
+            <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Quick Actions</h2>
           </div>
           <div className="p-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[

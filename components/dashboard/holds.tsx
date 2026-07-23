@@ -49,20 +49,20 @@ export function Holds({ holds }: HoldsProps) {
               className="flex items-start gap-3 py-3 border-b border-slate-50 last:border-0"
             >
               {/* cover placeholder */}
-              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                <Bookmark className="h-4 w-4 text-slate-400" />
+              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] flex items-center justify-center shrink-0">
+                <Bookmark className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-[14px] font-medium text-slate-800 truncate">{hold.title}</p>
-                <p className="text-[12px] text-slate-400">{hold.author}</p>
+                <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{hold.title}</p>
+                <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{hold.author}</p>
 
                 {hold.status === 'ready' ? (
                   <div className="mt-1.5 space-y-1">
                     <Badge variant="success" dot>Ready for Pickup</Badge>
                     <div className="flex items-center gap-1.5 mt-0.5">
-                      <MapPin className="h-3 w-3 text-slate-400" />
-                      <span className="text-[12px] text-slate-500">{hold.pickupLocation}</span>
+                      <MapPin className="h-3 w-3 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                      <span className="text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{hold.pickupLocation}</span>
                     </div>
                     {hold.pickupDeadline && (
                       <p className="text-[12px] font-medium text-red-600">

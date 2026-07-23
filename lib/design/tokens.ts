@@ -46,8 +46,8 @@ export const colors = {
   amber500:    '#D97706',
   /** Accent blue */
   accentBlue:  '#5B9BD5',
-  /** Purple – for KPI card icon */
-  purple:      '#8B5CF6',
+  /** Accent blue – for KPI card icon */
+  accentBlueAlt: '#5B9BD5',
   /** Blue 500 – for KPI card icon */
   blue500:     '#3B82F6',
 } as const

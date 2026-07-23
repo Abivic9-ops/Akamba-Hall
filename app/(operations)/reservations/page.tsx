@@ -8,7 +8,7 @@ export default function ReservationsPage() {
     <div className="p-6 md:p-8 max-w-[1400px] mx-auto pb-20">
       <FadeIn>
         <div className="flex items-center gap-3 mb-2">
-          <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
+          <span className="inline-flex items-center gap-2 bg-[#0B1A3B]/5 text-[#0B1A3B] dark:text-white dark:text-white text-[12px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">
             <CalendarCheck className="h-3.5 w-3.5" aria-hidden="true" />
             Reservations
           </span>
@@ -19,7 +19,7 @@ export default function ReservationsPage() {
 
       <FadeIn delay={0.1}>
         <ScaleOnHover>
-          <div className="mt-8 bg-white border border-[#E4E7EE] rounded-[20px] p-10 text-center flex flex-col items-center justify-center min-h-[400px] hover:shadow-lg hover:border-gold/30 transition-all duration-300">
+          <div className="mt-8 bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] border border-[#E4E7EE] dark:border-white/10 dark:border-white/10 rounded-[20px] p-10 text-center flex flex-col items-center justify-center min-h-[400px] hover:shadow-lg hover:border-gold/30 transition-all duration-300">
             <div className="h-16 w-16 rounded-full bg-gold/10 text-gold flex items-center justify-center mb-5">
               <CalendarCheck className="h-7 w-7" aria-hidden="true" />
             </div>

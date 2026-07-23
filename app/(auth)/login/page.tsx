@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BookOpen, CalendarCheck, QrCode, BarChart3, Shield, ArrowLeft } from 'lucide-react'
 import { LoginForm } from '@/components/forms/LoginForm'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 const features = [
   { icon: BookOpen, text: 'Access thousands of books, journals, past papers and digital materials' },
@@ -20,7 +21,7 @@ export default function LoginPage() {
   const [active_tab, set_active_tab] = useState<auth_tab>('email')
 
   return (
-    <div className="min-h-screen w-full flex bg-white">
+    <div className="min-h-screen w-full flex bg-white dark:bg-[#071224] transition-colors duration-300">
       {/* ─── LEFT PANEL ───────────────────────────── */}
       <div className="hidden lg:flex w-[38%] relative overflow-hidden min-h-screen shrink-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#071B4A] via-[#0B1F52] to-[#0B1829]">
@@ -82,14 +83,17 @@ export default function LoginPage() {
       <div className="w-full lg:w-[62%] flex flex-col">
         <div className="flex-1 flex flex-col items-center px-8 sm:px-12 lg:px-16 py-10">
           <div className="w-full max-w-[440px]">
-            {/* back to home pill */}
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-[13px] text-slate-500 font-medium hover:bg-slate-50 hover:border-slate-300 transition-all mb-8"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back to Home
-            </Link>
+            {/* back to home pill + theme toggle row */}
+            <div className="flex items-center justify-between mb-8">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 text-[13px] text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20 transition-all"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                Back to Home
+              </Link>
+              <ThemeToggle size="sm" />
+            </div>
 
             {/* mobile logo */}
             <div className="flex lg:hidden items-center gap-3 mb-8">
@@ -97,32 +101,32 @@ export default function LoginPage() {
                 <Image src="/images/starehe-logo.png" alt="Logo" fill className="object-contain" />
               </div>
               <div>
-                <p className="text-[#0B1A3B] font-medium text-[13px]">STAREHE BOYS&apos; CENTRE</p>
+                <p className="text-[#0B1A3B] dark:text-white font-medium text-[13px]">STAREHE BOYS&apos; CENTRE</p>
                 <p className="text-slate-400 text-[11px] font-light">Akamba Hall Library</p>
               </div>
             </div>
 
             {/* welcome */}
             <div className="mb-6">
-              <h2 className="text-[30px] font-light text-[#0B1A3B] tracking-tight">Welcome Back</h2>
+              <h2 className="text-[30px] font-light text-[#0B1A3B] dark:text-white tracking-tight">Welcome Back</h2>
               <p className="text-slate-400 text-[14px] font-light mt-1.5">
                 Sign in to your Akamba Hall Library account.
               </p>
             </div>
 
             {/* info banner */}
-            <div className="flex items-start gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 mb-6">
+            <div className="flex items-start gap-3 bg-slate-50 dark:bg-white/[0.04] border border-slate-100 dark:border-white/[0.06] rounded-xl px-4 py-3 mb-6">
               <Shield className="h-4 w-4 text-blue-400 mt-0.5 shrink-0" />
-              <p className="text-[12px] text-slate-500 font-light leading-relaxed">
-                Use your Student ID, Staff ID or Email to access your library account.
+              <p className="text-[12px] text-slate-500 dark:text-slate-400 font-light leading-relaxed">
+                Use your Student/Staff ID or Email to access your library account.
               </p>
             </div>
 
             {/* auth tabs */}
-            <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100/80 rounded-xl mb-6">
+            <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100/80 dark:bg-white/[0.05] rounded-xl mb-6">
               {([
                 { id: 'email' as auth_tab, label: 'Email' },
-                { id: 'student' as auth_tab, label: 'Student ID' },
+                { id: 'student' as auth_tab, label: 'Student / Staff' },
                 { id: 'qr' as auth_tab, label: 'QR Code' },
               ]).map((tab) => (
                 <button
@@ -130,8 +134,8 @@ export default function LoginPage() {
                   onClick={() => set_active_tab(tab.id)}
                   className={`relative py-2.5 rounded-lg text-[13px] font-light transition-all cursor-pointer ${
                     active_tab === tab.id
-                      ? 'bg-white text-[#0B1A3B] shadow-sm'
-                      : 'text-slate-400 hover:text-slate-600'
+                      ? 'bg-white dark:bg-[#13285A] text-[#0B1A3B] dark:text-white shadow-sm'
+                      : 'text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300'
                   }`}
                 >
                   {tab.label}
@@ -163,7 +167,7 @@ export default function LoginPage() {
             <div className="mt-6 text-center">
               <p className="text-[13px] text-slate-400 font-light">
                 New to the library?{' '}
-                <Link href="/register" className="font-medium text-[#0B1A3B] hover:text-[#D4A017] transition-colors">
+                <Link href="/register" className="font-medium text-[#0B1A3B] dark:text-[#E8A63C] hover:text-[#D4A017] transition-colors">
                   Create an Account
                 </Link>
               </p>
@@ -172,14 +176,14 @@ export default function LoginPage() {
         </div>
 
         {/* footer */}
-        <div className="shrink-0 border-t border-slate-100 px-8 py-3 flex items-center justify-between">
-          <p className="text-slate-400 text-[11px] font-light">
+        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-8 py-3 flex items-center justify-between">
+          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light">
             Mon–Fri 7:30 AM – 6:00 PM &middot; Sat 8:00 AM – 1:00 PM
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-slate-400 font-light">
-            <a href="#" className="hover:text-slate-600 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Terms</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Help</a>
+          <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-light">
+            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Terms</a>
+            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Help</a>
           </div>
         </div>
       </div>

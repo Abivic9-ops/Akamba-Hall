@@ -21,12 +21,12 @@ export function ReadingResourcesClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-[28px] font-medium text-slate-900">Reading Resources</h1>
-        <p className="text-[15px] text-slate-500 mt-1">Browse the physical book collection</p>
+        <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Reading Resources</h1>
+        <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Browse the physical book collection</p>
       </div>
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-          <h3 className="text-[15px] font-semibold text-slate-900">Collection Overview</h3>
+      <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] flex items-center justify-between">
+          <h3 className="text-[15px] font-semibold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Collection Overview</h3>
           <button className="h-8 px-4 rounded-full bg-blue-50 text-[12px] font-semibold text-[#2563EB] hover:bg-blue-100 inline-flex items-center gap-1.5 transition-all duration-200">
             Browse catalogue <ArrowRight className="h-3 w-3" />
           </button>
@@ -38,10 +38,10 @@ export function ReadingResourcesClient() {
                 <BookOpen className="h-5 w-5 text-[#2563EB]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-medium text-slate-800 truncate">{r.title}</p>
-                <p className="text-[11px] text-slate-400">{r.author} · {r.category}</p>
+                <p className="text-[13px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{r.title}</p>
+                <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.author} · {r.category}</p>
               </div>
-              <span className="text-[11px] font-semibold text-slate-500">{r.copies} copies</span>
+              <span className="text-[11px] font-semibold text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.copies} copies</span>
               <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${status_colors[r.status]}`}>{r.status}</span>
             </div>
           ))}

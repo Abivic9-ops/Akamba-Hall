@@ -48,7 +48,7 @@ export function StudentDashboardClient({
     : ''
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-5">
 
         {/* ── Welcome Header ──────────────────────────── */}

@@ -32,7 +32,7 @@ const type_colors: Record<string, string> = {
   hold_pickup: 'text-[#0D9488]',
   book_suggestion: 'text-[#2563EB]',
   seat_booking: 'text-[#8B5CF6]',
-  return: 'text-slate-500',
+  return: 'text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]',
 }
 
 function timeAgo(iso: string): string {
@@ -52,27 +52,27 @@ export function StaffRecentActivity({ activities }: StaffRecentActivityProps) {
       cta={{ label: 'View all', href: '#' }}
     >
       {activities.length === 0 ? (
-        <p className="text-[14px] text-slate-400 text-center py-6">No recent activity</p>
+        <p className="text-[14px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] text-center py-6">No recent activity</p>
       ) : (
         <div className="space-y-0">
           {activities.map((item) => {
             const Icon = type_icons[item.type] ?? RefreshCw
-            const color = type_colors[item.type] ?? 'text-slate-500'
+            const color = type_colors[item.type] ?? 'text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]'
             return (
               <div
                 key={item.id}
                 className="flex items-start gap-3 py-2.5 border-b border-slate-50 last:border-0"
               >
-                <div className="h-8 w-8 rounded-lg bg-slate-50 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="h-8 w-8 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] flex items-center justify-center shrink-0 mt-0.5">
                   <Icon className={`h-4 w-4 ${color}`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[14px] font-medium text-slate-800">{item.description}</p>
+                  <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0]">{item.description}</p>
                   {item.detail && (
-                    <p className="text-[12px] text-slate-400 mt-0.5">{item.detail}</p>
+                    <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{item.detail}</p>
                   )}
                 </div>
-                <span className="text-[11px] text-slate-400 shrink-0 mt-1">
+                <span className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] shrink-0 mt-1">
                   {timeAgo(item.timestamp)}
                 </span>
               </div>

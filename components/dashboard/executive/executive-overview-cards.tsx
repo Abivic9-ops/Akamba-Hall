@@ -71,10 +71,10 @@ export function ExecutiveOverviewCards({
             </div>
 
             <div>
-              <p className="text-[40px] font-bold text-slate-900 leading-none tracking-tight">
+              <p className="text-[40px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] leading-none tracking-tight">
                 {card.value}
               </p>
-              <p className="text-[15px] font-semibold text-[#1F2937] mt-1">
+              <p className="text-[15px] font-semibold text-[#1F2937] dark:text-[#E2E8F0] dark:text-[#E2E8F0] mt-1">
                 {card.label}
               </p>
               <p className="text-[13px] text-[#6B7280] mt-0.5">

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { sign_up_action } from '@/lib/actions/auth'
 import { createClient } from '@/lib/supabase/client'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 import {
   ArrowRight, Eye, EyeOff, AlertTriangle, Loader2,
   CheckCircle2, ArrowLeft, BookOpen, Clock, QrCode,
@@ -83,7 +84,7 @@ export default function RegisterPage() {
   /* ─── Success State ───────────────────────────── */
   if (success) {
     return (
-      <div className="min-h-screen w-full flex bg-white">
+      <div className="min-h-screen w-full flex bg-white dark:bg-[#071224] transition-colors duration-300">
         <div className="hidden lg:flex w-[38%] relative overflow-hidden min-h-screen shrink-0">
           <div className="absolute inset-0 bg-gradient-to-br from-[#071B4A] via-[#0B1F52] to-[#0B1829]">
             <Image src="/images/hero-bg.png" alt="" fill className="object-cover opacity-15 mix-blend-overlay" priority />
@@ -94,7 +95,7 @@ export default function RegisterPage() {
             <div className="h-16 w-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="h-8 w-8 text-emerald-500" />
             </div>
-            <h2 className="text-[28px] font-light text-[#0B1A3B] tracking-tight">Account Created</h2>
+            <h2 className="text-[28px] font-light text-[#0B1A3B] dark:text-white tracking-tight">Account Created</h2>
             <p className="text-slate-400 text-[14px] font-light mt-3 leading-relaxed">
               {is_preview
                 ? 'Preview mode — registration simulated. You can now sign in.'
@@ -112,9 +113,9 @@ export default function RegisterPage() {
     )
   }
 
-  /* ─── Registration Form ───────────────────────── */
+  /* ─── Registration Form ─────────────────────────────────────── */
   return (
-    <div className="min-h-screen w-full flex bg-white">
+    <div className="min-h-screen w-full flex bg-white dark:bg-[#071224] transition-colors duration-300">
       {/* ─── LEFT PANEL ──────────────────────────── */}
       <div className="hidden lg:flex w-[38%] relative overflow-hidden min-h-screen shrink-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#071B4A] via-[#0B1F52] to-[#0B1829]">
@@ -180,24 +181,27 @@ export default function RegisterPage() {
                 <Image src="/images/starehe-logo.png" alt="Logo" fill className="object-contain" />
               </div>
               <div>
-                <p className="text-[#0B1A3B] font-medium text-[13px]">STAREHE BOYS&apos; CENTRE</p>
+                <p className="text-[#0B1A3B] dark:text-white font-medium text-[13px]">STAREHE BOYS&apos; CENTRE</p>
                 <p className="text-slate-400 text-[11px] font-light">Akamba Hall Library</p>
               </div>
             </div>
 
-            {/* back to sign in pill */}
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-[13px] text-slate-500 font-medium hover:bg-slate-50 hover:border-slate-300 transition-all mb-6"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back to Sign In
-            </Link>
+            {/* back to sign in pill + theme toggle row */}
+            <div className="flex items-center justify-between mb-6">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 text-[13px] text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20 transition-all"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                Back to Sign In
+              </Link>
+              <ThemeToggle size="sm" />
+            </div>
 
             {/* header */}
             <div className="mb-6">
-              <h2 className="text-[30px] font-light text-[#0B1A3B] tracking-tight">Create Account</h2>
-              <p className="text-slate-400 text-[14px] font-light mt-1.5">
+              <h2 className="text-[30px] font-light text-[#0B1A3B] dark:text-white tracking-tight">Create Account</h2>
+              <p className="text-slate-400 dark:text-slate-300 text-[14px] font-light mt-1.5">
                 Fill in your details below. It only takes a moment.
               </p>
             </div>
@@ -224,7 +228,7 @@ export default function RegisterPage() {
                           onClick={() => set_user_type('student')}
                           className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-medium transition-all cursor-pointer ${
                             user_type === 'student'
-                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B]'
+                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B] dark:text-white'
                               : 'border-slate-200 bg-slate-50/80 text-slate-400 hover:border-slate-300 hover:text-slate-500'
                           }`}
                         >
@@ -236,7 +240,7 @@ export default function RegisterPage() {
                           onClick={() => set_user_type('staff')}
                           className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-medium transition-all cursor-pointer ${
                             user_type === 'staff'
-                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B]'
+                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B] dark:text-white'
                               : 'border-slate-200 bg-slate-50/80 text-slate-400 hover:border-slate-300 hover:text-slate-500'
                           }`}
                         >
@@ -387,7 +391,7 @@ export default function RegisterPage() {
             <div className="text-center">
               <p className="text-[13px] text-slate-400 font-light">
                 Already have an account?{' '}
-                <Link href="/login" className="font-medium text-[#0B1A3B] hover:text-[#D4A017] transition-colors">
+                <Link href="/login" className="font-medium text-[#0B1A3B] dark:text-[#E8A63C] hover:text-[#D4A017] transition-colors">
                   Sign In
                 </Link>
               </p>
@@ -396,14 +400,14 @@ export default function RegisterPage() {
         </div>
 
         {/* footer */}
-        <div className="shrink-0 border-t border-slate-100 px-8 py-3 flex items-center justify-between">
-          <p className="text-slate-400 text-[11px] font-light">
+        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-8 py-3 flex items-center justify-between">
+          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light">
             Mon–Fri 7:30 AM – 6:00 PM &middot; Sat 8:00 AM – 1:00 PM
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-slate-400 font-light">
-            <a href="#" className="hover:text-slate-600 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Terms</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Help</a>
+          <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-light">
+            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Terms</a>
+            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Help</a>
           </div>
         </div>
       </div>

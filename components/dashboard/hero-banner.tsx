@@ -89,7 +89,7 @@ export function HeroBanner() {
             </a>
             <a
               href={slide.cta2.href}
-              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-white/30 text-white text-[14px] font-medium hover:bg-white/10 transition-all"
+              className="inline-flex items-center justify-center h-11 px-6 rounded-xl border border-white/30 text-white text-[14px] font-medium hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 transition-all"
             >
               {slide.cta2.label}
             </a>
@@ -120,7 +120,7 @@ export function HeroBanner() {
             key={i}
             onClick={() => setCurrent(i)}
             className={`h-2.5 w-2.5 rounded-full transition-all ${
-              i === current ? 'bg-white' : 'bg-white/30'
+              i === current ? 'bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]' : 'bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/30'
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />

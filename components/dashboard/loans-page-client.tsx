@@ -85,14 +85,14 @@ export function LoansPageClient() {
   const activeCount = mockLoans.filter((l) => daysLeft(l.dueDate) >= 0).length
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-6">
 
         {/* page header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-[28px] font-medium text-slate-900">My Loans</h1>
-            <p className="text-[15px] text-slate-500 mt-1">
+            <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">My Loans</h1>
+            <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
               View and manage all books you have borrowed from Akamba Hall Library.
             </p>
           </div>
@@ -104,41 +104,41 @@ export function LoansPageClient() {
 
         {/* stats row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-white rounded-xl border border-slate-100 p-4">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4">
             <div className="flex items-center gap-2 mb-2">
               <BookOpen className="h-4 w-4 text-[#2563EB]" />
-              <span className="text-[13px] text-slate-500">Total Loans</span>
+              <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Total Loans</span>
             </div>
-            <p className="text-[24px] font-medium text-slate-900">{mockLoans.length}</p>
+            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{mockLoans.length}</p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-100 p-4">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4">
             <div className="flex items-center gap-2 mb-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-              <span className="text-[13px] text-slate-500">Active</span>
+              <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Active</span>
             </div>
-            <p className="text-[24px] font-medium text-slate-900">{activeCount}</p>
+            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{activeCount}</p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-100 p-4">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertCircle className="h-4 w-4 text-red-500" />
-              <span className="text-[13px] text-slate-500">Overdue</span>
+              <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Overdue</span>
             </div>
-            <p className="text-[24px] font-medium text-slate-900">{overdueCount}</p>
+            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{overdueCount}</p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-100 p-4">
+          <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4">
             <div className="flex items-center gap-2 mb-2">
               <RefreshCw className="h-4 w-4 text-amber-500" />
-              <span className="text-[13px] text-slate-500">Renewable</span>
+              <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Renewable</span>
             </div>
-            <p className="text-[24px] font-medium text-slate-900">{mockLoans.filter(l => l.renewable).length}</p>
+            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{mockLoans.filter(l => l.renewable).length}</p>
           </div>
         </div>
 
         {/* filters + search */}
-        <div className="bg-white rounded-xl border border-slate-100 p-4 flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4 flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-slate-400" />
-            <span className="text-[13px] text-slate-500">Filter:</span>
+            <Filter className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+            <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Filter:</span>
           </div>
           <div className="flex gap-2 flex-wrap">
             {(['all', 'active', 'overdue'] as const).map((f) => (
@@ -148,7 +148,7 @@ export function LoansPageClient() {
                 className={`px-3 py-1.5 rounded-lg text-[13px] font-normal transition-all capitalize ${
                   filter === f
                     ? 'bg-[#2563EB] text-white'
-                    : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
+                    : 'bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] hover:bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] dark:bg-white/[0.06]'
                 }`}
               >
                 {f}
@@ -161,18 +161,18 @@ export function LoansPageClient() {
               placeholder="Search loans..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-9 px-3 rounded-lg border border-slate-200 text-[14px] text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-[#2563EB] transition-colors"
+              className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] text-slate-700 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] focus:outline-none focus:border-[#2563EB] transition-colors"
             />
           </div>
         </div>
 
         {/* loans list */}
-        <div className="bg-white rounded-xl border border-slate-100 overflow-hidden">
+        <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] overflow-hidden">
           {filteredLoans.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <BookOpen className="h-12 w-12 text-slate-300 mb-4" />
-              <p className="text-[16px] text-slate-500">No loans found</p>
-              <p className="text-[14px] text-slate-400 mt-1">Try adjusting your search or filter</p>
+              <p className="text-[16px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">No loans found</p>
+              <p className="text-[14px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Try adjusting your search or filter</p>
             </div>
           ) : (
             <div>
@@ -187,23 +187,23 @@ export function LoansPageClient() {
                     className="flex items-center gap-4 p-5 border-b border-slate-50 last:border-0 hover:bg-slate-50/50 transition-colors"
                   >
                     {/* cover */}
-                    <div className="w-[48px] h-[64px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                      <BookOpen className="h-5 w-5 text-slate-400" />
+                    <div className="w-[48px] h-[64px] rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] flex items-center justify-center shrink-0">
+                      <BookOpen className="h-5 w-5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                     </div>
 
                     {/* details */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="text-[16px] font-medium text-slate-800 truncate">{loan.title}</p>
+                        <p className="text-[16px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{loan.title}</p>
                         {isOverdue && <Badge variant="danger" inverted>Overdue</Badge>}
                         {isDueSoon && !isOverdue && <Badge variant="warning">{days}d left</Badge>}
                         {!isOverdue && !isDueSoon && <Badge variant="success">{days}d left</Badge>}
                       </div>
-                      <p className="text-[14px] text-slate-500 mt-0.5">{loan.author}</p>
+                      <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{loan.author}</p>
                       <div className="flex items-center gap-4 mt-1.5">
-                        <span className="text-[13px] text-slate-400">Category: {loan.category}</span>
-                        <span className="text-[13px] text-slate-400">Borrowed: {formatDate(loan.borrowedDate)}</span>
-                        <span className={`text-[13px] ${isOverdue ? 'text-red-600 font-medium' : 'text-slate-400'}`}>
+                        <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Category: {loan.category}</span>
+                        <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Borrowed: {formatDate(loan.borrowedDate)}</span>
+                        <span className={`text-[13px] ${isOverdue ? 'text-red-600 font-medium' : 'text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]'}`}>
                           Due: {formatDate(loan.dueDate)}
                         </span>
                       </div>
@@ -212,7 +212,7 @@ export function LoansPageClient() {
                     {/* actions */}
                     <div className="flex items-center gap-2 shrink-0">
                       {loan.renewable && (
-                        <button className="h-8 px-4 rounded-lg border border-slate-200 text-[13px] font-normal text-slate-700 hover:bg-slate-100 transition-colors">
+                        <button className="h-8 px-4 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[13px] font-normal text-slate-700 dark:text-[#E2E8F0] hover:bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] dark:bg-white/[0.06] transition-colors">
                           Renew
                         </button>
                       )}

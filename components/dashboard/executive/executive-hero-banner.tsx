@@ -22,7 +22,7 @@ export function ExecutiveHeroBanner() {
           </button>
           <a
             href="#approval-queue"
-            className="h-10 px-6 rounded-lg border border-white/40 text-white text-[13px] font-semibold hover:bg-white/10 hover:border-white/60 transition-all duration-200 inline-flex items-center gap-2"
+            className="h-10 px-6 rounded-lg border border-white/40 text-white text-[13px] font-semibold hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 hover:border-white/60 transition-all duration-200 inline-flex items-center gap-2"
           >
             Review Approvals
             <ArrowRight className="h-3.5 w-3.5" />

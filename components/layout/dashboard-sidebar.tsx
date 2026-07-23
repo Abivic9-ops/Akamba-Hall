@@ -106,10 +106,10 @@ export function dashboard_sidebar() {
     <motion.aside
       animate={{ width: collapsed ? 72 : 264 }}
       transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="bg-white border-r border-[#E7EBF2] flex flex-col h-screen sticky top-0 overflow-hidden z-20 shrink-0"
+      className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] dark:bg-[#0B1A3B] border-r border-[#E7EBF2] dark:border-white/[0.08] dark:border-white/[0.08] dark:border-white/[0.08] flex flex-col h-screen sticky top-0 overflow-hidden z-20 shrink-0 transition-colors duration-300"
     >
       {/* logo area */}
-      <div className="px-5 h-[72px] flex items-center gap-3 shrink-0 border-b border-[#F3F4F6]">
+      <div className="px-5 h-[72px] flex items-center gap-3 shrink-0 border-b border-[#F3F4F6] dark:border-white/[0.08]">
         <div className="relative h-10 w-8 shrink-0">
           <Image src="/images/starehe-logo.png" alt="Logo" fill className="object-contain" />
         </div>
@@ -122,9 +122,9 @@ export function dashboard_sidebar() {
               transition={{ duration: 0.15 }}
               className="flex flex-col min-w-0"
             >
-              <span className="font-medium text-[#1F2937] text-[15px] leading-tight truncate">Akamba Hall</span>
-              <span className="text-[#7A819A] text-[12px] font-normal leading-none mt-0.5 truncate">Library System</span>
-              <span className="mt-1.5 inline-block px-2 py-[2px] rounded bg-[#EEF4FF] text-[10px] font-medium text-[#1747D6] w-fit truncate">
+              <span className="font-medium text-[#1F2937] dark:text-[#E2E8F0] dark:text-[#E2E8F0] dark:text-[#E2E8F0] text-[15px] leading-tight truncate">Akamba Hall</span>
+              <span className="text-[#7A819A] dark:text-[#6B7A99] dark:text-[#6B7A99] dark:text-[#6B7A99] text-[12px] font-normal leading-none mt-0.5 truncate">Library System</span>
+              <span className="mt-1.5 inline-block px-2 py-[2px] rounded bg-[#EEF4FF] dark:bg-[#1747D6]/20 dark:bg-[#1747D6]/20 dark:bg-[#1747D6]/20 text-[10px] font-medium text-[#1747D6] dark:text-[#8BA9FF] w-fit truncate">
                 {portal_labels[sidebarRole] ?? 'Portal'}
               </span>
              
@@ -137,7 +137,7 @@ export function dashboard_sidebar() {
       <button
         onClick={() => set_collapsed(!collapsed)}
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-        className="absolute top-[52px] -right-3 h-6 w-6 rounded-full bg-white border border-[#E7EBF2] shadow-sm flex items-center justify-center text-[#7A819A] hover:text-[#1747D6] hover:border-[#1747D6]/30 transition-all duration-200 cursor-pointer z-30"
+        className="absolute top-[52px] -right-3 h-6 w-6 rounded-full bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] dark:bg-[#13285A] border border-[#E7EBF2] dark:border-white/[0.08] dark:border-white/[0.08] dark:border-white/10 shadow-sm dark:shadow-none dark:shadow-none flex items-center justify-center text-[#7A819A] dark:text-[#6B7A99] dark:text-[#6B7A99] dark:text-[#6B7A99] hover:text-[#1747D6] dark:hover:text-white hover:border-[#1747D6]/30 dark:hover:border-white/30 transition-all duration-200 cursor-pointer z-30"
       >
         {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
       </button>
@@ -156,7 +156,7 @@ export function dashboard_sidebar() {
             href="/super-admin/dashboard"
             className={`flex items-center gap-2 rounded-xl text-[13px] font-medium transition-all ${
               collapsed ? 'px-0 py-2 justify-center' : 'px-3 py-2'
-            } bg-[#F59E0B]/10 text-[#D97706] hover:bg-[#F59E0B] hover:text-white`}
+            } bg-[#F59E0B]/10 dark:bg-[#F59E0B]/20 text-[#D97706] dark:text-[#FBBF24] hover:bg-[#F59E0B] hover:text-white dark:hover:bg-[#F59E0B] dark:hover:text-white`}
             title={collapsed ? 'Back to Admin' : undefined}
           >
             <Shield className="h-4 w-4 shrink-0" />
@@ -175,7 +175,7 @@ export function dashboard_sidebar() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="text-[11px] font-medium text-[#7A819A] uppercase tracking-wider mb-2 px-3 block"
+                  className="text-[11px] font-medium text-[#7A819A] dark:text-[#6B7A99] dark:text-[#6B7A99] dark:text-[#6B7A99] uppercase tracking-wider mb-2 px-3 block"
                 >
                   {section.label}
                 </motion.span>
@@ -197,13 +197,13 @@ export function dashboard_sidebar() {
                       collapsed ? 'px-0 py-2.5 justify-center' : 'px-3 py-2.5'
                     } ${
                       is_active
-                        ? 'rounded-[18px] bg-[#D6E4FF]'
-                        : 'rounded-xl hover:bg-[#F3F7FF]'
+                        ? 'rounded-[18px] bg-[#D6E4FF] dark:bg-[#13285A]'
+                        : 'rounded-xl hover:bg-[#F3F7FF] dark:hover:bg-[#1E3A72] dark:hover:bg-[#1E3A72] dark:hover:bg-[#1E3A72]'
                     }`}
                     title={collapsed ? item.label : undefined}
                   >
                     <Icon className={`h-[18px] w-[18px] shrink-0 ${
-                      is_active ? 'text-[#0E1F4D]' : 'text-[#132859]'
+                      is_active ? 'text-[#0E1F4D] dark:text-[#E2E8F0] dark:text-[#E2E8F0] dark:text-white' : 'text-[#132859] dark:text-[#E2E8F0] dark:text-[#E2E8F0] dark:text-[#8E95A9]'
                     }`} />
                     <AnimatePresence>
                       {!collapsed && (
@@ -213,8 +213,8 @@ export function dashboard_sidebar() {
                           exit={{ opacity: 0 }}
                           className={`truncate text-[14px] ${
                             is_active
-                              ? 'text-[#0E1F4D] font-medium'
-                              : 'text-[#132859] font-normal'
+                              ? 'text-[#0E1F4D] dark:text-[#E2E8F0] dark:text-[#E2E8F0] dark:text-white font-medium'
+                              : 'text-[#132859] dark:text-[#E2E8F0] dark:text-[#E2E8F0] dark:text-[#8E95A9] font-normal'
                           }`}
                         >
                           {item.label}
@@ -244,7 +244,7 @@ export function dashboard_sidebar() {
       </nav>
 
       {/* sign out */}
-      <div className="shrink-0 p-3 border-t border-[#E7EBF2]">
+      <div className="shrink-0 p-3 border-t border-[#E7EBF2] dark:border-white/[0.08] dark:border-white/[0.08] dark:border-white/[0.08]">
         <AnimatePresence>
           {!collapsed ? (
             <motion.div
@@ -255,7 +255,7 @@ export function dashboard_sidebar() {
               <form action="/api/auth/logout" method="POST">
                 <button
                   type="submit"
-                  className="w-full flex items-center gap-2 px-3 py-2.5 text-[13px] font-medium text-[#F23D4F] hover:bg-red-50 rounded-xl transition-colors cursor-pointer"
+                  className="w-full flex items-center gap-2 px-3 py-2.5 text-[13px] font-medium text-[#F23D4F] hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors cursor-pointer"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign Out

@@ -60,14 +60,14 @@ export function MyLoans({ loans }: MyLoansProps) {
               className="flex items-center gap-3 py-3 border-b border-slate-50 last:border-0 group"
             >
               {/* cover placeholder */}
-              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                <BookOpen className="h-4 w-4 text-slate-400" />
+              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] flex items-center justify-center shrink-0">
+                <BookOpen className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
               </div>
 
               <div className="flex-1 min-w-0">
-                <p className="text-[14px] font-medium text-slate-800 truncate">{loan.title}</p>
-                <p className="text-[12px] text-slate-400">{loan.author}</p>
-                <p className="text-[12px] text-slate-400 mt-0.5">
+                <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{loan.title}</p>
+                <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{loan.author}</p>
+                <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">
                   Due: {formatDate(loan.dueDate)}
                 </p>
               </div>
@@ -87,7 +87,7 @@ export function MyLoans({ loans }: MyLoansProps) {
 
       {loans.length > 0 && (
         <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50">
-          <button className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate-600 hover:text-slate-800 transition-colors">
+          <button className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] hover:text-slate-800 dark:text-[#E2E8F0] transition-colors">
             <RefreshCw className="h-3.5 w-3.5" />
             Renew All Eligible
           </button>

@@ -28,10 +28,10 @@ export function ApprovalsClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-[28px] font-medium text-slate-900">Approval Queue</h1>
-        <p className="text-[15px] text-slate-500 mt-1">Review and manage pending requests</p>
+        <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Approval Queue</h1>
+        <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Review and manage pending requests</p>
       </div>
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none overflow-hidden">
         <div className="divide-y divide-slate-50">
           {requests.map((r) => (
             <div key={r.id} className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50/50 transition-colors">
@@ -40,17 +40,17 @@ export function ApprovalsClient() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <p className="text-[13px] font-medium text-slate-800 truncate">{r.request}</p>
+                  <p className="text-[13px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{r.request}</p>
                   <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${type_badges[r.type]}`}>{r.type}</span>
                   {r.priority === 'high' && <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-red-100 text-red-600">Urgent</span>}
                 </div>
-                <p className="text-[11px] text-slate-400 mt-0.5">{r.requestor} · {r.context} · {r.date}</p>
+                <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{r.requestor} · {r.context} · {r.date}</p>
               </div>
               <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${status_badges[r.status]}`}>{r.status}</span>
               {r.status === 'Pending' && (
                 <div className="flex items-center gap-2 shrink-0">
                   <button className="h-8 px-3 rounded-full bg-[#1A2D5A] text-white text-[12px] font-semibold hover:bg-[#1A2D5A]/90 transition-colors">Approve</button>
-                  <button className="h-8 px-3 rounded-full border border-slate-200 text-slate-600 text-[12px] font-semibold hover:bg-slate-50 transition-colors">Decline</button>
+                  <button className="h-8 px-3 rounded-full border border-slate-200 dark:border-white/10 dark:border-white/10 text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] text-[12px] font-semibold hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors">Decline</button>
                 </div>
               )}
             </div>

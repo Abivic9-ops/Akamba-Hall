@@ -1,6 +1,6 @@
 export default function StudentDashboardLoading() {
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-5 animate-pulse">
         {/* welcome header skeleton */}
         <div className="h-24 rounded-2xl bg-slate-200" />

@@ -53,7 +53,7 @@ export function StaffSupport() {
           return (
             <button
               key={opt.title}
-              className={`relative flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-gradient-to-r ${opt.gradient} hover:shadow-sm hover:border-slate-200 transition-all text-left cursor-pointer group`}
+              className={`relative flex items-center gap-4 p-4 rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] bg-gradient-to-r ${opt.gradient} hover:shadow-sm dark:shadow-none dark:shadow-none hover:border-slate-200 dark:border-white/10 dark:border-white/10 transition-all text-left cursor-pointer group`}
             >
               <div
                 className="absolute left-0 top-2 bottom-2 w-[3px] rounded-full"
@@ -66,10 +66,10 @@ export function StaffSupport() {
                 <Icon className="h-5 w-5" style={{ color: opt.color }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[14px] font-medium text-slate-800">{opt.title}</p>
-                <p className="text-[12px] text-slate-400 mt-0.5">{opt.description}</p>
+                <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0]">{opt.title}</p>
+                <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{opt.description}</p>
               </div>
-              <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-slate-500 transition-colors shrink-0" />
+              <ChevronRight className="h-4 w-4 text-slate-300 group-hover:text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] transition-colors shrink-0" />
             </button>
           )
         })}

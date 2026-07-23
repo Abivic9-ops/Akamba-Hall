@@ -10,9 +10,10 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { sign_in_action } from '@/lib/actions/auth'
 import { createClient } from '@/lib/supabase/client'
+import { GraduationCap, Briefcase } from 'lucide-react'
 import {
   ArrowRight, Eye, EyeOff, AlertTriangle, Upload,
-  QrCode, Loader2, CheckCircle2,
+  QrCode, Loader2, CheckCircle2, Info,
 } from 'lucide-react'
 
 interface login_form_props {
@@ -29,6 +30,8 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
   const [loading, set_loading] = useState(false)
   const [qr_scanning, set_qr_scanning] = useState(false)
   const [qr_found, set_qr_found] = useState(false)
+  /** Only relevant when mode === 'student' — distinguishes Admission Number vs Staff ID */
+  const [id_type, set_id_type] = useState<'student' | 'staff'>('student')
   const file_ref = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -117,18 +120,18 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
   /* ─── QR MODE ────────────────────────────────── */
   if (mode === 'qr') {
     return (
-      <div className="rounded-2xl border border-slate-100 bg-white p-6">
+      <div className="rounded-2xl border border-slate-100 dark:border-white/[0.07] bg-white dark:bg-[#0E1F3F] p-6">
         <div className="flex flex-col items-center gap-5">
           <div className="text-center">
-            <p className="text-[16px] font-light text-[#0B1A3B]">Scan your QR Code</p>
+            <p className="text-[16px] font-light text-[#0B1A3B] dark:text-white">Scan your QR Code</p>
             <p className="text-[13px] text-slate-400 font-light mt-1">Point your camera at the QR card, or upload an image.</p>
           </div>
 
           <div className="relative h-44 w-44 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-center overflow-hidden">
-            <div className="absolute top-0 left-0 w-7 h-7 border-t-[3px] border-l-[3px] border-[#0B1A3B] rounded-tl-xl" />
-            <div className="absolute top-0 right-0 w-7 h-7 border-t-[3px] border-r-[3px] border-[#0B1A3B] rounded-tr-xl" />
-            <div className="absolute bottom-0 left-0 w-7 h-7 border-b-[3px] border-l-[3px] border-[#0B1A3B] rounded-bl-xl" />
-            <div className="absolute bottom-0 right-0 w-7 h-7 border-b-[3px] border-r-[3px] border-[#0B1A3B] rounded-br-xl" />
+            <div className="absolute top-0 left-0 w-7 h-7 border-t-[3px] border-l-[3px] border-[#0B1A3B] dark:border-[#E8A63C] rounded-tl-xl" />
+            <div className="absolute top-0 right-0 w-7 h-7 border-t-[3px] border-r-[3px] border-[#0B1A3B] dark:border-[#E8A63C] rounded-tr-xl" />
+            <div className="absolute bottom-0 left-0 w-7 h-7 border-b-[3px] border-l-[3px] border-[#0B1A3B] dark:border-[#E8A63C] rounded-bl-xl" />
+            <div className="absolute bottom-0 right-0 w-7 h-7 border-b-[3px] border-r-[3px] border-[#0B1A3B] dark:border-[#E8A63C] rounded-br-xl" />
 
             {qr_scanning && (
               <motion.div
@@ -183,7 +186,7 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
           <p className="text-[12px] text-slate-400 font-light text-center">
             Having trouble?{' '}
             <button type="button" onClick={() => on_switch_tab?.('student')} className="font-medium text-blue-500 hover:underline cursor-pointer">
-              Use Student ID
+              Use Student / Staff ID
             </button>
           </p>
         </div>
@@ -193,7 +196,7 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
 
   /* ─── EMAIL / STUDENT MODE ───────────────────── */
   return (
-    <div className="rounded-2xl border border-slate-100 bg-white p-6">
+    <div className="rounded-2xl border border-slate-100 dark:border-white/[0.07] bg-white dark:bg-[#0E1F3F] p-6">
       <form onSubmit={handle_submit} className="flex flex-col gap-4">
         {/* preview banner */}
         {is_preview && (
@@ -208,19 +211,60 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
           </div>
         )}
 
-        {/* identifier */}
+        {/* identifier — context-aware for email vs student vs staff */}
         <div className="flex flex-col gap-2">
-          <Label htmlFor="login-id" className="text-[13px] font-light text-slate-600">
-            {mode === 'email' ? 'Email Address' : 'Student / Staff ID'}
+          {/* Student/Staff sub-toggle — only shown in student/staff ID mode */}
+          {mode === 'student' && (
+            <div className="flex gap-1.5 mb-1">
+              <button
+                type="button"
+                onClick={() => { set_id_type('student'); set_identifier('') }}
+                className={`flex items-center gap-1.5 flex-1 justify-center py-2 rounded-lg border text-[12px] font-medium transition-all cursor-pointer ${
+                  id_type === 'student'
+                    ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B] dark:text-[#E8A63C]'
+                    : 'border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/[0.04] text-slate-400 dark:text-slate-500 hover:border-slate-300 hover:text-slate-600'
+                }`}
+              >
+                <GraduationCap className="h-3.5 w-3.5" />
+                Student
+              </button>
+              <button
+                type="button"
+                onClick={() => { set_id_type('staff'); set_identifier('') }}
+                className={`flex items-center gap-1.5 flex-1 justify-center py-2 rounded-lg border text-[12px] font-medium transition-all cursor-pointer ${
+                  id_type === 'staff'
+                    ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B] dark:text-[#E8A63C]'
+                    : 'border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-white/[0.04] text-slate-400 dark:text-slate-500 hover:border-slate-300 hover:text-slate-600'
+                }`}
+              >
+                <Briefcase className="h-3.5 w-3.5" />
+                Staff
+              </button>
+            </div>
+          )}
+
+          <Label htmlFor="login-id" className="text-[13px] font-light text-slate-600 dark:text-slate-400">
+            {mode === 'email'
+              ? 'Email Address'
+              : id_type === 'student'
+                ? 'Admission Number'
+                : 'Staff ID'}
           </Label>
+
           <div className="relative">
             <Input
               id="login-id"
               type={mode === 'email' ? 'email' : 'text'}
-              placeholder={mode === 'email' ? 'john@starehe.org' : 'e.g. 11876'}
+              placeholder={
+                mode === 'email'
+                  ? 'john@starehe.org'
+                  : id_type === 'student'
+                    ? 'e.g. 11876'
+                    : 'e.g. SBC-Staff-001'
+              }
               value={identifier}
               onChange={(e) => set_identifier(e.target.value)}
-              className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+              className="h-12 bg-slate-50/80 dark:bg-white/[0.05] border-slate-200 dark:border-white/10 rounded-xl text-[14px] font-light placeholder:text-slate-300 dark:placeholder:text-slate-600 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors dark:text-slate-200"
               required={!is_preview}
               disabled={is_preview}
               autoComplete={mode === 'email' ? 'email' : 'username'}
@@ -229,6 +273,22 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
               <CheckCircle2 className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-emerald-400" />
             )}
           </div>
+
+          {/* Staff ID helper note */}
+          {mode === 'student' && id_type === 'staff' && (
+            <motion.div
+              key="staff-hint"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="flex items-start gap-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-xl px-3.5 py-2.5"
+            >
+              <Info className="h-3.5 w-3.5 text-blue-400 dark:text-blue-300 shrink-0 mt-0.5" />
+              <p className="text-[11px] text-blue-600 dark:text-blue-300 font-light leading-snug">
+                Your Staff ID (e.g. <span className="font-medium">SBC-Staff-001</span>) is the system-generated ID assigned when your account was created. Check your welcome email or contact the library desk.
+              </p>
+            </motion.div>
+          )}
         </div>
 
         {/* password */}
@@ -248,7 +308,7 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => set_password(e.target.value)}
-              className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 pr-11 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+              className="h-12 bg-slate-50/80 dark:bg-white/[0.05] border-slate-200 dark:border-white/10 rounded-xl text-[14px] font-light placeholder:text-slate-300 dark:placeholder:text-slate-600 dark:text-slate-200 pr-11 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
               required={!is_preview}
               disabled={is_preview}
               autoComplete="current-password"

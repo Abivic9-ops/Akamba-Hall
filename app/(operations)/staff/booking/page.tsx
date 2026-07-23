@@ -28,25 +28,25 @@ export default async function StaffBookingPage() {
   const pendingCount = bookings.filter((b) => b.status === 'Pending').length
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-5">
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900">AVR / Boardroom Booking</h1>
-          <p className="text-[15px] text-slate-500 mt-1">Book audio-visual rooms and boardrooms for meetings and sessions.</p>
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">AVR / Boardroom Booking</h1>
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Book audio-visual rooms and boardrooms for meetings and sessions.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <SectionCard title="Today&apos;s Bookings">
             <p className="text-[32px] font-bold text-[#2563EB]">{todayCount}</p>
-            <p className="text-[13px] text-slate-400 mt-1">Scheduled for today</p>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Scheduled for today</p>
           </SectionCard>
           <SectionCard title="Pending Approval">
             <p className="text-[32px] font-bold text-[#F97316]">{pendingCount}</p>
-            <p className="text-[13px] text-slate-400 mt-1">Awaiting confirmation</p>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Awaiting confirmation</p>
           </SectionCard>
           <SectionCard title="Total Bookings">
-            <p className="text-[32px] font-bold text-slate-900">{bookings.length}</p>
-            <p className="text-[13px] text-slate-400 mt-1">This week</p>
+            <p className="text-[32px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{bookings.length}</p>
+            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">This week</p>
           </SectionCard>
         </div>
 
@@ -56,18 +56,18 @@ export default async function StaffBookingPage() {
               const sc = status_config[bk.status]
               const tc = type_config[bk.type]
               return (
-                <div key={bk.id} className="flex items-center gap-4 py-3.5 border-b border-slate-50 last:border-0 hover:bg-slate-50 rounded-lg px-2 transition-colors">
-                  <div className="h-10 w-10 rounded-lg bg-slate-50 flex items-center justify-center shrink-0">
+                <div key={bk.id} className="flex items-center gap-4 py-3.5 border-b border-slate-50 last:border-0 hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] rounded-lg px-2 transition-colors">
+                  <div className="h-10 w-10 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] flex items-center justify-center shrink-0">
                     <Video className={`h-4 w-4 ${tc.iconColor}`} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[14px] font-medium text-slate-800 truncate">{bk.title}</p>
+                    <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] dark:text-[#E2E8F0] truncate">{bk.title}</p>
                     <div className="flex items-center gap-3 mt-1">
-                      <span className="flex items-center gap-1 text-[11px] text-slate-400">
+                      <span className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                         <MapPin className="h-3 w-3" />
                         {bk.location}
                       </span>
-                      <span className="flex items-center gap-1 text-[11px] text-slate-400">
+                      <span className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">
                         <Clock className="h-3 w-3" />
                         {bk.date} · {bk.startTime} – {bk.endTime}
                       </span>

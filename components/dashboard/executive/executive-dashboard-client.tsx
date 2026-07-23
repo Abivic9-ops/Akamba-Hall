@@ -19,12 +19,12 @@ const LibraryPerformanceSnapshot = dynamic(() => import('./library-performance-s
 
 function PanelSkeleton({ className = '' }: { className?: string }) {
   return (
-    <div className={`bg-white rounded-xl border border-slate-100 p-5 space-y-3 animate-pulse ${className}`}>
+    <div className={`bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-5 space-y-3 animate-pulse ${className}`}>
       <div className="h-5 w-36 bg-slate-200 rounded" />
       <div className="space-y-2">
-        <div className="h-8 bg-slate-100 rounded" />
-        <div className="h-8 bg-slate-100 rounded" />
-        <div className="h-8 bg-slate-100 rounded" />
+        <div className="h-8 bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded" />
+        <div className="h-8 bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded" />
+        <div className="h-8 bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded" />
       </div>
     </div>
   )

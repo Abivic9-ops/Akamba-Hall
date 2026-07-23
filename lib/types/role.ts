@@ -80,7 +80,7 @@ export function getPermittedRoutes(role: Role): string[] {
 
 export const role_badge_colors: Record<Role, { bg: string; text: string }> = {
   STUDENT: { bg: 'bg-blue-50', text: 'text-blue-600' },
-  STAFF: { bg: 'bg-purple-50', text: 'text-purple-600' },
+  STAFF: { bg: 'bg-[#5B9BD5]/10', text: 'text-[#5B9BD5]' },
   ASSISTANT: { bg: 'bg-amber-50', text: 'text-amber-600' },
   CAPTAIN: { bg: 'bg-amber-50', text: 'text-amber-600' },
   PREFECT: { bg: 'bg-amber-50', text: 'text-amber-600' },

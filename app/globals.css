@@ -137,6 +137,26 @@
   --sidebar-accent-foreground: #FFFFFF;
   --sidebar-border: rgba(255, 255, 255, 0.08);
   --sidebar-ring: #E8A63C;
+
+  /* ── Auth page & shared surface overrides ───────────────────────
+     These map the hardcoded slate-* colours used throughout auth
+     pages to appropriate dark-mode equivalents via Tailwind's
+     dark: variant + CSS custom property cascade.
+  ──────────────────────────────────────────────────────────────── */
+
+  /* Auth page background / card surfaces */
+  --auth-bg: #071224;            /* outermost page bg in dark */
+  --auth-card: #0E1F3F;          /* white card → deep navy card */
+  --auth-card-border: rgba(255,255,255,0.07);
+
+  /* Slate text tones */
+  --slate-50-dark:  #111E3B;     /* bg-slate-50 → deep navy tint */
+  --slate-100-dark: #162340;     /* border-slate-100 */
+  --slate-200-dark: rgba(255,255,255,0.10); /* border-slate-200 */
+  --slate-300-dark: #3B4D6E;     /* placeholder / icon */
+  --slate-400-dark: #7A8FAD;     /* muted body text */
+  --slate-500-dark: #96A6C0;     /* secondary text */
+  --slate-600-dark: #B9C9DF;     /* label text */
 }
 
 @layer base {
@@ -266,4 +286,32 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #e2e8f0;
   border-radius: 99px;
+}
+
+/* ─── View Transition: dark/light ripple ──────────────────────────────────
+   We suppress ONLY the browser's default cross-fade on the old snapshot so
+   our custom clipPath circle-expand (fired via Element.animate() in
+   theme-context.tsx) is the sole animation on the new snapshot.
+   Removing animation:none from ::view-transition-new(root) is critical —
+   without it the JS animation is silently cancelled by the browser.
+──────────────────────────────────────────────────────────────────────── */
+::view-transition-old(root) {
+  /* freeze the outgoing snapshot in place */
+  animation: none;
+  mix-blend-mode: normal;
+  z-index: 1;
+}
+::view-transition-new(root) {
+  /* DO NOT set animation:none here — JS applies clipPath circle expand */
+  mix-blend-mode: normal;
+  z-index: 9999;
+}
+
+/* Provide a fallback clip-path starting state so there is no flash before
+   JS kicks in (handles very slow devices or prefers-reduced-motion = no). */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }

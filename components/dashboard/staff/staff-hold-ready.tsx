@@ -52,13 +52,13 @@ export function StaffHoldReady({ holds }: StaffHoldReadyProps) {
                 <Bookmark className="h-5 w-5 text-emerald-400" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[15px] font-semibold text-slate-800 truncate">{readyHold.title}</p>
-                <p className="text-[13px] text-slate-500">{readyHold.author}</p>
+                <p className="text-[15px] font-semibold text-slate-800 dark:text-[#E2E8F0] truncate">{readyHold.title}</p>
+                <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{readyHold.author}</p>
                 <div className="mt-2 space-y-1">
                   <Badge variant="success" dot>Ready for Pickup</Badge>
                   <div className="flex items-center gap-1.5 mt-1">
-                    <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                    <span className="text-[13px] text-slate-500">{readyHold.pickupLocation}</span>
+                    <MapPin className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                    <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{readyHold.pickupLocation}</span>
                   </div>
                   {readyHold.pickupDeadline && (
                     <p className="text-[13px] font-medium text-red-600">
@@ -75,7 +75,7 @@ export function StaffHoldReady({ holds }: StaffHoldReadyProps) {
               <button className="flex-1 h-9 rounded-lg bg-[#2563EB] text-white text-[13px] font-medium hover:bg-[#1D4ED8] transition-colors">
                 Pick Up Now
               </button>
-              <button className="h-9 px-4 rounded-lg border border-slate-200 text-[13px] font-medium text-red-500 hover:bg-red-50 transition-colors">
+              <button className="h-9 px-4 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[13px] font-medium text-red-500 hover:bg-red-50 transition-colors">
                 Cancel
               </button>
             </div>
@@ -84,14 +84,14 @@ export function StaffHoldReady({ holds }: StaffHoldReadyProps) {
           {pendingHolds.map((hold) => (
             <div
               key={hold.id}
-              className="flex items-center gap-3 py-2.5 border-t border-slate-100"
+              className="flex items-center gap-3 py-2.5 border-t border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]"
             >
-              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
-                <Bookmark className="h-4 w-4 text-slate-400" />
+              <div className="w-[36px] h-[50px] rounded-lg bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] flex items-center justify-center shrink-0">
+                <Bookmark className="h-4 w-4 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[14px] font-medium text-slate-800 truncate">{hold.title}</p>
-                <p className="text-[12px] text-slate-400">{hold.author}</p>
+                <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{hold.title}</p>
+                <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{hold.author}</p>
               </div>
               <Badge variant="info" dot>#{hold.queuePosition} in queue</Badge>
             </div>
