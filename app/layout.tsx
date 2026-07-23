@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins, Inter } from 'next/font/google'
 import { ThemeProvider } from '@/lib/contexts/theme-context'
 import { PWAInstallPrompt } from '@/components/pwa/PWAInstallPrompt'
+import { InitialLoader } from '@/components/layout/initial-loader'
 import './globals.css'
 
 const poppins = Poppins({
@@ -49,6 +50,7 @@ export default function RootLayout({
       </head>
       <body className="font-poppins antialiased">
         <ThemeProvider>
+          <InitialLoader />
           {children}
           <PWAInstallPrompt />
         </ThemeProvider>
