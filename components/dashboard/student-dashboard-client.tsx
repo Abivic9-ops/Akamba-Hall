@@ -17,7 +17,7 @@ interface Props {
   profile: {
     fullName: string
     membership: { tier: string; points: number; nextTier: string; nextTierPoints: number }
-    qrCard: { label: string; memberId: string; status: 'Active' | 'Suspended' }
+    qrCard: { label: string; memberId: string; status: 'Active' | 'Suspended'; qrCodeUrl?: string; cardRef?: string }
   }
   loans: { id: string; title: string; author: string; coverUrl: string; dueDate: string; renewable: boolean }[]
   holds: { id: string; title: string; author: string; coverUrl: string; status: 'ready' | 'pending'; queuePosition: number | null; pickupLocation: string | null; pickupDeadline: string | null }[]
@@ -79,6 +79,8 @@ export function StudentDashboardClient({
               memberId={profile.qrCard.memberId}
               userName={profile.fullName}
               status={profile.qrCard.status}
+              qrCodeUrl={profile.qrCard.qrCodeUrl}
+              cardRef={profile.qrCard.cardRef}
             />
           </div>
         </div>

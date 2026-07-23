@@ -75,7 +75,7 @@ export async function sign_up_action(formData: {
 
   const { fullName, email, studentId, password } = formData
 
-  // check if student ID already exists
+  // check if email or admission number already exists
   const existing = await prisma.user.findFirst({
     where: {
       OR: [
@@ -89,7 +89,7 @@ export async function sign_up_action(formData: {
     if (existing.email === email.toLowerCase()) {
       return { success: false, error: 'An account with this email already exists.' }
     }
-    return { success: false, error: 'This Student/Staff ID is already registered.' }
+    return { success: false, error: 'This admission number is already registered.' }
   }
 
   // create supabase auth user
@@ -112,14 +112,14 @@ export async function sign_up_action(formData: {
     return { success: false, error: 'Failed to create account. Please try again.' }
   }
 
-  // create prisma user profile
+  // create prisma user profile with the admission number
   try {
     await prisma.user.create({
       data: {
         id: auth_data.user.id,
         email: email.toLowerCase(),
         fullName,
-        studentId: studentId || null,
+        studentId,
         role: 'STUDENT',
         memberType: 'STUDENT',
         status: 'ACTIVE',
@@ -129,9 +129,24 @@ export async function sign_up_action(formData: {
     // prisma user may already exist from trigger, that's fine
   }
 
+  // auto-create QR card — admission number IS the card reference
+  if (auth_data.user) {
+    try {
+      await prisma.qRCard.create({
+        data: {
+          userId: auth_data.user.id,
+          cardRef: studentId,
+          status: 'ACTIVE',
+        },
+      })
+    } catch {
+      // QR card creation failure is non-critical
+    }
+  }
+
   // set role in app_metadata so middleware can read it from the JWT
   const admin = getAdminClient()
-  if (admin) {
+  if (admin && auth_data.user) {
     await admin.auth.admin.updateUserById(auth_data.user.id, {
       app_metadata: { role: 'STUDENT' },
     }).catch(() => {})
@@ -196,6 +211,117 @@ export async function sign_in_action(formData: {
             app_metadata: { role: dbRole },
           }).catch(() => {})
           // refresh the session so the new JWT carries the updated role
+          await supabase.auth.refreshSession().catch(() => {})
+        }
+      }
+    }
+  } catch {}
+
+  return { success: true }
+}
+
+/* ─── QR Login: Look up user by card reference ──── */
+
+export async function lookup_qr_user(cardRef: string): Promise<{
+  found: boolean
+  fullName?: string
+  cardRef?: string
+  role?: string
+  error?: string
+}> {
+  try {
+    const card = await prisma.qRCard.findUnique({
+      where: { cardRef, status: 'ACTIVE' },
+      include: {
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+            role: true,
+            status: true,
+          },
+        },
+      },
+    })
+
+    if (!card || card.user.status !== 'ACTIVE') {
+      return { found: false, error: 'Invalid or inactive QR card.' }
+    }
+
+    return {
+      found: true,
+      fullName: card.user.fullName ?? 'Unknown',
+      cardRef: card.cardRef,
+      role: card.user.role,
+    }
+  } catch {
+    return { found: false, error: 'Failed to look up QR card.' }
+  }
+}
+
+/* ─── QR Login: Sign in with card reference + password ── */
+
+export async function qr_sign_in_action(formData: {
+  cardRef: string
+  password: string
+}): Promise<auth_result> {
+  const supabase = await createClient()
+  if (!supabase) {
+    return { success: false, error: 'Authentication service is not configured.' }
+  }
+
+  const { cardRef, password } = formData
+
+  // look up the user via card reference
+  const card = await prisma.qRCard.findUnique({
+    where: { cardRef, status: 'ACTIVE' },
+    include: {
+      user: {
+        select: { id: true, email: true, status: true },
+      },
+    },
+  })
+
+  if (!card || card.user.status !== 'ACTIVE') {
+    return { success: false, error: 'Invalid or inactive QR card.' }
+  }
+
+  if (!card.user.email) {
+    return { success: false, error: 'Account has no email associated.' }
+  }
+
+  // sign in with the user's email + provided password
+  const { error } = await supabase.auth.signInWithPassword({
+    email: card.user.email.toLowerCase(),
+    password,
+  })
+
+  if (error) {
+    return { success: false, error: error.message }
+  }
+
+  // update last active + sync role
+  try {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      const profile = await prisma.user.findUnique({
+        where: { id: user.id },
+        select: { role: true },
+      })
+
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { lastActiveAt: new Date() },
+      }).catch(() => {})
+
+      const dbRole = profile?.role ?? 'STUDENT'
+      const jwtRole = user.app_metadata?.role
+      if (jwtRole !== dbRole) {
+        const admin = getAdminClient()
+        if (admin) {
+          await admin.auth.admin.updateUserById(user.id, {
+            app_metadata: { role: dbRole },
+          }).catch(() => {})
           await supabase.auth.refreshSession().catch(() => {})
         }
       }

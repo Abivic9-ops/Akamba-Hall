@@ -66,6 +66,7 @@ model QRCard {
   revokedAt    DateTime?
   reissuedFrom String?
 
+  @@unique([userId, status], name: "unique_active_card")
   @@index([cardRef])
 }
 

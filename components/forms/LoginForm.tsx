@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import jsQR from 'jsqr'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -27,6 +28,7 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
   const [error, set_error] = useState<string | null>(null)
   const [loading, set_loading] = useState(false)
   const [qr_scanning, set_qr_scanning] = useState(false)
+  const [qr_found, set_qr_found] = useState(false)
   const file_ref = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -56,24 +58,70 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
     router.refresh()
   }
 
-  function handle_qr_upload(e: React.ChangeEvent<HTMLInputElement>) {
+  /* Decode QR from uploaded image and redirect to /qr-login */
+  const handle_qr_upload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
+
     set_qr_scanning(true)
-    setTimeout(() => {
+    set_error(null)
+
+    const img = new window.Image()
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      canvas.width = img.naturalWidth
+      canvas.height = img.naturalHeight
+      const ctx = canvas.getContext('2d')
+      if (!ctx) {
+        set_qr_scanning(false)
+        set_error('Failed to read QR image.')
+        return
+      }
+
+      ctx.drawImage(img, 0, 0)
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      const code = jsQR(imageData.data, canvas.width, canvas.height)
+
+      if (code?.data) {
+        set_qr_found(true)
+        try {
+          const url = new URL(code.data)
+          const ref = url.searchParams.get('ref')
+          if (ref) {
+            router.push(`/qr-login?ref=${encodeURIComponent(ref)}`)
+            return
+          }
+        } catch {
+          // Not a valid URL — treat raw data as a card reference
+          router.push(`/qr-login?ref=${encodeURIComponent(code.data.trim())}`)
+          return
+        }
+        set_qr_scanning(false)
+        set_error('QR code does not contain a valid login link.')
+      } else {
+        set_qr_scanning(false)
+        set_error('No QR code detected in the image. Try a clearer photo.')
+      }
+    }
+
+    img.onerror = () => {
       set_qr_scanning(false)
-      set_identifier('QR-DECODED-ID')
-    }, 1500)
-  }
+      set_error('Failed to load the image.')
+    }
+
+    img.src = URL.createObjectURL(file)
+    // reset file input so the same file can be re-selected
+    e.target.value = ''
+  }, [router])
 
   /* ─── QR MODE ────────────────────────────────── */
   if (mode === 'qr') {
     return (
       <div className="rounded-2xl border border-slate-100 bg-white p-6">
-        <form onSubmit={handle_submit} className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-5">
           <div className="text-center">
             <p className="text-[16px] font-light text-[#0B1A3B]">Scan your QR Code</p>
-            <p className="text-[13px] text-slate-400 font-light mt-1">Position your QR card inside the frame.</p>
+            <p className="text-[13px] text-slate-400 font-light mt-1">Point your camera at the QR card, or upload an image.</p>
           </div>
 
           <div className="relative h-44 w-44 rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/50 flex items-center justify-center overflow-hidden">
@@ -92,6 +140,8 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
 
             {qr_scanning ? (
               <Loader2 className="h-9 w-9 text-blue-400 animate-spin" />
+            ) : qr_found ? (
+              <CheckCircle2 className="h-11 w-11 text-emerald-400" />
             ) : (
               <div className="flex flex-col items-center gap-2 text-slate-300">
                 <QrCode className="h-11 w-11" />
@@ -99,6 +149,18 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
               </div>
             )}
           </div>
+
+          {/* error */}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="flex items-center gap-2 text-red-500 bg-red-50 border border-red-100 rounded-xl px-3.5 py-2.5 w-full"
+            >
+              <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+              <p className="text-[12px] font-light">{error}</p>
+            </motion.div>
+          )}
 
           <div className="flex items-center gap-4 w-full">
             <div className="flex-1 h-px bg-slate-100" />
@@ -124,7 +186,7 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
               Use Student ID
             </button>
           </p>
-        </form>
+        </div>
       </div>
     )
   }

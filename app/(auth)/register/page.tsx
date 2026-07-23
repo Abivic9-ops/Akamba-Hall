@@ -26,7 +26,7 @@ export default function RegisterPage() {
 
   const [full_name, set_full_name] = useState('')
   const [email, set_email] = useState('')
-  const [student_id, set_student_id] = useState('')
+  const [admission_number, set_admission_number] = useState('')
   const [password, set_password] = useState('')
   const [confirm_password, set_confirm_password] = useState('')
   const [show_password, set_show_password] = useState(false)
@@ -60,7 +60,7 @@ export default function RegisterPage() {
       return
     }
 
-    const result = await sign_up_action({ fullName: full_name, email, studentId: student_id, password })
+    const result = await sign_up_action({ fullName: full_name, email, studentId: admission_number, password })
 
     if (!result.success) {
       set_error(result.error ?? 'Registration failed. Please try again.')
@@ -193,6 +193,12 @@ export default function RegisterPage() {
 
             {/* ── Form Card ───────────────────────── */}
             <div className="rounded-2xl border border-slate-100 bg-white p-6 mb-4">
+              <div className="flex items-start gap-2.5 bg-blue-50 border border-blue-100 rounded-xl px-3.5 py-3 mb-4">
+                <QrCode className="h-3.5 w-3.5 text-blue-500 mt-0.5 shrink-0" />
+                <p className="text-[11px] text-blue-700 font-light leading-snug">
+                  Your <span className="font-medium">QR Access Card</span> will be generated automatically upon registration.
+                </p>
+              </div>
               <form onSubmit={handle_submit} className="flex flex-col gap-4">
                 {/* personal info section */}
                 <div>
@@ -224,12 +230,12 @@ export default function RegisterPage() {
                       />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="reg-sid" className="text-[13px] font-light text-slate-600">Student / Staff ID</Label>
+                      <Label htmlFor="reg-sid" className="text-[13px] font-light text-slate-600">Admission Number</Label>
                       <Input
                         id="reg-sid"
                         placeholder="e.g. 11876"
-                        value={student_id}
-                        onChange={(e) => set_student_id(e.target.value)}
+                        value={admission_number}
+                        onChange={(e) => set_admission_number(e.target.value)}
                         className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
                         required
                         autoComplete="off"

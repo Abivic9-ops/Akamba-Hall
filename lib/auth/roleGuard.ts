@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import prisma from '@/lib/db/prisma'
+import type { User } from '@prisma/client'
 
 const roleRoutes: Record<string, string> = {
   STUDENT: '/student/dashboard',
@@ -44,7 +45,14 @@ export async function requireAuth() {
 
 export async function requireRole(allowedRoles: string[]) {
   const user = await requireAuth()
-  const profile = await prisma.user.findUnique({ where: { id: user.id } })
+
+  let profile: User | null = null
+  try {
+    profile = await prisma.user.findUnique({ where: { id: user.id } })
+  } catch (error) {
+    console.error('[requireRole] Database error fetching profile:', error)
+    redirect('/login')
+  }
 
   if (!profile || !allowedRoles.includes(profile.role)) {
     redirect('/unauthorized')
