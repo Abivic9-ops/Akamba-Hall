@@ -256,6 +256,7 @@ export function LoginForm({ mode, on_switch_tab }: login_form_props) {
             <button
               type="button"
               onClick={() => set_show_password(!show_password)}
+              aria-label={show_password ? 'Hide password' : 'Show password'}
               className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500 transition-colors cursor-pointer"
             >
               {show_password ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

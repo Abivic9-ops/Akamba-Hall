@@ -25,7 +25,7 @@ const type_config: Record<string, { icon: typeof AlertCircle; color: string }> =
   eresource: { icon: Globe, color: 'text-[#0D9488]' },
   reminder: { icon: Bell, color: 'text-amber-500' },
   policy: { icon: FileText, color: 'text-slate-500' },
-  campaign: { icon: BookHeart, color: 'text-purple-500' },
+  campaign: { icon: BookHeart, color: 'text-[#5B9BD5]' },
 }
 
 function timeAgo(iso: string): string {

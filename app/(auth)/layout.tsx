@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sign In | Akamba Hall Library',
-  description: 'Sign in to your Akamba Hall Library account to access your loans, bookings, and QR card.',
+  title: {
+    default: 'Akamba Hall Library',
+    template: '%s | Akamba Hall Library',
+  },
+  description: 'Access your Akamba Hall Library account — sign in, register, or use QR code authentication to manage your loans, bookings, and reading activity.',
+  robots: { index: false, follow: false },
 }
 
 export default function AuthLayout({

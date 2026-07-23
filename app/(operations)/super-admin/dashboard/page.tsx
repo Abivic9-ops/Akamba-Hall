@@ -108,7 +108,7 @@ export default async function super_admin_dashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { label: 'Active Users Today', value: metrics.active_users_today, icon: TrendingUp, color: 'text-emerald-500', trend: 'up' },
-            { label: 'Total Staff', value: metrics.total_staff, icon: Shield, color: 'text-purple-500', trend: 'up' },
+            { label: 'Total Staff', value: metrics.total_staff, icon: Shield, color: 'text-[#5B9BD5]', trend: 'up' },
             { label: 'Total Students', value: metrics.total_students, icon: Users, color: 'text-blue-500', trend: 'up' },
             { label: 'Overdue Loans', value: metrics.overdue_loans, icon: AlertTriangle, color: metrics.overdue_loans > 0 ? 'text-red-500' : 'text-slate-400', trend: 'down' },
           ].map((item) => (
@@ -229,7 +229,7 @@ export default async function super_admin_dashboard() {
                 { label: 'Manage Books', href: '/catalogue', color: 'bg-emerald-50 text-emerald-600' },
                 { label: 'View Loans', href: '/reservations', color: 'bg-amber-50 text-amber-600' },
                 { label: 'Members', href: '/members', color: 'bg-sky-50 text-sky-600' },
-                { label: 'Reservations', href: '/reservations', color: 'bg-purple-50 text-purple-600' },
+                { label: 'Reservations', href: '/reservations', color: 'bg-[#5B9BD5]/10 text-[#5B9BD5]' },
                 { label: 'System Settings', href: '/super-admin/settings', color: 'bg-slate-100 text-slate-600' },
               ].map((action) => (
                 <a

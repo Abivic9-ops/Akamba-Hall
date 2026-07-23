@@ -64,7 +64,7 @@ export function ProfilePageClient() {
                   VO
                 </div>
                 {isEditing && (
-                  <button className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-[#2563EB] flex items-center justify-center text-white hover:bg-[#1D4ED8] transition-colors">
+                  <button aria-label="Upload profile photo" className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-[#2563EB] flex items-center justify-center text-white hover:bg-[#1D4ED8] transition-colors">
                     <Camera className="h-3.5 w-3.5" />
                   </button>
                 )}

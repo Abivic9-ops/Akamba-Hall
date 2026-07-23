@@ -17,7 +17,7 @@ const status_config = {
 }
 
 const type_config = {
-  Boardroom: { color: 'bg-purple-50 text-purple-700', iconColor: 'text-[#8B5CF6]' },
+  Boardroom: { color: 'bg-[#5B9BD5]/10 text-[#2563EB]', iconColor: 'text-[#5B9BD5]' },
   AVR: { color: 'bg-blue-50 text-blue-700', iconColor: 'text-[#2563EB]' },
 }
 

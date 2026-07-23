@@ -229,7 +229,7 @@ export default function ResourcesPageClient() {
             </div>
             <h2 className="text-[30px] md:text-[36px] font-medium text-[#101828] mt-6 mb-3">Study Help</h2>
             <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-12">
-              The library does not just provide materials — it teaches you how to use them effectively. These guides cover everything from finding a book to writing a research paper. Each guide is written by library staff and reviewed by teachers.
+              The library teaches you how to use materials effectively. These guides cover everything from finding a book to writing a research paper. Each guide is written by library staff and reviewed by teachers.
             </p>
             <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[

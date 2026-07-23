@@ -25,10 +25,10 @@ const dashboards = [
     description: 'Staff tools for managing daily library operations, processing loans, and assisting members.',
     href: '/staff/dashboard',
     icon: Briefcase,
-    color: 'from-purple-500 to-purple-600',
-    bg: 'bg-purple-50',
-    iconColor: 'text-purple-500',
-    borderColor: 'border-purple-100',
+    color: 'from-[#0B1A3B] to-[#132859]',
+    bg: 'bg-[#0B1A3B]/5',
+    iconColor: 'text-[#0B1A3B]',
+    borderColor: 'border-[#E4E7EE]',
     features: ['Loan Processing', 'Member Assistance', 'Daily Operations', 'Reports'],
   },
   {
@@ -121,7 +121,7 @@ export default async function all_dashboards_page() {
                 {/* gradient header */}
                 <div className={`bg-gradient-to-r ${dash.color} px-6 py-6`}>
                   <div className="flex items-center gap-3">
-                    <div className="h-11 w-11 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                    <div className="h-11 w-11 rounded-xl bg-white/15 flex items-center justify-center">
                       <Icon className="h-5 w-5 text-white" />
                     </div>
                     <div>

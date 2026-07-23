@@ -14,7 +14,7 @@ const bookmarks = [
 const category_colors: Record<string, string> = {
   Science: 'bg-blue-50 text-blue-700',
   Education: 'bg-emerald-50 text-emerald-700',
-  Reference: 'bg-purple-50 text-purple-700',
+  Reference: 'bg-[#5B9BD5]/10 text-[#2563EB]',
   'Computer Science': 'bg-amber-50 text-amber-700',
   History: 'bg-rose-50 text-rose-700',
 }

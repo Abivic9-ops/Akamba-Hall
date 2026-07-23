@@ -83,7 +83,7 @@ export function QuickIssueWorkspace() {
       }}
     >
       {showSuccess && (
-        <div className="absolute inset-x-0 top-0 bg-emerald-500/95 text-white px-7 py-3 flex items-center gap-3 z-10 backdrop-blur-sm">
+        <div className="absolute inset-x-0 top-0 bg-emerald-600 text-white px-7 py-3 flex items-center gap-3 z-10">
           <CheckCircle2 className="h-5 w-5" />
           <span className="text-[14px] font-semibold">
             {item?.title} issued to {member?.name} — Due{' '}

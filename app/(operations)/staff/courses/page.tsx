@@ -15,7 +15,7 @@ const courses = [
 const dept_colors: Record<string, string> = {
   Science: 'bg-blue-50 text-blue-700',
   Mathematics: 'bg-emerald-50 text-emerald-700',
-  Languages: 'bg-purple-50 text-purple-700',
+  Languages: 'bg-[#5B9BD5]/10 text-[#2563EB]',
   Humanities: 'bg-amber-50 text-amber-700',
 }
 

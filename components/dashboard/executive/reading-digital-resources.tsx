@@ -15,7 +15,7 @@ interface Resource {
 const type_config: Record<string, { icon: React.ComponentType<{ className?: string }>; color: string; bg: string }> = {
   book: { icon: BookOpen, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   database: { icon: Database, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  journal: { icon: BookMarked, color: 'text-[#8B5CF6]', bg: 'bg-purple-50' },
+  journal: { icon: BookMarked, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
   ebook: { icon: FileText, color: 'text-[#D97706]', bg: 'bg-amber-50' },
 }
 

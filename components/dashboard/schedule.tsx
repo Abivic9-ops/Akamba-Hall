@@ -27,7 +27,7 @@ const type_icons: Record<string, typeof BookOpen> = {
 const type_colors: Record<string, string> = {
   'Reading Seat': 'text-[#2563EB]',
   AVR: 'text-amber-500',
-  Boardroom: 'text-purple-500',
+  Boardroom: 'text-[#5B9BD5]',
 }
 
 const status_map: Record<string, { variant: 'success' | 'warning' | 'info' | 'neutral' }> = {

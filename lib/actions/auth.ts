@@ -3,6 +3,7 @@
 import prisma from '@/lib/db/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { getAdminClient } from '@/lib/supabase/admin'
+import { generateCardRef } from '@/lib/utils/id-generator'
 
 /* ─── Types ─────────────────────────────────────── */
 
@@ -67,20 +68,22 @@ export async function sign_up_action(formData: {
   email: string
   studentId: string
   password: string
+  role?: 'STUDENT' | 'STAFF'
 }): Promise<auth_result> {
   const supabase = await createClient()
   if (!supabase) {
     return { success: false, error: 'Authentication service is not configured.' }
   }
 
-  const { fullName, email, studentId, password } = formData
+  const { fullName, email, studentId, password, role = 'STUDENT' } = formData
+  const isStaff = role === 'STAFF'
 
-  // check if email or admission number already exists
+  // check if email already exists; also check admission number for students
   const existing = await prisma.user.findFirst({
     where: {
       OR: [
         { email: email.toLowerCase() },
-        { studentId: studentId || '__none__' },
+        ...(!isStaff && studentId ? [{ studentId }] : []),
       ],
     },
   })
@@ -99,7 +102,8 @@ export async function sign_up_action(formData: {
     options: {
       data: {
         full_name: fullName,
-        student_id: studentId,
+        student_id: studentId || null,
+        role,
       },
     },
   })
@@ -112,16 +116,16 @@ export async function sign_up_action(formData: {
     return { success: false, error: 'Failed to create account. Please try again.' }
   }
 
-  // create prisma user profile with the admission number
+  // create prisma user profile
   try {
     await prisma.user.create({
       data: {
         id: auth_data.user.id,
         email: email.toLowerCase(),
         fullName,
-        studentId,
-        role: 'STUDENT',
-        memberType: 'STUDENT',
+        studentId: studentId || null,
+        role,
+        memberType: role,
         status: 'ACTIVE',
       },
     })
@@ -129,13 +133,16 @@ export async function sign_up_action(formData: {
     // prisma user may already exist from trigger, that's fine
   }
 
-  // auto-create QR card — admission number IS the card reference
+  // auto-create QR card
   if (auth_data.user) {
     try {
+      // For students: admission number IS the card reference.
+      // For staff: auto-generate a card reference.
+      const cardRef = isStaff ? await generateCardRef() : studentId
       await prisma.qRCard.create({
         data: {
           userId: auth_data.user.id,
-          cardRef: studentId,
+          cardRef,
           status: 'ACTIVE',
         },
       })
@@ -148,7 +155,7 @@ export async function sign_up_action(formData: {
   const admin = getAdminClient()
   if (admin && auth_data.user) {
     await admin.auth.admin.updateUserById(auth_data.user.id, {
-      app_metadata: { role: 'STUDENT' },
+      app_metadata: { role },
     }).catch(() => {})
   }
 

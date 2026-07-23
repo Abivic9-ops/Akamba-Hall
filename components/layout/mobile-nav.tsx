@@ -121,6 +121,7 @@ export function mobile_nav({ open, on_close }: mobile_nav_props) {
                 )}
                 <button
                   onClick={on_close}
+                  aria-label="Close navigation"
                   className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors cursor-pointer"
                 >
                   <X className="h-5 w-5" />

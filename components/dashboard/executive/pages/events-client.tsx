@@ -14,7 +14,7 @@ const events = [
 const category_colors: Record<string, string> = {
   Club: 'bg-blue-50 text-blue-600',
   Event: 'bg-emerald-50 text-emerald-600',
-  Workshop: 'bg-purple-50 text-purple-600',
+  Workshop: 'bg-[#5B9BD5]/10 text-[#5B9BD5]',
   Notice: 'bg-amber-50 text-amber-600',
 }
 

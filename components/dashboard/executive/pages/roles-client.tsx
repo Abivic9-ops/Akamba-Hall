@@ -5,7 +5,7 @@ import { Users, GraduationCap, Briefcase, Star, UserX, ArrowRight } from 'lucide
 const roles = [
   { role: 'Students', icon: GraduationCap, count: 1780, active: 1654, suspended: 6, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   { role: 'Librarians & Staff', icon: Users, count: 24, active: 24, suspended: 0, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  { role: 'Department Staff', icon: Briefcase, count: 98, active: 95, suspended: 0, color: 'text-[#8B5CF6]', bg: 'bg-purple-50' },
+  { role: 'Department Staff', icon: Briefcase, count: 98, active: 95, suspended: 0, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
   { role: 'Executives', icon: Star, count: 12, active: 12, suspended: 0, color: 'text-[#D97706]', bg: 'bg-amber-50' },
   { role: 'Suspended Users', icon: UserX, count: 6, active: 0, suspended: 6, color: 'text-red-500', bg: 'bg-red-50' },
 ]

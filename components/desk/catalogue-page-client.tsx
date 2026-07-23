@@ -54,7 +54,7 @@ export function CataloguePageClient() {
     <div className="bg-[#F8F9FB] min-h-screen">
       <div className="max-w-[1200px] mx-auto p-6 space-y-5">
         <div className="flex items-center gap-3 mb-1">
-          <div className="h-10 w-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
+          <div className="h-10 w-10 rounded-xl bg-[#5B9BD5]/10 text-[#5B9BD5] flex items-center justify-center">
             <Grid3X3 className="h-5 w-5" />
           </div>
           <div>

@@ -9,13 +9,13 @@ import { SectionCard } from '@/components/ui/section-card'
 const actions = [
   { label: 'Search Catalogue', icon: Search, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   { label: 'Reserve Book', icon: BookMarked, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  { label: 'Book a Room', icon: DoorOpen, color: 'text-[#8B5CF6]', bg: 'bg-purple-50' },
+  { label: 'Book a Room', icon: DoorOpen, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
   { label: 'Reading Seat', icon: Armchair, color: 'text-[#0EA5E9]', bg: 'bg-sky-50' },
   { label: 'Equipment', icon: Monitor, color: 'text-slate-500', bg: 'bg-slate-100' },
   { label: 'Renew Items', icon: RefreshCw, color: 'text-[#18A957]', bg: 'bg-emerald-50' },
   { label: 'Request Book', icon: BookPlus, color: 'text-[#F97316]', bg: 'bg-orange-50' },
   { label: 'Ask a Librarian', icon: MessageCircle, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
-  { label: 'My Bookmarks', icon: Bookmark, color: 'text-[#8B5CF6]', bg: 'bg-purple-50' },
+  { label: 'My Bookmarks', icon: Bookmark, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
 ]
 
 export function StaffQuickActions() {

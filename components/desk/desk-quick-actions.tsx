@@ -9,12 +9,12 @@ import { SectionCard } from '@/components/ui/section-card'
 const actions = [
   { label: 'New Member', icon: UserPlus, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   { label: 'Scan Item', icon: ScanLine, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  { label: 'Issue Item', icon: BookOpen, color: 'text-purple-500', bg: 'bg-purple-50' },
+  { label: 'Issue Item', icon: BookOpen, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
   { label: 'Return Item', icon: RotateCcw, color: 'text-emerald-600', bg: 'bg-emerald-50' },
   { label: 'Renew Item', icon: RefreshCw, color: 'text-amber-500', bg: 'bg-amber-50' },
   { label: 'Lost Item', icon: Search, color: 'text-red-500', bg: 'bg-red-50' },
   { label: 'Reserve Book', icon: CalendarCheck, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
-  { label: 'Print QR Card', icon: CreditCard, color: 'text-purple-500', bg: 'bg-purple-50' },
+  { label: 'Print QR Card', icon: CreditCard, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
   { label: 'Check In/Out', icon: LogIn, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
 ]
 

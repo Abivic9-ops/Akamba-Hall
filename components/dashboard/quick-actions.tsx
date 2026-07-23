@@ -9,7 +9,7 @@ import { SectionCard } from '@/components/ui/section-card'
 const actions = [
   { label: 'Search Catalogue', icon: Search, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   { label: 'Reserve Book', icon: BookMarked, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  { label: 'Book a Seat', icon: Armchair, color: 'text-purple-500', bg: 'bg-purple-50' },
+  { label: 'Book a Seat', icon: Armchair, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
   { label: 'AVR Booking', icon: Video, color: 'text-amber-500', bg: 'bg-amber-50' },
   { label: 'Equipment', icon: Monitor, color: 'text-slate-500', bg: 'bg-slate-100' },
   { label: 'Ask a Librarian', icon: MessageCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },

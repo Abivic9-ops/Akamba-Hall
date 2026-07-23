@@ -9,7 +9,7 @@ const summaryCards = [
   { label: 'Total Transactions', value: 47, color: 'bg-blue-50 text-[#2563EB]', icon: TrendingUp },
   { label: 'Issues', value: 28, color: 'bg-emerald-50 text-emerald-600', icon: BookOpen },
   { label: 'Returns', value: 15, color: 'bg-amber-50 text-amber-600', icon: Calendar },
-  { label: 'New Members', value: 4, color: 'bg-purple-50 text-purple-600', icon: Users },
+  { label: 'New Members', value: 4, color: 'bg-[#5B9BD5]/10 text-[#5B9BD5]', icon: Users },
   { label: 'Overdue Items', value: 7, color: 'bg-red-50 text-red-600', icon: TrendingUp },
 ]
 

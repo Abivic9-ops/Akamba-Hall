@@ -80,7 +80,7 @@ const mockEvents: Event[] = [
 const type_config = {
   workshop: { icon: Globe, color: 'text-[#2563EB]', bg: 'bg-blue-50', label: 'Workshop' },
   deadline: { icon: Bell, color: 'text-red-500', bg: 'bg-red-50', label: 'Deadline' },
-  campaign: { icon: BookHeart, color: 'text-purple-500', bg: 'bg-purple-50', label: 'Campaign' },
+  campaign: { icon: BookHeart, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10', label: 'Campaign' },
   announcement: { icon: Megaphone, color: 'text-amber-500', bg: 'bg-amber-50', label: 'Announcement' },
   event: { icon: CalendarDays, color: 'text-[#0D9488]', bg: 'bg-teal-50', label: 'Event' },
 }

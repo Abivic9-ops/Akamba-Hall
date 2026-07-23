@@ -87,7 +87,7 @@ const events = [
 
 const testimonials = [
   { quote: 'Walking into Akamba Hall Library every morning gives me a sense of purpose. The quiet spaces, the organised shelves, and the warmth of the librarians make me feel like I truly belong here. This library has given me more than books — it has given me confidence.', name: 'Brian O.', role: 'Form 6 Student', avatar: 'https://i.pravatar.cc/150?img=11' },
-  { quote: 'As a teacher, I have watched students transform because of the resources this library provides. The digital databases, the research support, the reading programmes — they all come together to create something truly special. I am deeply grateful for Akamba Hall Library.', name: 'Mrs. Wambui', role: 'Physics Teacher', avatar: 'https://i.pravatar.cc/150?img=32' },
+  { quote: 'As a teacher, I have watched students grow because of the resources this library provides. The digital databases, the research support, the reading programmes — they all come together to create something truly special. I am deeply grateful for Akamba Hall Library.', name: 'Mrs. Wambui', role: 'Physics Teacher', avatar: 'https://i.pravatar.cc/150?img=32' },
   { quote: 'Years after leaving Starehe, the reading habits and discipline I developed in Akamba Hall Library still guide me. Every time I open a book, I remember the librarians who believed in me. I owe so much of my success to this place.', name: 'James K.', role: 'Alumnus — Class of 2018', avatar: 'https://i.pravatar.cc/150?img=53' },
 ]
 

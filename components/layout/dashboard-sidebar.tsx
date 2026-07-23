@@ -136,6 +136,7 @@ export function dashboard_sidebar() {
       {/* collapse toggle */}
       <button
         onClick={() => set_collapsed(!collapsed)}
+        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         className="absolute top-[52px] -right-3 h-6 w-6 rounded-full bg-white border border-[#E7EBF2] shadow-sm flex items-center justify-center text-[#7A819A] hover:text-[#1747D6] hover:border-[#1747D6]/30 transition-all duration-200 cursor-pointer z-30"
       >
         {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, CalendarCheck, QrCode, BarChart3, Shield } from 'lucide-react'
+import { BookOpen, CalendarCheck, QrCode, BarChart3, Shield, ArrowLeft } from 'lucide-react'
 import { LoginForm } from '@/components/forms/LoginForm'
 
 const features = [
@@ -82,6 +82,15 @@ export default function LoginPage() {
       <div className="w-full lg:w-[62%] flex flex-col">
         <div className="flex-1 flex flex-col items-center px-8 sm:px-12 lg:px-16 py-10">
           <div className="w-full max-w-[440px]">
+            {/* back to home pill */}
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-[13px] text-slate-500 font-medium hover:bg-slate-50 hover:border-slate-300 transition-all mb-8"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Back to Home
+            </Link>
+
             {/* mobile logo */}
             <div className="flex lg:hidden items-center gap-3 mb-8">
               <div className="relative h-10 w-9 shrink-0">

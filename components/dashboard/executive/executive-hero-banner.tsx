@@ -14,7 +14,7 @@ export function ExecutiveHeroBanner() {
         </h2>
         <p className="text-[13px] text-white/70 mt-3 leading-relaxed max-w-md">
           Oversee operations, approve requests, review policies and ensure our library
-          continues to empower every Starehean.
+          serves every Starehean well.
         </p>
         <div className="flex items-left gap-3 mt-5">
           <button className="h-10 px-6 rounded-lg bg-[#D97706] text-white text-[13px] font-semibold hover:bg-[#B45309] hover:shadow-md hover:shadow-amber-500/20 transition-all duration-200">

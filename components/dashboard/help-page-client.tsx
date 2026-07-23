@@ -38,7 +38,7 @@ const contactOptions = [
   { label: 'Visit the Library Desk', detail: 'Akamba Hall, Ground Floor', icon: MapPin, color: 'text-[#2563EB]' },
   { label: 'Call Us', detail: '+254 712 345 678', icon: Phone, color: 'text-[#0D9488]' },
   { label: 'Email Us', detail: 'library@starehe.ac.ke', icon: Mail, color: 'text-amber-500' },
-  { label: 'Operating Hours', detail: 'Mon–Fri 7:30 AM – 6:00 PM', icon: Clock, color: 'text-purple-500' },
+  { label: 'Operating Hours', detail: 'Mon–Fri 7:30 AM – 6:00 PM', icon: Clock, color: 'text-[#5B9BD5]' },
 ]
 
 export function HelpPageClient() {

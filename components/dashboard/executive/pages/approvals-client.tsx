@@ -13,7 +13,7 @@ const requests = [
 
 const type_badges: Record<string, string> = {
   'Room Booking': 'bg-blue-100 text-blue-700',
-  'Special Access': 'bg-purple-100 text-purple-700',
+  'Special Access': 'bg-[#5B9BD5]/10 text-[#2563EB]',
   'Policy Exception': 'bg-amber-100 text-amber-700',
   Incident: 'bg-red-100 text-red-600',
 }

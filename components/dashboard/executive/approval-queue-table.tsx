@@ -14,7 +14,7 @@ interface ApprovalItem {
 
 const type_badges: Record<string, { label: string; color: string }> = {
   room_booking: { label: 'Room', color: 'bg-blue-100 text-blue-700' },
-  special_access: { label: 'Access', color: 'bg-purple-100 text-purple-700' },
+  special_access: { label: 'Access', color: 'bg-[#5B9BD5]/10 text-[#2563EB]' },
   policy_exception: { label: 'Policy', color: 'bg-amber-100 text-amber-700' },
   incident: { label: 'Incident', color: 'bg-red-100 text-red-600' },
   general: { label: 'General', color: 'bg-slate-100 text-slate-600' },

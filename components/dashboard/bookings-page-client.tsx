@@ -50,7 +50,7 @@ const mockBookings: Booking[] = [
 const type_config = {
   'Reading Seat': { icon: BookOpen, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   AVR: { icon: Video, color: 'text-amber-500', bg: 'bg-amber-50' },
-  Boardroom: { icon: Users, color: 'text-purple-500', bg: 'bg-purple-50' },
+  Boardroom: { icon: Users, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
 }
 
 function formatTime(iso: string): string {

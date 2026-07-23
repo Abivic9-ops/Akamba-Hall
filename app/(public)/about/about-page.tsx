@@ -97,7 +97,7 @@ export default function AboutPageClient() {
                   Akamba Hall Library exists to support the academic life of Starehe Boys&apos; Centre. It provides supervised access to books, journals, digital resources, and study spaces — all managed through systems that enforce order, protect privacy, and make resources available to those who need them.
                 </p>
                 <p className="text-[16px] text-[#5B6376] leading-relaxed">
-                  The library is not just a room with shelves. It is a structured service environment where borrowing, reservations, space use, and event participation all follow clear processes. Every member knows what they can access, how to access it, and what is expected of them.
+                  The library is a structured service environment where borrowing, reservations, space use, and event participation all follow clear processes. Every member knows what they can access, how to access it, and what is expected of them.
                 </p>
                 <p className="text-[16px] text-[#5B6376] leading-relaxed">
                   Our purpose is to build a reading culture, support research, and give every student the tools to perform well academically — within a system that teaches responsibility and respect for shared resources.
@@ -187,7 +187,7 @@ export default function AboutPageClient() {
             {[
               { icon: BookOpen, title: 'Academic Support Centre', desc: 'A place where students access textbooks, reference materials, past papers, and digital resources to support classroom learning and independent study. The library\'s collection is aligned with the Kenyan curriculum and supplemented with materials for wider reading.', color: 'bg-gold/10 text-gold' },
               { icon: Users, title: 'Community Hub', desc: 'A shared space where students, teachers, and staff interact around knowledge — through reading, research, events, and collaborative projects. The library hosts author talks, research workshops, reading competitions, and orientation sessions throughout the school term.', color: 'bg-[#5B9BD5]/10 text-[#5B9BD5]' },
-              { icon: Award, title: 'Discipline Framework', desc: 'A system that teaches responsibility. Borrowing rules, overdue policies, QR access, and space bookings all build habits of accountability. The library does not just lend books — it trains students to manage time, respect deadlines, and care for shared resources.', color: 'bg-[#2E8B57]/10 text-[#2E8B57]' },
+              { icon: Award, title: 'Discipline Framework', desc: 'A system that teaches responsibility. Borrowing rules, overdue policies, QR access, and space bookings all build habits of accountability. The library trains students to manage time, respect deadlines, and care for shared resources.', color: 'bg-[#2E8B57]/10 text-[#2E8B57]' },
             ].map((item, i) => (
               <StaggerItem key={i}>
                 <ScaleOnHover scale={1.03}>

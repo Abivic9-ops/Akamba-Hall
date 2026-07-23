@@ -13,7 +13,7 @@ const resources = [
 
 const category_colors: Record<string, string> = {
   Journals: 'bg-blue-50 text-blue-700',
-  Databases: 'bg-purple-50 text-purple-700',
+  Databases: 'bg-[#5B9BD5]/10 text-[#2563EB]',
   Catalogue: 'bg-emerald-50 text-emerald-700',
   National: 'bg-amber-50 text-amber-700',
   'E-Books': 'bg-rose-50 text-rose-700',

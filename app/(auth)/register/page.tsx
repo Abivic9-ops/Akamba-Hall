@@ -12,6 +12,7 @@ import { createClient } from '@/lib/supabase/client'
 import {
   ArrowRight, Eye, EyeOff, AlertTriangle, Loader2,
   CheckCircle2, ArrowLeft, BookOpen, Clock, QrCode,
+  GraduationCap, Briefcase,
 } from 'lucide-react'
 
 const benefits = [
@@ -26,6 +27,7 @@ export default function RegisterPage() {
 
   const [full_name, set_full_name] = useState('')
   const [email, set_email] = useState('')
+  const [user_type, set_user_type] = useState<'student' | 'staff'>('student')
   const [admission_number, set_admission_number] = useState('')
   const [password, set_password] = useState('')
   const [confirm_password, set_confirm_password] = useState('')
@@ -60,7 +62,13 @@ export default function RegisterPage() {
       return
     }
 
-    const result = await sign_up_action({ fullName: full_name, email, studentId: admission_number, password })
+    const result = await sign_up_action({
+      fullName: full_name,
+      email,
+      studentId: user_type === 'student' ? admission_number : '',
+      password,
+      role: user_type === 'student' ? 'STUDENT' : 'STAFF',
+    })
 
     if (!result.success) {
       set_error(result.error ?? 'Registration failed. Please try again.')
@@ -177,8 +185,11 @@ export default function RegisterPage() {
               </div>
             </div>
 
-            {/* back */}
-            <Link href="/login" className="inline-flex items-center gap-1.5 text-[12px] text-slate-400 font-light hover:text-slate-600 transition-colors mb-6">
+            {/* back to sign in pill */}
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-[13px] text-slate-500 font-medium hover:bg-slate-50 hover:border-slate-300 transition-all mb-6"
+            >
               <ArrowLeft className="h-3.5 w-3.5" />
               Back to Sign In
             </Link>
@@ -204,6 +215,36 @@ export default function RegisterPage() {
                 <div>
                   <p className="text-[11px] font-medium text-slate-400 tracking-[0.1em] uppercase mb-3">Personal Information</p>
                   <div className="flex flex-col gap-3">
+                    {/* user type toggle */}
+                    <div className="flex flex-col gap-1.5">
+                      <Label className="text-[13px] font-light text-slate-600">I am a</Label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => set_user_type('student')}
+                          className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-medium transition-all cursor-pointer ${
+                            user_type === 'student'
+                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B]'
+                              : 'border-slate-200 bg-slate-50/80 text-slate-400 hover:border-slate-300 hover:text-slate-500'
+                          }`}
+                        >
+                          <GraduationCap className="h-4 w-4" />
+                          Student
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => set_user_type('staff')}
+                          className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-medium transition-all cursor-pointer ${
+                            user_type === 'staff'
+                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B]'
+                              : 'border-slate-200 bg-slate-50/80 text-slate-400 hover:border-slate-300 hover:text-slate-500'
+                          }`}
+                        >
+                          <Briefcase className="h-4 w-4" />
+                          Staff
+                        </button>
+                      </div>
+                    </div>
                     <div className="flex flex-col gap-1.5">
                       <Label htmlFor="reg-name" className="text-[13px] font-light text-slate-600">Full Name</Label>
                       <Input
@@ -229,18 +270,20 @@ export default function RegisterPage() {
                         autoComplete="email"
                       />
                     </div>
-                    <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="reg-sid" className="text-[13px] font-light text-slate-600">Admission Number</Label>
-                      <Input
-                        id="reg-sid"
-                        placeholder="e.g. 11876"
-                        value={admission_number}
-                        onChange={(e) => set_admission_number(e.target.value)}
-                        className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
-                        required
-                        autoComplete="off"
-                      />
-                    </div>
+                    {user_type === 'student' && (
+                      <div className="flex flex-col gap-1.5">
+                        <Label htmlFor="reg-sid" className="text-[13px] font-light text-slate-600">Admission Number</Label>
+                        <Input
+                          id="reg-sid"
+                          placeholder="e.g. 11876"
+                          value={admission_number}
+                          onChange={(e) => set_admission_number(e.target.value)}
+                          className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+                          required
+                          autoComplete="off"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
 

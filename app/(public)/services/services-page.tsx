@@ -67,7 +67,7 @@ const services = [
     id: 'events',
     icon: CalendarDays,
     title: 'Events & Attendance',
-    desc: 'The library is not just a quiet reading room. It hosts events that build skills, introduce new ideas, and bring the school community together around knowledge.',
+    desc: 'The library hosts events that build skills, introduce new ideas, and bring the school community together around knowledge.',
     items: [
       { heading: 'What Happens', text: 'The library hosts reading competitions, author talks, research workshops, orientations, and awareness campaigns throughout the school term. Events are announced on the News & Updates page and through the portal. Major events include AI Literacy Week, Author Meet & Greet, and the Read 30 Challenge.' },
       { heading: 'Signing In', text: 'Register for events through the portal. On the day, sign in using your QR card. Attendance is tracked for record-keeping and to plan future events. Students who attend 80% or more of a term\'s events receive recognition at the term assembly.' },

@@ -20,8 +20,8 @@ export function ResearchSupportClient() {
         {services.map((s, i) => (
           <div key={i} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3 mb-3">
-              <div className="h-10 w-10 rounded-xl bg-purple-50 flex items-center justify-center">
-                <GraduationCap className="h-5 w-5 text-[#8B5CF6]" />
+              <div className="h-10 w-10 rounded-xl bg-[#5B9BD5]/10 flex items-center justify-center">
+                <GraduationCap className="h-5 w-5 text-[#5B9BD5]" />
               </div>
               <div>
                 <p className="text-[14px] font-semibold text-slate-800">{s.title}</p>
@@ -29,7 +29,7 @@ export function ResearchSupportClient() {
               </div>
             </div>
             <p className="text-[12px] text-slate-500 mb-3">{s.description}</p>
-            <button className="h-8 px-4 rounded-full bg-purple-50 text-[12px] font-semibold text-[#8B5CF6] hover:bg-purple-100 inline-flex items-center gap-1.5 transition-all duration-200">
+            <button className="h-8 px-4 rounded-full bg-[#5B9BD5]/10 text-[12px] font-semibold text-[#5B9BD5] hover:bg-[#5B9BD5]/20 inline-flex items-center gap-1.5 transition-all duration-200">
               Learn more <ArrowRight className="h-3 w-3" />
             </button>
           </div>
