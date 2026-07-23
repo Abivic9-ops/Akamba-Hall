@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     title: 'Akamba Hall',
   },
   icons: {
+    icon: '/favicon-circle.png',
     apple: '/apple-touch-icon.png',
   },
 }
