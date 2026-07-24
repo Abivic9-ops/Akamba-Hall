@@ -78,38 +78,33 @@ export function OverviewCards({
   ]
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 gap-3">
       {cards.map((card) => {
         const Icon = card.icon
         return (
           <div
             key={card.label}
-            className="relative w-full rounded-[30px] border border-[#EDF2F7] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)] p-5 flex flex-col justify-between overflow-hidden transition-shadow hover:shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.04)]"
+            className="relative w-full rounded-2xl border border-[#EDF2F7] dark:border-white/[0.08] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)] p-3.5 flex flex-col justify-between overflow-hidden transition-shadow hover:shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.04)] dark:shadow-none"
             style={{ background: card.gradient }}
           >
-            {/* icon */}
-            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${card.iconBg}`}>
-              <Icon className={`h-5 w-5 ${card.iconColor}`} />
-            </div>
-
-            {/* value + label */}
-            <div>
-              <p className="text-[40px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] leading-none tracking-tight">
-                {card.value}
-              </p>
-              <p className="text-[15px] font-semibold text-[#1F2937] dark:text-[#E2E8F0] dark:text-[#E2E8F0] mt-1">
-                {card.label}
-              </p>
-              <p className="text-[13px] text-[#6B7280] mt-0.5">
-                {card.detail}
-              </p>
-            </div>
-
-            {/* action button */}
-            <div className="flex justify-end">
-              <div className={`h-[26px] w-[26px] rounded-full ${card.btnBg} flex items-center justify-center`}>
+            <div className="flex items-center justify-between mb-2">
+              <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${card.iconBg}`}>
+                <Icon className={`h-4 w-4 ${card.iconColor}`} />
+              </div>
+              <div className={`h-[20px] w-[20px] rounded-full ${card.btnBg} flex items-center justify-center`}>
                 <ArrowRight className="h-3 w-3 text-white" />
               </div>
+            </div>
+            <div>
+              <p className="text-[22px] sm:text-[26px] font-bold text-slate-900 dark:text-[#E2E8F0] leading-none tracking-tight">
+                {card.value}
+              </p>
+              <p className="text-[11px] sm:text-[12px] font-semibold text-[#1F2937] dark:text-[#E2E8F0] mt-0.5">
+                {card.label}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-[#6B7280] dark:text-[#94A3B8] mt-0.5">
+                {card.detail}
+              </p>
             </div>
           </div>
         )

@@ -109,7 +109,7 @@ function QRLoginContent() {
               <div className="h-8 w-8 rounded-lg bg-[#D4A017]/10 flex items-center justify-center shrink-0">
                 <QrCode className="h-4 w-4 text-[#D4A017]" />
               </div>
-              <p className="text-white/70 text-[14px] font-light">Secure QR-based authentication</p>
+              <p className="text-white/70 text-[14px] font-light">Secure QR based authentication</p>
             </div>
             <p className="text-white/30 text-[13px] font-light leading-relaxed">
               Your QR code identifies your account. Only your password can grant access — keeping your data safe even if someone else scans your code.

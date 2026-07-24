@@ -14,12 +14,15 @@ const loadingMessages = [
 export function InitialLoader() {
   const [loading, setLoading] = useState(true)
   const [messageIndex, setMessageIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    // Hide the loader after the app has hydrated and a small delay
-    const totalDuration = 3000 // 3 seconds splash screen for kids to enjoy
+    const mobile = window.matchMedia('(max-width: 768px)').matches ||
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    setIsMobile(mobile)
+
+    const totalDuration = mobile ? 2500 : 3000
     
-    // Cycle messages
     const messageInterval = setInterval(() => {
       setMessageIndex((prev) => (prev + 1 < loadingMessages.length ? prev + 1 : prev))
     }, totalDuration / loadingMessages.length)
@@ -35,6 +38,112 @@ export function InitialLoader() {
   }, [])
 
   if (!loading) return null
+
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-[#0B1A3B] flex flex-col justify-center items-center font-poppins overflow-hidden" style={{ width: '100vw', height: '100dvh', maxWidth: '100vw', maxHeight: '100dvh' }}>
+        {/* Background */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-bg.png"
+            alt="Background"
+            fill
+            sizes="100vw"
+            quality={50}
+            fetchPriority="high"
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center px-6 w-full max-w-sm">
+          {/* Logos */}
+          <div className="relative w-16 h-14 mb-4 flex justify-center items-center" style={{ animation: 'float-up-down 4s ease-in-out infinite' }}>
+            <div className="absolute" style={{ animation: 'cross-left-right 3.5s ease-in-out infinite' }}>
+              <Image
+                src="/images/starehe-preview.png"
+                alt="Starehe Preview"
+                width={64}
+                height={64}
+                quality={75}
+                fetchPriority="high"
+                className="object-contain drop-shadow-lg w-12 h-12 bg-white rounded-xl p-1.5"
+                priority
+              />
+            </div>
+            <div className="absolute" style={{ animation: 'cross-right-left 3.5s ease-in-out infinite' }}>
+              <Image
+                src="/pwa-icon.png"
+                alt="PWA Logo"
+                width={64}
+                height={64}
+                quality={75}
+                fetchPriority="high"
+                className="object-contain drop-shadow-lg w-12 h-12"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-[26px] font-bold text-white mb-0.5 text-center tracking-tight">
+            Akamba Hall
+          </h1>
+          <p className="text-amber-400 text-[16px] text-center mb-8 font-semibold tracking-wide">
+            Library
+          </p>
+
+          {/* Loading dots */}
+          <div className="flex gap-2.5 mb-4">
+            <div className="w-3 h-3 rounded-full bg-amber-400 animate-bounce shadow-md" style={{ animationDelay: '0ms', animationDuration: '0.8s' }} />
+            <div className="w-3 h-3 rounded-full bg-white animate-bounce shadow-md" style={{ animationDelay: '150ms', animationDuration: '0.8s' }} />
+            <div className="w-3 h-3 rounded-full bg-blue-400 animate-bounce shadow-md" style={{ animationDelay: '300ms', animationDuration: '0.8s' }} />
+            <div className="w-3 h-3 rounded-full bg-amber-400 animate-bounce shadow-md" style={{ animationDelay: '450ms', animationDuration: '0.8s' }} />
+          </div>
+
+          {/* Message */}
+          <div className="h-6 flex items-center justify-center mb-5">
+            <p className="text-[13px] font-medium text-white/60 text-center transition-all duration-300">
+              {loadingMessages[messageIndex]}
+            </p>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-amber-400 via-yellow-400 to-white rounded-full"
+              style={{ animation: `progress-fill ${2500}ms ease-out forwards` }}
+            />
+          </div>
+        </div>
+
+        {/* Inline keyframes */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes cross-left-right {
+            0%, 100% { transform: translateX(-16px) rotate(-5deg) scale(1); z-index: 20; }
+            25% { z-index: 20; transform: translateX(0px) rotate(0deg) scale(1.1); }
+            50% { transform: translateX(16px) rotate(5deg) scale(1); z-index: 10; }
+            75% { z-index: 10; transform: translateX(0px) rotate(0deg) scale(0.9); }
+          }
+          @keyframes cross-right-left {
+            0%, 100% { transform: translateX(16px) rotate(5deg) scale(1); z-index: 10; }
+            25% { z-index: 10; transform: translateX(0px) rotate(0deg) scale(0.9); }
+            50% { transform: translateX(-16px) rotate(-5deg) scale(1); z-index: 20; }
+            75% { z-index: 20; transform: translateX(0px) rotate(0deg) scale(1.1); }
+          }
+          @keyframes float-up-down {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+          @keyframes progress-fill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+          }
+        `}} />
+      </div>
+    )
+  }
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white flex flex-col justify-center items-center font-poppins selection:bg-[#0B1A3B] selection:text-white overflow-hidden h-[100dvh]">

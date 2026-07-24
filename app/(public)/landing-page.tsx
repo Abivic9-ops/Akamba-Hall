@@ -243,20 +243,20 @@ export default function PublicLandingPage() {
       <Script id="org-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       <Script id="website-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
 
-      <div className="w-full bg-white overflow-hidden">
+      <div className="w-full bg-white overflow-hidden max-w-[100vw]">
         {/* ═══════════════════════════════════════════
             SECTION B — HERO (unchanged)
            ═══════════════════════════════════════════ */}
-        <section className="relative w-full min-h-[600px] flex items-center bg-[#0B1A3B] overflow-hidden">
+        <section className="relative w-full min-h-[500px] md:min-h-[600px] flex items-center bg-[#0B1A3B] overflow-hidden">
           <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-bg.png')" }} />
           <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0B1A3B] via-[#0B1A3B]/90 to-[#0B1A3B]/30" />
-          <div className="container relative z-10 mx-auto px-4 pt-0 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <div className="flex flex-col gap-6 max-w-2xl">
-              <h1 className="text-[42px] font-bold leading-[1.08] tracking-tight text-white">
+          <div className="container relative z-10 mx-auto px-5 md:px-6 pt-10 pb-12 md:pt-0 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+            <div className="flex flex-col gap-5 max-w-2xl">
+              <h1 className="text-[28px] sm:text-[34px] md:text-[42px] font-bold leading-[1.1] tracking-tight text-white">
                 The Heart of Learning at{' '}
                 <span className="text-gold">Starehe Boys&apos; Centre</span>
               </h1>
-              <p className="text-[14px] md:text-[14px] text-white/60 font-light max-w-xl leading-relaxed">
+              <p className="text-[13px] sm:text-[14px] text-white/60 font-light max-w-xl leading-relaxed">
                 Akamba Hall Library is more than a place to borrow books. It is the academic heart
                 of Starehe Boys&apos; Centre — providing access to quality collections, collaborative
                 learning spaces, digital resources, and innovative technologies that give every
@@ -265,26 +265,30 @@ export default function PublicLandingPage() {
                 centre serving over 2,100 active members.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mt-1">
-                <Button className="h-12 px-7 text-[14px] font-bold bg-gold hover:bg-gold-hover text-navy rounded-full shadow-lg shadow-gold/20 transition-all gap-2">
-                  Explore the Library <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button className="h-12 px-7 text-[14px] font-bold border border-white/20 bg-transparent text-white hover:bg-white/10 rounded-full transition-all gap-2">
-                  <User className="h-4 w-4" />
-                  Access Member Portal
-                </Button>
+                <Link href="/about" className="w-full sm:w-auto">
+                  <Button className="h-11 sm:h-12 px-6 sm:px-7 text-[13px] sm:text-[14px] font-bold bg-gold hover:bg-gold-hover text-navy rounded-full shadow-lg shadow-gold/20 transition-all gap-2 w-full">
+                    Explore the Library <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/login" className="w-full sm:w-auto">
+                  <Button className="h-11 sm:h-12 px-6 sm:px-7 text-[13px] sm:text-[14px] font-bold border border-white/20 bg-transparent text-white hover:bg-white/10 rounded-full transition-all gap-2 w-full">
+                    <User className="h-4 w-4" />
+                    Access Member Portal
+                  </Button>
+                </Link>
               </div>
-              <div className="flex flex-wrap items-center gap-6 mt-4 pt-6 border-t border-white/10">
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-start sm:items-center gap-4 sm:gap-6 mt-3 pt-5 border-t border-white/10">
                 {[
                   { icon: ShieldCheck, title: 'QR-Powered Access', sub: 'Tap. Scan. Access.' },
                   { icon: Globe, title: 'Digital Resources', sub: '24/7 Anywhere' },
                   { icon: Headphones, title: 'Expert Support', sub: 'Ask, Learn, Grow.' },
                   { icon: CheckCircle, title: 'Safe & Secure', sub: 'Your data, protected.' },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
+                  <div key={i} className="flex items-start gap-2">
                     <item.icon className="h-4 w-4 text-white/40 mt-0.5 shrink-0" aria-hidden="true" />
                     <div className="flex flex-col leading-tight">
-                      <span className="text-[12px] font-semibold text-white">{item.title}</span>
-                      <span className="text-[10px] text-white/40">{item.sub}</span>
+                      <span className="text-[11px] sm:text-[12px] font-semibold text-white">{item.title}</span>
+                      <span className="text-[9px] sm:text-[10px] text-white/40">{item.sub}</span>
                     </div>
                   </div>
                 ))}
@@ -309,7 +313,9 @@ export default function PublicLandingPage() {
                     </div>
                   ))}
                 </div>
-                <Button className="w-full h-11 rounded-xl font-bold text-[13px] border border-gold/30 bg-transparent text-gold hover:bg-gold/10 transition-all">Quick Login <ArrowRight className="h-3.5 w-3.5 ml-1" /></Button>
+                <Link href="/login" className="w-full">
+                  <Button className="w-full h-11 rounded-xl font-bold text-[13px] border border-gold/30 bg-transparent text-gold hover:bg-gold/10 transition-all">Quick Login <ArrowRight className="h-3.5 w-3.5 ml-1" /></Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -318,30 +324,30 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — ABOUT PREVIEW
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 md:px-6">
             <FadeIn>
               <PillHeader icon={BookOpen} label="About Us" />
             </FadeIn>
             <FadeIn delay={0.1}>
-              <h2 className="text-[32px] md:text-[40px] font-bold text-[#101828] tracking-tight mt-5 mb-3">
+              <h2 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#101828] tracking-tight mt-5 mb-3">
                 Akamba Hall Library
               </h2>
-              <p className="text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-6">
+              <p className="text-[14px] md:text-[16px] text-[#5B6376] max-w-3xl leading-relaxed mb-6">
                 The central library hub of Starehe Boys&apos; Centre — serving the school community since 1959. From a single room of donated books to a modern learning centre with over 8,400 resources and 2,100 active members, the library is built on a legacy of service, discipline, and academic excellence.
               </p>
             </FadeIn>
 
-            <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10" staggerDelay={0.1}>
+            <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mt-10" staggerDelay={0.1}>
               {aboutHighlights.map((item, i) => (
                 <StaggerItem key={i}>
                   <ScaleOnHover>
-                    <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[20px] p-6 flex flex-col gap-4 hover:shadow-lg hover:border-gold/30 transition-all duration-300 h-full">
-                      <div className="h-12 w-12 rounded-full bg-gold/10 text-gold flex items-center justify-center">
+                    <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[18px] sm:rounded-[20px] p-5 sm:p-6 flex flex-col gap-3 sm:gap-4 hover:shadow-lg hover:border-gold/30 transition-all duration-300 h-full">
+                      <div className="h-11 w-11 sm:h-12 sm:w-12 rounded-full bg-gold/10 text-gold flex items-center justify-center">
                         <item.icon className="h-5 w-5" aria-hidden="true" />
                       </div>
-                      <h3 className="text-[17px] font-bold text-[#101828]">{item.title}</h3>
-                      <p className="text-[15px] text-[#5B6376] leading-relaxed flex-1">{item.desc}</p>
+                      <h3 className="text-[15px] sm:text-[17px] font-bold text-[#101828]">{item.title}</h3>
+                      <p className="text-[13px] sm:text-[15px] text-[#5B6376] leading-relaxed flex-1">{item.desc}</p>
                       <PillLink href={item.link}>Read more</PillLink>
                     </div>
                   </ScaleOnHover>
@@ -351,11 +357,11 @@ export default function PublicLandingPage() {
 
             {/* Quick Facts Row */}
             <FadeIn delay={0.3}>
-              <div className="mt-10 bg-[#0B1A3B] rounded-[20px] p-8 grid grid-cols-3 md:grid-cols-6 gap-6">
+              <div className="mt-10 bg-[#0B1A3B] rounded-[18px] sm:rounded-[20px] p-6 sm:p-8 grid grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6">
                 {quickFacts.map((f, i) => (
                   <div key={i} className="text-center">
-                    <span className="text-[24px] md:text-[28px] font-extrabold text-gold leading-none block">{f.value}</span>
-                    <span className="text-[12px] text-white/50 mt-1 block">{f.label}</span>
+                    <span className="text-[18px] sm:text-[24px] md:text-[28px] font-extrabold text-gold leading-none block">{f.value}</span>
+                    <span className="text-[10px] sm:text-[12px] text-white/50 mt-1 block">{f.label}</span>
                   </div>
                 ))}
               </div>
@@ -366,32 +372,32 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — WHY AKAMBA HALL?
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-[#F5F6FA]">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 bg-[#F5F6FA]">
+          <div className="container mx-auto px-5 md:px-6">
             <FadeIn>
               <div className="flex items-center gap-3 mb-4">
                 <PillHeader icon={Star} label="Why Us" />
               </div>
-              <div className="text-center mb-14">
-                <h2 className="text-[32px] md:text-[40px] font-bold text-[#101828] tracking-tight">Why Akamba Hall?</h2>
-                <p className="text-[16px] text-[#5B6376] mt-3 max-w-lg mx-auto">A modern library built to support reading, research, discipline, and academic excellence for every Starehe student.</p>
+              <div className="text-center mb-10 md:mb-14">
+                <h2 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#101828] tracking-tight">Why Akamba Hall?</h2>
+                <p className="text-[14px] md:text-[16px] text-[#5B6376] mt-3 max-w-lg mx-auto">A modern library built to support reading, research, discipline, and academic excellence for every Starehe student.</p>
               </div>
             </FadeIn>
 
-            <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.08}>
+            <StaggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" staggerDelay={0.08}>
               {whyFeatures.map((feat, i) => (
                 <StaggerItem key={i}>
                   <ScaleOnHover>
-                    <div className="group bg-white border border-[#E4E7EE] rounded-[20px] p-7 flex flex-col items-center text-center gap-4 hover:shadow-xl hover:border-gold/30 transition-all duration-300 h-full">
+                    <div className="group bg-white border border-[#E4E7EE] rounded-[18px] sm:rounded-[20px] p-6 sm:p-7 flex flex-col items-center text-center gap-3 sm:gap-4 hover:shadow-xl hover:border-gold/30 transition-all duration-300 h-full">
                       <motion.div
-                        className={`h-14 w-14 rounded-full flex items-center justify-center ${feat.color}`}
+                        className={`h-12 w-12 sm:h-14 sm:w-14 rounded-full flex items-center justify-center ${feat.color}`}
                         whileHover={{ rotate: 5, scale: 1.1 }}
                         transition={{ type: 'spring', stiffness: 400, damping: 15 }}
                       >
-                        <feat.icon className="h-6 w-6" aria-hidden="true" />
+                        <feat.icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
                       </motion.div>
-                      <h3 className="font-bold text-[17px] text-[#101828]">{feat.title}</h3>
-                      <p className="text-[15px] text-[#5B6376] leading-relaxed">{feat.desc}</p>
+                      <h3 className="font-bold text-[15px] sm:text-[17px] text-[#101828]">{feat.title}</h3>
+                      <p className="text-[13px] sm:text-[15px] text-[#5B6376] leading-relaxed">{feat.desc}</p>
                       <PillLink href={feat.link}>Learn more</PillLink>
                     </div>
                   </ScaleOnHover>
@@ -404,32 +410,32 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — STATS BANNER
            ═══════════════════════════════════════════ */}
-        <section className="py-10 px-4">
+        <section className="py-8 md:py-10 px-5 md:px-4">
           <div className="container mx-auto">
             <FadeIn>
-              <div className="bg-[#0B1A3B] rounded-[24px] py-16 px-6 md:px-12 relative overflow-hidden">
+              <div className="bg-[#0B1A3B] rounded-[20px] md:rounded-[24px] py-10 md:py-16 px-5 sm:px-6 md:px-12 relative overflow-hidden">
                 {/* Decorative circles */}
                 <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gold/5" />
                 <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-gold/5" />
                 <div className="flex items-center justify-center gap-3 mb-4 relative z-10">
                   <PillHeaderLight icon={TrendingUp} label="By the Numbers" />
                 </div>
-                <h2 className="text-[30px] md:text-[36px] font-bold text-white text-center mb-12 tracking-tight relative z-10">
+                <h2 className="text-[22px] sm:text-[26px] md:text-[30px] lg:text-[36px] font-bold text-white text-center mb-8 md:mb-12 tracking-tight relative z-10">
                   Akamba Hall Library by the Numbers
                 </h2>
-                <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6 relative z-10" staggerDelay={0.1}>
+                <StaggerChildren className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-5 sm:gap-6 md:gap-6 relative z-10" staggerDelay={0.1}>
                   {bannerStats.map((stat, i) => (
                     <StaggerItem key={i}>
                       <motion.div
-                        className="flex flex-col items-center text-center gap-3"
+                        className="flex flex-col items-center text-center gap-2 sm:gap-3"
                         whileHover={{ y: -5 }}
                         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                       >
-                        <div className="h-12 w-12 rounded-full bg-gold/10 flex items-center justify-center">
-                          <stat.icon className="h-5 w-5 text-gold" aria-hidden="true" />
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gold/10 flex items-center justify-center">
+                          <stat.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gold" aria-hidden="true" />
                         </div>
-                        <span className="text-[28px] md:text-[32px] font-extrabold text-white leading-none">{stat.number}</span>
-                        <span className="text-[13px] text-white/50">{stat.label}</span>
+                        <span className="text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-extrabold text-white leading-none">{stat.number}</span>
+                        <span className="text-[10px] sm:text-[11px] md:text-[13px] text-white/50">{stat.label}</span>
                       </motion.div>
                     </StaggerItem>
                   ))}
@@ -442,35 +448,35 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — FEATURED COLLECTIONS
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 md:px-6">
             <FadeIn>
               <PillHeader icon={BookOpen} label="Popular Books" />
-              <div className="flex items-end justify-between mb-10 mt-5">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-10 mt-5">
                 <div>
-                  <h2 className="text-[32px] md:text-[40px] font-bold text-[#101828] tracking-tight">Featured Collections</h2>
-                  <p className="text-[16px] text-[#5B6376] mt-2">Staff picks, high-circulation titles, and new arrivals worth your time.</p>
+                  <h2 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#101828] tracking-tight">Featured Collections</h2>
+                  <p className="text-[14px] md:text-[16px] text-[#5B6376] mt-2">Staff picks, high-circulation titles, and new arrivals worth your time.</p>
                 </div>
-                <PillLink href="/search">View full catalogue</PillLink>
+                <div className="hidden sm:block"><PillLink href="/search">View full catalogue</PillLink></div>
               </div>
             </FadeIn>
 
             <div className="relative">
-              <div id="book-scroll" className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+              <div id="book-scroll" className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
                 {books.map((book, i) => (
-                  <motion.div key={i} className="shrink-0 w-[180px] snap-start" whileHover={{ y: -8, scale: 1.02 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-                    <div className="bg-white border border-[#E4E7EE] rounded-[16px] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
-                      <div className="relative h-[240px] w-full bg-slate-100">
+                  <motion.div key={i} className="shrink-0 w-[160px] sm:w-[180px] snap-start" whileHover={{ y: -8, scale: 1.02 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                    <div className="bg-white border border-[#E4E7EE] rounded-[14px] sm:rounded-[16px] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300">
+                      <div className="relative h-[210px] sm:h-[240px] w-full bg-slate-100">
                         <Image src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} width={300} height={450} className="object-cover w-full h-full" loading={i > 1 ? 'lazy' : undefined} />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
                       </div>
-                      <div className="p-3.5 flex flex-col gap-1.5">
-                        <h4 className="text-[13px] font-bold text-[#101828] leading-tight line-clamp-2">{book.title}</h4>
-                        <p className="text-[11px] text-[#5B6376]">{book.author}</p>
+                      <div className="p-3 sm:p-3.5 flex flex-col gap-1 sm:gap-1.5">
+                        <h4 className="text-[12px] sm:text-[13px] font-bold text-[#101828] leading-tight line-clamp-2">{book.title}</h4>
+                        <p className="text-[10px] sm:text-[11px] text-[#5B6376]">{book.author}</p>
                         <div className="flex items-center gap-1">
                           <Star className="h-3 w-3 text-gold fill-gold" aria-hidden="true" />
-                          <span className="text-[11px] font-semibold text-[#101828]">{book.rating}</span>
-                          <span className="text-[10px] text-[#5B6376] ml-1">· {book.borrowed} borrowed</span>
+                          <span className="text-[10px] sm:text-[11px] font-semibold text-[#101828]">{book.rating}</span>
+                          <span className="text-[9px] sm:text-[10px] text-[#5B6376] ml-1">· {book.borrowed} borrowed</span>
                         </div>
                       </div>
                     </div>
@@ -494,34 +500,34 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — EXPLORE OUR SPACES
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-[#F5F6FA]">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 bg-[#F5F6FA]">
+          <div className="container mx-auto px-5 md:px-6">
             <FadeIn>
               <PillHeader icon={Users} label="Study Spaces" />
-              <div className="flex items-end justify-between mb-10 mt-5">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 md:mb-10 mt-5">
                 <div>
-                  <h2 className="text-[32px] md:text-[40px] font-bold text-[#101828] tracking-tight">Explore Our Spaces</h2>
-                  <p className="text-[16px] text-[#5B6376] mt-2">Book a space that fits your study style — from quiet reading to collaborative group work.</p>
+                  <h2 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#101828] tracking-tight">Explore Our Spaces</h2>
+                  <p className="text-[14px] md:text-[16px] text-[#5B6376] mt-2">Book a space that fits your study style — from quiet reading to collaborative group work.</p>
                 </div>
-                <PillLink href="/services#bookings">Book a space</PillLink>
+                <div className="hidden sm:block"><PillLink href="/services#bookings">Book a space</PillLink></div>
               </div>
             </FadeIn>
 
             <div className="relative">
-              <div id="space-scroll" className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+              <div id="space-scroll" className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
                 {spaces.map((space, i) => (
-                  <motion.div key={i} className="shrink-0 w-[260px] h-[320px] relative rounded-[20px] overflow-hidden snap-start group cursor-pointer" whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                  <motion.div key={i} className="shrink-0 w-[220px] sm:w-[260px] h-[280px] sm:h-[320px] relative rounded-[16px] sm:rounded-[20px] overflow-hidden snap-start group cursor-pointer" whileHover={{ scale: 1.03 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
                     <Image src={space.img} alt={`${space.name} — ${space.desc}`} width={600} height={400} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A3B] via-[#0B1A3B]/40 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col gap-2">
-                      <h3 className="text-[16px] font-bold text-white">{space.name}</h3>
-                      <p className="text-[13px] text-white/60 leading-relaxed">{space.desc}</p>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 flex flex-col gap-1.5 sm:gap-2">
+                      <h3 className="text-[14px] sm:text-[16px] font-bold text-white">{space.name}</h3>
+                      <p className="text-[11px] sm:text-[13px] text-white/60 leading-relaxed">{space.desc}</p>
                       <div className="flex items-center justify-between mt-1">
-                        <div className="flex items-center gap-1.5 text-white/50 text-[11px]">
-                          <Users className="h-3.5 w-3.5" aria-hidden="true" />
+                        <div className="flex items-center gap-1.5 text-white/50 text-[10px] sm:text-[11px]">
+                          <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5" aria-hidden="true" />
                           {space.seats} seats
                         </div>
-                        <span className="text-[10px] font-semibold bg-[#2E8B57]/20 text-green-400 px-2.5 py-0.5 rounded-full">Available</span>
+                        <span className="text-[9px] sm:text-[10px] font-semibold bg-[#2E8B57]/20 text-green-400 px-2 sm:px-2.5 py-0.5 rounded-full">Available</span>
                       </div>
                     </div>
                   </motion.div>
@@ -534,31 +540,35 @@ export default function PublicLandingPage() {
                 <ChevronRight className="h-5 w-5" />
               </button>
             </div>
+
+            <div className="sm:hidden mt-4">
+              <PillLink href="/services#bookings">Book a space</PillLink>
+            </div>
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════
             SECTION — SERVICES + EVENTS + AI
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <StaggerChildren className="grid grid-cols-1 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 md:px-6">
+            <StaggerChildren className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6" staggerDelay={0.1}>
               {/* Column 1: Library Services */}
               <StaggerItem>
                 <ScaleOnHover>
-                  <div className="bg-[#FAFAFA] border border-[#E4E7EE] rounded-[24px] p-7 flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
+                  <div className="bg-[#FAFAFA] border border-[#E4E7EE] rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
                     <PillHeader icon={BookCopy} label="Services" />
-                    <h3 className="text-[20px] font-bold text-[#101828] mt-4 mb-1">Library Services</h3>
-                    <p className="text-[15px] text-[#5B6376] mb-6">Everything you need — from borrowing books to booking spaces and accessing digital resources.</p>
-                    <div className="grid grid-cols-3 gap-3 flex-1">
+                    <h3 className="text-[18px] sm:text-[20px] font-bold text-[#101828] mt-4 mb-1">Library Services</h3>
+                    <p className="text-[13px] sm:text-[15px] text-[#5B6376] mb-5 sm:mb-6">Everything you need — from borrowing books to booking spaces and accessing digital resources.</p>
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3 flex-1">
                       {services.map((svc, i) => (
-                        <motion.div key={i} className="flex flex-col items-center text-center gap-2 p-2 rounded-xl hover:bg-white transition-colors" whileHover={{ y: -3 }}>
-                          <div className="h-10 w-10 rounded-full bg-gold/10 text-gold flex items-center justify-center"><svc.icon className="h-4 w-4" aria-hidden="true" /></div>
-                          <span className="text-[11px] font-medium text-[#101828] leading-tight">{svc.label}</span>
+                        <motion.div key={i} className="flex flex-col items-center text-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-lg sm:rounded-xl hover:bg-white transition-colors" whileHover={{ y: -3 }}>
+                          <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-gold/10 text-gold flex items-center justify-center"><svc.icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" /></div>
+                          <span className="text-[10px] sm:text-[11px] font-medium text-[#101828] leading-tight">{svc.label}</span>
                         </motion.div>
                       ))}
                     </div>
-                    <div className="mt-5"><PillLink href="/services">View all services</PillLink></div>
+                    <div className="mt-4 sm:mt-5"><PillLink href="/services">View all services</PillLink></div>
                   </div>
                 </ScaleOnHover>
               </StaggerItem>
@@ -566,27 +576,27 @@ export default function PublicLandingPage() {
               {/* Column 2: Upcoming Events */}
               <StaggerItem>
                 <ScaleOnHover>
-                  <div className="bg-[#FAFAFA] border border-[#E4E7EE] rounded-[24px] p-7 flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
+                  <div className="bg-[#FAFAFA] border border-[#E4E7EE] rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
                     <PillHeader icon={Calendar} label="Events" />
-                    <h3 className="text-[20px] font-bold text-[#101828] mt-4 mb-1">Upcoming Events</h3>
-                    <p className="text-[15px] text-[#5B6376] mb-6">Workshops, author talks, debates, and research skills sessions happening soon.</p>
-                    <div className="flex flex-col gap-4 flex-1">
+                    <h3 className="text-[18px] sm:text-[20px] font-bold text-[#101828] mt-4 mb-1">Upcoming Events</h3>
+                    <p className="text-[13px] sm:text-[15px] text-[#5B6376] mb-5 sm:mb-6">Workshops, author talks, debates, and research skills sessions happening soon.</p>
+                    <div className="flex flex-col gap-3 sm:gap-4 flex-1">
                       {events.map((evt, i) => (
-                        <motion.div key={i} className="flex items-start gap-3 group" whileHover={{ x: 4 }} transition={{ type: 'spring', stiffness: 400, damping: 25 }}>
-                          <div className="shrink-0 w-12 h-12 rounded-xl bg-gold/10 flex flex-col items-center justify-center leading-none group-hover:bg-gold/20 transition-colors">
-                            <span className="text-[16px] font-bold text-gold">{evt.day}</span>
-                            <span className="text-[9px] font-semibold text-gold/70 uppercase">{evt.month}</span>
+                        <motion.div key={i} className="flex items-start gap-2.5 sm:gap-3 group" whileHover={{ x: 4 }} transition={{ type: 'spring', stiffness: 400, damping: 25 }}>
+                          <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gold/10 flex flex-col items-center justify-center leading-none group-hover:bg-gold/20 transition-colors">
+                            <span className="text-[14px] sm:text-[16px] font-bold text-gold">{evt.day}</span>
+                            <span className="text-[8px] sm:text-[9px] font-semibold text-gold/70 uppercase">{evt.month}</span>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-[14px] font-bold text-[#101828] leading-tight truncate">{evt.title}</h4>
-                            <p className="text-[12px] text-[#5B6376] mt-0.5 line-clamp-1">{evt.desc}</p>
-                            <p className="text-[11px] text-[#5B6376] mt-0.5 flex items-center gap-1"><Clock className="h-3 w-3" aria-hidden="true" />{evt.time}</p>
+                            <h4 className="text-[13px] sm:text-[14px] font-bold text-[#101828] leading-tight truncate">{evt.title}</h4>
+                            <p className="text-[11px] sm:text-[12px] text-[#5B6376] mt-0.5 line-clamp-1">{evt.desc}</p>
+                            <p className="text-[10px] sm:text-[11px] text-[#5B6376] mt-0.5 flex items-center gap-1"><Clock className="h-3 w-3" aria-hidden="true" />{evt.time}</p>
                           </div>
-                          <Button className="shrink-0 h-7 px-3 rounded-lg text-[11px] font-semibold bg-gold/10 text-gold hover:bg-gold hover:text-navy border-0 transition-colors">{evt.action}</Button>
+                          <Button className="shrink-0 h-7 px-2.5 sm:px-3 rounded-lg text-[10px] sm:text-[11px] font-semibold bg-gold/10 text-gold hover:bg-gold hover:text-navy border-0 transition-colors">{evt.action}</Button>
                         </motion.div>
                       ))}
                     </div>
-                    <div className="mt-5"><PillLink href="/news#events">See full calendar</PillLink></div>
+                    <div className="mt-4 sm:mt-5"><PillLink href="/news#events">See full calendar</PillLink></div>
                   </div>
                 </ScaleOnHover>
               </StaggerItem>
@@ -594,27 +604,27 @@ export default function PublicLandingPage() {
               {/* Column 3: Ask Akamba AI */}
               <StaggerItem>
                 <ScaleOnHover>
-                  <div className="bg-[#FAFAFA] border border-[#E4E7EE] rounded-[24px] p-7 flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
+                  <div className="bg-[#FAFAFA] border border-[#E4E7EE] rounded-[20px] sm:rounded-[24px] p-6 sm:p-7 flex flex-col h-full hover:shadow-xl transition-shadow duration-300">
                     <PillHeader icon={Sparkles} label="AI Assistant" />
-                    <h3 className="text-[20px] font-bold text-[#101828] mt-4 mb-1">Ask Akamba AI</h3>
-                    <p className="text-[15px] text-[#5B6376] mb-5">Your intelligent library assistant — available 24/7 to answer questions and guide your research.</p>
-                    <div className="flex-1 bg-white border border-[#E4E7EE] rounded-[16px] p-4 flex flex-col gap-4 shadow-sm">
-                      <div className="flex items-start gap-3">
-                        <motion.div className="h-9 w-9 rounded-full bg-[#0B1A3B] flex items-center justify-center shrink-0" animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 3 }}>
-                          <Sparkles className="h-4 w-4 text-gold" aria-hidden="true" />
+                    <h3 className="text-[18px] sm:text-[20px] font-bold text-[#101828] mt-4 mb-1">Ask Akamba AI</h3>
+                    <p className="text-[13px] sm:text-[15px] text-[#5B6376] mb-4 sm:mb-5">Your intelligent library assistant — available 24/7 to answer questions and guide your research.</p>
+                    <div className="flex-1 bg-white border border-[#E4E7EE] rounded-[14px] sm:rounded-[16px] p-3.5 sm:p-4 flex flex-col gap-3 sm:gap-4 shadow-sm">
+                      <div className="flex items-start gap-2.5 sm:gap-3">
+                        <motion.div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-[#0B1A3B] flex items-center justify-center shrink-0" animate={{ scale: [1, 1.1, 1] }} transition={{ repeat: Infinity, duration: 3 }}>
+                          <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-gold" aria-hidden="true" />
                         </motion.div>
-                        <div className="bg-[#F5F6FA] rounded-2xl rounded-tl-sm px-4 py-2.5 max-w-[85%]">
-                          <p className="text-[13px] text-[#101828] leading-relaxed">Hello! I&apos;m Akamba AI. How can I help you today?</p>
+                        <div className="bg-[#F5F6FA] rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-2.5 max-w-[85%]">
+                          <p className="text-[12px] sm:text-[13px] text-[#101828] leading-relaxed">Hello! I&apos;m Akamba AI. How can I help you today?</p>
                         </div>
                       </div>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {aiSuggestions.map((sug, i) => (
-                          <motion.span key={i} className="text-[11px] bg-[#F5F6FA] border border-[#E4E7EE] text-[#5B6376] px-3 py-1.5 rounded-full cursor-pointer hover:border-gold/40 hover:text-gold hover:bg-gold/5 transition-all" whileHover={{ scale: 1.05 }}>{sug}</motion.span>
+                          <motion.span key={i} className="text-[10px] sm:text-[11px] bg-[#F5F6FA] border border-[#E4E7EE] text-[#5B6376] px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full cursor-pointer hover:border-gold/40 hover:text-gold hover:bg-gold/5 transition-all" whileHover={{ scale: 1.05 }}>{sug}</motion.span>
                         ))}
                       </div>
                       <div className="mt-auto flex gap-2">
-                        <Input placeholder="Type your question…" className="flex-1 h-10 bg-[#F5F6FA] border-[#E4E7EE] text-[13px] rounded-xl placeholder:text-[#5B6376]/50 focus-visible:ring-gold" aria-label="Ask Akamba AI a question" />
-                        <Button className="h-10 w-10 rounded-xl bg-gold hover:bg-gold-hover text-navy p-0 shrink-0" aria-label="Send question to Akamba AI"><Send className="h-4 w-4" /></Button>
+                        <Input placeholder="Type your question…" className="flex-1 h-9 sm:h-10 bg-[#F5F6FA] border-[#E4E7EE] text-[12px] sm:text-[13px] rounded-xl placeholder:text-[#5B6376]/50 focus-visible:ring-gold" aria-label="Ask Akamba AI a question" />
+                        <Button className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-gold hover:bg-gold-hover text-navy p-0 shrink-0" aria-label="Send question to Akamba AI"><Send className="h-3.5 w-3.5 sm:h-4 sm:w-4" /></Button>
                       </div>
                     </div>
                   </div>
@@ -627,28 +637,28 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — NEW ARRIVALS + NEWS PREVIEW
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-[#F5F6FA]">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <section className="py-16 md:py-24 bg-[#F5F6FA]">
+          <div className="container mx-auto px-5 md:px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
               {/* New Arrivals */}
               <FadeIn direction="left">
                 <div>
                   <PillHeader icon={BookPlus} label="New Arrivals" />
-                  <h2 className="text-[28px] md:text-[34px] font-bold text-[#101828] tracking-tight mt-5 mb-4">Fresh Additions</h2>
-                  <p className="text-[16px] text-[#5B6376] leading-relaxed mb-8">Recently acquired titles available for borrowing. New arrivals are displayed on a dedicated shelf near the entrance for the first two weeks.</p>
-                  <div className="flex flex-col gap-4">
+                  <h2 className="text-[22px] sm:text-[26px] md:text-[28px] lg:text-[34px] font-bold text-[#101828] tracking-tight mt-5 mb-4">Fresh Additions</h2>
+                  <p className="text-[14px] md:text-[16px] text-[#5B6376] leading-relaxed mb-6 md:mb-8">Recently acquired titles available for borrowing. New arrivals are displayed on a dedicated shelf near the entrance for the first two weeks.</p>
+                  <div className="flex flex-col gap-3 sm:gap-4">
                     {newArrivals.map((book, i) => (
-                      <motion.div key={i} className="bg-white border border-[#E4E7EE] rounded-[16px] p-5 flex items-start gap-4 hover:shadow-md hover:border-gold/20 transition-all" whileHover={{ x: 6 }}>
-                        <div className="shrink-0 h-10 w-10 rounded-full bg-gold/10 text-gold flex items-center justify-center"><BookOpen className="h-5 w-5" aria-hidden="true" /></div>
-                        <div className="flex-1">
-                          <span className="text-[10px] font-bold text-gold uppercase tracking-wider">{book.category}</span>
-                          <h3 className="text-[15px] font-bold text-[#101828] mt-0.5">{book.title}</h3>
-                          <p className="text-[13px] text-[#5B6376]">{book.author}</p>
+                      <motion.div key={i} className="bg-white border border-[#E4E7EE] rounded-[14px] sm:rounded-[16px] p-4 sm:p-5 flex items-start gap-3 sm:gap-4 hover:shadow-md hover:border-gold/20 transition-all" whileHover={{ x: 6 }}>
+                        <div className="shrink-0 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-gold/10 text-gold flex items-center justify-center"><BookOpen className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" /></div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[9px] sm:text-[10px] font-bold text-gold uppercase tracking-wider">{book.category}</span>
+                          <h3 className="text-[13px] sm:text-[15px] font-bold text-[#101828] mt-0.5">{book.title}</h3>
+                          <p className="text-[12px] sm:text-[13px] text-[#5B6376]">{book.author}</p>
                         </div>
                       </motion.div>
                     ))}
                   </div>
-                  <div className="mt-6"><PillLink href="/resources#suggested">Browse all resources</PillLink></div>
+                  <div className="mt-5 sm:mt-6"><PillLink href="/resources#suggested">Browse all resources</PillLink></div>
                 </div>
               </FadeIn>
 
@@ -656,21 +666,21 @@ export default function PublicLandingPage() {
               <FadeIn direction="right">
                 <div>
                   <PillHeader icon={Newspaper} label="Latest News" />
-                  <h2 className="text-[28px] md:text-[34px] font-bold text-[#101828] tracking-tight mt-5 mb-4">News &amp; Updates</h2>
-                  <p className="text-[16px] text-[#5B6376] leading-relaxed mb-8">Stay informed about schedule changes, new resources, events, and library notices. Check this page regularly for the latest updates.</p>
-                  <div className="flex flex-col gap-4">
+                  <h2 className="text-[22px] sm:text-[26px] md:text-[28px] lg:text-[34px] font-bold text-[#101828] tracking-tight mt-5 mb-4">News &amp; Updates</h2>
+                  <p className="text-[14px] md:text-[16px] text-[#5B6376] leading-relaxed mb-6 md:mb-8">Stay informed about schedule changes, new resources, events, and library notices. Check this page regularly for the latest updates.</p>
+                  <div className="flex flex-col gap-3 sm:gap-4">
                     {newsHighlights.map((item, i) => (
-                      <motion.div key={i} className="bg-white border border-[#E4E7EE] rounded-[16px] p-5 hover:shadow-md hover:border-gold/20 transition-all" whileHover={{ x: -6 }}>
+                      <motion.div key={i} className="bg-white border border-[#E4E7EE] rounded-[14px] sm:rounded-[16px] p-4 sm:p-5 hover:shadow-md hover:border-gold/20 transition-all" whileHover={{ x: -6 }}>
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-[11px] font-bold text-[#5B6376]">{item.date}</span>
-                          <span className="text-[10px] font-bold bg-gold/10 text-gold px-2 py-0.5 rounded-full">{item.tag}</span>
+                          <span className="text-[10px] sm:text-[11px] font-bold text-[#5B6376]">{item.date}</span>
+                          <span className="text-[9px] sm:text-[10px] font-bold bg-gold/10 text-gold px-2 py-0.5 rounded-full">{item.tag}</span>
                         </div>
-                        <h3 className="text-[15px] font-bold text-[#101828]">{item.title}</h3>
-                        <p className="text-[14px] text-[#5B6376] leading-relaxed mt-1">{item.desc}</p>
+                        <h3 className="text-[13px] sm:text-[15px] font-bold text-[#101828]">{item.title}</h3>
+                        <p className="text-[12px] sm:text-[14px] text-[#5B6376] leading-relaxed mt-1">{item.desc}</p>
                       </motion.div>
                     ))}
                   </div>
-                  <div className="mt-6"><PillLink href="/news">View all updates</PillLink></div>
+                  <div className="mt-5 sm:mt-6"><PillLink href="/news">View all updates</PillLink></div>
                 </div>
               </FadeIn>
             </div>
@@ -680,16 +690,16 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — TESTIMONIALS
            ═══════════════════════════════════════════ */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4">
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 md:px-6">
             <FadeIn>
-              <div className="flex items-start justify-between mb-14">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-10 md:mb-14">
                 <div>
                   <PillHeader icon={Quote} label="Testimonials" className="mb-4" />
-                  <h2 className="text-[32px] md:text-[40px] font-bold text-[#101828] tracking-tight">What Our Community Says</h2>
-                  <p className="text-[16px] text-[#5B6376] mt-3">Hear from students, teachers, and alumni who use the library every day.</p>
+                  <h2 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] font-bold text-[#101828] tracking-tight">What Our Community Says</h2>
+                  <p className="text-[14px] md:text-[16px] text-[#5B6376] mt-3">Hear from students, teachers, and alumni who use the library every day.</p>
                 </div>
-                <div className="hidden md:flex items-center gap-6 mt-4">
+                <div className="hidden md:flex items-center gap-6 mt-4 shrink-0">
                   <SatisfactionRing percentage={95} label="Student Satisfaction" />
                   <SatisfactionRing percentage={92} label="Would Recommend" />
                   <div className="hidden lg:flex items-center gap-2">
@@ -704,19 +714,19 @@ export default function PublicLandingPage() {
               </div>
             </FadeIn>
 
-            <div id="testimonial-scroll" className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
+            <div id="testimonial-scroll" className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
               {testimonials.map((t, i) => (
-                <motion.div key={i} className="shrink-0 w-[380px] snap-start" whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
-                  <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[24px] p-7 flex flex-col gap-5 h-full">
-                    <Quote className="h-8 w-8 text-gold/30" aria-hidden="true" />
-                    <p className="text-[15px] text-[#101828] leading-relaxed italic flex-1">&ldquo;{t.quote}&rdquo;</p>
-                    <div className="flex items-center gap-3 pt-4 border-t border-[#E4E7EE]">
-                      <div className="relative h-10 w-10 rounded-full overflow-hidden shrink-0 bg-slate-100">
+                <motion.div key={i} className="shrink-0 w-[300px] sm:w-[340px] md:w-[380px] snap-start" whileHover={{ y: -4 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                  <div className="bg-[#F5F6FA] border border-[#E4E7EE] rounded-[20px] sm:rounded-[24px] p-5 sm:p-7 flex flex-col gap-4 sm:gap-5 h-full">
+                    <Quote className="h-7 w-7 sm:h-8 sm:w-8 text-gold/30" aria-hidden="true" />
+                    <p className="text-[13px] sm:text-[15px] text-[#101828] leading-relaxed italic flex-1">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="flex items-center gap-3 pt-3 sm:pt-4 border-t border-[#E4E7EE]">
+                      <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full overflow-hidden shrink-0 bg-slate-100">
                         <Image src={t.avatar} alt={`Photo of ${t.name}`} width={40} height={40} className="object-cover w-full h-full" />
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-[13px] font-bold text-[#101828]">{t.name}</span>
-                        <span className="text-[11px] text-[#5B6376]">{t.role}</span>
+                        <span className="text-[12px] sm:text-[13px] font-bold text-[#101828]">{t.name}</span>
+                        <span className="text-[10px] sm:text-[11px] text-[#5B6376]">{t.role}</span>
                       </div>
                     </div>
                   </div>
@@ -724,7 +734,7 @@ export default function PublicLandingPage() {
               ))}
             </div>
 
-            <div className="flex justify-center gap-2 mt-10" role="group" aria-label="Testimonial pagination">
+            <div className="flex justify-center gap-2 mt-8 md:mt-10" role="group" aria-label="Testimonial pagination">
               <motion.div className="h-2.5 w-2.5 rounded-full bg-gold" whileHover={{ scale: 1.3 }} />
               <motion.div className="h-2.5 w-2.5 rounded-full bg-[#E4E7EE] cursor-pointer hover:bg-gold/50" whileHover={{ scale: 1.3 }} />
               <motion.div className="h-2.5 w-2.5 rounded-full bg-[#E4E7EE] cursor-pointer hover:bg-gold/50" whileHover={{ scale: 1.3 }} />
@@ -735,37 +745,37 @@ export default function PublicLandingPage() {
         {/* ═══════════════════════════════════════════
             SECTION — CONTACT CTA
            ═══════════════════════════════════════════ */}
-        <section className="py-10 px-4">
+        <section className="py-10 md:py-10 px-5 md:px-4">
           <div className="container mx-auto">
             <FadeIn>
-              <div className="bg-[#0B1A3B] rounded-[24px] py-14 px-8 md:px-14 relative overflow-hidden">
-                <div className="flex flex-col items-center text-center gap-6 max-w-2xl mx-auto relative z-10">
+              <div className="bg-[#0B1A3B] rounded-[20px] md:rounded-[24px] py-10 md:py-14 px-5 sm:px-6 md:px-14 relative overflow-hidden">
+                <div className="flex flex-col items-center text-center gap-5 sm:gap-6 max-w-2xl mx-auto relative z-10">
                   <PillHeaderLight icon={HelpCircle} label="Have Questions in mind?" />
-                  <h2 className="text-[30px] md:text-[38px] font-bold text-white leading-tight tracking-tight">
-                    Curious About Something?Reach out to us!
+                  <h2 className="text-[22px] sm:text-[26px] md:text-[30px] lg:text-[38px] font-bold text-white leading-tight tracking-tight">
+                    Curious About Something? Reach out to us!
                   </h2>
-                  <p className="text-[16px] text-white/50 leading-relaxed">
+                  <p className="text-[13px] sm:text-[14px] md:text-[16px] text-white/50 leading-relaxed">
                     The library is open Monday to Friday, 7:30 AM to 6:00 PM, and Saturday 8:00 AM to 1:00 PM.
                     Located on General Waruinge Street, Nairobi. For urgent matters, call +254 727 531 001.
                   </p>
-                  <div className="flex flex-wrap items-center justify-center gap-6 mt-1">
-                    <div className="flex items-center gap-2 text-white/40 text-[13px]"><MapPin className="h-3.5 w-3.5" aria-hidden="true" />General Waruinge St</div>
-                    <div className="flex items-center gap-2 text-white/40 text-[13px]"><Phone className="h-3.5 w-3.5" aria-hidden="true" />+254 727 531 001</div>
-                    <div className="flex items-center gap-2 text-white/40 text-[13px]"><Mail className="h-3.5 w-3.5" aria-hidden="true" />info@stareheboyscentre.ac.ke</div>
+                  <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-6 mt-1">
+                    <div className="flex items-center gap-2 text-white/40 text-[12px] sm:text-[13px]"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />General Waruinge St</div>
+                    <div className="flex items-center gap-2 text-white/40 text-[12px] sm:text-[13px]"><Phone className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />+254 727 531 001</div>
+                    <div className="flex items-center gap-2 text-white/40 text-[12px] sm:text-[13px]"><Mail className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />info@stareheboyscentre.ac.ke</div>
                   </div>
-                  <div className="flex items-center gap-3 mt-4">
-                    <Link href="/contact">
-                      <Button className="h-12 px-6 font-bold text-[14px] bg-gold hover:bg-gold-hover text-navy rounded-full shadow-lg shadow-gold/20 transition-all gap-2">
+                  <div className="flex flex-col sm:flex-row items-center gap-3 mt-3 sm:mt-4 w-full sm:w-auto">
+                    <Link href="/contact" className="w-full sm:w-auto">
+                      <Button className="w-full sm:w-auto h-11 sm:h-12 px-6 font-bold text-[13px] sm:text-[14px] bg-gold hover:bg-gold-hover text-navy rounded-full shadow-lg shadow-gold/20 transition-all gap-2">
                         Chat With Us <ArrowRight className="h-4 w-4" />
                       </Button>
                     </Link>
-                    <Link href="/about">
-                      <Button className="h-12 px-6 font-bold text-[14px] border border-white/20 bg-transparent text-white hover:bg-white/10 rounded-full transition-all">
+                    <Link href="/about" className="w-full sm:w-auto">
+                      <Button className="w-full sm:w-auto h-11 sm:h-12 px-6 font-bold text-[13px] sm:text-[14px] border border-white/20 bg-transparent text-white hover:bg-white/10 rounded-full transition-all">
                         About the Library
                       </Button>
                     </Link>
-                    <Link href="/login">
-                      <Button className="h-12 px-6 font-bold text-[14px] border border-white/20 bg-transparent text-white hover:bg-white/10 rounded-full transition-all">
+                    <Link href="/login" className="w-full sm:w-auto">
+                      <Button className="w-full sm:w-auto h-11 sm:h-12 px-6 font-bold text-[13px] sm:text-[14px] border border-white/20 bg-transparent text-white hover:bg-white/10 rounded-full transition-all">
                         Portal Login
                       </Button>
                     </Link>

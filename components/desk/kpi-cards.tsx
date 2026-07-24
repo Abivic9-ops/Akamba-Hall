@@ -73,7 +73,7 @@ export function KpiCards({ loansIssued, returnsProcessed, renewals, newMembers, 
   }
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
       {cards.map((card) => {
         const Icon = card.icon
         const value = values[card.key]
@@ -81,27 +81,27 @@ export function KpiCards({ loansIssued, returnsProcessed, renewals, newMembers, 
         return (
           <div
             key={card.key}
-            className="relative w-full rounded-[30px] border border-[#EDF2F7] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)] p-5 flex flex-col justify-between overflow-hidden transition-shadow hover:shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.04)]"
+            className="relative w-full rounded-2xl sm:rounded-[24px] border border-[#EDF2F7] dark:border-white/[0.08] shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.03)] p-4 sm:p-5 flex flex-col justify-between overflow-hidden transition-shadow hover:shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(0,0,0,0.04)] dark:shadow-none"
             style={{ background: card.gradient }}
           >
-            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${card.iconBg}`}>
-              <Icon className={`h-5 w-5 ${card.iconColor}`} />
+            <div className={`h-9 w-9 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center ${card.iconBg}`}>
+              <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${card.iconColor}`} />
             </div>
 
             <div>
-              <p className="text-[40px] font-bold text-slate-900 leading-none tracking-tight">
+              <p className="text-[28px] sm:text-[36px] md:text-[40px] font-bold text-slate-900 dark:text-white leading-none tracking-tight">
                 {value}
               </p>
-              <p className="text-[15px] font-semibold text-[#1F2937] mt-1">
+              <p className="text-[12px] sm:text-[14px] md:text-[15px] font-semibold text-[#1F2937] dark:text-white/80 mt-1">
                 {card.label}
               </p>
-              <p className="text-[13px] text-[#6B7280] mt-0.5">
+              <p className="text-[11px] sm:text-[12px] md:text-[13px] text-[#6B7280] dark:text-white/40 mt-0.5">
                 {card.detail}
               </p>
             </div>
 
             <div className="flex justify-end">
-              <div className={`h-[26px] w-[26px] rounded-full ${card.btnBg} flex items-center justify-center`}>
+              <div className={`h-[22px] w-[22px] sm:h-[26px] sm:w-[26px] rounded-full ${card.btnBg} flex items-center justify-center`}>
                 <ArrowRight className="h-3 w-3 text-white" />
               </div>
             </div>

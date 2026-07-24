@@ -7,7 +7,7 @@ import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components
 const featuredBooks = [
   { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', category: 'Psychology', desc: 'A groundbreaking exploration of the two systems that drive the way we think — System 1 fast and intuitive, System 2 slow and deliberate. Essential for understanding decision-making.' },
   { title: 'Sapiens', author: 'Yuval Noah Harari', category: 'History', desc: 'A bold narrative of humanity\'s creation and evolution that explores how biology and history have defined us and enhanced our understanding of what it means to be human.' },
-  { title: 'Atomic Habits', author: 'James Clear', category: 'Self-Development', desc: 'Practical strategies for forming good habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable results. Applicable to study and personal growth.' },
+  { title: 'Atomic Habits', author: 'James Clear', category: 'Self Development', desc: 'Practical strategies for forming good habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable results. Applicable to study and personal growth.' },
   { title: 'Deep Work', author: 'Cal Newport', category: 'Productivity', desc: 'Rules for focused success in a distracted world. Cal Newport makes a compelling case that the ability to focus without distraction is becoming increasingly rare and increasingly valuable.' },
   { title: 'Clean Code', author: 'Robert C. Martin', category: 'Technology', desc: 'A handbook of agile software craftsmanship. Even if you are not a programmer, the principles of clarity, simplicity, and structure apply to any form of technical writing or problem-solving.' },
   { title: 'The Lean Startup', author: 'Eric Ries', category: 'Business', desc: 'How today\'s entrepreneurs use continuous innovation to create radically successful businesses. Introduces the build-measure-learn feedback loop that applies far beyond business.' },
@@ -50,10 +50,10 @@ export default function ResourcesPageClient() {
 
       {/* Quick anchor nav - mini navbar */}
       <div className="sticky top-0 z-50 w-full bg-white py-3 border-b border-[#E4E7EE]">
-        <div className="h-16 flex items-center justify-center px-4">
-          <div className="flex gap-4">
+        <div className="flex items-center justify-center px-4">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             {['#catalogue', '#physical', '#digital', '#study-help', '#suggested'].map((id) => (
-              <a key={id} href={id} className="shrink-0 px-4 py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}
@@ -236,7 +236,7 @@ export default function ResourcesPageClient() {
                 { title: 'Using the Catalogue', text: 'A step-by-step guide to searching, filtering, and locating items in the library system. Learn how to check availability, place holds, track your searches, and use advanced search filters to find exactly what you need. Includes screenshots and tips for common search scenarios.', icon: Search },
                 { title: 'Research Tips', text: 'How to start a research project, find credible sources, evaluate information, and structure your findings for school assignments. Covers the difference between primary and secondary sources, how to assess source credibility, and how to organize your research notes effectively.', icon: Lightbulb },
                 { title: 'Citation Guides', text: 'APA, MLA, and other citation formats explained with examples. Know how to reference books, journals, websites, and digital resources correctly. Includes a quick-reference card you can keep at your desk and an online citation generator available through the portal.', icon: FileText },
-                { title: 'Reading Strategies', text: 'Techniques for effective reading — skimming, scanning, critical reading, and note-taking. Get more out of every book you pick up. Includes a reading log template you can download from the portal to track your progress and reflect on what you have read.', icon: BookOpen },
+                { title: 'Reading Strategies', text: 'Techniques for effective reading, skimming, scanning, critical reading, and note taking. Get more out of every book you pick up. Includes a reading log template you can download from the portal to track your progress and reflect on what you have read.', icon: BookOpen },
               ].map((item, i) => (
                 <StaggerItem key={i}>
                   <ScaleOnHover>

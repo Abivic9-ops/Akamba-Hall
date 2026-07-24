@@ -54,7 +54,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-poppins antialiased">
+      <body className="font-poppins antialiased overflow-x-hidden max-w-[100vw]">
         <ThemeProvider>
           <InitialLoader />
           {children}

@@ -33,10 +33,10 @@ export default function ContactPageClient() {
 
       {/* Quick anchor nav - mini navbar */}
       <div className="sticky top-0 z-50 w-full bg-white py-3 border-b border-[#E4E7EE]">
-        <div className="h-16 flex items-center justify-center px-4">
-          <div className="flex gap-4">
+        <div className="flex items-center justify-center px-4">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             {['#visit', '#help-desk', '#feedback', '#lost-card', '#hours'].map((id) => (
-              <a key={id} href={id} className="shrink-0 px-4 py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}

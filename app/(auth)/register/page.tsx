@@ -19,7 +19,7 @@ import {
 const benefits = [
   { icon: BookOpen, text: 'Browse and borrow from thousands of books and digital resources' },
   { icon: Clock, text: 'Reserve study rooms and reading spaces in advance' },
-  { icon: QrCode, text: 'Use QR-based check-in for fast, contactless library access' },
+  { icon: QrCode, text: 'Use QR based check in for fast, contactless library access' },
 ]
 
 export default function RegisterPage() {
@@ -400,9 +400,9 @@ export default function RegisterPage() {
         </div>
 
         {/* footer */}
-        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-8 py-3 flex items-center justify-between">
-          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light">
-            Mon–Fri 7:30 AM – 6:00 PM &middot; Sat 8:00 AM – 1:00 PM
+        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-6 sm:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light text-center sm:text-left">
+            Starehe Boys&apos; Centre · General Waruinge Street, Nairobi
           </p>
           <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-light">
             <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Privacy</a>

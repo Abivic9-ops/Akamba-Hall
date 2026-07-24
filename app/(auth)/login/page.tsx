@@ -8,12 +8,12 @@ import { BookOpen, CalendarCheck, QrCode, BarChart3, Shield, ArrowLeft, External
 import { LoginForm } from '@/components/forms/LoginForm'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://akambahall.vercel.app'
+const SITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://akamba-hall-stareheboyscentre.vercel.app/'
 
 const features = [
   { icon: BookOpen, text: 'Access thousands of books, journals, past papers and digital materials' },
   { icon: CalendarCheck, text: 'Reserve study rooms, reading areas and AV facilities in seconds' },
-  { icon: QrCode, text: 'Borrow and return books with secure QR-based authentication' },
+  { icon: QrCode, text: 'Borrow and return books with secure QR based authentication' },
   { icon: BarChart3, text: 'Track your loans, reservations, fines and reading history in real time' },
 ]
 
@@ -198,9 +198,9 @@ export default function LoginPage() {
         </div>
 
         {/* footer */}
-        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-8 py-3 flex items-center justify-between">
-          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light">
-            Mon–Fri 7:30 AM – 6:00 PM &middot; Sat 8:00 AM – 1:00 PM
+        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-6 sm:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light text-center sm:text-left">
+            Starehe Boys&apos; Centre · General Waruinge Street, Nairobi
           </p>
           <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-light">
             <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Privacy</a>

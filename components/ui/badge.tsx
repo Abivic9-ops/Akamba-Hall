@@ -4,11 +4,11 @@ import { cn } from '@/lib/utils'
 type BadgeVariant = 'success' | 'warning' | 'danger' | 'info' | 'neutral' | 'new'
 
 const variant_styles: Record<BadgeVariant, string> = {
-  success: 'bg-emerald-50 text-emerald-700',
-  warning: 'bg-amber-50 text-amber-700',
-  danger: 'bg-red-50 text-red-700',
-  info: 'bg-sky-50 text-sky-700',
-  neutral: 'bg-slate-100 text-slate-600',
+  success: 'bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400',
+  warning: 'bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400',
+  danger: 'bg-red-50 dark:bg-red-500/15 text-red-700 dark:text-red-400',
+  info: 'bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400',
+  neutral: 'bg-slate-100 dark:bg-white/[0.08] text-slate-600 dark:text-white/60',
   new: 'bg-red-600 text-white',
 }
 
