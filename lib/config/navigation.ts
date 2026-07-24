@@ -101,6 +101,13 @@ export const navigationRegistry: NavItem[] = [
     section: 'People',
     roles: ['LIBRARY_HEAD'],
   },
+  {
+    label: 'Approval Queue',
+    icon: 'ClipboardCheck',
+    path: '/library-head/requests',
+    section: 'People',
+    roles: ['LIBRARY_HEAD'],
+  },
 
   // ─── STUDENT ────────────────────────────────────
   {
@@ -149,6 +156,13 @@ export const navigationRegistry: NavItem[] = [
     label: 'Profile',
     icon: 'User',
     path: '/student/profile',
+    section: 'Account',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Role Requests',
+    icon: 'Shield',
+    path: '/student/requests',
     section: 'Account',
     roles: ['STUDENT'],
   },
@@ -235,6 +249,13 @@ export const navigationRegistry: NavItem[] = [
     label: 'Profile',
     icon: 'User',
     path: '/staff/profile',
+    section: 'Account',
+    roles: ['STAFF'],
+  },
+  {
+    label: 'Role Requests',
+    icon: 'Shield',
+    path: '/staff/requests',
     section: 'Account',
     roles: ['STAFF'],
   },

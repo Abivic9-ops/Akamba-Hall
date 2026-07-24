@@ -192,34 +192,28 @@ export async function sign_in_action(formData: {
     return { success: false, error: error.message }
   }
 
-  // update last active timestamp + sync role to app_metadata for middleware
+  // update last active timestamp + always sync role to app_metadata for middleware
   try {
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
-      // read role from database
       const profile = await prisma.user.findUnique({
         where: { id: user.id },
         select: { role: true },
       })
 
-      // update last active
       await prisma.user.update({
         where: { id: user.id },
         data: { lastActiveAt: new Date() },
       }).catch(() => {})
 
-      // sync role to Supabase app_metadata so middleware can read it from the JWT
+      // always force-sync role to app_metadata on every login
       const dbRole = profile?.role ?? 'STUDENT'
-      const jwtRole = user.app_metadata?.role
-      if (jwtRole !== dbRole) {
-        const admin = getAdminClient()
-        if (admin) {
-          await admin.auth.admin.updateUserById(user.id, {
-            app_metadata: { role: dbRole },
-          }).catch(() => {})
-          // refresh the session so the new JWT carries the updated role
-          await supabase.auth.refreshSession().catch(() => {})
-        }
+      const admin = getAdminClient()
+      if (admin) {
+        await admin.auth.admin.updateUserById(user.id, {
+          app_metadata: { role: dbRole },
+        }).catch(() => {})
+        await supabase.auth.refreshSession().catch(() => {})
       }
     }
   } catch {}
@@ -307,7 +301,7 @@ export async function qr_sign_in_action(formData: {
     return { success: false, error: error.message }
   }
 
-  // update last active + sync role
+  // update last active + always force-sync role
   try {
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
@@ -321,16 +315,14 @@ export async function qr_sign_in_action(formData: {
         data: { lastActiveAt: new Date() },
       }).catch(() => {})
 
+      // always force-sync role to app_metadata on every login
       const dbRole = profile?.role ?? 'STUDENT'
-      const jwtRole = user.app_metadata?.role
-      if (jwtRole !== dbRole) {
-        const admin = getAdminClient()
-        if (admin) {
-          await admin.auth.admin.updateUserById(user.id, {
-            app_metadata: { role: dbRole },
-          }).catch(() => {})
-          await supabase.auth.refreshSession().catch(() => {})
-        }
+      const admin = getAdminClient()
+      if (admin) {
+        await admin.auth.admin.updateUserById(user.id, {
+          app_metadata: { role: dbRole },
+        }).catch(() => {})
+        await supabase.auth.refreshSession().catch(() => {})
       }
     }
   } catch {}

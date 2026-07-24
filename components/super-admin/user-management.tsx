@@ -6,10 +6,15 @@ import {
   update_user_status,
   type UserListItem,
 } from '@/lib/actions/users'
+import {
+  appoint_library_head,
+  revoke_library_head,
+} from '@/lib/actions/role-requests'
 import { all_roles, role_display_names, role_badge_colors, type Role } from '@/lib/types/role'
 import {
   Users, Shield, ChevronDown, Check,
   AlertTriangle, Search, ArrowUpDown,
+  Crown, RotateCcw, Loader2,
 } from 'lucide-react'
 
 interface Props {
@@ -25,6 +30,7 @@ export default function UserManagement({ users: initialUsers, currentUserId }: P
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const [search, setSearch] = useState('')
   const [roleFilter, setRoleFilter] = useState<string>('ALL')
+  const [appointingUserId, setAppointingUserId] = useState<string | null>(null)
 
   const filtered = users.filter((u) => {
     const matchesSearch =
@@ -76,6 +82,40 @@ export default function UserManagement({ users: initialUsers, currentUserId }: P
         prev.map((u) => (u.id === userId ? { ...u, status: newStatus } : u))
       )
     }
+  }
+
+  async function handleAppointHead(userId: string) {
+    setAppointingUserId(userId)
+    setMessage(null)
+
+    const result = await appoint_library_head(userId)
+
+    if (result.success) {
+      setUsers((prev) =>
+        prev.map((u) => (u.id === userId ? { ...u, role: 'LIBRARY_HEAD' as Role } : u))
+      )
+      setMessage({ type: 'success', text: 'Staff member appointed as Library Head.' })
+    } else {
+      setMessage({ type: 'error', text: result.error ?? 'Failed to appoint Library Head.' })
+    }
+    setAppointingUserId(null)
+  }
+
+  async function handleRevokeHead(userId: string) {
+    setAppointingUserId(userId)
+    setMessage(null)
+
+    const result = await revoke_library_head(userId)
+
+    if (result.success) {
+      setUsers((prev) =>
+        prev.map((u) => (u.id === userId ? { ...u, role: 'STAFF' as Role } : u))
+      )
+      setMessage({ type: 'success', text: 'Library Head appointment revoked. User returned to Staff portal.' })
+    } else {
+      setMessage({ type: 'error', text: result.error ?? 'Failed to revoke Library Head.' })
+    }
+    setAppointingUserId(null)
   }
 
   return (
@@ -253,6 +293,40 @@ export default function UserManagement({ users: initialUsers, currentUserId }: P
                           <div className="flex items-center justify-end gap-1.5">
                             {!isSelf && (
                               <>
+                                {/* Appoint / Revoke Library Head */}
+                                {(user.role === 'STAFF' || user.role === 'LIBRARY_HEAD') && (
+                                  <>
+                                    {user.role === 'STAFF' ? (
+                                      <button
+                                        onClick={() => handleAppointHead(user.id)}
+                                        disabled={appointingUserId === user.id}
+                                        className="h-8 px-4 rounded-lg bg-sky-50 text-sky-600 text-[13px] font-normal hover:bg-sky-100 transition-colors disabled:opacity-50"
+                                        title="Appoint as Library Head"
+                                      >
+                                        {appointingUserId === user.id ? (
+                                          <Loader2 className="h-3.5 w-3.5 inline mr-1 animate-spin" />
+                                        ) : (
+                                          <Crown className="h-3.5 w-3.5 inline mr-1" />
+                                        )}
+                                        Appoint Head
+                                      </button>
+                                    ) : (
+                                      <button
+                                        onClick={() => handleRevokeHead(user.id)}
+                                        disabled={appointingUserId === user.id}
+                                        className="h-8 px-4 rounded-lg bg-amber-50 text-amber-600 text-[13px] font-normal hover:bg-amber-100 transition-colors disabled:opacity-50"
+                                        title="Revoke Library Head appointment"
+                                      >
+                                        {appointingUserId === user.id ? (
+                                          <Loader2 className="h-3.5 w-3.5 inline mr-1 animate-spin" />
+                                        ) : (
+                                          <RotateCcw className="h-3.5 w-3.5 inline mr-1" />
+                                        )}
+                                        Revoke Head
+                                      </button>
+                                    )}
+                                  </>
+                                )}
                                 <button
                                   onClick={() => startEditing(user)}
                                   className="h-8 px-4 rounded-lg bg-slate-100 text-slate-600 text-[13px] font-normal hover:bg-slate-200 transition-colors"

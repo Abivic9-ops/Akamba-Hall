@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useTheme } from '@/lib/contexts/theme-context'
 import { Sun, Moon } from 'lucide-react'
 
@@ -17,7 +18,11 @@ interface ThemeToggleProps {
  */
 export function ThemeToggle({ className = '', size = 'md' }: ThemeToggleProps) {
   const { theme, toggle_theme } = useTheme()
-  const isDark = theme === 'dark'
+  const [mounted, set_mounted] = useState(false)
+
+  useEffect(() => set_mounted(true), [])
+
+  const isDark = mounted ? theme === 'dark' : false
 
   const dim = size === 'sm' ? 'h-8 w-8' : 'h-10 w-10'
   const iconDim = size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'
@@ -28,6 +33,7 @@ export function ThemeToggle({ className = '', size = 'md' }: ThemeToggleProps) {
       id="theme-toggle-btn"
       onClick={toggle_theme}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      suppressHydrationWarning
       className={`
         ${dim} rounded-full flex items-center justify-center
         text-[#1E275B] dark:text-[#B9C2D8]

@@ -26,7 +26,9 @@ export function DashboardHeader({ on_menu_toggle }: DashboardHeaderProps) {
   const display_role = role ? role_display_names[role as Role] : ''
   const user_name = user?.fullName ?? 'User'
   const first_name = user_name.split(' ')[0] ?? 'User'
-  const student_info = user?.studentId ?? display_role
+  const student_info = user?.studentId
+    ? `${user.studentId} · ${display_role}`
+    : display_role
 
   useEffect(() => {
     function handle_click_outside(e: MouseEvent) {
@@ -156,8 +158,8 @@ export function DashboardHeader({ on_menu_toggle }: DashboardHeaderProps) {
 
             {/* identity block */}
             <div className="hidden sm:flex flex-col items-start">
-              <span className="text-[13px] font-medium text-[#1F2937] dark:text-[#E2E8F0] dark:text-[#E2E8F0] dark:text-[#E2E8F0] leading-tight">{first_name}</span>
-              <span className="text-[11px] text-[#7C869D] dark:text-[#6B7A99] dark:text-[#6B7A99] dark:text-[#6B7A99] leading-tight mt-0.5">{student_info} · {display_role}</span>
+              <span className="text-[13px] font-medium text-[#1F2937] dark:text-[#E2E8F0] leading-tight">{first_name}</span>
+              <span className="text-[11px] text-[#7C869D] dark:text-[#6B7A99] leading-tight mt-0.5">{student_info}</span>
             </div>
 
             {/* chevron */}

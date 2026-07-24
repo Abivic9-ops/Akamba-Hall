@@ -1,5 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import prisma from '@/lib/db/prisma'
 
 const role_route_map: Record<string, string> = {
   STUDENT: '/student/dashboard',
@@ -27,12 +28,24 @@ const protected_route_prefixes = [
 
 /**
  * Reads the user's role from app_metadata in the JWT.
- * Falls back to 'STUDENT' if not set.
+ * Falls back to Prisma DB lookup if JWT role is missing.
  */
-function getRoleFromUser(user: { app_metadata?: Record<string, unknown> } | null): string {
-  const role = user?.app_metadata?.role
-  if (typeof role === 'string' && role in role_route_map) return role
-  return 'STUDENT'
+async function getRoleFromUser(user: { id: string; app_metadata?: Record<string, unknown> } | null): Promise<string> {
+  if (!user) return 'STUDENT'
+
+  const jwtRole = user.app_metadata?.role
+  if (typeof jwtRole === 'string' && jwtRole in role_route_map) return jwtRole
+
+  // JWT role missing — fall back to DB
+  try {
+    const profile = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: { role: true },
+    })
+    return (profile?.role as string) ?? 'STUDENT'
+  } catch {
+    return 'STUDENT'
+  }
 }
 
 export async function updateSession(request: NextRequest) {
@@ -75,7 +88,7 @@ export async function updateSession(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   const pathname = request.nextUrl.pathname
-  const role = getRoleFromUser(user)
+  const role = await getRoleFromUser(user)
 
   // redirect logged-in users away from login
   if (user && pathname.startsWith('/login')) {

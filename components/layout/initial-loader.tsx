@@ -56,15 +56,15 @@ export function InitialLoader() {
       {/* Custom Keyframes for Playful Animations */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes cross-left-right {
-          0%, 100% { transform: translateX(-40px) rotate(-5deg) scale(1); z-index: 20; }
+          0%, 100% { transform: translateX(-20px) rotate(-5deg) scale(1); z-index: 20; }
           25% { z-index: 20; transform: translateX(0px) rotate(0deg) scale(1.1); }
-          50% { transform: translateX(40px) rotate(5deg) scale(1); z-index: 10; }
+          50% { transform: translateX(20px) rotate(5deg) scale(1); z-index: 10; }
           75% { z-index: 10; transform: translateX(0px) rotate(0deg) scale(0.9); }
         }
         @keyframes cross-right-left {
-          0%, 100% { transform: translateX(40px) rotate(5deg) scale(1); z-index: 10; }
+          0%, 100% { transform: translateX(20px) rotate(5deg) scale(1); z-index: 10; }
           25% { z-index: 10; transform: translateX(0px) rotate(0deg) scale(0.9); }
-          50% { transform: translateX(-40px) rotate(-5deg) scale(1); z-index: 20; }
+          50% { transform: translateX(-20px) rotate(-5deg) scale(1); z-index: 20; }
           75% { z-index: 20; transform: translateX(0px) rotate(0deg) scale(1.1); }
         }
         @keyframes float-up-down {
@@ -75,14 +75,6 @@ export function InitialLoader() {
           0% { width: 0%; }
           100% { width: 100%; }
         }
-        @keyframes walk-across {
-          0% { transform: translateX(-150vw); }
-          100% { transform: translateX(150vw); }
-        }
-        @keyframes bounce-walk {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-12px); }
-        }
       `}} />
 
       {/* Content Container */}
@@ -90,7 +82,7 @@ export function InitialLoader() {
         
         {/* Animated Logos with Floating Effect */}
         <div 
-          className="relative w-24 h-20 sm:w-40 sm:h-28 mb-4 sm:mb-8 flex justify-center items-center"
+          className="relative w-20 h-16 sm:w-32 sm:h-24 mb-1 sm:mb-3 flex justify-center items-center"
           style={{ animation: 'float-up-down 4s ease-in-out infinite' }}
         >
           <div 
@@ -100,11 +92,11 @@ export function InitialLoader() {
             <Image
               src="/images/starehe-preview.png"
               alt="Starehe Preview"
-              width={96}
-              height={96}
+              width={80}
+              height={80}
               quality={75}
               fetchPriority="high"
-              className="object-contain drop-shadow-lg w-12 h-12 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white rounded-lg sm:rounded-2xl p-1 sm:p-2"
+              className="object-contain drop-shadow-lg w-10 h-10 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white rounded-lg sm:rounded-2xl p-1 sm:p-2"
               priority
             />
           </div>
@@ -115,21 +107,21 @@ export function InitialLoader() {
             <Image
               src="/pwa-icon.png"
               alt="PWA Logo"
-              width={96}
-              height={96}
+              width={80}
+              height={80}
               quality={75}
               fetchPriority="high"
-              className="object-contain drop-shadow-lg w-12 h-12 sm:w-24 sm:h-24 md:w-28 md:h-28"
+              className="object-contain drop-shadow-lg w-10 h-10 sm:w-20 sm:h-20 md:w-24 md:h-24"
               priority
             />
           </div>
         </div>
         
         {/* Titles with vibrant pop */}
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold sm:font-extrabold text-[#0B1A3B] mb-0.5 sm:mb-2 text-center drop-shadow-md tracking-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold sm:font-extrabold text-[#0B1A3B] mb-1 sm:mb-2 text-center drop-shadow-md tracking-tight">
           Akamba Hall
         </h1>
-        <p className="text-amber-500 text-base sm:text-xl md:text-2xl text-center mb-6 sm:mb-12 font-medium sm:font-bold tracking-wide drop-shadow-sm">
+        <p className="text-amber-500 text-base sm:text-xl md:text-2xl text-center mb-8 sm:mb-14 font-medium sm:font-bold tracking-wide drop-shadow-sm">
           Library
         </p>
 
@@ -159,19 +151,6 @@ export function InitialLoader() {
         </div>
       </div>
 
-      {/* Students Animation */}
-      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 overflow-hidden h-12 sm:h-20 pointer-events-none z-10 flex items-center justify-center opacity-90">
-        <div 
-          className="flex gap-3 sm:gap-6 whitespace-nowrap"
-          style={{ animation: 'walk-across 5s linear infinite' }}
-        >
-          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite' }}>👩‍🎓</span>
-          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.1s' }}>👨‍🎓</span>
-          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.2s' }}>📚</span>
-          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.3s' }}>🏃‍♀️</span>
-          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.15s' }}>🏃‍♂️</span>
-        </div>
-      </div>
     </div>
   )
 }

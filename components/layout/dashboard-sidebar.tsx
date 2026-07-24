@@ -97,7 +97,7 @@ export function DashboardSidebar() {
   const sidebarRole = getSidebarRole(pathname, (role as Role) ?? 'STUDENT')
   const sections = getNavigationSections(sidebarRole)
   const display_role = role_short_names[sidebarRole] ?? ''
-  const viewingOther = sidebarRole !== role
+  const viewingOther = role === 'SUPER_ADMIN' && sidebarRole !== role
   const firstName = user?.fullName?.split(' ')[0] ?? ''
 
   return (
@@ -139,29 +139,6 @@ export function DashboardSidebar() {
       >
         {collapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
       </button>
-
-      {/* viewing-as indicator + back to admin */}
-      {viewingOther && (
-        <div className="mx-3 mt-3 mb-2 space-y-1.5">
-          {!collapsed && (
-            <div className="px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200">
-              <span className="text-[12px] font-medium text-amber-600">
-                Viewing as {display_role}
-              </span>
-            </div>
-          )}
-          <Link
-            href="/super-admin/dashboard"
-            className={`flex items-center gap-2 rounded-xl text-[13px] font-medium transition-all ${
-              collapsed ? 'px-0 py-2 justify-center' : 'px-3 py-2'
-            } bg-[#F59E0B]/10 dark:bg-[#F59E0B]/20 text-[#D97706] dark:text-[#FBBF24] hover:bg-[#F59E0B] hover:text-white dark:hover:bg-[#F59E0B] dark:hover:text-white`}
-            title={collapsed ? 'Back to Admin' : undefined}
-          >
-            <Shield className="h-4 w-4 shrink-0" />
-            {!collapsed && <span>Back to Admin</span>}
-          </Link>
-        </div>
-      )}
 
       {/* navigation */}
       <nav className="flex-1 overflow-y-auto overflow-x-hidden px-3 py-4 custom-scrollbar">
@@ -240,6 +217,29 @@ export function DashboardSidebar() {
           </div>
         ))}
       </nav>
+
+      {/* viewing-as indicator + back to admin — bottom of sidebar */}
+      {viewingOther && (
+        <div className="shrink-0 mx-3 mb-2 space-y-1.5">
+          {!collapsed && (
+            <div className="px-3 py-1.5 rounded-lg bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20">
+              <span className="text-[12px] font-medium text-amber-600 dark:text-amber-400">
+                Viewing as {display_role}
+              </span>
+            </div>
+          )}
+          <Link
+            href="/super-admin/dashboard"
+            className={`flex items-center gap-2 rounded-xl text-[13px] font-medium transition-all ${
+              collapsed ? 'px-0 py-2 justify-center' : 'px-3 py-2'
+            } bg-[#F59E0B]/10 dark:bg-[#F59E0B]/20 text-[#D97706] dark:text-[#FBBF24] hover:bg-[#F59E0B] hover:text-white dark:hover:bg-[#F59E0B] dark:hover:text-white`}
+            title={collapsed ? 'Back to Admin' : undefined}
+          >
+            <Shield className="h-4 w-4 shrink-0" />
+            {!collapsed && <span>Back to Admin</span>}
+          </Link>
+        </div>
+      )}
 
       {/* sign out */}
       <div className="shrink-0 p-3 border-t border-[#E7EBF2] dark:border-white/[0.08] dark:border-white/[0.08] dark:border-white/[0.08]">

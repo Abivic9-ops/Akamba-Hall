@@ -62,9 +62,13 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
   const sidebarRole = getSidebarRole(pathname, (role as Role) ?? 'STUDENT')
   const nav_items = getNavigationForRole(sidebarRole)
   const display_role = role_short_names[sidebarRole] ?? ''
-  const viewingOther = sidebarRole !== role
+  const viewingOther = role === 'SUPER_ADMIN' && sidebarRole !== role
   const user_name = user?.fullName ?? 'User'
+  const first_name = user_name.split(' ')[0] ?? 'User'
   const initials = user_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+  const student_info = user?.studentId
+    ? `${user.studentId} · ${display_role}`
+    : display_role
 
   useEffect(() => {
     if (open) {
@@ -100,12 +104,12 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
             {/* header */}
             <div className="p-4 flex items-center justify-between border-b border-white/5">
               <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 flex items-center justify-center text-[13px] font-normal text-white">
+                <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-[13px] font-normal text-white">
                   {initials}
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[14px] font-normal text-white truncate">{user_name}</span>
-                  <span className="text-[12px] text-white/40 truncate">{display_role}</span>
+                  <span className="text-[14px] font-normal text-white truncate">{first_name}</span>
+                  <span className="text-[12px] text-white/40 truncate">{student_info}</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -129,25 +133,6 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
               </div>
             </div>
 
-            {/* viewing-as indicator + back to admin */}
-            {viewingOther && (
-              <div className="mx-3 mt-3 space-y-1.5">
-                <div className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                  <span className="text-[12px] font-normal text-amber-400">
-                    Viewing as {display_role}
-                  </span>
-                </div>
-                <Link
-                  href="/super-admin/dashboard"
-                  onClick={on_close}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] dark:text-white dark:text-white transition-all"
-                >
-                  <Shield className="h-4 w-4 shrink-0" />
-                  <span>Back to Admin</span>
-                </Link>
-              </div>
-            )}
-
             {/* nav items */}
             <nav className="flex-1 overflow-y-auto px-3 py-4">
               {nav_items.map((item) => {
@@ -170,6 +155,25 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
                 )
               })}
             </nav>
+
+            {/* viewing-as indicator + back to admin — bottom */}
+            {viewingOther && (
+              <div className="mx-3 mb-2 space-y-1.5">
+                <div className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                  <span className="text-[12px] font-normal text-amber-400">
+                    Viewing as {display_role}
+                  </span>
+                </div>
+                <Link
+                  href="/super-admin/dashboard"
+                  onClick={on_close}
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] transition-all"
+                >
+                  <Shield className="h-4 w-4 shrink-0" />
+                  <span>Back to Admin</span>
+                </Link>
+              </div>
+            )}
 
             {/* sign out */}
             <div className="p-3 border-t border-white/5">

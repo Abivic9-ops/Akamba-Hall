@@ -1,12 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, CalendarCheck, QrCode, BarChart3, Shield, ArrowLeft } from 'lucide-react'
+import { BookOpen, CalendarCheck, QrCode, BarChart3, Shield, ArrowLeft, ExternalLink } from 'lucide-react'
 import { LoginForm } from '@/components/forms/LoginForm'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://akambahall.vercel.app'
 
 const features = [
   { icon: BookOpen, text: 'Access thousands of books, journals, past papers and digital materials' },
@@ -19,6 +21,14 @@ type auth_tab = 'email' | 'student' | 'qr'
 
 export default function LoginPage() {
   const [active_tab, set_active_tab] = useState<auth_tab>('email')
+  const [is_pwa, set_is_pwa] = useState(false)
+
+  useEffect(() => {
+    set_is_pwa(
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true
+    )
+  }, [])
 
   return (
     <div className="min-h-screen w-full flex bg-white dark:bg-[#071224] transition-colors duration-300">
@@ -85,13 +95,25 @@ export default function LoginPage() {
           <div className="w-full max-w-[440px]">
             {/* back to home pill + theme toggle row */}
             <div className="flex items-center justify-between mb-8">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 text-[13px] text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20 transition-all"
-              >
-                <ArrowLeft className="h-3.5 w-3.5" />
-                Back to Home
-              </Link>
+              {is_pwa ? (
+                <a
+                  href={SITE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 text-[13px] text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20 transition-all"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  Visit Website
+                </a>
+              ) : (
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 text-[13px] text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20 transition-all"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  Back to Home
+                </Link>
+              )}
               <ThemeToggle size="sm" />
             </div>
 
