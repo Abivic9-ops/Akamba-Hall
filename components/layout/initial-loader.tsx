@@ -37,7 +37,7 @@ export function InitialLoader() {
   if (!loading) return null
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-white flex flex-col justify-center items-center font-poppins selection:bg-[#0B1A3B] selection:text-white overflow-hidden">
+    <div className="fixed inset-0 z-[9999] bg-white flex flex-col justify-center items-center font-poppins selection:bg-[#0B1A3B] selection:text-white overflow-hidden h-[100dvh]">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -75,6 +75,14 @@ export function InitialLoader() {
           0% { width: 0%; }
           100% { width: 100%; }
         }
+        @keyframes walk-across {
+          0% { transform: translateX(-150vw); }
+          100% { transform: translateX(150vw); }
+        }
+        @keyframes bounce-walk {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-12px); }
+        }
       `}} />
 
       {/* Content Container */}
@@ -82,7 +90,7 @@ export function InitialLoader() {
         
         {/* Animated Logos with Floating Effect */}
         <div 
-          className="relative w-40 h-28 mb-8 flex justify-center items-center"
+          className="relative w-24 h-20 sm:w-40 sm:h-28 mb-4 sm:mb-8 flex justify-center items-center"
           style={{ animation: 'float-up-down 4s ease-in-out infinite' }}
         >
           <div 
@@ -96,7 +104,7 @@ export function InitialLoader() {
               height={96}
               quality={75}
               fetchPriority="high"
-              className="object-contain drop-shadow-lg w-24 h-24 bg-white rounded-2xl p-2"
+              className="object-contain drop-shadow-lg w-12 h-12 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-white rounded-lg sm:rounded-2xl p-1 sm:p-2"
               priority
             />
           </div>
@@ -111,43 +119,57 @@ export function InitialLoader() {
               height={96}
               quality={75}
               fetchPriority="high"
-              className="object-contain drop-shadow-lg w-24 h-24"
+              className="object-contain drop-shadow-lg w-12 h-12 sm:w-24 sm:h-24 md:w-28 md:h-28"
               priority
             />
           </div>
         </div>
         
         {/* Titles with vibrant pop */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0B1A3B] mb-2 text-center drop-shadow-md tracking-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold sm:font-extrabold text-[#0B1A3B] mb-0.5 sm:mb-2 text-center drop-shadow-md tracking-tight">
           Akamba Hall
         </h1>
-        <p className="text-amber-500 text-xl sm:text-2xl text-center mb-12 font-bold tracking-wide drop-shadow-sm">
+        <p className="text-amber-500 text-base sm:text-xl md:text-2xl text-center mb-6 sm:mb-12 font-medium sm:font-bold tracking-wide drop-shadow-sm">
           Library
         </p>
 
         {/* Playful Loading Dots */}
-        <div className="flex gap-3 mb-6">
-          <div className="w-4 h-4 rounded-full bg-amber-400 animate-bounce shadow-md" style={{ animationDelay: '0ms', animationDuration: '0.8s' }}></div>
-          <div className="w-4 h-4 rounded-full bg-[#0B1A3B] animate-bounce shadow-md" style={{ animationDelay: '150ms', animationDuration: '0.8s' }}></div>
-          <div className="w-4 h-4 rounded-full bg-blue-400 animate-bounce shadow-md" style={{ animationDelay: '300ms', animationDuration: '0.8s' }}></div>
-          <div className="w-4 h-4 rounded-full bg-amber-400 animate-bounce shadow-md" style={{ animationDelay: '450ms', animationDuration: '0.8s' }}></div>
+        <div className="flex gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <div className="w-2.5 h-2.5 sm:w-4 sm:h-4 rounded-full bg-amber-400 animate-bounce shadow-md" style={{ animationDelay: '0ms', animationDuration: '0.8s' }}></div>
+          <div className="w-2.5 h-2.5 sm:w-4 sm:h-4 rounded-full bg-[#0B1A3B] animate-bounce shadow-md" style={{ animationDelay: '150ms', animationDuration: '0.8s' }}></div>
+          <div className="w-2.5 h-2.5 sm:w-4 sm:h-4 rounded-full bg-blue-400 animate-bounce shadow-md" style={{ animationDelay: '300ms', animationDuration: '0.8s' }}></div>
+          <div className="w-2.5 h-2.5 sm:w-4 sm:h-4 rounded-full bg-amber-400 animate-bounce shadow-md" style={{ animationDelay: '450ms', animationDuration: '0.8s' }}></div>
         </div>
 
         {/* Dynamic Loading Text */}
-        <div className="h-8 flex items-center justify-center mb-6">
-          <h2 className="text-lg sm:text-xl font-bold text-[#1a2b4c] text-center transition-all duration-300 ease-in-out transform">
+        <div className="h-6 sm:h-8 flex items-center justify-center mb-4 sm:mb-6">
+          <h2 className="text-sm sm:text-lg md:text-xl font-medium sm:font-bold text-[#1a2b4c] text-center transition-all duration-300 ease-in-out transform">
             {loadingMessages[messageIndex]}
           </h2>
         </div>
 
         {/* Fun Progress Bar */}
-        <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden shadow-inner drop-shadow-sm border border-gray-100">
+        <div className="w-full h-2 sm:h-3 bg-gray-200 rounded-full overflow-hidden shadow-inner drop-shadow-sm border border-gray-100">
           <div 
             className="h-full bg-gradient-to-r from-amber-400 via-yellow-400 to-[#0B1A3B] rounded-full"
             style={{ 
               animation: 'progress-fill 3s ease-out forwards'
             }}
           />
+        </div>
+      </div>
+
+      {/* Students Animation */}
+      <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 overflow-hidden h-12 sm:h-20 pointer-events-none z-10 flex items-center justify-center opacity-90">
+        <div 
+          className="flex gap-3 sm:gap-6 whitespace-nowrap"
+          style={{ animation: 'walk-across 5s linear infinite' }}
+        >
+          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite' }}>👩‍🎓</span>
+          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.1s' }}>👨‍🎓</span>
+          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.2s' }}>📚</span>
+          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.3s' }}>🏃‍♀️</span>
+          <span className="text-2xl sm:text-4xl" style={{ animation: 'bounce-walk 0.5s ease-in-out infinite 0.15s' }}>🏃‍♂️</span>
         </div>
       </div>
     </div>

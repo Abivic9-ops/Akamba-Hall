@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Akamba Hall Library',
     short_name: 'Akamba Hall',
     description: 'The digital home of Akamba Hall Library — catalogue, loans, spaces, and more.',
-    start_url: '/launch',
+    start_url: '/login',
     display: 'standalone',
     orientation: 'portrait',
     background_color: '#0B1A3B',

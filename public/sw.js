@@ -1,8 +1,8 @@
 // Akamba Hall Library - Service Worker
 // Handles: install prompt support, offline caching, and push notifications
 
-const CACHE_NAME = 'akamba-hall-v1'
-const OFFLINE_URL = '/'
+const CACHE_NAME = 'akamba-hall-v2'
+const OFFLINE_URL = '/offline'
 
 // ─── Install: pre-cache shell ──────────────────────────────────────────────
 self.addEventListener('install', (event) => {
@@ -10,6 +10,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
         '/',
+        '/offline',
         '/icon-192x192.png',
         '/icon-512x512.png',
         '/images/starehe-logo.png',
@@ -62,7 +63,7 @@ self.addEventListener('fetch', (event) => {
         return response
       })
       .catch(async () => {
-        // Offline fallback: serve cached version or home page
+        // Offline fallback: serve cached version or offline page
         const cached = await caches.match(event.request)
         return cached || caches.match(OFFLINE_URL)
       })
