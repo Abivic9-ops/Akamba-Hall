@@ -1,4 +1,5 @@
 import prisma from '@/lib/db/prisma'
+import type { Role } from '@prisma/client'
 
 export interface dashboard_metrics {
   total_users: number
@@ -119,7 +120,7 @@ export async function get_role_distribution(): Promise<role_distribution[]> {
 
     const roles = ['STUDENT', 'STAFF', 'ASSISTANT', 'CAPTAIN', 'PREFECT', 'EXECUTIVE', 'LIBRARY_HEAD', 'SUPER_ADMIN']
     const counts = await Promise.all(
-      roles.map((role) => prisma.user.count({ where: { role: role as any } }))
+      roles.map((role) => prisma.user.count({ where: { role: role as Role } }))
     )
 
     return roles

@@ -16,18 +16,11 @@ import Link from 'next/link'
 
 export default function ProfilePage() {
   const { user, role } = useAuth()
-  const [full_name, set_full_name] = useState('')
-  const [student_id, set_student_id] = useState('')
+  const [full_name, set_full_name] = useState(() => user?.fullName ?? '')
+  const [student_id, set_student_id] = useState(() => user?.studentId ?? '')
   const [error, set_error] = useState<string | null>(null)
   const [success, set_success] = useState(false)
   const [loading, set_loading] = useState(false)
-
-  useEffect(() => {
-    if (user) {
-      set_full_name(user.fullName ?? '')
-      set_student_id(user.studentId ?? '')
-    }
-  }, [user])
 
   async function handle_submit(e: React.FormEvent) {
     e.preventDefault()

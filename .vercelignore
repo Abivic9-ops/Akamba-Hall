@@ -1,0 +1,9 @@
+# Do not upload local secrets or environment files
+.env
+.env.*
+!.env.example
+
+# Keep the repo lean for deployment
+node_modules
+.git
+.next

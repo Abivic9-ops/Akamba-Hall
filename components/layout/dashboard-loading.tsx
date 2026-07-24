@@ -1,6 +1,6 @@
 'use client'
 
-export function dashboard_loading() {
+export function DashboardLoading() {
   return (
     <div className="flex h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
       {/* sidebar skeleton */}

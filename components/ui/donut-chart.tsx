@@ -20,12 +20,11 @@ export function DonutChart({ segments, centerValue, centerLabel, size = 100 }: D
   const cy = 50
   const total = segments.reduce((sum, s) => sum + s.value, 0) || 1
 
-  let accumulated = 0
-  const paths = segments.map((seg) => {
+  const paths = segments.map((seg, index) => {
+    const accumulated = segments.slice(0, index).reduce((sum, s) => sum + s.value, 0)
     const fraction = seg.value / total
     const startAngle = (accumulated / total) * 2 * Math.PI - Math.PI / 2
-    accumulated += seg.value
-    const endAngle = (accumulated / total) * 2 * Math.PI - Math.PI / 2
+    const endAngle = ((accumulated + seg.value) / total) * 2 * Math.PI - Math.PI / 2
 
     const largeArc = fraction > 0.5 ? 1 : 0
 

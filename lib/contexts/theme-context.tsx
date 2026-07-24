@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -13,17 +13,14 @@ interface theme_context_value {
 const ThemeContext = createContext<theme_context_value | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, set_theme_state] = useState<Theme>('light')
-  const [mounted, set_mounted] = useState(false)
-
-  useEffect(() => {
-    const saved = localStorage.getItem('theme') as Theme | null
+  const [theme, set_theme_state] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'light'
+    const saved = window.localStorage.getItem('theme') as Theme | null
     const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     const initial = saved ?? preferred
-    set_theme_state(initial)
     document.documentElement.classList.toggle('dark', initial === 'dark')
-    set_mounted(true)
-  }, [])
+    return initial
+  })
 
   const apply_theme = useCallback((next: Theme) => {
     const update = () => {
@@ -61,16 +58,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const set_theme = useCallback((t: Theme) => {
     apply_theme(t)
   }, [apply_theme])
-
-  if (!mounted) {
-    // Still wrap children in the Provider with safe defaults so any
-    // component that calls useTheme() doesn't throw before hydration.
-    return (
-      <ThemeContext.Provider value={{ theme: 'light', toggle_theme: () => {}, set_theme: () => {} }}>
-        {children}
-      </ThemeContext.Provider>
-    )
-  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggle_theme, set_theme }}>

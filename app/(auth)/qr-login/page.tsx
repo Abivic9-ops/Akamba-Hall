@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -15,6 +15,14 @@ import {
 } from 'lucide-react'
 
 export default function QRLoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-white"><Loader2 className="h-8 w-8 animate-spin text-[#D4A017]" /></div>}>
+      <QRLoginContent />
+    </Suspense>
+  )
+}
+
+function QRLoginContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const ref = searchParams.get('ref')

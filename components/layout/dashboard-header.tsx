@@ -9,11 +9,11 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { role_display_names } from '@/lib/types/role'
 import type { Role } from '@/lib/types/role'
 
-interface dashboard_header_props {
+interface DashboardHeaderProps {
   on_menu_toggle: () => void
 }
 
-export function dashboard_header({ on_menu_toggle }: dashboard_header_props) {
+export function DashboardHeader({ on_menu_toggle }: DashboardHeaderProps) {
   const { user, role } = useAuth()
   const pathname = usePathname()
   const { theme } = useTheme()

@@ -51,12 +51,12 @@ function getSidebarRole(pathname: string, actualRole: Role): Role {
   return actualRole
 }
 
-interface mobile_nav_props {
+interface MobileNavProps {
   open: boolean
   on_close: () => void
 }
 
-export function mobile_nav({ open, on_close }: mobile_nav_props) {
+export function MobileNav({ open, on_close }: MobileNavProps) {
   const { user, role } = useAuth()
   const pathname = usePathname()
   const sidebarRole = getSidebarRole(pathname, (role as Role) ?? 'STUDENT')

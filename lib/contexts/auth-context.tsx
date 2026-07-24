@@ -23,19 +23,14 @@ export function useAuth() {
   return useContext(auth_context)
 }
 
-export function auth_provider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const supabase = createClient()
   const [user, setUser] = useState<UserProfile | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(() => supabase !== null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const supabase = createClient()
-
-    if (!supabase) {
-      setUser(null)
-      setLoading(false)
-      return
-    }
+    if (!supabase) return
 
     async function fetch_user() {
       try {
@@ -77,7 +72,7 @@ export function auth_provider({ children }: { children: ReactNode }) {
     )
 
     return () => subscription.unsubscribe()
-  }, [])
+  }, [supabase])
 
   return (
     <auth_context.Provider value={{ user, role: (user?.role as Role) ?? null, loading, error }}>

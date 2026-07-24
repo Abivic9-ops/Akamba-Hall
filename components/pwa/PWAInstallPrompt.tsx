@@ -12,21 +12,20 @@ interface BeforeInstallPromptEvent extends Event {
 export function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [show, setShow] = useState(false)
-  const [isIOS, setIsIOS] = useState(false)
-  const [isInstalled, setIsInstalled] = useState(false)
+  const [isIOS] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !('MSStream' in window)
+  })
+  const [isInstalled, setIsInstalled] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(display-mode: standalone)').matches
+  })
   const [installing, setInstalling] = useState(false)
 
   useEffect(() => {
-    // Don't show if already installed (standalone mode)
-    const standalone = window.matchMedia('(display-mode: standalone)').matches
-    if (standalone) {
-      setIsInstalled(true)
-      return
-    }
+    if (isInstalled) return
 
-    // Detect iOS
-    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
-    setIsIOS(ios)
+    const ios = isIOS
 
     // Check if user dismissed before (session-based, not permanent)
     const dismissed = sessionStorage.getItem('pwa-install-dismissed')
@@ -49,13 +48,12 @@ export function PWAInstallPrompt() {
 
     window.addEventListener('beforeinstallprompt', handler)
 
-    // On iOS, show after a short delay
     if (ios) {
       setTimeout(() => setShow(true), 2500)
     }
 
     return () => window.removeEventListener('beforeinstallprompt', handler)
-  }, [])
+  }, [isInstalled, isIOS])
 
   const handleInstall = async () => {
     if (!deferredPrompt) return
@@ -81,11 +79,11 @@ export function PWAInstallPrompt() {
     <AnimatePresence>
       {show && (
         <motion.div
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
+          exit={{ y: -50, opacity: 0 }}
           transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[9999] w-[calc(100%-2rem)] max-w-sm"
+          className="fixed top-4 right-4 z-[9999] w-[calc(100%-2rem)] max-w-sm"
         >
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
             {/* Gradient background */}

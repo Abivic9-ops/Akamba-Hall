@@ -26,6 +26,7 @@ export function QuickIssueWorkspace() {
   const [member, setMember] = useState<ScannedMember | null>(null)
   const [item, setItem] = useState<ScannedItem | null>(null)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [dueDateLabel, setDueDateLabel] = useState('')
 
   const handleMemberScan = () => {
     setMemberState('scanning')
@@ -55,6 +56,8 @@ export function QuickIssueWorkspace() {
   }
 
   const handleIssue = () => {
+    const due = new Date(Date.now() + 14 * 86400000)
+    setDueDateLabel(due.toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' }))
     setShowSuccess(true)
     setTimeout(() => {
       setShowSuccess(false)
@@ -62,6 +65,7 @@ export function QuickIssueWorkspace() {
       setItemState('disabled')
       setMember(null)
       setItem(null)
+      setDueDateLabel('')
     }, 2500)
   }
 
@@ -86,8 +90,7 @@ export function QuickIssueWorkspace() {
         <div className="absolute inset-x-0 top-0 bg-emerald-600 text-white px-7 py-3 flex items-center gap-3 z-10">
           <CheckCircle2 className="h-5 w-5" />
           <span className="text-[14px] font-semibold">
-            {item?.title} issued to {member?.name} — Due{' '}
-            {new Date(Date.now() + 14 * 86400000).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })}
+            {item?.title} issued to {member?.name} — Due {dueDateLabel}
           </span>
         </div>
       )}
@@ -277,9 +280,7 @@ export function QuickIssueWorkspace() {
               <div className="flex items-center justify-between pb-2.5 border-b border-white/[0.06]">
                 <span className="text-[12px] text-white/40">Due Date</span>
                 <span className="text-[12px] text-white font-semibold">
-                  {canIssue
-                    ? new Date(Date.now() + 14 * 86400000).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })
-                    : '—'}
+                  {canIssue ? dueDateLabel || '—' : '—'}
                 </span>
               </div>
               <div className="flex items-center justify-between">

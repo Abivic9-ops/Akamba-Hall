@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import type { Role } from '@prisma/client'
 import { BriefcaseBusiness, Search, UserCheck, UserX, Shield } from 'lucide-react'
 import { suspend_member, activate_member, update_staff_role } from '@/lib/actions/library-head'
 
@@ -89,7 +90,7 @@ export function StaffClient({
   function handle_role_change(userId: string, newRole: string) {
     set_optimistic_role(prev => ({ ...prev, [userId]: newRole }))
     startTransition(async () => {
-      const result = await update_staff_role(userId, newRole as any)
+      const result = await update_staff_role(userId, newRole as Role)
       if (!result.success) {
         set_optimistic_role(prev => { const n = { ...prev }; delete n[userId]; return n })
         alert(result.error)

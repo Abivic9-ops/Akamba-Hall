@@ -2,12 +2,12 @@
 
 import { AlertTriangle, RefreshCcw } from 'lucide-react'
 
-interface dashboard_error_props {
+interface DashboardErrorProps {
   error: string
   reset?: () => void
 }
 
-export function dashboard_error({ error, reset }: dashboard_error_props) {
+export function DashboardError({ error, reset }: DashboardErrorProps) {
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224] flex items-center justify-center p-6">
       <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-10 max-w-md w-full text-center space-y-4">

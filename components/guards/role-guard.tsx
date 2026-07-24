@@ -10,7 +10,7 @@ interface role_guard_props {
   fallback?: ReactNode
 }
 
-export function role_guard({ allowed_roles, children, fallback = null }: role_guard_props) {
+export function RoleGuard({ allowed_roles, children, fallback = null }: role_guard_props) {
   const { role, loading } = useAuth()
 
   if (loading) return null

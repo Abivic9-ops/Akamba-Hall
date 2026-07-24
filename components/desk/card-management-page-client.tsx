@@ -21,13 +21,16 @@ export function CardManagementPageClient() {
   const [memberId, setMemberId] = useState('')
   const [cardType, setCardType] = useState('Standard')
   const [issueSuccess, setIssueSuccess] = useState(false)
+  const [issuedCardReference, setIssuedCardReference] = useState('')
 
   const filtered = activeFilter === 'All' ? allCards : allCards.filter(c => c.status === activeFilter)
 
   const handleIssue = () => {
     if (!memberId.trim()) return
+    const nextReference = `AKB-C-${String(Math.floor(427 + Math.random() * 100)).padStart(4, '0')}`
+    setIssuedCardReference(nextReference)
     setIssueSuccess(true)
-    setTimeout(() => { setIssueSuccess(false); setMemberId(''); setCardType('Standard') }, 3000)
+    setTimeout(() => { setIssueSuccess(false); setMemberId(''); setCardType('Standard'); setIssuedCardReference('') }, 3000)
   }
 
   const statusBadge = (status: string) => {
@@ -150,7 +153,7 @@ export function CardManagementPageClient() {
           </div>
           {issueSuccess && (
             <div className="mt-3 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-2.5 text-[13px] text-emerald-700 font-medium">
-              Card issued successfully to member {memberId}! New card reference: AKB-C-{String(Math.floor(427 + Math.random() * 100)).padStart(4, '0')}
+              Card issued successfully to member {memberId}! New card reference: {issuedCardReference}
             </div>
           )}
         </SectionCard>

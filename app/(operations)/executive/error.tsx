@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { AlertTriangle, RefreshCcw } from 'lucide-react'
 
-export default function executive_error({
+export default function ExecutiveError({
   error,
   reset,
 }: {

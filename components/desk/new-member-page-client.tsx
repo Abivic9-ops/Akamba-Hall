@@ -49,6 +49,7 @@ export function NewMemberPageClient() {
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [cardReference, setCardReference] = useState('')
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -87,6 +88,7 @@ export function NewMemberPageClient() {
   }
 
   const handleSubmit = () => {
+    setCardReference(`AKB-${Math.floor(1000 + Math.random() * 9000)}`)
     setSubmitted(true)
   }
 
@@ -103,7 +105,7 @@ export function NewMemberPageClient() {
               <p className="text-[13px] text-slate-500 mt-2">
                 <strong>{formData.fullName}</strong> has been registered as a {formData.memberType} member.
               </p>
-              <p className="text-[12px] text-slate-400 mt-1">Card Reference: AKB-{Math.floor(1000 + Math.random() * 9000)}</p>
+              <p className="text-[12px] text-slate-400 mt-1">Card Reference: {cardReference}</p>
               <button
                 onClick={() => { setSubmitted(false); setFormData(initialFormData); setStep(0) }}
                 className="mt-6 px-6 py-2 bg-[#2563EB] text-white rounded-lg text-[13px] font-medium hover:bg-[#1D4ED8] transition-colors"

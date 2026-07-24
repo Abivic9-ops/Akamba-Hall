@@ -74,18 +74,16 @@ const new_badges: Record<string, boolean> = {
   '/student/catalogue': true,
 }
 
-export function dashboard_sidebar() {
+export function DashboardSidebar() {
   const { user, role } = useAuth()
   const pathname = usePathname()
-  const [collapsed, set_collapsed] = useState(false)
+  const [collapsed, set_collapsed] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.localStorage.getItem('sidebar_collapsed') === 'true'
+  })
 
   useEffect(() => {
-    const saved = localStorage.getItem('sidebar_collapsed')
-    if (saved === 'true') set_collapsed(true)
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('sidebar_collapsed', String(collapsed))
+    window.localStorage.setItem('sidebar_collapsed', String(collapsed))
   }, [collapsed])
 
   useEffect(() => {

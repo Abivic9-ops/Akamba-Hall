@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import type { CopyStatus } from '@prisma/client'
 import { Package, CheckCircle2, AlertTriangle, XCircle, Search, ChevronDown } from 'lucide-react'
 import { update_copy_status } from '@/lib/actions/library-head'
 
@@ -55,7 +56,7 @@ export function InventoryClient({
   function handle_status_change(copyId: string, newStatus: string) {
     set_optimistic(prev => ({ ...prev, [copyId]: newStatus }))
     startTransition(async () => {
-      const result = await update_copy_status(copyId, newStatus as any)
+      const result = await update_copy_status(copyId, newStatus as CopyStatus)
       if (!result.success) {
         set_optimistic(prev => {
           const next = { ...prev }
