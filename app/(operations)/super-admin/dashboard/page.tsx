@@ -84,49 +84,49 @@ export default async function super_admin_dashboard() {
         </div>
 
         {/* row 1 — primary metric cards */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {metric_keys.map((key, i) => {
             const Icon = metric_icon_map[i]
             return (
-              <div key={key} className="bg-white dark:bg-[#0E1F3F] rounded-2xl p-4 border border-slate-100 dark:border-white/[0.08] shadow-sm dark:shadow-none hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[13px] font-normal text-slate-500 dark:text-[#6B7A99]">{metric_labels[i]}</span>
-                  <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${metric_color_map[i]}`}>
-                    <Icon className="h-4 w-4" />
+              <div key={key} className="bg-white dark:bg-[#0E1F3F] rounded-2xl p-3 sm:p-4 border border-slate-100 dark:border-white/[0.08] shadow-sm dark:shadow-none hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+                  <span className="text-[11px] sm:text-[13px] font-normal text-slate-500 dark:text-[#6B7A99] truncate">{metric_labels[i]}</span>
+                  <div className={`h-7 w-7 sm:h-8 sm:w-8 rounded-lg flex items-center justify-center shrink-0 ${metric_color_map[i]}`}>
+                    <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </div>
                 </div>
-                <div className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] font-[var(--font-poppins)] leading-tight">
+                <div className="text-[20px] sm:text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] font-[var(--font-poppins)] leading-tight">
                   {metric_values[i]}
                 </div>
-                <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] mt-0.5">{metric_subtexts[i]}</p>
+                <p className="text-[11px] sm:text-[12px] text-slate-400 dark:text-[#6B7A99] mt-0.5 truncate">{metric_subtexts[i]}</p>
               </div>
             )
           })}
         </div>
 
         {/* row 2 — secondary metrics */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {[
             { label: 'Active Users Today', value: metrics.active_users_today, icon: TrendingUp, color: 'text-emerald-500', trend: 'up' },
             { label: 'Total Staff', value: metrics.total_staff, icon: Shield, color: 'text-[#5B9BD5]', trend: 'up' },
             { label: 'Total Students', value: metrics.total_students, icon: Users, color: 'text-blue-500', trend: 'up' },
             { label: 'Overdue Loans', value: metrics.overdue_loans, icon: AlertTriangle, color: metrics.overdue_loans > 0 ? 'text-red-500' : 'text-slate-400 dark:text-[#6B7A99]', trend: 'down' },
           ].map((item) => (
-            <div key={item.label} className="bg-white dark:bg-[#0E1F3F] rounded-2xl p-4 border border-slate-100 dark:border-white/[0.08] shadow-sm dark:shadow-none">
+            <div key={item.label} className="bg-white dark:bg-[#0E1F3F] rounded-2xl p-3 sm:p-4 border border-slate-100 dark:border-white/[0.08] shadow-sm dark:shadow-none">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="h-8 w-8 rounded-lg bg-slate-50 dark:bg-white/[0.04] flex items-center justify-center">
-                    <item.icon className={`h-4 w-4 ${item.color}`} />
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                  <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-slate-50 dark:bg-white/[0.04] flex items-center justify-center shrink-0">
+                    <item.icon className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${item.color}`} />
                   </div>
-                  <span className="text-[13px] font-normal text-slate-500 dark:text-[#6B7A99]">{item.label}</span>
+                  <span className="text-[11px] sm:text-[13px] font-normal text-slate-500 dark:text-[#6B7A99] truncate">{item.label}</span>
                 </div>
                 {item.trend === 'up' ? (
-                  <ArrowUpRight className="h-4 w-4 text-emerald-500" />
+                  <ArrowUpRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-500 shrink-0" />
                 ) : (
-                  <ArrowDownRight className="h-4 w-4 text-red-400" />
+                  <ArrowDownRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-red-400 shrink-0" />
                 )}
               </div>
-              <div className="text-[22px] font-medium text-slate-900 dark:text-[#E2E8F0] mt-1.5 font-[var(--font-poppins)]">
+              <div className="text-[18px] sm:text-[22px] font-medium text-slate-900 dark:text-[#E2E8F0] mt-1 sm:mt-1.5 font-[var(--font-poppins)]">
                 {item.value}
               </div>
             </div>

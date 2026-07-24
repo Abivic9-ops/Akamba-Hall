@@ -132,7 +132,7 @@ export function InventoryClient({
                   className="w-full flex items-center gap-4 px-5 py-4 hover:bg-slate-50/50 transition-colors text-left cursor-pointer"
                 >
                   <div className="h-10 w-10 rounded-xl bg-[#0B1A3B]/5 flex items-center justify-center shrink-0">
-                    <Package className="h-5 w-5 text-[#0B1A3B] dark:text-white dark:text-white" />
+                    <Package className="h-5 w-5 text-[#0B1A3B] dark:text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{book.title}</p>

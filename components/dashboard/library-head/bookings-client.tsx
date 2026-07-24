@@ -96,7 +96,7 @@ export function BookingsClient({ bookings }: { bookings: BookingWithUser[] }) {
                   : 'border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] hover:border-slate-200 dark:border-white/10 dark:border-white/10'
               }`}
             >
-              <Icon className={`h-4 w-4 ${isActive ? 'text-[#0B1A3B] dark:text-white dark:text-white' : 'text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]'}`} />
+              <Icon className={`h-4 w-4 ${isActive ? 'text-[#0B1A3B] dark:text-white' : 'text-slate-400 dark:text-[#6B7A99]'}`} />
               <div className="text-left">
                 <p className="text-[18px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{counts[s]}</p>
                 <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{s === 'ALL' ? 'Total' : cfg?.label}</p>
@@ -108,7 +108,7 @@ export function BookingsClient({ bookings }: { bookings: BookingWithUser[] }) {
 
       {/* search */}
       <div className="relative">
-        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300" />
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
         <input
           type="text"
           placeholder="Search by member or space..."

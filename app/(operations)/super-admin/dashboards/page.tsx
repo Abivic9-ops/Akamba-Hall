@@ -27,8 +27,8 @@ const dashboards = [
     icon: Briefcase,
     color: 'from-[#0B1A3B] to-[#132859]',
     bg: 'bg-[#0B1A3B]/5',
-    iconColor: 'text-[#0B1A3B] dark:text-white dark:text-white',
-    borderColor: 'border-[#E4E7EE] dark:border-white/10 dark:border-white/10',
+    iconColor: 'text-[#0B1A3B] dark:text-white',
+    borderColor: 'border-[#E4E7EE] dark:border-white/10',
     features: ['Loan Processing', 'Member Assistance', 'Daily Operations', 'Reports'],
   },
   {
@@ -93,17 +93,17 @@ export default async function all_dashboards_page() {
   await requireRole(['SUPER_ADMIN'])
 
   return (
-    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
       <div className="max-w-[1440px] mx-auto p-6 space-y-8">
         {/* header */}
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)] flex items-center gap-3">
+          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] font-[var(--font-poppins)] flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-[#E8A63C] flex items-center justify-center">
               <Shield className="h-5 w-5 text-white" />
             </div>
             All Dashboards
           </h1>
-          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1 ml-13">
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] mt-1 ml-13">
             Preview and access any role dashboard in the system
           </p>
         </div>
@@ -116,13 +116,13 @@ export default async function all_dashboards_page() {
               <Link
                 key={dash.href}
                 href={dash.href}
-                className="group relative bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none hover:shadow-lg transition-all duration-300 overflow-hidden"
+                className="group relative bg-white dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] shadow-sm dark:shadow-none hover:shadow-lg transition-all duration-300 overflow-hidden"
               >
                 {/* gradient header */}
                 <div className={`bg-gradient-to-r ${dash.color} px-6 py-6`}>
                   <div className="flex items-center gap-3">
-                    <div className="h-11 w-11 rounded-xl bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/15 flex items-center justify-center">
-                      <Icon className="h-5 w-5 text-white" />
+                    <div className="h-11 w-11 rounded-xl bg-white/90 dark:bg-[#0E1F3F]/15 flex items-center justify-center">
+                      <Icon className={`h-5 w-5 ${dash.iconColor}`} />
                     </div>
                     <div>
                       <h2 className="text-[16px] font-medium text-white">
@@ -134,7 +134,7 @@ export default async function all_dashboards_page() {
 
                 {/* body */}
                 <div className="p-5 space-y-4">
-                  <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] leading-relaxed">
+                  <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] leading-relaxed">
                     {dash.description}
                   </p>
 
@@ -148,7 +148,7 @@ export default async function all_dashboards_page() {
                           className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg ${dash.bg} border ${dash.borderColor}`}
                         >
                           <FeatIcon className={`h-3.5 w-3.5 ${dash.iconColor} shrink-0`} />
-                          <span className="text-[12px] font-normal text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] truncate">
+                          <span className="text-[12px] font-normal text-slate-600 dark:text-[#94A3B8] truncate">
                             {feat}
                           </span>
                         </div>
@@ -158,7 +158,7 @@ export default async function all_dashboards_page() {
 
                   {/* open button */}
                   <div className="flex items-center justify-between pt-2 border-t border-slate-50">
-                    <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Click to open</span>
+                    <span className="text-[13px] text-slate-400 dark:text-[#6B7A99]">Click to open</span>
                     <div className={`h-8 w-8 rounded-lg ${dash.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                       <ArrowRight className={`h-4 w-4 ${dash.iconColor}`} />
                     </div>

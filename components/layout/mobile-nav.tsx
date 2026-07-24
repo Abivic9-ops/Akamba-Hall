@@ -3,34 +3,12 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  LayoutDashboard, Users, Shield, Activity, ScrollText,
-  Settings, CalendarCheck, Library, BriefcaseBusiness, X,
-  GraduationCap, Briefcase, Monitor, Zap, BookMarked,
-  Grid3X3, BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
-  Search, PackageCheck, Star, Globe, Video,
-  ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
-  FileText, UserSearch,
-} from 'lucide-react'
+import { Activity, X } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 import { getNavigationForRole } from '@/lib/config/navigation'
 import { role_short_names } from '@/lib/types/role'
+import { resolve_icon } from '@/lib/config/icon-map'
 import type { Role } from '@/lib/types/role'
-
-const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
-  LayoutDashboard, Users, Shield, Activity, ScrollText,
-  Settings, CalendarCheck, Library, BriefcaseBusiness,
-  GraduationCap, Briefcase, Monitor, Zap, BookMarked, Grid3X3,
-  BookOpen, Bookmark, Megaphone, User, HelpCircle, LogIn,
-  Search, PackageCheck, Star, Globe, Video,
-  ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
-  FileText, UserSearch,
-}
-
-function resolve_icon(name: string) {
-  return icon_map[name] ?? LayoutDashboard
-}
 
 const path_role_map: Record<string, Role> = {
   '/super-admin': 'SUPER_ADMIN',
@@ -79,116 +57,109 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
+  // Don't render anything when closed (avoids mounting hidden DOM)
+  if (!open) return null
+
   return (
-    <AnimatePresence>
-      {open && (
-        <>
-          {/* backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden"
-            onClick={on_close}
-          />
+    <>
+      {/* backdrop */}
+      <div
+        className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-200"
+        style={{ opacity: open ? 1 : 0 }}
+        onClick={on_close}
+      />
 
-          {/* slide-in panel */}
-          <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-y-0 left-0 w-72 bg-[#0B1A3B] z-50 lg:hidden flex flex-col shadow-2xl"
-          >
-            {/* header */}
-            <div className="p-4 flex items-center justify-between border-b border-white/5">
-              <div className="flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-[13px] font-normal text-white">
-                  {initials}
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className="text-[14px] font-normal text-white truncate">{first_name}</span>
-                  <span className="text-[12px] text-white/40 truncate">{student_info}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                {sidebarRole === 'EXECUTIVE' && (
-                  <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-1">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-                    </span>
-                    <Activity className="h-3 w-3 text-emerald-400" />
-                    <span className="text-[10px] font-semibold text-emerald-400">Healthy</span>
-                  </div>
-                )}
-                <button
-                  onClick={on_close}
-                  aria-label="Close navigation"
-                  className="p-2 rounded-lg hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/10 text-white/50 hover:text-white transition-colors cursor-pointer"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+      {/* slide-in panel */}
+      <div
+        className="fixed inset-y-0 left-0 w-72 bg-[#0B1A3B] z-50 lg:hidden flex flex-col shadow-2xl transition-transform duration-200 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+        style={{ transform: open ? 'translateX(0)' : 'translateX(-100%)' }}
+      >
+        {/* header */}
+        <div className="p-4 flex items-center justify-between border-b border-white/5">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center text-[13px] font-normal text-white">
+              {initials}
             </div>
-
-            {/* nav items */}
-            <nav className="flex-1 overflow-y-auto px-3 py-4">
-              {nav_items.map((item) => {
-                const is_active = pathname === item.path
-                const Icon = resolve_icon(item.icon)
-                return (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    onClick={on_close}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-normal transition-all mb-1 ${
-                      is_active
-                        ? 'bg-[#E8A63C] text-[#0B1A3B] dark:text-white dark:text-white font-medium'
-                        : 'text-white/60 hover:text-white hover:bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F]/5'
-                    }`}
-                  >
-                    <Icon className="h-[18px] w-[18px] shrink-0" />
-                    <span className="truncate">{item.label}</span>
-                  </Link>
-                )
-              })}
-            </nav>
-
-            {/* viewing-as indicator + back to admin — bottom */}
-            {viewingOther && (
-              <div className="mx-3 mb-2 space-y-1.5">
-                <div className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                  <span className="text-[12px] font-normal text-amber-400">
-                    Viewing as {display_role}
-                  </span>
-                </div>
-                <Link
-                  href="/super-admin/dashboard"
-                  onClick={on_close}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] transition-all"
-                >
-                  <Shield className="h-4 w-4 shrink-0" />
-                  <span>Back to Admin</span>
-                </Link>
+            <div className="flex flex-col min-w-0">
+              <span className="text-[14px] font-normal text-white truncate">{first_name}</span>
+              <span className="text-[12px] text-white/40 truncate">{student_info}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            {sidebarRole === 'EXECUTIVE' && (
+              <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2 py-1">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                </span>
+                <Activity className="h-3 w-3 text-emerald-400" />
+                <span className="text-[10px] font-semibold text-emerald-400">Healthy</span>
               </div>
             )}
+            <button
+              onClick={on_close}
+              aria-label="Close navigation"
+              className="p-2 rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors cursor-pointer"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
 
-            {/* sign out */}
-            <div className="p-3 border-t border-white/5">
-              <form action="/api/auth/logout" method="POST">
-                <button
-                  type="submit"
-                  className="w-full flex items-center gap-2 px-3 py-2.5 text-[13px] font-normal text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition cursor-pointer"
-                >
-                  Sign Out
-                </button>
-              </form>
+        {/* nav items */}
+        <nav className="flex-1 overflow-y-auto px-3 py-4">
+          {nav_items.map((item) => {
+            const is_active = pathname === item.path
+            const Icon = resolve_icon(item.icon)
+            return (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={on_close}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-normal transition-all mb-1 ${
+                  is_active
+                    ? 'bg-[#E8A63C] text-[#0B1A3B] font-medium'
+                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <Icon className="h-[18px] w-[18px] shrink-0" />
+                <span className="truncate">{item.label}</span>
+              </Link>
+            )
+          })}
+        </nav>
+
+        {/* viewing-as indicator + back to admin */}
+        {viewingOther && (
+          <div className="mx-3 mb-2 space-y-1.5">
+            <div className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20">
+              <span className="text-[12px] font-normal text-amber-400">
+                Viewing as {display_role}
+              </span>
             </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+            <Link
+              href="/super-admin/dashboard"
+              onClick={on_close}
+              className="flex items-center gap-2 px-3 py-2 rounded-xl text-[14px] font-normal bg-[#E8A63C]/10 text-[#E8A63C] hover:bg-[#E8A63C] hover:text-[#0B1A3B] transition-all"
+            >
+              <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Back to Admin</span>
+            </Link>
+          </div>
+        )}
+
+        {/* sign out */}
+        <div className="p-3 border-t border-white/5">
+          <form action="/api/auth/logout" method="POST">
+            <button
+              type="submit"
+              className="w-full flex items-center gap-2 px-3 py-2.5 text-[13px] font-normal text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition cursor-pointer"
+            >
+              Sign Out
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
   )
 }
