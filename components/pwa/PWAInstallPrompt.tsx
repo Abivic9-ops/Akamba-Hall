@@ -83,7 +83,7 @@ export function PWAInstallPrompt() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -50, opacity: 0 }}
           transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-          className="fixed top-4 right-4 z-[9999] w-[calc(100%-2rem)] max-w-sm"
+          className="fixed top-4 right-4 sm:top-6 sm:right-6 left-4 sm:left-auto z-[9999] sm:w-[380px]"
         >
           <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
             {/* Gradient background */}
