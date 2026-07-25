@@ -6,32 +6,32 @@ import {
 import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
 
-const mockProfile = {
-  fullName: 'Victor Otieno',
-  email: 'victor.otieno@starehe.ac.ke',
-  studentId: 'SBC-2024-0142',
-  memberType: 'STUDENT',
-  joinDate: '12 Jan 2024',
+interface Profile {
+  fullName: string
+  email: string
+  studentId: string
+  memberType: string
+  joinDate: string
   membership: {
-    tier: 'Gold Reader',
-    points: 1240,
-    nextTier: 'Platinum Scholar',
-    nextTierPoints: 2000,
-  },
+    tier: string
+    points: number
+    nextTier: string
+    nextTierPoints: number
+  }
   stats: {
-    totalLoans: 47,
-    currentLoans: 3,
-    reservations: 2,
-    eventsAttended: 8,
-  },
+    totalLoans: number
+    currentLoans: number
+    reservations: number
+    eventsAttended: number
+  }
 }
 
-export function ProfilePageClient() {
+export function ProfilePageClient({ profile }: { profile: Profile }) {
   const [isEditing, setIsEditing] = useState(false)
-  const [fullName, setFullName] = useState(mockProfile.fullName)
-  const [email, setEmail] = useState(mockProfile.email)
+  const [fullName, setFullName] = useState(profile.fullName)
+  const [email, setEmail] = useState(profile.email)
 
-  const tierProgress = (mockProfile.membership.points / mockProfile.membership.nextTierPoints) * 100
+  const tierProgress = (profile.membership.points / profile.membership.nextTierPoints) * 100
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
@@ -61,7 +61,7 @@ export function ProfilePageClient() {
             <div className="flex flex-col items-center text-center">
               <div className="relative">
                 <div className="h-20 w-20 rounded-full bg-[#0B1A3B] flex items-center justify-center text-[24px] font-normal text-white">
-                  VO
+                  {profile.fullName.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()}
                 </div>
                 {isEditing && (
                   <button aria-label="Upload profile photo" className="absolute -bottom-1 -right-1 h-7 w-7 rounded-full bg-[#2563EB] flex items-center justify-center text-white hover:bg-[#1D4ED8] transition-colors">
@@ -70,14 +70,14 @@ export function ProfilePageClient() {
                 )}
               </div>
 
-              <h2 className="text-[18px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] mt-3">{mockProfile.fullName}</h2>
-              <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{mockProfile.email}</p>
-              <Badge variant="info" className="mt-2">{mockProfile.membership.tier}</Badge>
+              <h2 className="text-[18px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] mt-3">{profile.fullName}</h2>
+              <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{profile.email}</p>
+              <Badge variant="info" className="mt-2">{profile.membership.tier}</Badge>
             </div>
 
             {/* stats */}
             <div className="grid grid-cols-2 gap-3 mt-6">
-              {Object.entries(mockProfile.stats).map(([key, value]) => (
+              {Object.entries(profile.stats).map(([key, value]) => (
                 <div key={key} className="text-center p-3 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04]">
                   <p className="text-[20px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{value}</p>
                   <p className="text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
@@ -103,7 +103,7 @@ export function ProfilePageClient() {
                       className="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] text-slate-800 dark:text-[#E2E8F0] focus:outline-none focus:border-[#2563EB] transition-colors"
                     />
                   ) : (
-                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{mockProfile.fullName}</p>
+                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.fullName}</p>
                   )}
                 </div>
                 <div>
@@ -116,17 +116,17 @@ export function ProfilePageClient() {
                       className="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] text-slate-800 dark:text-[#E2E8F0] focus:outline-none focus:border-[#2563EB] transition-colors"
                     />
                   ) : (
-                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{mockProfile.email}</p>
+                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.email}</p>
                   )}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mb-1 block">Student ID</label>
-                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{mockProfile.studentId}</p>
+                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.studentId}</p>
                   </div>
                   <div>
                     <label className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mb-1 block">Member Since</label>
-                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{mockProfile.joinDate}</p>
+                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.joinDate}</p>
                   </div>
                 </div>
               </div>
@@ -138,17 +138,17 @@ export function ProfilePageClient() {
                 <h3 className="text-[16px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Membership Tier</h3>
                 <div className="flex items-center gap-1.5">
                   <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
-                  <span className="text-[14px] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]">{mockProfile.membership.tier}</span>
+                  <span className="text-[14px] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]">{profile.membership.tier}</span>
                 </div>
               </div>
 
               <div className="mb-3">
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
-                    {mockProfile.membership.points} / {mockProfile.membership.nextTierPoints} points
+                    {profile.membership.points} / {profile.membership.nextTierPoints} points
                   </span>
                   <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
-                    {mockProfile.membership.nextTierPoints - mockProfile.membership.points} points to {mockProfile.membership.nextTier}
+                    {profile.membership.nextTierPoints - profile.membership.points} points to {profile.membership.nextTier}
                   </span>
                 </div>
                 <div className="h-2.5 bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] rounded-full overflow-hidden">
@@ -172,7 +172,7 @@ export function ProfilePageClient() {
                   <CreditCard className="h-6 w-6 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0]">{mockProfile.studentId}</p>
+                  <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0]">{profile.studentId}</p>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="h-2 w-2 rounded-full bg-emerald-500" />
                     <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Active — Use at library entrance</span>

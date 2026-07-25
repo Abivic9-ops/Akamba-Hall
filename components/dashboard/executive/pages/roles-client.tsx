@@ -2,15 +2,33 @@
 
 import { Users, GraduationCap, Briefcase, Star, UserX, ArrowRight } from 'lucide-react'
 
-const roles = [
-  { role: 'Students', icon: GraduationCap, count: 1780, active: 1654, suspended: 6, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
-  { role: 'Librarians & Staff', icon: Users, count: 24, active: 24, suspended: 0, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  { role: 'Department Staff', icon: Briefcase, count: 98, active: 95, suspended: 0, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
-  { role: 'Executives', icon: Star, count: 12, active: 12, suspended: 0, color: 'text-[#D97706]', bg: 'bg-amber-50' },
-  { role: 'Suspended Users', icon: UserX, count: 6, active: 0, suspended: 6, color: 'text-red-500', bg: 'bg-red-50' },
-]
+interface RoleData {
+  role: string
+  count: number
+  active: number
+  suspended: number
+}
 
-export function RolesClient() {
+const roleMeta: Record<string, { icon: React.ElementType; color: string; bg: string }> = {
+  STUDENT: { icon: GraduationCap, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
+  STAFF: { icon: Users, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
+  EXECUTIVE: { icon: Star, color: 'text-[#D97706]', bg: 'bg-amber-50' },
+  LIBRARY_HEAD: { icon: Briefcase, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
+  SUPER_ADMIN: { icon: Briefcase, color: 'text-[#8B5CF6]', bg: 'bg-violet-50' },
+}
+
+const roleLabels: Record<string, string> = {
+  STUDENT: 'Students',
+  STAFF: 'Staff',
+  EXECUTIVE: 'Executives',
+  LIBRARY_HEAD: 'Library Heads',
+  SUPER_ADMIN: 'Super Admins',
+  ASSISTANT: 'Assistants',
+  CAPTAIN: 'Captains',
+  PREFECT: 'Prefects',
+}
+
+export function RolesClient({ roles }: { roles: RoleData[] }) {
   return (
     <div className="space-y-6">
       <div>
@@ -19,15 +37,16 @@ export function RolesClient() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {roles.map((r) => {
-          const Icon = r.icon
+          const meta = roleMeta[r.role] ?? { icon: Users, color: 'text-slate-500', bg: 'bg-slate-50' }
+          const Icon = meta.icon
           return (
             <div key={r.role} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-5 hover:shadow-md transition-shadow">
               <div className="flex items-center gap-3 mb-4">
-                <div className={`h-10 w-10 rounded-xl ${r.bg} flex items-center justify-center`}>
-                  <Icon className={`h-5 w-5 ${r.color}`} />
+                <div className={`h-10 w-10 rounded-xl ${meta.bg} flex items-center justify-center`}>
+                  <Icon className={`h-5 w-5 ${meta.color}`} />
                 </div>
                 <div>
-                  <p className="text-[14px] font-semibold text-slate-800 dark:text-[#E2E8F0]">{r.role}</p>
+                  <p className="text-[14px] font-semibold text-slate-800 dark:text-[#E2E8F0]">{roleLabels[r.role] ?? r.role}</p>
                   <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.count} total</p>
                 </div>
               </div>

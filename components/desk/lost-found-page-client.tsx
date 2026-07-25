@@ -20,15 +20,6 @@ interface LostFoundItem {
   status: 'Lost' | 'Found' | 'Claimed'
 }
 
-const mockItems: LostFoundItem[] = [
-  { id: 'LF-001', type: 'Lost', description: 'Black leather backpack with university logo, contains Calculus textbook', reportedBy: 'James Ochieng', memberId: 'STU-24011076', date: '2026-06-20', location: 'Main Reading Hall', status: 'Lost' },
-  { id: 'LF-002', type: 'Found', description: 'Casio fx-991EX scientific calculator', reportedBy: 'Mary Wanjiku', memberId: 'STF-047', date: '2026-06-21', location: 'AVR Room 3', status: 'Found' },
-  { id: 'LF-003', type: 'Lost', description: 'Blue USB flash drive 64GB with thesis documents', reportedBy: 'Grace Wambui', memberId: 'STU-24011115', date: '2026-06-18', location: 'Computer Lab B', status: 'Lost' },
-  { id: 'LF-004', type: 'Found', description: 'Set of keys with silver keychain and student ID tag', reportedBy: 'Peter Kamau', memberId: 'STU-24011089', date: '2026-06-19', location: 'Circulation Desk', status: 'Claimed' },
-  { id: 'LF-005', type: 'Lost', description: 'Brown library book: "Economics: A Modern Introduction" by Mankiw', reportedBy: 'David Mutua', memberId: 'STU-24011102', date: '2026-06-22', location: 'Shelf D1', status: 'Lost' },
-  { id: 'LF-006', type: 'Found', description: 'Wireless earbuds in white charging case, Samsung brand', reportedBy: 'Brian Kipchoge', memberId: 'STU-24011128', date: '2026-06-20', location: 'Study Room 7', status: 'Found' },
-]
-
 const filterTabs = ['All', 'Lost', 'Found', 'Claimed'] as const
 
 function statusBadge(status: LostFoundItem['status']) {
@@ -42,14 +33,14 @@ function statusBadge(status: LostFoundItem['status']) {
   }
 }
 
-export function LostFoundPageClient() {
+export function LostFoundPageClient({ items }: { items: LostFoundItem[] }) {
   const [activeFilter, setActiveFilter] = useState<typeof filterTabs[number]>('All')
   const [reportType, setReportType] = useState<'Lost' | 'Found'>('Lost')
   const [reportDesc, setReportDesc] = useState('')
   const [reportMemberId, setReportMemberId] = useState('')
   const [reportLocation, setReportLocation] = useState('')
 
-  const filteredItems = mockItems.filter(
+  const filteredItems = items.filter(
     (item) => activeFilter === 'All' || item.status === activeFilter
   )
 
@@ -75,7 +66,7 @@ export function LostFoundPageClient() {
               >
                 {tab}
                 <span className="ml-1.5 text-[10px] opacity-70">
-                  {tab === 'All' ? mockItems.length : mockItems.filter((i) => i.status === tab).length}
+                  {tab === 'All' ? items.length : items.filter((i) => i.status === tab).length}
                 </span>
               </button>
             ))}
@@ -94,15 +85,19 @@ export function LostFoundPageClient() {
                     <div>
                       <p className="text-[13px] font-medium text-slate-800">{item.description}</p>
                       <div className="flex flex-wrap items-center gap-3 mt-1.5">
-                        <span className="flex items-center gap-1 text-[11px] text-slate-500">
-                          <User className="h-3 w-3" /> {item.reportedBy}
-                        </span>
+                        {item.reportedBy && (
+                          <span className="flex items-center gap-1 text-[11px] text-slate-500">
+                            <User className="h-3 w-3" /> {item.reportedBy}
+                          </span>
+                        )}
                         <span className="flex items-center gap-1 text-[11px] text-slate-500">
                           <Calendar className="h-3 w-3" /> {new Date(item.date).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </span>
-                        <span className="flex items-center gap-1 text-[11px] text-slate-500">
-                          <MapPin className="h-3 w-3" /> {item.location}
-                        </span>
+                        {item.location && (
+                          <span className="flex items-center gap-1 text-[11px] text-slate-500">
+                            <MapPin className="h-3 w-3" /> {item.location}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">

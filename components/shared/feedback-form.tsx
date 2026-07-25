@@ -1,0 +1,99 @@
+'use client'
+
+import { MessageSquare, Send } from 'lucide-react'
+import { useState } from 'react'
+import { SectionCard } from '@/components/ui/section-card'
+
+interface Props {
+  portal: string
+}
+
+export function FeedbackForm({ portal }: Props) {
+  const [title, set_title] = useState('')
+  const [description, set_description] = useState('')
+  const [category, set_category] = useState('GENERAL')
+  const [submitted, set_submitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    set_submitted(true)
+    setTimeout(() => {
+      set_title('')
+      set_description('')
+      set_submitted(false)
+    }, 2000)
+  }
+
+  return (
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
+      <div className="max-w-[1440px] mx-auto p-6 space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-xl bg-[#5B9BD5]/10 text-[#5B9BD5] flex items-center justify-center">
+            <MessageSquare className="h-5 w-5" />
+          </div>
+          <div>
+            <h1 className="text-xl font-extrabold text-[#0B1B3D] dark:text-[#E2E8F0] tracking-tight">Submit Feedback</h1>
+            <p className="text-[12px] text-slate-500 dark:text-[#6B7A99]">Report issues or share suggestions</p>
+          </div>
+        </div>
+
+        <SectionCard title="New Report" icon={MessageSquare}>
+          {submitted ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <div className="h-16 w-16 rounded-2xl bg-emerald-50 flex items-center justify-center mb-4">
+                <Send className="h-7 w-7 text-emerald-500" />
+              </div>
+              <h3 className="text-[15px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1">Thank you!</h3>
+              <p className="text-[13px] text-slate-400 dark:text-[#6B7A99]">Your feedback has been submitted.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-[13px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1.5">Title</label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => set_title(e.target.value)}
+                  placeholder="Brief description of the issue"
+                  className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.05] text-[13px] text-slate-800 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:placeholder:text-[#6B7A99] focus:outline-none focus:ring-2 focus:ring-[#5B9BD5]/30"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-[13px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1.5">Category</label>
+                <select
+                  value={category}
+                  onChange={(e) => set_category(e.target.value)}
+                  className="w-full h-9 px-3 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.05] text-[13px] text-slate-800 dark:text-[#E2E8F0] focus:outline-none focus:ring-2 focus:ring-[#5B9BD5]/30"
+                >
+                  <option value="GENERAL">General</option>
+                  <option value="BOOK_DAMAGE">Book Damage</option>
+                  <option value="FACILITY">Facility</option>
+                  <option value="EQUIPMENT">Equipment</option>
+                  <option value="MEMBER_CONDUCT">Member Conduct</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-[13px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1.5">Description</label>
+                <textarea
+                  value={description}
+                  onChange={(e) => set_description(e.target.value)}
+                  placeholder="Provide details..."
+                  rows={4}
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.05] text-[13px] text-slate-800 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:placeholder:text-[#6B7A99] focus:outline-none focus:ring-2 focus:ring-[#5B9BD5]/30 resize-none"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="h-9 px-6 rounded-lg bg-[#5B9BD5] text-white text-[13px] font-medium hover:bg-[#4A8AC4] transition-colors"
+              >
+                Submit Feedback
+              </button>
+            </form>
+          )}
+        </SectionCard>
+      </div>
+    </div>
+  )
+}

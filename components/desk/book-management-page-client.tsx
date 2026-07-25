@@ -20,20 +20,9 @@ interface Book {
   shelfLocation: string
 }
 
-const mockBooks: Book[] = [
-  { id: 'BK-001', title: 'Advanced Physics: Principles and Applications', author: 'Ochieng & Odhiambo', isbn: '978-9966-028-43-1', category: 'Science', copies: 5, available: 3, shelfLocation: 'A3-01' },
-  { id: 'BK-002', title: 'Chemistry: The Central Science', author: 'Brown, LeMay & Bursten', isbn: '978-0-13-468599-1', category: 'Science', copies: 4, available: 2, shelfLocation: 'A4-02' },
-  { id: 'BK-003', title: 'Biology: Concepts and Applications', author: 'Starr & Taggart', isbn: '978-0-534-38017-5', category: 'Science', copies: 3, available: 3, shelfLocation: 'B1-01' },
-  { id: 'BK-004', title: 'Introduction to Computer Science', author: 'Brookshear & Brylow', isbn: '978-0-13-592899-8', category: 'Technology', copies: 6, available: 4, shelfLocation: 'C2-03' },
-  { id: 'BK-005', title: 'Economics: A Modern Introduction', author: 'Mankiw', isbn: '978-1-285-16588-2', category: 'Commerce', copies: 4, available: 3, shelfLocation: 'D1-01' },
-  { id: 'BK-006', title: 'Kenya History and Geography', author: 'Sindu & Kibua', isbn: '978-9966-771-12-8', category: 'Humanities', copies: 3, available: 1, shelfLocation: 'E3-02' },
-  { id: 'BK-007', title: 'Literature in English Anthology', author: 'Wa Thiong\'o & Nyabera', isbn: '978-9966-874-23-9', category: 'Humanities', copies: 5, available: 4, shelfLocation: 'E1-01' },
-  { id: 'BK-008', title: 'Mathematics for Kenya', author: 'Omenko', isbn: '978-9966-028-56-4', category: 'Science', copies: 7, available: 5, shelfLocation: 'A2-04' },
-]
-
 const categories = ['All', 'Science', 'Technology', 'Commerce', 'Humanities']
 
-export function BookManagementPageClient() {
+export function BookManagementPageClient({ books }: { books: Book[] }) {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
   const [showAddForm, setShowAddForm] = useState(false)
@@ -44,7 +33,7 @@ export function BookManagementPageClient() {
   const [newCopies, setNewCopies] = useState('1')
   const [newShelf, setNewShelf] = useState('')
 
-  const filteredBooks = mockBooks.filter((book) => {
+  const filteredBooks = books.filter((book) => {
     const matchesSearch =
       book.title.toLowerCase().includes(search.toLowerCase()) ||
       book.author.toLowerCase().includes(search.toLowerCase()) ||
@@ -160,7 +149,7 @@ export function BookManagementPageClient() {
                     </td>
                     <td className="py-3 px-3 text-center text-[13px] font-bold text-slate-700">{book.copies}</td>
                     <td className="py-3 px-3 text-center text-[13px] font-bold text-slate-700">{book.available}</td>
-                    <td className="py-3 px-3 text-[12px] text-slate-600 font-mono">{book.shelfLocation}</td>
+                    <td className="py-3 px-3 text-[12px] text-slate-600 font-mono">{book.shelfLocation || 'N/A'}</td>
                     <td className="py-3 px-3">
                       <div className="flex items-center justify-end gap-2">
                         <Button variant="ghost" size="xs" className="gap-1 text-[11px]">

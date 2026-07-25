@@ -11,55 +11,13 @@ interface Loan {
   id: string
   title: string
   author: string
-  coverUrl: string
+  coverUrl: string | null
   dueDate: string
+  checkoutAt: string
+  returnedAt: string | null
   renewable: boolean
-  category: string
-  borrowedDate: string
+  status: string
 }
-
-const mockLoans: Loan[] = [
-  {
-    id: 'loan-1',
-    title: 'Introduction to Physics',
-    author: 'J.K. Kariuki',
-    coverUrl: '',
-    dueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-    renewable: true,
-    category: 'Science',
-    borrowedDate: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'loan-2',
-    title: 'Secondary School Mathematics',
-    author: 'A.O. Awino',
-    coverUrl: '',
-    dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
-    renewable: true,
-    category: 'Mathematics',
-    borrowedDate: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'loan-3',
-    title: 'The Secret Runner',
-    author: 'Tim Kennemar',
-    coverUrl: '',
-    dueDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
-    renewable: false,
-    category: 'Fiction',
-    borrowedDate: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    id: 'loan-4',
-    title: 'Kenya: A History Since Independence',
-    author: 'Nic Cheeseman',
-    coverUrl: '',
-    dueDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-    renewable: true,
-    category: 'History',
-    borrowedDate: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(),
-  },
-]
 
 function daysLeft(dueDate: string): number {
   return Math.ceil((new Date(dueDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
@@ -69,20 +27,21 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
-export function LoansPageClient() {
+export function LoansPageClient({ loans }: { loans: Loan[] }) {
   const [filter, setFilter] = useState<'all' | 'active' | 'overdue' | 'returned'>('all')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const filteredLoans = mockLoans.filter((loan) => {
+  const filteredLoans = loans.filter((loan) => {
     const days = daysLeft(loan.dueDate)
     if (filter === 'overdue' && days >= 0) return false
     if (filter === 'active' && days < 0) return false
+    if (filter === 'returned' && loan.status !== 'returned') return false
     if (searchQuery && !loan.title.toLowerCase().includes(searchQuery.toLowerCase()) && !loan.author.toLowerCase().includes(searchQuery.toLowerCase())) return false
     return true
   })
 
-  const overdueCount = mockLoans.filter((l) => daysLeft(l.dueDate) < 0).length
-  const activeCount = mockLoans.filter((l) => daysLeft(l.dueDate) >= 0).length
+  const overdueCount = loans.filter((l) => l.status === 'overdue').length
+  const activeCount = loans.filter((l) => l.status === 'active').length
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
@@ -109,7 +68,7 @@ export function LoansPageClient() {
               <BookOpen className="h-4 w-4 text-[#2563EB]" />
               <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Total Loans</span>
             </div>
-            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{mockLoans.length}</p>
+            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{loans.length}</p>
           </div>
           <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] p-4">
             <div className="flex items-center gap-2 mb-2">
@@ -130,7 +89,7 @@ export function LoansPageClient() {
               <RefreshCw className="h-4 w-4 text-amber-500" />
               <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Renewable</span>
             </div>
-            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{mockLoans.filter(l => l.renewable).length}</p>
+            <p className="text-[24px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{loans.filter(l => l.renewable).length}</p>
           </div>
         </div>
 
@@ -178,7 +137,7 @@ export function LoansPageClient() {
             <div>
               {filteredLoans.map((loan) => {
                 const days = daysLeft(loan.dueDate)
-                const isOverdue = days < 0
+                const isOverdue = days < 0 && loan.status !== 'returned'
                 const isDueSoon = days >= 0 && days <= 3
 
                 return (
@@ -195,14 +154,14 @@ export function LoansPageClient() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <p className="text-[16px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{loan.title}</p>
+                        {loan.status === 'returned' && <Badge variant="success">Returned</Badge>}
                         {isOverdue && <Badge variant="danger" inverted>Overdue</Badge>}
-                        {isDueSoon && !isOverdue && <Badge variant="warning">{days}d left</Badge>}
-                        {!isOverdue && !isDueSoon && <Badge variant="success">{days}d left</Badge>}
+                        {isDueSoon && !isOverdue && loan.status !== 'returned' && <Badge variant="warning">{days}d left</Badge>}
+                        {!isOverdue && !isDueSoon && loan.status !== 'returned' && <Badge variant="success">{days}d left</Badge>}
                       </div>
                       <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{loan.author}</p>
                       <div className="flex items-center gap-4 mt-1.5">
-                        <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Category: {loan.category}</span>
-                        <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Borrowed: {formatDate(loan.borrowedDate)}</span>
+                        <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">Borrowed: {formatDate(loan.checkoutAt)}</span>
                         <span className={`text-[13px] ${isOverdue ? 'text-red-600 font-medium' : 'text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]'}`}>
                           Due: {formatDate(loan.dueDate)}
                         </span>
@@ -211,7 +170,7 @@ export function LoansPageClient() {
 
                     {/* actions */}
                     <div className="flex items-center gap-2 shrink-0">
-                      {loan.renewable && (
+                      {loan.renewable && loan.status !== 'returned' && (
                         <button className="h-8 px-4 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[13px] font-normal text-slate-700 dark:text-[#E2E8F0] hover:bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] dark:bg-white/[0.06] transition-colors">
                           Renew
                         </button>

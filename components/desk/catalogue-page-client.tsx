@@ -17,26 +17,13 @@ interface CatalogueBook {
   isbn: string
 }
 
-const catalogue_books: CatalogueBook[] = [
-  { id: 'cb1', title: 'Advanced Physics: Principles and Applications', author: 'Ababu J. Zeleke', category: 'General Books', available: true, copies: 3, totalCopies: 5, shelfLocation: 'A-12-03', isbn: '978-9966-123-45-6' },
-  { id: 'cb2', title: 'Introduction to Computer Science', author: 'J. Brookshear', category: 'General Books', available: true, copies: 2, totalCopies: 4, shelfLocation: 'B-05-07', isbn: '978-0-13-376411-1' },
-  { id: 'cb3', title: 'Teaching Mathematics in East Africa', author: 'Samwel Otieno', category: 'Reference', available: false, copies: 0, totalCopies: 2, shelfLocation: 'REF-02-01', isbn: '978-9966-789-01-2' },
-  { id: 'cb4', title: 'Kenya History and Geography', author: 'B. A. Ogot', category: 'General Books', available: true, copies: 4, totalCopies: 6, shelfLocation: 'C-08-11', isbn: '978-9966-234-56-7' },
-  { id: 'cb5', title: 'Chemistry: The Central Science', author: 'Brown, LeMay & Bursten', category: 'General Books', available: true, copies: 1, totalCopies: 3, shelfLocation: 'A-14-02', isbn: '978-0-321-80926-1' },
-  { id: 'cb6', title: 'Business Studies Form 4', author: 'KLB Publishers', category: 'Reference', available: true, copies: 5, totalCopies: 8, shelfLocation: 'REF-05-04', isbn: '978-9966-567-89-0' },
-  { id: 'cb7', title: 'Journal of East African Natural History', author: 'Various Authors', category: 'Periodicals', available: true, copies: 1, totalCopies: 1, shelfLocation: 'PER-01-02', isbn: 'ISSN 0012-8252' },
-  { id: 'cb8', title: 'Digital Literacy for African Schools', author: 'Wanjiku M. Kamau', category: 'Digital', available: true, copies: 99, totalCopies: 99, shelfLocation: 'Online', isbn: '978-9966-345-67-8' },
-  { id: 'cb9', title: 'Economics: A Modern Introduction', author: 'N. Gregory Mankiw', category: 'General Books', available: false, copies: 0, totalCopies: 3, shelfLocation: 'D-03-09', isbn: '978-0-538-45372-3' },
-  { id: 'cb10', title: 'Literature in English Anthology', author: 'Longhorn Publishers', category: 'General Books', available: true, copies: 6, totalCopies: 10, shelfLocation: 'E-11-01', isbn: '978-9966-789-12-8' },
-]
-
 const categories = ['All', 'General Books', 'Reference', 'Periodicals', 'Digital']
 
-export function CataloguePageClient() {
+export function CataloguePageClient({ books }: { books: CatalogueBook[] }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
 
-  const filtered = catalogue_books.filter((book) => {
+  const filtered = books.filter((book) => {
     if (activeCategory !== 'All' && book.category !== activeCategory) return false
     if (searchQuery) {
       const q = searchQuery.toLowerCase()
@@ -140,7 +127,7 @@ export function CataloguePageClient() {
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="bg-slate-50 rounded-lg p-2">
                   <p className="text-[9px] text-slate-500 font-bold uppercase">Shelf</p>
-                  <p className="text-[12px] font-bold text-[#0B1B3D]">{book.shelfLocation}</p>
+                  <p className="text-[12px] font-bold text-[#0B1B3D]">{book.shelfLocation || 'N/A'}</p>
                 </div>
                 <div className="bg-slate-50 rounded-lg p-2">
                   <p className="text-[9px] text-slate-500 font-bold uppercase">Copies</p>

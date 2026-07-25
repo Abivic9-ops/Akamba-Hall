@@ -1,6 +1,6 @@
 import { requireRole } from '@/lib/auth/roleGuard'
 import { get_or_create_staff_card } from '@/lib/actions/qr-cards'
-import { get_staff_dashboard_data } from '@/lib/actions/dashboard'
+import { get_staff_dashboard_data, get_staff_recent_activity } from '@/lib/actions/dashboard'
 import { get_announcements } from '@/lib/actions/announcements'
 import { get_events } from '@/lib/actions/events'
 import { StaffDashboardClient } from '@/components/dashboard/staff/staff-dashboard-client'
@@ -56,11 +56,18 @@ export default async function StaffDashboardPage() {
 
   let announcements: { id: string; type: string; title: string; subtitle: string; createdAt: string }[] = []
   let upcomingEvents: { id: string; title: string; date: string; time: string; venue: string }[] = []
+  let recentActivity: { id: string; type: 'renewal' | 'seat_booking' | 'hold_pickup' | 'avr_booking' | 'book_suggestion' | 'return'; description: string; detail: string; timestamp: string }[] = []
 
   try {
     dashboardData = await get_staff_dashboard_data(profile.id)
   } catch (e) {
     console.error('[Staff Dashboard] Data fetch error:', e)
+  }
+
+  try {
+    recentActivity = await get_staff_recent_activity(profile.id)
+  } catch (e) {
+    console.error('[Staff Dashboard] Activity fetch error:', e)
   }
 
   try {
@@ -101,7 +108,7 @@ export default async function StaffDashboardPage() {
       bookings={dashboardData.bookings.map((b) => ({ ...b, type: b.type as 'Reading Seat' | 'AVR' | 'Boardroom', status: b.status as 'Approved' | 'Pending' | 'Cancelled' | 'Confirmed' }))}
       announcements={announcements.map((a) => ({ ...a, type: a.type as 'closure' | 'acquisition' | 'workshop' | 'ict' | 'policy' }))}
       libraryHours={staff_library_hours}
-      recentActivity={[]}
+      recentActivity={recentActivity}
       upcomingEvents={upcomingEvents}
       overdue={dashboardData.overdue}
       unreadAlerts={dashboardData.overdue.overdueCount}

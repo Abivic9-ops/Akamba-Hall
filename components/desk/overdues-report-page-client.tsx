@@ -5,21 +5,16 @@ import { AlertTriangle, Clock, Mail, Calendar, XCircle } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 
-const summaryStats = [
-  { label: 'Total Overdue', value: 6, color: 'bg-red-50 text-red-600', icon: AlertTriangle },
-  { label: '1–3 Days', value: 2, color: 'bg-amber-50 text-amber-600', icon: Clock },
-  { label: '4–7 Days', value: 2, color: 'bg-orange-50 text-orange-600', icon: Clock },
-  { label: '7+ Days', value: 2, color: 'bg-red-100 text-red-700', icon: AlertTriangle },
-]
-
-const overdueItems = [
-  { id: 1, bookTitle: 'Introduction to Algorithms', member: 'Kipchoge Korir', studentId: 'AKM-2025-0314', dueDate: '10 Jul 2026', daysOverdue: 12, fine: 600, status: 'Severe' },
-  { id: 2, bookTitle: 'Database System Concepts', member: 'Jabali Mwangi', studentId: 'AKM-2025-0078', dueDate: '15 Jul 2026', daysOverdue: 7, fine: 350, status: 'Critical' },
-  { id: 3, bookTitle: 'Engineering Mathematics', member: 'Wanjiku Kamau', studentId: 'AKM-2026-0042', dueDate: '18 Jul 2026', daysOverdue: 4, fine: 200, status: 'Critical' },
-  { id: 4, bookTitle: 'Principles of Economics', member: 'Otieno Ochieng', studentId: 'AKM-2026-0117', dueDate: '20 Jul 2026', daysOverdue: 2, fine: 100, status: 'Warning' },
-  { id: 5, bookTitle: 'Organic Chemistry', member: 'Amina Hassan', studentId: 'AKM-2026-0089', dueDate: '19 Jul 2026', daysOverdue: 3, fine: 150, status: 'Warning' },
-  { id: 6, bookTitle: 'Data Structures & Algorithms in Java', member: 'Nyerere Odhiambo', studentId: 'AKM-2026-0156', dueDate: '12 Jul 2026', daysOverdue: 10, fine: 500, status: 'Severe' },
-]
+interface OverdueItem {
+  id: string
+  bookTitle: string
+  member: string
+  studentId: string
+  dueDate: string
+  daysOverdue: number
+  fine: number
+  status: string
+}
 
 const statusBadge = (status: string) => {
   if (status === 'Severe') return <Badge variant="danger" dot>{status}</Badge>
@@ -27,13 +22,7 @@ const statusBadge = (status: string) => {
   return <Badge variant="info" dot>{status}</Badge>
 }
 
-const trendSummary = [
-  { period: 'This Week', total: 6, avgDays: 6.3, avgFine: 317 },
-  { period: 'Last Week', total: 9, avgDays: 5.1, avgFine: 255 },
-  { period: '2 Weeks Ago', total: 4, avgDays: 3.8, avgFine: 190 },
-]
-
-export function OverduesReportPageClient() {
+export function OverduesReportPageClient({ overdueItems }: { overdueItems: OverdueItem[] }) {
   const [actionMessage, setActionMessage] = useState<string | null>(null)
 
   const handleAction = (action: string, memberName: string) => {
@@ -42,6 +31,18 @@ export function OverduesReportPageClient() {
   }
 
   const totalFines = overdueItems.reduce((sum, item) => sum + item.fine, 0)
+
+  const totalOverdue = overdueItems.length
+  const days13 = overdueItems.filter(i => i.daysOverdue >= 1 && i.daysOverdue <= 3).length
+  const days47 = overdueItems.filter(i => i.daysOverdue >= 4 && i.daysOverdue <= 7).length
+  const days7plus = overdueItems.filter(i => i.daysOverdue >= 8).length
+
+  const summaryStats = [
+    { label: 'Total Overdue', value: totalOverdue, color: 'bg-red-50 text-red-600', icon: AlertTriangle },
+    { label: '1-3 Days', value: days13, color: 'bg-amber-50 text-amber-600', icon: Clock },
+    { label: '4-7 Days', value: days47, color: 'bg-orange-50 text-orange-600', icon: Clock },
+    { label: '7+ Days', value: days7plus, color: 'bg-red-100 text-red-700', icon: AlertTriangle },
+  ]
 
   return (
     <div className="min-h-screen bg-[#F8F9FB]">
@@ -140,32 +141,14 @@ export function OverduesReportPageClient() {
                       </td>
                     </tr>
                   ))}
+                  {overdueItems.length === 0 && (
+                    <tr>
+                      <td colSpan={8} className="py-8 text-center text-[13px] text-slate-400">No overdue items. All books are on time!</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
-          </div>
-        </SectionCard>
-
-        <SectionCard title="Overdue Trends" icon={Clock}>
-          <div className="space-y-0">
-            {trendSummary.map(t => (
-              <div key={t.period} className="flex items-center justify-between py-3 border-b border-slate-50 last:border-0">
-                <div>
-                  <p className="text-[13px] font-medium text-slate-800">{t.period}</p>
-                  <p className="text-[11px] text-slate-400">Average {t.avgDays} days overdue</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <p className="text-[14px] font-bold text-slate-800">{t.total}</p>
-                    <p className="text-[10px] text-slate-400">overdue items</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-[14px] font-bold text-amber-600">KES {t.avgFine}</p>
-                    <p className="text-[10px] text-slate-400">avg fine</p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </SectionCard>
 

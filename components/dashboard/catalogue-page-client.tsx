@@ -9,39 +9,27 @@ interface CatalogueItem {
   id: string
   title: string
   author: string
-  category: string
-  status: 'available' | 'on_loan' | 'reserved'
-  rating: number
-  copies: number
-  year: number
-  isbn: string
+  category: string | null
+  status: string
+  availableCopies: number
+  totalCopies: number
+  year: number | null
+  isbn: string | null
 }
-
-const mockCatalogue: CatalogueItem[] = [
-  { id: 'cat-1', title: 'Introduction to Physics', author: 'J.K. Kariuki', category: 'Science', status: 'available', rating: 4.5, copies: 3, year: 2022, isbn: '978-0-123456-01-1' },
-  { id: 'cat-2', title: 'Secondary School Mathematics', author: 'A.O. Awino', category: 'Mathematics', status: 'on_loan', rating: 4.2, copies: 2, year: 2021, isbn: '978-0-123456-02-8' },
-  { id: 'cat-3', title: 'The Secret Runner', author: 'Tim Kennemar', category: 'Fiction', status: 'available', rating: 4.8, copies: 1, year: 2023, isbn: '978-0-123456-03-5' },
-  { id: 'cat-4', title: 'Chemistry Practical Guide', author: 'P.O. Owuor', category: 'Science', status: 'reserved', rating: 4.0, copies: 0, year: 2020, isbn: '978-0-123456-04-2' },
-  { id: 'cat-5', title: 'Kenyan History: Pre-Colonial to Modern', author: 'M.W. Odhiambo', category: 'History', status: 'available', rating: 4.6, copies: 4, year: 2023, isbn: '978-0-123456-05-9' },
-  { id: 'cat-6', title: 'Advanced English Grammar', author: 'Wanjiku Kamau', category: 'Language', status: 'on_loan', rating: 4.3, copies: 2, year: 2022, isbn: '978-0-123456-06-6' },
-  { id: 'cat-7', title: 'Computer Studies for Secondary Schools', author: 'James Mwangi', category: 'Technology', status: 'available', rating: 4.1, copies: 5, year: 2024, isbn: '978-0-123456-07-3' },
-  { id: 'cat-8', title: 'Biology: A Complete Guide', author: 'Grace Achieng', category: 'Science', status: 'available', rating: 4.7, copies: 3, year: 2023, isbn: '978-0-123456-08-0' },
-]
 
 const categories = ['All', 'Science', 'Mathematics', 'Fiction', 'History', 'Language', 'Technology']
 
-const status_map = {
-  available: { label: 'Available', variant: 'success' as const },
-  on_loan: { label: 'On Loan', variant: 'warning' as const },
-  reserved: { label: 'Reserved', variant: 'info' as const },
+const status_map: Record<string, { label: string; variant: 'success' | 'warning' }> = {
+  available: { label: 'Available', variant: 'success' },
+  unavailable: { label: 'Unavailable', variant: 'warning' },
 }
 
-export function CataloguePageClient() {
+export function CataloguePageClient({ books }: { books: CatalogueItem[] }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
 
-  const filtered = mockCatalogue.filter((item) => {
+  const filtered = books.filter((item) => {
     const matchesSearch = !searchQuery || item.title.toLowerCase().includes(searchQuery.toLowerCase()) || item.author.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesCategory = activeCategory === 'All' || item.category === activeCategory
     return matchesSearch && matchesCategory
@@ -109,7 +97,7 @@ export function CataloguePageClient() {
         {/* results count */}
         <div className="flex items-center justify-between">
           <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">
-            Showing {filtered.length} of {mockCatalogue.length} items
+            Showing {filtered.length} of {books.length} items
           </p>
         </div>
 
@@ -117,7 +105,7 @@ export function CataloguePageClient() {
         {viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filtered.map((item) => {
-              const st = status_map[item.status]
+              const st = status_map[item.status] ?? status_map.unavailable
               return (
                 <div
                   key={item.id}
@@ -127,21 +115,16 @@ export function CataloguePageClient() {
                     <BookOpen className="h-12 w-12 text-slate-300" />
                   </div>
                   <div className="p-4">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
-                      <span className="text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.rating}</span>
-                    </div>
                     <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{item.title}</p>
                     <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{item.author}</p>
                     <div className="flex items-center justify-between mt-3">
                       <span className={`text-[12px] px-2 py-0.5 rounded-full ${
                         item.status === 'available' ? 'bg-emerald-50 text-emerald-700' :
-                        item.status === 'on_loan' ? 'bg-amber-50 text-amber-700' :
-                        'bg-sky-50 text-sky-700'
+                        'bg-amber-50 text-amber-700'
                       }`}>
                         {st.label}
                       </span>
-                      <span className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.copies} copies</span>
+                      <span className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.availableCopies} cop{item.availableCopies !== 1 ? 'ies' : 'y'}</span>
                     </div>
                   </div>
                 </div>
@@ -151,7 +134,7 @@ export function CataloguePageClient() {
         ) : (
           <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] overflow-hidden">
             {filtered.map((item) => {
-              const st = status_map[item.status]
+              const st = status_map[item.status] ?? status_map.unavailable
               return (
                 <div
                   key={item.id}
@@ -162,16 +145,11 @@ export function CataloguePageClient() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{item.title}</p>
-                    <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.author} · {item.year}</p>
-                  </div>
-                  <div className="hidden sm:flex items-center gap-2">
-                    <Star className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
-                    <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.rating}</span>
+                    <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.author}{item.year ? ` · ${item.year}` : ''}</p>
                   </div>
                   <span className={`text-[12px] px-2.5 py-0.5 rounded-full shrink-0 ${
                     item.status === 'available' ? 'bg-emerald-50 text-emerald-700' :
-                    item.status === 'on_loan' ? 'bg-amber-50 text-amber-700' :
-                    'bg-sky-50 text-sky-700'
+                    'bg-amber-50 text-amber-700'
                   }`}>
                     {st.label}
                   </span>

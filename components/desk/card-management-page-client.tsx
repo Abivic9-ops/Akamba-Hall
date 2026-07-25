@@ -5,25 +5,26 @@ import { CreditCard, Search, Ban, RotateCcw, Plus } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 
-const allCards = [
-  { id: 1, cardRef: 'AKB-C-0421', memberName: 'Wanjiku Kamau', studentId: 'AKM-2026-0042', status: 'Active', issuedDate: '15 Jan 2026', cardType: 'Standard' },
-  { id: 2, cardRef: 'AKB-C-0422', memberName: 'Otieno Ochieng', studentId: 'AKM-2026-0117', status: 'Active', issuedDate: '20 Feb 2026', cardType: 'Premium' },
-  { id: 3, cardRef: 'AKB-C-0423', memberName: 'Amina Hassan', studentId: 'AKM-2026-0089', status: 'Suspended', issuedDate: '03 Mar 2026', cardType: 'Standard' },
-  { id: 4, cardRef: 'AKB-C-0424', memberName: 'Kipchoge Korir', studentId: 'AKM-2025-0314', status: 'Revoked', issuedDate: '12 Nov 2025', cardType: 'Premium' },
-  { id: 5, cardRef: 'AKB-C-0425', memberName: 'Faith Wambui', studentId: 'AKM-2026-0203', status: 'Active', issuedDate: '08 Apr 2026', cardType: 'Standard' },
-  { id: 6, cardRef: 'AKB-C-0426', memberName: 'Nyerere Odhiambo', studentId: 'AKM-2026-0156', status: 'Active', issuedDate: '19 Jun 2026', cardType: 'Standard' },
-]
+interface CardData {
+  id: string
+  cardRef: string
+  memberName: string
+  studentId: string
+  status: string
+  issuedDate: string
+  cardType: string
+}
 
-const statusFilters = ['All', 'Active', 'Suspended', 'Revoked']
+const statusFilters = ['All', 'ACTIVE', 'SUSPENDED', 'REVOKED']
 
-export function CardManagementPageClient() {
+export function CardManagementPageClient({ cards }: { cards: CardData[] }) {
   const [activeFilter, setActiveFilter] = useState('All')
   const [memberId, setMemberId] = useState('')
   const [cardType, setCardType] = useState('Standard')
   const [issueSuccess, setIssueSuccess] = useState(false)
   const [issuedCardReference, setIssuedCardReference] = useState('')
 
-  const filtered = activeFilter === 'All' ? allCards : allCards.filter(c => c.status === activeFilter)
+  const filtered = activeFilter === 'All' ? cards : cards.filter(c => c.status === activeFilter)
 
   const handleIssue = () => {
     if (!memberId.trim()) return
@@ -34,9 +35,16 @@ export function CardManagementPageClient() {
   }
 
   const statusBadge = (status: string) => {
-    if (status === 'Active') return <Badge variant="success" dot>Active</Badge>
-    if (status === 'Suspended') return <Badge variant="danger" dot>Suspended</Badge>
+    if (status === 'ACTIVE') return <Badge variant="success" dot>Active</Badge>
+    if (status === 'SUSPENDED') return <Badge variant="danger" dot>Suspended</Badge>
     return <Badge variant="neutral" dot>Revoked</Badge>
+  }
+
+  const filterLabel = (f: string) => {
+    if (f === 'All') return 'All'
+    if (f === 'ACTIVE') return 'Active'
+    if (f === 'SUSPENDED') return 'Suspended'
+    return 'Revoked'
   }
 
   return (
@@ -55,7 +63,7 @@ export function CardManagementPageClient() {
                     activeFilter === f ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
                   }`}
                 >
-                  {f} ({f === 'All' ? allCards.length : allCards.filter(c => c.status === f).length})
+                  {filterLabel(f)} ({f === 'All' ? cards.length : cards.filter(c => c.status === f).length})
                 </button>
               ))}
             </div>
@@ -87,21 +95,23 @@ export function CardManagementPageClient() {
                       </td>
                       <td className="py-3 pr-4">{statusBadge(card.status)}</td>
                       <td className="py-3 pr-4">
-                        <span className="text-[11px] text-slate-400">{card.issuedDate}</span>
+                        <span className="text-[11px] text-slate-400">
+                          {new Date(card.issuedDate).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </span>
                       </td>
                       <td className="py-3">
                         <div className="flex items-center gap-1">
-                          {card.status === 'Active' && (
+                          {card.status === 'ACTIVE' && (
                             <button title="Suspend Card" className="h-7 w-7 rounded-md flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors">
                               <Ban className="h-3.5 w-3.5" />
                             </button>
                           )}
-                          {(card.status === 'Active' || card.status === 'Suspended') && (
+                          {(card.status === 'ACTIVE' || card.status === 'SUSPENDED') && (
                             <button title="Revoke Card" className="h-7 w-7 rounded-md flex items-center justify-center text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors">
                               <Ban className="h-3.5 w-3.5" />
                             </button>
                           )}
-                          {(card.status === 'Revoked' || card.status === 'Suspended') && (
+                          {(card.status === 'REVOKED' || card.status === 'SUSPENDED') && (
                             <button title="Reissue Card" className="h-7 w-7 rounded-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors">
                               <RotateCcw className="h-3.5 w-3.5" />
                             </button>

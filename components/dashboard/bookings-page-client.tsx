@@ -9,48 +9,21 @@ import { Badge } from '@/components/ui/badge'
 
 interface Booking {
   id: string
-  type: 'Reading Seat' | 'AVR' | 'Boardroom'
+  type: string
   title: string
   location: string
   startAt: string
   endAt: string
-  status: 'Approved' | 'Pending' | 'Cancelled'
+  status: string
 }
 
-const mockBookings: Booking[] = [
-  {
-    id: 'bk-1',
-    type: 'Reading Seat',
-    title: 'Morning Study Session',
-    location: 'Reading Hall — Seat 14',
-    startAt: new Date(new Date().setHours(9, 0, 0, 0)).toISOString(),
-    endAt: new Date(new Date().setHours(11, 30, 0, 0)).toISOString(),
-    status: 'Approved',
-  },
-  {
-    id: 'bk-2',
-    type: 'AVR',
-    title: 'AVR Session — Research Presentation',
-    location: 'Audio Visual Room',
-    startAt: new Date(new Date().setHours(14, 0, 0, 0)).toISOString(),
-    endAt: new Date(new Date().setHours(15, 30, 0, 0)).toISOString(),
-    status: 'Pending',
-  },
-  {
-    id: 'bk-3',
-    type: 'Boardroom',
-    title: 'Study Group — Physics Review',
-    location: 'Boardroom B',
-    startAt: new Date(new Date().setHours(16, 0, 0, 0)).toISOString(),
-    endAt: new Date(new Date().setHours(17, 0, 0, 0)).toISOString(),
-    status: 'Approved',
-  },
-]
-
-const type_config = {
-  'Reading Seat': { icon: BookOpen, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
+const type_config: Record<string, { icon: typeof BookOpen; color: string; bg: string }> = {
+  READING_HALL: { icon: BookOpen, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
   AVR: { icon: Video, color: 'text-amber-500', bg: 'bg-amber-50' },
-  Boardroom: { icon: Users, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
+  BOARDROOM: { icon: Users, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
+  STUDY_ROOM: { icon: BookOpen, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
+  COMPUTER_LAB: { icon: Video, color: 'text-[#8B5CF6]', bg: 'bg-purple-50' },
+  INNOVATION_CORNER: { icon: Users, color: 'text-[#F97316]', bg: 'bg-orange-50' },
 }
 
 function formatTime(iso: string): string {
@@ -61,11 +34,11 @@ function formatDay(iso: string): string {
   return new Date(iso).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
 }
 
-export function BookingsPageClient() {
+export function BookingsPageClient({ bookings }: { bookings: Booking[] }) {
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming')
 
-  const upcomingBookings = mockBookings.filter((b) => new Date(b.startAt) >= new Date())
-  const displayBookings = activeTab === 'upcoming' ? upcomingBookings : mockBookings
+  const upcomingBookings = bookings.filter((b) => new Date(b.startAt) >= new Date())
+  const displayBookings = activeTab === 'upcoming' ? upcomingBookings : bookings
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
@@ -89,7 +62,7 @@ export function BookingsPageClient() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {Object.entries(type_config).map(([type, cfg]) => {
             const Icon = cfg.icon
-            const count = mockBookings.filter((b) => b.type === type).length
+            const count = bookings.filter((b) => b.type === type).length
             return (
               <button
                 key={type}
@@ -99,7 +72,7 @@ export function BookingsPageClient() {
                   <Icon className={`h-6 w-6 ${cfg.color}`} />
                 </div>
                 <div className="flex-1">
-                  <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0]">{type}</p>
+                  <p className="text-[15px] font-medium text-slate-800 dark:text-[#E2E8F0]">{type.replace(/_/g, ' ')}</p>
                   <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">
                     {count === 0 ? 'No bookings' : `${count} upcoming`}
                   </p>
@@ -137,7 +110,7 @@ export function BookingsPageClient() {
             </div>
           ) : (
             displayBookings.map((bk) => {
-              const cfg = type_config[bk.type]
+              const cfg = type_config[bk.type] ?? type_config.READING_HALL
               const Icon = cfg.icon
               return (
                 <div
@@ -153,9 +126,9 @@ export function BookingsPageClient() {
                       <div className="flex items-center gap-2">
                         <p className="text-[16px] font-medium text-slate-800 dark:text-[#E2E8F0]">{bk.title}</p>
                         <Badge
-                          variant={bk.status === 'Approved' ? 'success' : bk.status === 'Pending' ? 'warning' : 'neutral'}
+                          variant={bk.status === 'APPROVED' ? 'success' : bk.status === 'PENDING' ? 'warning' : 'neutral'}
                         >
-                          {bk.status}
+                          {bk.status.charAt(0) + bk.status.slice(1).toLowerCase()}
                         </Badge>
                       </div>
 

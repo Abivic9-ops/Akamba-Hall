@@ -3,17 +3,21 @@
 import { Search } from 'lucide-react'
 import { useState } from 'react'
 
-const results = [
-  { title: 'Introduction to Algorithms', author: 'Thomas Cormen', year: 2022, category: 'Computer Science', available: true },
-  { title: 'The Art of Strategy', author: 'Avinash Dixit', year: 2021, category: 'Economics', available: true },
-  { title: 'Campus Biology', author: 'Kenneth Miller', year: 2023, category: 'Science', available: false },
-  { title: 'Modern World History', author: 'Southington', year: 2020, category: 'History', available: true },
-  { title: 'Principles of Economics', author: 'N. Gregory Mankiw', year: 2022, category: 'Economics', available: true },
-]
+interface Book {
+  id: string
+  title: string
+  author: string
+  category: string | null
+  year: number | null
+  status: string
+}
 
-export function CatalogueSearchClient() {
+export function CatalogueSearchClient({ books }: { books: Book[] }) {
   const [query, setQuery] = useState('')
-  const filtered = results.filter(r => r.title.toLowerCase().includes(query.toLowerCase()) || r.author.toLowerCase().includes(query.toLowerCase()))
+  const filtered = books.filter(r =>
+    r.title.toLowerCase().includes(query.toLowerCase()) ||
+    r.author.toLowerCase().includes(query.toLowerCase())
+  )
 
   return (
     <div className="space-y-6">
@@ -33,14 +37,14 @@ export function CatalogueSearchClient() {
       </div>
       <div className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none overflow-hidden">
         <div className="divide-y divide-slate-50">
-          {filtered.map((r, i) => (
-            <div key={i} className="flex items-center gap-4 px-6 py-3 hover:bg-slate-50/50 transition-colors">
+          {filtered.map((r) => (
+            <div key={r.id} className="flex items-center gap-4 px-6 py-3 hover:bg-slate-50/50 transition-colors">
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] font-medium text-slate-800 dark:text-[#E2E8F0]">{r.title}</p>
-                <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.author} · {r.year} · {r.category}</p>
+                <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.author} · {r.year ?? 'N/A'} · {r.category ?? 'Uncategorised'}</p>
               </div>
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${r.available ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500'}`}>
-                {r.available ? 'Available' : 'On Loan'}
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${r.status === 'available' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500'}`}>
+                {r.status === 'available' ? 'Available' : 'On Loan'}
               </span>
             </div>
           ))}

@@ -24,15 +24,6 @@ interface Member {
   outstandingFines: number
 }
 
-const mockMembers: Member[] = [
-  { id: 'M-001', name: 'James Ochieng', studentId: 'STU-24011076', role: 'Student', status: 'Active', loansCount: 3, lastVisit: '2026-06-22', email: 'james.ochieng@akambahall.ac.ke', phone: '+254 712 345 678', joinDate: '2024-09-01', outstandingFines: 0 },
-  { id: 'M-002', name: 'Peter Kamau', studentId: 'STU-24011089', role: 'Student', status: 'Active', loansCount: 2, lastVisit: '2026-06-21', email: 'peter.kamau@akambahall.ac.ke', phone: '+254 723 456 789', joinDate: '2024-09-01', outstandingFines: 150 },
-  { id: 'M-003', name: 'Grace Wambui', studentId: 'STU-24011115', role: 'Student', status: 'Active', loansCount: 1, lastVisit: '2026-06-20', email: 'grace.wambui@akambahall.ac.ke', phone: '+254 734 567 890', joinDate: '2024-09-01', outstandingFines: 0 },
-  { id: 'M-004', name: 'Sarah Njeri', studentId: 'STF-047', role: 'Staff', status: 'Active', loansCount: 4, lastVisit: '2026-06-22', email: 'sarah.njeri@akambahall.ac.ke', phone: '+254 745 678 901', joinDate: '2022-01-15', outstandingFines: 0 },
-  { id: 'M-005', name: 'David Mutua', studentId: 'STU-24011102', role: 'Student', status: 'Suspended', loansCount: 0, lastVisit: '2026-06-10', email: 'david.mutua@akambahall.ac.ke', phone: '+254 756 789 012', joinDate: '2024-09-01', outstandingFines: 500 },
-  { id: 'M-006', name: 'Alice Akinyi', studentId: 'STU-24011134', role: 'Student', status: 'Active', loansCount: 2, lastVisit: '2026-06-19', email: 'alice.akinyi@akambahall.ac.ke', phone: '+254 767 890 123', joinDate: '2024-09-01', outstandingFines: 0 },
-]
-
 function roleBadge(role: Member['role']) {
   return role === 'Staff' ? <Badge variant="info">{role}</Badge> : <Badge variant="neutral">{role}</Badge>
 }
@@ -52,11 +43,11 @@ function getInitials(name: string) {
   return name.split(' ').map((n) => n[0]).join('').toUpperCase()
 }
 
-export function MemberLookupPageClient() {
+export function MemberLookupPageClient({ members }: { members: Member[] }) {
   const [search, setSearch] = useState('')
   const [expandedId, setExpandedId] = useState<string | null>(null)
 
-  const filteredMembers = mockMembers.filter(
+  const filteredMembers = members.filter(
     (m) =>
       m.name.toLowerCase().includes(search.toLowerCase()) ||
       m.studentId.toLowerCase().includes(search.toLowerCase()) ||
@@ -127,10 +118,12 @@ export function MemberLookupPageClient() {
                       <Mail className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                       <span className="text-slate-700">{member.email}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-[12px]">
-                      <Phone className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-                      <span className="text-slate-700">{member.phone}</span>
-                    </div>
+                    {member.phone && (
+                      <div className="flex items-center gap-2 text-[12px]">
+                        <Phone className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                        <span className="text-slate-700">{member.phone}</span>
+                      </div>
+                    )}
                     <div className="flex items-center gap-2 text-[12px]">
                       <Calendar className="h-3.5 w-3.5 text-slate-400 shrink-0" />
                       <span className="text-slate-700">Joined {new Date(member.joinDate).toLocaleDateString('en-KE', { day: 'numeric', month: 'long', year: 'numeric' })}</span>

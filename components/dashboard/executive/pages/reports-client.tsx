@@ -3,21 +3,45 @@
 import { BarChart2, ArrowRight } from 'lucide-react'
 import { DonutChart } from '@/components/ui/donut-chart'
 
-const metrics = [
-  { label: 'Borrowing Trends', value: 82, color: '#2563EB' },
-  { label: 'Space Utilization', value: 76, color: '#0D9488' },
-  { label: 'E-Resource Usage', value: 64, color: '#8B5CF6' },
-  { label: 'Member Satisfaction', value: 91, color: '#D97706' },
-]
+interface Metric {
+  label: string
+  value: number
+  color: string
+}
 
-const reports = [
-  { title: 'Monthly Borrowing Report', date: 'Jun 2026', status: 'Ready' },
-  { title: 'Space Utilization Analysis', date: 'Jun 2026', status: 'Ready' },
-  { title: 'E-Resource Usage Summary', date: 'Jun 2026', status: 'Processing' },
-  { title: 'Incident Report — Q2', date: 'Apr–Jun 2026', status: 'Ready' },
-]
+interface Report {
+  title: string
+  date: string
+  status: string
+}
 
-export function ReportsClient() {
+interface LoanStats {
+  totalLoans: number
+  activeLoans: number
+  overdueLoans: number
+  returnedLoans: number
+  totalUsers: number
+  activeUsers: number
+  totalBooks: number
+  availableCopies: number
+  loanedCopies: number
+}
+
+export function ReportsClient({ stats }: { stats: LoanStats }) {
+  const metrics: Metric[] = [
+    { label: 'Active Loans', value: stats.activeLoans, color: '#2563EB' },
+    { label: 'Overdue Loans', value: stats.overdueLoans, color: '#EF4444' },
+    { label: 'Library Members', value: stats.activeUsers, color: '#0D9488' },
+    { label: 'Collection Usage', value: stats.totalBooks > 0 ? Math.round((stats.loanedCopies / stats.totalBooks) * 100) : 0, color: '#8B5CF6' },
+  ]
+
+  const reports: Report[] = [
+    { title: 'Monthly Borrowing Report', date: new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }), status: 'Ready' },
+    { title: 'Active Loan Summary', date: `${stats.activeLoans} current loans`, status: 'Ready' },
+    { title: 'Overdue Items Report', date: `${stats.overdueLoans} overdue`, status: stats.overdueLoans > 0 ? 'Processing' : 'Ready' },
+    { title: 'Collection Availability', date: `${stats.availableCopies} of ${stats.totalBooks} books available`, status: 'Ready' },
+  ]
+
   return (
     <div className="space-y-6">
       <div>
@@ -28,7 +52,7 @@ export function ReportsClient() {
         {metrics.map((m) => (
           <div key={m.label} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none p-5 flex flex-col items-center">
             <DonutChart
-              segments={[{ label: m.label, value: m.value, color: m.color }, { label: 'Remaining', value: 100 - m.value, color: '#E2E8F0' }]}
+              segments={[{ label: m.label, value: m.value, color: m.color }, { label: 'Remaining', value: Math.max(0, 100 - m.value), color: '#E2E8F0' }]}
               centerValue={m.value}
               centerLabel="%"
               size={80}

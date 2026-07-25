@@ -433,6 +433,98 @@ function formatTimeAgo(date: Date): string {
   return `${days}d ago`
 }
 
+/* ─── STAFF RECENT ACTIVITY ──────────────────── */
+
+export interface staff_activity_item {
+  id: string
+  type: 'renewal' | 'avr_booking' | 'hold_pickup' | 'book_suggestion' | 'seat_booking' | 'return'
+  description: string
+  detail: string
+  timestamp: string
+}
+
+export async function get_staff_recent_activity(userId: string): Promise<staff_activity_item[]> {
+  const now = new Date()
+  const since = new Date(now.getTime() - 30 * 86400000)
+
+  const [recentLoans, recentBookings, recentHolds] = await Promise.all([
+    prisma.loan.findMany({
+      where: { userId, checkoutAt: { gte: since } },
+      include: { copy: { include: { book: { select: { title: true } } } } },
+      orderBy: { checkoutAt: 'desc' },
+      take: 10,
+    }),
+    prisma.booking.findMany({
+      where: { userId, createdAt: { gte: since } },
+      include: { space: { select: { name: true, type: true } } },
+      orderBy: { createdAt: 'desc' },
+      take: 6,
+    }),
+    prisma.hold.findMany({
+      where: { userId, requestedAt: { gte: since }, status: 'READY' },
+      include: { book: { select: { title: true } } },
+      orderBy: { requestedAt: 'desc' },
+      take: 6,
+    }),
+  ])
+
+  const items: staff_activity_item[] = []
+
+  for (const loan of recentLoans) {
+    const title = loan.copy?.book?.title ?? 'Unknown'
+    if (loan.renewCount > 0 && !loan.returnedAt) {
+      items.push({
+        id: `${loan.id}-renew`,
+        type: 'renewal',
+        description: `Renewed: ${title}`,
+        detail: `Extended due ${loan.dueAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+        timestamp: loan.checkoutAt.toISOString(),
+      })
+    } else if (loan.returnedAt) {
+      items.push({
+        id: `${loan.id}-return`,
+        type: 'return',
+        description: `Returned: ${title}`,
+        detail: `Completed ${loan.returnedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+        timestamp: loan.returnedAt.toISOString(),
+      })
+    } else {
+      items.push({
+        id: `${loan.id}-checkout`,
+        type: 'book_suggestion',
+        description: `Borrowed: ${title}`,
+        detail: `Due ${loan.dueAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+        timestamp: loan.checkoutAt.toISOString(),
+      })
+    }
+  }
+
+  for (const booking of recentBookings) {
+    const isAVR = booking.space?.type === 'AVR'
+    const spaceName = booking.space?.name ?? 'Unknown'
+    items.push({
+      id: `${booking.id}-booking`,
+      type: isAVR ? 'avr_booking' : 'seat_booking',
+      description: `Booked: ${spaceName}`,
+      detail: booking.startAt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }),
+      timestamp: booking.createdAt.toISOString(),
+    })
+  }
+
+  for (const hold of recentHolds) {
+    items.push({
+      id: `${hold.id}-pickup`,
+      type: 'hold_pickup',
+      description: `Hold ready: ${hold.book?.title ?? 'Unknown'}`,
+      detail: 'Ready for pickup at Main Desk',
+      timestamp: hold.requestedAt.toISOString(),
+    })
+  }
+
+  items.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+  return items.slice(0, 12)
+}
+
 /* ─── EXECUTIVE DASHBOARD ────────────────────── */
 
 export async function get_executive_dashboard_data() {

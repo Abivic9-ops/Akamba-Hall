@@ -7,94 +7,47 @@ import {
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
-interface Event {
+interface EventItem {
   id: string
-  type: 'workshop' | 'deadline' | 'campaign' | 'announcement' | 'event'
   title: string
-  description: string
-  date: string
-  time: string
-  venue: string
-  attendees: number | null
-  isUpcoming: boolean
+  description: string | null
+  venue: string | null
+  startTime: string
+  endTime: string
+  category: string
+  maxAttendees: number | null
 }
 
-const mockEvents: Event[] = [
-  {
-    id: 'evt-1',
-    type: 'workshop',
-    title: 'AI Literacy Workshop',
-    description: 'Learn how to use AI tools for academic research, essay writing, and data analysis. Hands-on session with practical exercises.',
-    date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
-    time: '2:00 PM – 4:00 PM',
-    venue: 'Audio Visual Room',
-    attendees: 24,
-    isUpcoming: true,
-  },
-  {
-    id: 'evt-2',
-    type: 'event',
-    title: 'Book Club: African Literature',
-    description: 'Monthly book club meeting discussing contemporary African fiction. This month\'s pick: "A Grain of Wheat" by Ngũgĩ wa Thiong\'o.',
-    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-    time: '3:30 PM – 5:00 PM',
-    venue: 'Reading Hall',
-    attendees: 12,
-    isUpcoming: true,
-  },
-  {
-    id: 'evt-3',
-    type: 'campaign',
-    title: 'Read 10 Challenge',
-    description: 'Complete 10 books this term and earn the Gold Reader badge. Track your progress and compete with classmates.',
-    date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-    time: 'All Term',
-    venue: 'Online',
-    attendees: 89,
-    isUpcoming: true,
-  },
-  {
-    id: 'evt-4',
-    type: 'deadline',
-    title: 'End-of-Term Book Returns',
-    description: 'All borrowed books must be returned by 28 June 2026. Late returns will incur a KES 50/day fine.',
-    date: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
-    time: 'Before 6:00 PM',
-    venue: 'Main Desk',
-    attendees: null,
-    isUpcoming: true,
-  },
-  {
-    id: 'evt-5',
-    type: 'announcement',
-    title: 'JSTOR Access Now Available',
-    description: 'Full access to JSTOR academic journals is now available for all registered students. Use your school email to log in.',
-    date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-    time: 'N/A',
-    venue: 'Online',
-    attendees: null,
-    isUpcoming: false,
-  },
-]
-
-const type_config = {
+const type_config: Record<string, { icon: typeof Globe; color: string; bg: string; label: string }> = {
   workshop: { icon: Globe, color: 'text-[#2563EB]', bg: 'bg-blue-50', label: 'Workshop' },
   deadline: { icon: Bell, color: 'text-red-500', bg: 'bg-red-50', label: 'Deadline' },
   campaign: { icon: BookHeart, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10', label: 'Campaign' },
   announcement: { icon: Megaphone, color: 'text-amber-500', bg: 'bg-amber-50', label: 'Announcement' },
   event: { icon: CalendarDays, color: 'text-[#0D9488]', bg: 'bg-teal-50', label: 'Event' },
+  general: { icon: CalendarDays, color: 'text-slate-500', bg: 'bg-slate-50', label: 'General' },
+  fair: { icon: Globe, color: 'text-[#5B9BD5]', bg: 'bg-blue-50', label: 'Fair' },
+  meeting: { icon: Users, color: 'text-amber-500', bg: 'bg-amber-50', label: 'Meeting' },
+  club: { icon: BookHeart, color: 'text-[#0D9488]', bg: 'bg-teal-50', label: 'Club' },
+  training: { icon: Globe, color: 'text-[#2563EB]', bg: 'bg-blue-50', label: 'Training' },
 }
 
 function formatDay(iso: string): string {
   return new Date(iso).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
 }
 
-export function EventsPageClient() {
+function formatTimeRange(start: string, end: string): string {
+  const s = new Date(start).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+  const e = new Date(end).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+  return `${s} – ${e}`
+}
+
+export function EventsPageClient({ events }: { events: EventItem[] }) {
   const [filter, setFilter] = useState<'all' | 'upcoming' | 'past'>('all')
 
-  const filtered = mockEvents.filter((e) => {
-    if (filter === 'upcoming') return e.isUpcoming
-    if (filter === 'past') return !e.isUpcoming
+  const filtered = events.filter((e) => {
+    const isUpcoming = new Date(e.startTime) >= new Date()
+    if (filter === 'upcoming') return isUpcoming
+    if (filter === 'past') return !isUpcoming
     return true
   })
 
@@ -129,9 +82,16 @@ export function EventsPageClient() {
 
         {/* events list */}
         <div className="space-y-4">
+          {filtered.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-16 text-center bg-white dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08]">
+              <CalendarDays className="h-12 w-12 text-slate-300 mb-4" />
+              <p className="text-[16px] text-slate-500 dark:text-[#6B7A99]">No {filter === 'all' ? '' : filter} events</p>
+            </div>
+          )}
           {filtered.map((evt) => {
-            const cfg = type_config[evt.type]
+            const cfg = type_config[evt.category] ?? type_config.general
             const Icon = cfg.icon
+            const isUpcoming = new Date(evt.startTime) >= new Date()
             return (
               <div
                 key={evt.id}
@@ -145,39 +105,43 @@ export function EventsPageClient() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
                       <p className="text-[16px] font-medium text-slate-800 dark:text-[#E2E8F0]">{evt.title}</p>
-                      <Badge variant={evt.isUpcoming ? 'info' : 'neutral'}>
+                      <Badge variant={isUpcoming ? 'info' : 'neutral'}>
                         {cfg.label}
                       </Badge>
-                      {!evt.isUpcoming && <Badge variant="neutral">Past</Badge>}
+                      {!isUpcoming && <Badge variant="neutral">Past</Badge>}
                     </div>
 
-                    <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1.5 leading-relaxed">
-                      {evt.description}
-                    </p>
+                    {evt.description && (
+                      <p className="text-[14px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1.5 leading-relaxed">
+                        {evt.description}
+                      </p>
+                    )}
 
                     <div className="flex items-center gap-4 mt-3 flex-wrap">
                       <div className="flex items-center gap-1.5">
                         <CalendarDays className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
-                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{formatDay(evt.date)}</span>
+                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{formatDay(evt.startTime)}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Clock className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
-                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.time}</span>
+                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{formatTimeRange(evt.startTime, evt.endTime)}</span>
                       </div>
-                      <div className="flex items-center gap-1.5">
-                        <MapPin className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
-                        <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.venue}</span>
-                      </div>
-                      {evt.attendees !== null && (
+                      {evt.venue && (
+                        <div className="flex items-center gap-1.5">
+                          <MapPin className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
+                          <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.venue}</span>
+                        </div>
+                      )}
+                      {evt.maxAttendees !== null && (
                         <div className="flex items-center gap-1.5">
                           <Users className="h-3.5 w-3.5 text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]" />
-                          <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.attendees} attending</span>
+                          <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{evt.maxAttendees} max</span>
                         </div>
                       )}
                     </div>
                   </div>
 
-                  {evt.isUpcoming && (
+                  {isUpcoming && (
                     <button className="h-9 px-5 rounded-lg bg-[#2563EB] text-white text-[14px] font-medium hover:bg-[#1D4ED8] transition-colors shrink-0">
                       Register
                     </button>

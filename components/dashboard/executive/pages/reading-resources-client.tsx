@@ -2,22 +2,23 @@
 
 import { BookOpen, ArrowRight } from 'lucide-react'
 
-const resources = [
-  { title: 'The Leader in You', author: 'Robin Sharma', category: 'Leadership', status: 'Available', copies: 3 },
-  { title: 'Introduction to Algorithms', author: 'Thomas Cormen', category: 'Computer Science', status: 'Available', copies: 5 },
-  { title: 'Principles of Economics', author: 'N. Gregory Mankiw', category: 'Economics', status: 'On Loan', copies: 2 },
-  { title: 'Campus Biology', author: 'Kenneth Miller', category: 'Science', status: 'Available', copies: 4 },
-  { title: 'The Art of Public Speaking', author: 'Stephen Lucas', category: 'Communication', status: 'Reserved', copies: 1 },
-  { title: 'World History: Modern', author: 'Southington', category: 'History', status: 'Available', copies: 6 },
-]
-
-const status_colors: Record<string, string> = {
-  Available: 'bg-emerald-50 text-emerald-600',
-  'On Loan': 'bg-amber-50 text-amber-600',
-  Reserved: 'bg-blue-50 text-blue-600',
+interface Book {
+  id: string
+  title: string
+  author: string
+  category: string | null
+  status: string
+  totalCopies: number
+  availableCopies: number
 }
 
-export function ReadingResourcesClient() {
+const status_colors: Record<string, string> = {
+  available: 'bg-emerald-50 text-emerald-600',
+  unavailable: 'bg-amber-50 text-amber-600',
+  reserved: 'bg-blue-50 text-blue-600',
+}
+
+export function ReadingResourcesClient({ books }: { books: Book[] }) {
   return (
     <div className="space-y-6">
       <div>
@@ -32,17 +33,17 @@ export function ReadingResourcesClient() {
           </button>
         </div>
         <div className="divide-y divide-slate-50">
-          {resources.map((r, i) => (
-            <div key={i} className="flex items-center gap-4 px-6 py-3 hover:bg-slate-50/50 transition-colors">
+          {books.map((r) => (
+            <div key={r.id} className="flex items-center gap-4 px-6 py-3 hover:bg-slate-50/50 transition-colors">
               <div className="h-10 w-10 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
                 <BookOpen className="h-5 w-5 text-[#2563EB]" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-[13px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{r.title}</p>
-                <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.author} · {r.category}</p>
+                <p className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.author} · {r.category ?? 'Uncategorised'}</p>
               </div>
-              <span className="text-[11px] font-semibold text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.copies} copies</span>
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${status_colors[r.status]}`}>{r.status}</span>
+              <span className="text-[11px] font-semibold text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{r.totalCopies} copies</span>
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${status_colors[r.status] ?? 'bg-slate-100 text-slate-600'}`}>{r.status === 'available' ? 'Available' : 'On Loan'}</span>
             </div>
           ))}
         </div>

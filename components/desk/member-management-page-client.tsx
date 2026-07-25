@@ -5,26 +5,26 @@ import { Users, Search, Eye, Edit, Ban, RotateCcw, ChevronLeft, ChevronRight } f
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 
-const allMembers = [
-  { id: 1, name: 'Wanjiku Kamau', studentId: 'AKM-2026-0042', email: 'wanjiku.kamau@akamba.ac.ke', role: 'Student', status: 'Active', loans: 3, lastActive: '22 Jul 2026, 14:30' },
-  { id: 2, name: 'Otieno Ochieng', studentId: 'AKM-2026-0117', email: 'otieno.o@akamba.ac.ke', role: 'Staff', status: 'Active', loans: 1, lastActive: '22 Jul 2026, 11:15' },
-  { id: 3, name: 'Amina Hassan', studentId: 'AKM-2026-0089', email: 'amina.h@akamba.ac.ke', role: 'Student', status: 'Active', loans: 5, lastActive: '21 Jul 2026, 16:45' },
-  { id: 4, name: 'Kipchoge Korir', studentId: 'AKM-2025-0314', email: 'kipchoge.k@akamba.ac.ke', role: 'Student', status: 'Suspended', loans: 8, lastActive: '15 Jul 2026, 09:00' },
-  { id: 5, name: 'Faith Wambui', studentId: 'AKM-2026-0203', email: 'faith.w@akamba.ac.ke', role: 'Student', status: 'Active', loans: 2, lastActive: '22 Jul 2026, 10:20' },
-  { id: 6, name: 'Jabali Mwangi', studentId: 'AKM-2025-0078', email: 'jabali.m@akamba.ac.ke', role: 'Staff', status: 'Inactive', loans: 0, lastActive: '01 Jun 2026, 08:30' },
-  { id: 7, name: 'Nyerere Odhiambo', studentId: 'AKM-2026-0156', email: 'nyerere.o@akamba.ac.ke', role: 'Student', status: 'Active', loans: 4, lastActive: '22 Jul 2026, 13:00' },
-  { id: 8, name: 'Achieng Nyaboke', studentId: 'AKM-2026-0091', email: 'achieng.n@akamba.ac.ke', role: 'Student', status: 'Active', loans: 1, lastActive: '21 Jul 2026, 17:10' },
-]
+interface Member {
+  id: string
+  name: string
+  studentId: string
+  email: string
+  role: string
+  status: string
+  loans: number
+  lastActive: string | null
+}
 
 const ITEMS_PER_PAGE = 5
 
-export function MemberManagementPageClient() {
+export function MemberManagementPageClient({ members }: { members: Member[] }) {
   const [search, setSearch] = useState('')
   const [roleFilter, setRoleFilter] = useState('All')
   const [statusFilter, setStatusFilter] = useState('All')
   const [page, setPage] = useState(1)
 
-  const filtered = allMembers.filter(m => {
+  const filtered = members.filter(m => {
     const matchesSearch = m.name.toLowerCase().includes(search.toLowerCase()) ||
       m.studentId.toLowerCase().includes(search.toLowerCase()) ||
       m.email.toLowerCase().includes(search.toLowerCase())
@@ -37,9 +37,14 @@ export function MemberManagementPageClient() {
   const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)
 
   const statusBadge = (status: string) => {
-    if (status === 'Active') return <Badge variant="success" dot>Active</Badge>
-    if (status === 'Suspended') return <Badge variant="danger" dot>Suspended</Badge>
+    if (status === 'ACTIVE') return <Badge variant="success" dot>Active</Badge>
+    if (status === 'SUSPENDED') return <Badge variant="danger" dot>Suspended</Badge>
     return <Badge variant="neutral" dot>Inactive</Badge>
+  }
+
+  const roleDisplay = (role: string) => {
+    if (role === 'STAFF') return 'Staff'
+    return 'Student'
   }
 
   return (
@@ -66,8 +71,8 @@ export function MemberManagementPageClient() {
                 className="h-9 px-3 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
               >
                 <option value="All">All Roles</option>
-                <option value="Student">Student</option>
-                <option value="Staff">Staff</option>
+                <option value="STUDENT">Student</option>
+                <option value="STAFF">Staff</option>
               </select>
               <select
                 value={statusFilter}
@@ -75,9 +80,9 @@ export function MemberManagementPageClient() {
                 className="h-9 px-3 rounded-lg border border-slate-200 bg-slate-50 text-[13px] text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]"
               >
                 <option value="All">All Statuses</option>
-                <option value="Active">Active</option>
-                <option value="Suspended">Suspended</option>
-                <option value="Inactive">Inactive</option>
+                <option value="ACTIVE">Active</option>
+                <option value="SUSPENDED">Suspended</option>
+                <option value="INACTIVE">Inactive</option>
               </select>
             </div>
 
@@ -109,14 +114,16 @@ export function MemberManagementPageClient() {
                         <span className="text-[12px] text-slate-500">{m.email}</span>
                       </td>
                       <td className="py-3 pr-4">
-                        <Badge variant="info">{m.role}</Badge>
+                        <Badge variant="info">{roleDisplay(m.role)}</Badge>
                       </td>
                       <td className="py-3 pr-4">{statusBadge(m.status)}</td>
                       <td className="py-3 pr-4">
                         <span className="text-[13px] font-medium text-slate-700">{m.loans}</span>
                       </td>
                       <td className="py-3 pr-4">
-                        <span className="text-[11px] text-slate-400">{m.lastActive}</span>
+                        <span className="text-[11px] text-slate-400">
+                          {m.lastActive ? new Date(m.lastActive).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' }) : 'N/A'}
+                        </span>
                       </td>
                       <td className="py-3">
                         <div className="flex items-center gap-1">
@@ -126,7 +133,7 @@ export function MemberManagementPageClient() {
                           <button title="Edit" className="h-7 w-7 rounded-md flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors">
                             <Edit className="h-3.5 w-3.5" />
                           </button>
-                          {m.status === 'Active' ? (
+                          {m.status === 'ACTIVE' ? (
                             <button title="Suspend" className="h-7 w-7 rounded-md flex items-center justify-center text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors">
                               <Ban className="h-3.5 w-3.5" />
                             </button>
