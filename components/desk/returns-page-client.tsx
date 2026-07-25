@@ -4,9 +4,16 @@ import { useState } from 'react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 import { RotateCw, Search, PackageCheck, CalendarDays, BookOpen, AlertTriangle, CheckCircle2 } from 'lucide-react'
-import { today_returns } from '@/lib/mock/desk-data'
 
-export function ReturnsPageClient() {
+interface ReturnItem {
+  id: string
+  title: string
+  author: string
+  dueDate: string
+  returnedAt: string
+}
+
+export function ReturnsPageClient({ todayReturns }: { todayReturns: ReturnItem[] }) {
   const [memberId, setMemberId] = useState('')
   const [bookBarcode, setBookBarcode] = useState('')
   const [returnDate, setReturnDate] = useState(() => new Date().toISOString().split('T')[0])
@@ -14,7 +21,7 @@ export function ReturnsPageClient() {
   const [searchQuery, setSearchQuery] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
-  const filteredReturns = today_returns.filter((r) =>
+  const filteredReturns = todayReturns.filter((r) =>
     r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     r.author.toLowerCase().includes(searchQuery.toLowerCase())
   )
@@ -208,7 +215,7 @@ export function ReturnsPageClient() {
             </table>
           </div>
           <div className="mt-3 text-center">
-            <span className="text-[11px] text-slate-400">{today_returns.length} returns processed today</span>
+            <span className="text-[11px] text-slate-400">{todayReturns.length} returns processed today</span>
           </div>
         </SectionCard>
       </div>

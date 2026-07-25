@@ -9,7 +9,7 @@ interface Hold {
   id: string
   title: string
   author: string
-  coverUrl: string
+  coverUrl: string | null
   status: 'ready' | 'pending'
   queuePosition: number | null
   pickupLocation: string | null

@@ -6,12 +6,12 @@ import { Badge } from '@/components/ui/badge'
 
 interface Booking {
   id: string
-  type: 'Reading Seat' | 'AVR' | 'Boardroom'
+  type: string
   title: string
   location: string
   startAt: string
   endAt: string
-  status: 'Approved' | 'Pending' | 'Cancelled' | 'Confirmed'
+  status: string
 }
 
 interface ScheduleProps {

@@ -65,6 +65,50 @@ export const navigationRegistry: NavItem[] = [
     roles: ['SUPER_ADMIN'],
   },
 
+  // ─── SUPER ADMIN: CONTENT MANAGEMENT ───────────
+  {
+    label: 'Manage Books',
+    icon: 'BookPlus',
+    path: '/super-admin/catalogue',
+    section: 'Content',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'Announcements',
+    icon: 'Megaphone',
+    path: '/super-admin/announcements',
+    section: 'Content',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'Events',
+    icon: 'CalendarCheck',
+    path: '/super-admin/events',
+    section: 'Content',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'Policies',
+    icon: 'ShieldCheck',
+    path: '/super-admin/policies',
+    section: 'Content',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'Courses',
+    icon: 'GraduationCap',
+    path: '/super-admin/courses',
+    section: 'Content',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'E-Resources',
+    icon: 'Globe',
+    path: '/super-admin/eresources',
+    section: 'Content',
+    roles: ['SUPER_ADMIN'],
+  },
+
   // ─── LIBRARY HEAD ──────────────────────────────
   {
     label: 'Dashboard',
@@ -106,6 +150,50 @@ export const navigationRegistry: NavItem[] = [
     icon: 'ClipboardCheck',
     path: '/library-head/requests',
     section: 'People',
+    roles: ['LIBRARY_HEAD'],
+  },
+
+  // ─── LIBRARY HEAD: CONTENT MANAGEMENT ──────────
+  {
+    label: 'Manage Books',
+    icon: 'BookPlus',
+    path: '/library-head/catalogue',
+    section: 'Content',
+    roles: ['LIBRARY_HEAD'],
+  },
+  {
+    label: 'Announcements',
+    icon: 'Megaphone',
+    path: '/library-head/announcements',
+    section: 'Content',
+    roles: ['LIBRARY_HEAD'],
+  },
+  {
+    label: 'Events',
+    icon: 'CalendarCheck',
+    path: '/library-head/events',
+    section: 'Content',
+    roles: ['LIBRARY_HEAD'],
+  },
+  {
+    label: 'Policies',
+    icon: 'ShieldCheck',
+    path: '/library-head/policies',
+    section: 'Content',
+    roles: ['LIBRARY_HEAD'],
+  },
+  {
+    label: 'Courses',
+    icon: 'GraduationCap',
+    path: '/library-head/courses',
+    section: 'Content',
+    roles: ['LIBRARY_HEAD'],
+  },
+  {
+    label: 'E-Resources',
+    icon: 'Globe',
+    path: '/library-head/eresources',
+    section: 'Content',
     roles: ['LIBRARY_HEAD'],
   },
 

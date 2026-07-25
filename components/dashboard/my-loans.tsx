@@ -9,7 +9,7 @@ interface Loan {
   id: string
   title: string
   author: string
-  coverUrl: string
+  coverUrl: string | null
   dueDate: string
   renewable: boolean
 }

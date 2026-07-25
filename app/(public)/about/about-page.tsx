@@ -4,7 +4,7 @@ import { BookOpen, Users, Shield, Eye, Heart, Target, Award, Scale, Lock, Handsh
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
 
 const values = [
-  { icon: Scale, title: 'Order', desc: 'Every process — from borrowing to space use — runs on clear rules. Order protects everyone\'s access and keeps the library running well. When order is maintained, every student knows what they can access, when, and how.' },
+  { icon: Scale, title: 'Order', desc: 'Every process,from borrowing to space use ,runs on clear rules. Order protects everyone\'s access and keeps the library running well. When order is maintained, every student knows what they can access, when, and how.' },
   { icon: Handshake, title: 'Accessibility', desc: 'All approved members can use the library\'s resources. We remove barriers to reading, research, and study wherever we can. The library does not discriminate — it serves every student who follows the rules.' },
   { icon: Shield, title: 'Accountability', desc: 'Every book, every space, every visit is tracked. Accountability builds trust between the library and the community it serves. When members know their actions are recorded, they take better care of shared resources.' },
   { icon: Lock, title: 'Privacy', desc: 'Member records, reading history, and personal data are handled with care. Your information is protected at every level. The library system logs activity for governance, not surveillance.' },
@@ -50,7 +50,7 @@ export default function AboutPageClient() {
               Akamba Hall Library
             </h1>
             <p className="text-[16px] md:text-[17px] text-white/50 mt-5 max-w-2xl mx-auto leading-relaxed">
-              The central library hub of Starehe Boys&apos; Centre — a place for reading, research, discipline, and responsible access to knowledge. Built on a legacy of service that stretches back to 1959.
+              The central library hub of Starehe Boys&apos; Centre ;a place for reading, research, discipline, and responsible access to knowledge. Built on a legacy of service that stretches back to 1959.
             </p>
           </div>
         </FadeIn>

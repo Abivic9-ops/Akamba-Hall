@@ -19,9 +19,9 @@ interface Props {
     membership: { tier: string; points: number; nextTier: string; nextTierPoints: number }
     qrCard: { label: string; memberId: string; status: 'Active' | 'Suspended'; qrCodeUrl?: string; cardRef?: string }
   }
-  loans: { id: string; title: string; author: string; coverUrl: string; dueDate: string; renewable: boolean }[]
-  holds: { id: string; title: string; author: string; coverUrl: string; status: 'ready' | 'pending'; queuePosition: number | null; pickupLocation: string | null; pickupDeadline: string | null }[]
-  bookings: { id: string; type: 'Reading Seat' | 'AVR' | 'Boardroom'; title: string; location: string; startAt: string; endAt: string; status: 'Approved' | 'Pending' | 'Cancelled' }[]
+  loans: { id: string; title: string; author: string; coverUrl: string | null; dueDate: string; renewable: boolean }[]
+  holds: { id: string; title: string; author: string; coverUrl: string | null; status: 'ready' | 'pending'; queuePosition: number | null; pickupLocation: string | null; pickupDeadline: string | null }[]
+  bookings: { id: string; type: string; title: string; location: string; startAt: string; endAt: string; status: string }[]
   announcements: { id: string; type: 'closure' | 'event' | 'eresource' | 'reminder' | 'policy' | 'campaign'; title: string; subtitle: string; createdAt: string }[]
   libraryHours: { isOpen: boolean; closesAt: string; opensTomorrow: string; schedule: { day: string; hours: string; isToday: boolean }[] }
   overdueCount: number

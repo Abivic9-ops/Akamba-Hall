@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,25 +6,33 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─── CORE USER ─────────────────────────────────
+
 model User {
-  id        String   @id @default(uuid()) // Links to Supabase auth.users.id
-  email     String?  @unique
-  studentId String?  @unique // Admission / staff number
-  fullName  String?
-  avatarUrl String?
-  role      Role     @default(STUDENT)
-  originalRole Role?  // Base role before promotion (e.g., STUDENT → CAPTAIN; STAFF → EXECUTIVE)
-  memberType MemberType @default(STUDENT)
-  status    UserStatus @default(ACTIVE)
+  id           String       @id @default(uuid())
+  email        String?      @unique
+  studentId    String?      @unique
+  fullName     String?
+  avatarUrl    String?      // Cloudinary URL
+  role         Role         @default(STUDENT)
+  originalRole Role?
+  memberType   MemberType   @default(STUDENT)
+  status       UserStatus   @default(ACTIVE)
   lastActiveAt DateTime?
 
-  // Relations
-  qrCards      QRCard[]
-  loans        Loan[]
-  holds        Hold[]
-  bookings     Booking[]
-  roleRequests RoleRequest[]
-  reviewedRequests RoleRequest[] @relation("ReviewedBy")
+  qrCards           QRCard[]
+  loans             Loan[]
+  holds             Hold[]
+  bookings          Booking[]
+  roleRequests      RoleRequest[]
+  reviewedRequests  RoleRequest[] @relation("ReviewedBy")
+  announcements     Announcement[]
+  events            Event[]
+  bookmarks         Bookmark[]
+  issueLogs         IssueLog[]
+  lostFoundItems    LostFoundItem[]
+  equipmentItems    Equipment[]
+  digitalResources  DigitalResource[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -57,13 +62,14 @@ enum UserStatus {
   SUSPENDED
 }
 
+// ─── QR CARDS ──────────────────────────────────
+
 model QRCard {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  cardRef   String   @unique
-  status    QRStatus @default(ACTIVE)
-  
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  cardRef      String   @unique
+  status       QRStatus @default(ACTIVE)
   issuedAt     DateTime @default(now())
   suspendedAt  DateTime?
   revokedAt    DateTime?
@@ -79,24 +85,28 @@ enum QRStatus {
   REVOKED
 }
 
+// ─── BOOKS & COPIES ───────────────────────────
+
 model Book {
   id          String   @id @default(uuid())
   title       String
   author      String
   isbn        String?
   category    String?
-  coverUrl    String?
+  coverUrl    String?  // Cloudinary URL
   description String?
+  year        Int?
   copies      Copy[]
   holds       Hold[]
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Copy {
-  id            String   @id @default(uuid())
+  id            String     @id @default(uuid())
   bookId        String
-  book          Book     @relation(fields: [bookId], references: [id])
-  barcode       String?  @unique
+  book          Book       @relation(fields: [bookId], references: [id])
+  barcode       String?    @unique
   shelfLocation String?
   status        CopyStatus @default(AVAILABLE)
   loans         Loan[]
@@ -110,19 +120,22 @@ enum CopyStatus {
   RESERVED
 }
 
+// ─── LOANS ─────────────────────────────────────
+
 model Loan {
-  id           String   @id @default(uuid())
-  userId       String
-  user         User     @relation(fields: [userId], references: [id])
-  copyId       String
-  copy         Copy     @relation(fields: [copyId], references: [id])
-  
-  checkoutAt   DateTime @default(now())
-  dueAt        DateTime
-  returnedAt   DateTime?
-  renewCount   Int      @default(0)
-  status       LoanStatus @default(ACTIVE)
-  processedBy  String?
+  id          String     @id @default(uuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+  copyId      String
+  copy        Copy       @relation(fields: [copyId], references: [id])
+  checkoutAt  DateTime   @default(now())
+  dueAt       DateTime
+  returnedAt  DateTime?
+  renewCount  Int        @default(0)
+  status      LoanStatus @default(ACTIVE)
+  processedBy String?
+
+  fine Fine?
 }
 
 enum LoanStatus {
@@ -132,17 +145,18 @@ enum LoanStatus {
   LOST
 }
 
+// ─── HOLDS ─────────────────────────────────────
+
 model Hold {
-  id           String   @id @default(uuid())
-  userId       String
-  user         User     @relation(fields: [userId], references: [id])
-  bookId       String
-  book         Book     @relation(fields: [bookId], references: [id])
-  
-  requestedAt  DateTime @default(now())
-  expiryAt     DateTime?
-  status       HoldStatus @default(PENDING)
-  queuePosition Int     @default(1)
+  id            String     @id @default(uuid())
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+  bookId        String
+  book          Book       @relation(fields: [bookId], references: [id])
+  requestedAt   DateTime   @default(now())
+  expiryAt      DateTime?
+  status        HoldStatus @default(PENDING)
+  queuePosition Int        @default(1)
 }
 
 enum HoldStatus {
@@ -153,24 +167,36 @@ enum HoldStatus {
   CANCELLED
 }
 
+// ─── BOOKINGS & SPACES ────────────────────────
+
 model Booking {
-  id        String   @id @default(uuid())
+  id        String        @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User          @relation(fields: [userId], references: [id])
   spaceId   String
-  space     Space    @relation(fields: [spaceId], references: [id])
-  
+  space     Space         @relation(fields: [spaceId], references: [id])
   startAt   DateTime
   endAt     DateTime
+  title     String?
   status    BookingStatus @default(APPROVED)
-  createdAt DateTime @default(now())
+  createdAt DateTime      @default(now())
 }
 
 model Space {
-  id        String   @id @default(uuid())
-  name      String
-  capacity  Int
-  bookings  Booking[]
+  id       String    @id @default(uuid())
+  name     String
+  capacity Int
+  type     SpaceType @default(READING_HALL)
+  bookings Booking[]
+}
+
+enum SpaceType {
+  READING_HALL
+  STUDY_ROOM
+  AVR
+  BOARDROOM
+  COMPUTER_LAB
+  INNOVATION_CORNER
 }
 
 enum BookingStatus {
@@ -181,17 +207,19 @@ enum BookingStatus {
   NO_SHOW
 }
 
+// ─── ROLE REQUESTS ─────────────────────────────
+
 model RoleRequest {
-  id            String          @id @default(uuid())
+  id            String        @id @default(uuid())
   userId        String
-  user          User            @relation(fields: [userId], references: [id])
+  user          User          @relation(fields: [userId], references: [id])
   requestedRole Role
   reason        String?
-  status        RequestStatus   @default(PENDING)
+  status        RequestStatus @default(PENDING)
   reviewedById  String?
-  reviewedBy    User?           @relation("ReviewedBy", fields: [reviewedById], references: [id])
+  reviewedBy    User?         @relation("ReviewedBy", fields: [reviewedById], references: [id])
   reviewNote    String?
-  createdAt     DateTime        @default(now())
+  createdAt     DateTime      @default(now())
   reviewedAt    DateTime?
 
   @@index([userId])
@@ -203,4 +231,243 @@ enum RequestStatus {
   APPROVED
   REJECTED
   REVOKED
+}
+
+// ─── ANNOUNCEMENTS ─────────────────────────────
+
+model Announcement {
+  id          String   @id @default(uuid())
+  title       String
+  body        String
+  category    AnnouncementCategory @default(GENERAL)
+  attachmentUrl String? // Cloudinary URL for PDF/image attachments
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id])
+  targetRoles Role[]
+  isPinned    Boolean  @default(false)
+  publishedAt DateTime @default(now())
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum AnnouncementCategory {
+  GENERAL
+  EVENT
+  CLOSURE
+  ERESOURCE
+  POLICY
+  CAMPAIGN
+  WORKSHOP
+  ACQUISITION
+}
+
+// ─── EVENTS ────────────────────────────────────
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  venue       String?
+  imageUrl    String?  // Cloudinary URL
+  startTime   DateTime
+  endTime     DateTime
+  category    EventCategory @default(GENERAL)
+  maxAttendees Int?
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id])
+  targetRoles Role[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum EventCategory {
+  GENERAL
+  WORKSHOP
+  FAIR
+  MEETING
+  CLUB
+  TRAINING
+}
+
+// ─── POLICIES ──────────────────────────────────
+
+model Policy {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    PolicyCategory @default(GENERAL)
+  documentUrl String?  // Cloudinary URL for policy PDF
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum PolicyCategory {
+  GENERAL
+  BORROWING
+  LATE_RETURN
+  ROOM_BOOKING
+  ERESOURCE
+  INCIDENT
+  CONDUCT
+}
+
+// ─── LOST & FOUND ──────────────────────────────
+
+model LostFoundItem {
+  id           String       @id @default(uuid())
+  title        String
+  description  String?
+  category     String?
+  imageUrl     String?      // Cloudinary URL
+  status       LostFoundStatus @default(FOUND)
+  reportedById String?
+  reportedBy   User?        @relation(fields: [reportedById], references: [id])
+  claimedById  String?
+  reportedAt   DateTime     @default(now())
+  resolvedAt   DateTime?
+}
+
+enum LostFoundStatus {
+  LOST
+  FOUND
+  CLAIMED
+}
+
+// ─── ISSUE LOG ─────────────────────────────────
+
+model IssueLog {
+  id           String      @id @default(uuid())
+  title        String
+  description  String
+  category     IssueCategory @default(GENERAL)
+  severity     IssueSeverity @default(LOW)
+  status       IssueStatus   @default(OPEN)
+  reportedById String?
+  reportedBy   User?       @relation(fields: [reportedById], references: [id])
+  assignedToId String?
+  attachmentUrl String?    // Cloudinary URL
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+enum IssueCategory {
+  GENERAL
+  BOOK_DAMAGE
+  LATE_RETURN
+  FACILITY
+  EQUIPMENT
+  MEMBER_CONDUCT
+}
+
+enum IssueSeverity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum IssueStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+// ─── BOOKMARKS ─────────────────────────────────
+
+model Bookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  bookTitle String
+  author    String
+  category  String?
+  coverUrl  String?  // Cloudinary URL
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, bookTitle])
+}
+
+// ─── COURSES ───────────────────────────────────
+
+model Course {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  department  String
+  formLevel   Int?
+  materialCount Int    @default(0)
+  instructor  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── E-RESOURCES ───────────────────────────────
+
+model EResource {
+  id          String   @id @default(uuid())
+  title       String
+  provider    String
+  description String?
+  url         String
+  category    String?
+  iconUrl     String?  // Cloudinary URL
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── EQUIPMENT ─────────────────────────────────
+
+model Equipment {
+  id          String          @id @default(uuid())
+  name        String
+  description String?
+  category    String?
+  imageUrl    String?         // Cloudinary URL
+  status      EquipmentStatus @default(AVAILABLE)
+  location    String?
+  assignedToId String?
+  assignedTo  User?           @relation(fields: [assignedToId], references: [id])
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+enum EquipmentStatus {
+  AVAILABLE
+  IN_USE
+  MAINTENANCE
+  RETIRED
+}
+
+// ─── DIGITAL RESOURCES ─────────────────────────
+
+model DigitalResource {
+  id          String   @id @default(uuid())
+  title       String
+  provider    String
+  description String?
+  url         String
+  iconUrl     String?  // Cloudinary URL
+  category    String?
+  isActive    Boolean  @default(true)
+  addedById   String?
+  addedBy     User?    @relation(fields: [addedById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── FINES ─────────────────────────────────────
+
+model Fine {
+  id       String    @id @default(uuid())
+  loanId   String    @unique
+  loan     Loan      @relation(fields: [loanId], references: [id])
+  amount   Float
+  reason   String?
+  paid     Boolean   @default(false)
+  paidAt   DateTime?
+  createdAt DateTime @default(now())
 }

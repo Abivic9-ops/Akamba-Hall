@@ -4,11 +4,23 @@ import { useState, useMemo } from 'react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 import { FileText, Search, ChevronLeft, ChevronRight, BookOpen, Archive, RefreshCw } from 'lucide-react'
-import { recent_transactions, type TransactionType } from '@/lib/mock/desk-data'
+
+type TransactionType = 'issue' | 'return' | 'renewal'
+
+interface Transaction {
+  id: string
+  type: TransactionType
+  itemTitle: string
+  memberName: string
+  memberId: string
+  category: string
+  timestamp: string
+  status: 'Issued' | 'Returned' | 'Overdue'
+}
 
 const ITEMS_PER_PAGE = 5
 
-export function IssueLogPageClient() {
+export function IssueLogPageClient({ transactions }: { transactions: Transaction[] }) {
   const [activeFilter, setActiveFilter] = useState<TransactionType | 'all'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [dateFrom, setDateFrom] = useState('')
@@ -16,7 +28,7 @@ export function IssueLogPageClient() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const filtered = useMemo(() => {
-    return recent_transactions.filter((tx) => {
+    return transactions.filter((tx) => {
       if (activeFilter !== 'all' && tx.type !== activeFilter) return false
       if (searchQuery) {
         const q = searchQuery.toLowerCase()
@@ -30,7 +42,7 @@ export function IssueLogPageClient() {
       if (dateTo && new Date(tx.timestamp) > new Date(dateTo + 'T23:59:59')) return false
       return true
     })
-  }, [activeFilter, searchQuery, dateFrom, dateTo])
+  }, [transactions, activeFilter, searchQuery, dateFrom, dateTo])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE))
   const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)

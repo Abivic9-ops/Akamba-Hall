@@ -29,7 +29,8 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
-  const supabase = createClient()
+  const supabaseRef = useRef(createClient())
+  const supabase = supabaseRef.current
   const hasInitial = initialProfile !== undefined && initialProfile !== null
   const [user, setUser] = useState<UserProfile | null>(initialProfile ?? null)
   const [loading, setLoading] = useState<boolean>(!hasInitial && supabase !== null)
@@ -41,7 +42,10 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
     try {
       const { data: { user: auth_user } } = await supabase.auth.getUser()
       if (!auth_user) {
-        setUser(null)
+        setUser((prev) => {
+          if (prev) return prev
+          return null
+        })
         setLoading(false)
         return
       }
@@ -52,7 +56,12 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
         return
       }
       setUser(profile)
+      setError(null)
     } catch {
+      setUser((prev) => {
+        if (prev) return prev
+        return null
+      })
       setError('Authentication error')
     } finally {
       setLoading(false)
@@ -71,7 +80,7 @@ export function AuthProvider({ children, initialProfile }: AuthProviderProps) {
         if (event === 'SIGNED_OUT') {
           setUser(null)
           setLoading(false)
-        } else if (event === 'SIGNED_IN' && session) {
+        } else if (event === 'SIGNED_IN') {
           fetch_user()
         }
       }
