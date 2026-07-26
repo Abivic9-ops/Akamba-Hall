@@ -86,7 +86,7 @@ export function MiniNavbar() {
   const handle_nav = useCallback((hash: string) => {
     const el = document.getElementById(hash.slice(1))
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 72 - 20
+      const top = el.getBoundingClientRect().top + window.scrollY - 72 - 48 - 24
       window.scrollTo({ top, behavior: 'smooth' })
     }
     set_mobile_open(false)

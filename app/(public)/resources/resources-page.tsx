@@ -4,6 +4,7 @@ import { Search, BookOpen, Globe, Lightbulb, Wrench, BookMarked, Star, ArrowRigh
 import Link from 'next/link'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
 import { AiCitationGenerator } from '@/components/ai/ai-citation-generator'
+import { AiFeatureBanner } from '@/components/ai/ai-feature-banner'
 
 const featuredBooks = [
   { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', category: 'Psychology', desc: 'A groundbreaking exploration of the two systems that drive the way we think — System 1 fast and intuitive, System 2 slow and deliberate. Essential for understanding decision-making.' },
@@ -43,18 +44,14 @@ export default function ResourcesPageClient() {
       </FadeIn>
 
       {/* Separator */}
-      <div className="w-full bg-[#0B1A3B]">
-        <div className="container mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        </div>
-      </div>
+      <div className="w-full border-t border-gold/30" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-0 z-50 w-full bg-white py-3 border-b border-[#E4E7EE]">
-        <div className="flex items-center justify-center px-4">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+      <div className="sticky top-[72px] z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E4E7EE]">
+        <div className="max-w-5xl mx-auto px-6 py-3">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#catalogue', '#physical', '#digital', '#study-help', '#suggested'].map((id) => (
-              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize shrink-0">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}
@@ -222,7 +219,13 @@ export default function ResourcesPageClient() {
       <FadeIn>
         <section id="study-help" className="py-24 px-4 bg-[#F5F6FA]">
           <div className="container mx-auto max-w-5xl">
-            <div className="flex items-center gap-3 mb-4">
+            <AiFeatureBanner
+              title="AI Citation Generator"
+              description="Format references in APA, MLA, Chicago, Harvard, or Vancouver — powered by AI. Just enter the details below."
+              feature="AI Tool"
+              pageKey="resources-citation"
+            />
+            <div className="flex items-center gap-3 mb-4 mt-8">
               <span className="inline-flex items-center gap-2 bg-white/80 text-[#0B1A3B] text-[13px] font-medium uppercase tracking-widest px-4 py-2 rounded-full">
                 <Lightbulb className="h-3.5 w-3.5" aria-hidden="true" />
                 Learn How
@@ -254,15 +257,10 @@ export default function ResourcesPageClient() {
                 </StaggerItem>
               ))}
             </StaggerChildren>
-          </div>
-        </section>
-      </FadeIn>
 
-      {/* AI Citation Generator */}
-      <FadeIn>
-        <section className="py-16 px-4">
-          <div className="container mx-auto max-w-3xl">
-            <AiCitationGenerator />
+            <div className="mt-12">
+              <AiCitationGenerator />
+            </div>
           </div>
         </section>
       </FadeIn>

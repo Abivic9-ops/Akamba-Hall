@@ -59,18 +59,14 @@ export default function NewsPageClient() {
       </FadeIn>
 
       {/* Separator */}
-      <div className="w-full bg-[#0B1A3B]">
-        <div className="container mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        </div>
-      </div>
+      <div className="w-full border-t border-gold/30" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-0 z-50 w-full bg-white py-3 border-b border-[#E4E7EE]">
-        <div className="flex items-center justify-center px-4">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+      <div className="sticky top-[72px] z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E4E7EE]">
+        <div className="max-w-5xl mx-auto px-6 py-3">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#announcements', '#arrivals', '#events', '#notices', '#campaigns'].map((id) => (
-              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize shrink-0">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}

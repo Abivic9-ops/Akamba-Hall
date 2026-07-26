@@ -12,6 +12,7 @@ import { Announcements } from './announcements'
 import { LibraryHours } from './library-hours'
 import { CatalogueSearch } from './catalogue-search'
 import { Support } from './support'
+import { AiBookRecommendations } from '@/components/ai/ai-book-recommendations'
 
 interface Props {
   profile: {
@@ -95,10 +96,11 @@ export function StudentDashboardClient({
           </div>
         </div>
 
-        {/* ── Catalogue | Announcements + Hours + Support ─ */}
+        {/* ── Catalogue + AI Recommendations | Announcements + Hours + Support ─ */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-4">
             <CatalogueSearch />
+            <AiBookRecommendations />
           </div>
           <div className="lg:col-span-3 space-y-4">
             <Announcements announcements={announcements} />

@@ -128,13 +128,13 @@ export function PublicNavbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full h-[72px] transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0B1A3B] shadow-lg shadow-black/15 py-2'
-          : 'bg-[#0B1A3B] py-3'
+          ? 'bg-[#0B1A3B] shadow-lg shadow-black/15'
+          : 'bg-[#0B1A3B]'
       }`}
     >
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-full flex items-center justify-between">
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <div className="relative h-14 w-11 shrink-0">

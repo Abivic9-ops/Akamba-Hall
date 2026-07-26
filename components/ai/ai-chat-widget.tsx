@@ -43,8 +43,13 @@ export function AiChatWidget() {
   const panel_ref = useRef<HTMLDivElement>(null)
   const input_ref = useRef<HTMLTextAreaElement>(null)
   const messages_end_ref = useRef<HTMLDivElement>(null)
+  const [mounted, set_mounted] = useState(false)
 
   const is_authenticated = !!user
+
+  useEffect(() => {
+    set_mounted(true)
+  }, [])
 
   useEffect(() => {
     if (open && messages.length === 0) {
@@ -137,6 +142,8 @@ export function AiChatWidget() {
   }
 
   const suggestions = is_authenticated ? AUTH_SUGGESTIONS : PUBLIC_SUGGESTIONS
+
+  if (!mounted) return null
 
   return (
     <>
