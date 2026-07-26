@@ -103,11 +103,11 @@ async function call_openrouter(system_prompt: string, messages: ChatMessage[]): 
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${OPENROUTER_KEY}`,
-      'HTTP-Referer': 'https://akambahall.vercel.app',
+      'HTTP-Referer': 'https://akamba-hall-stareheboyscentre.vercel.app',
       'X-Title': 'Akamba AI',
     },
     body: JSON.stringify({
-      model: 'meta-llama/llama-3.1-8b-instruct:free',
+      model: 'google/gemma-4-31b-it:free',
       messages: all_msgs,
       temperature: 0.7,
       max_tokens: 1024,

@@ -3,6 +3,7 @@
 import { Search, BookOpen, Globe, Lightbulb, Wrench, BookMarked, Star, ArrowRight, Filter, Eye, CheckCircle2, Download, Wifi, FileText, Library, BookPlus } from 'lucide-react'
 import Link from 'next/link'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
+import { AiCitationGenerator } from '@/components/ai/ai-citation-generator'
 
 const featuredBooks = [
   { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', category: 'Psychology', desc: 'A groundbreaking exploration of the two systems that drive the way we think — System 1 fast and intuitive, System 2 slow and deliberate. Essential for understanding decision-making.' },
@@ -253,6 +254,15 @@ export default function ResourcesPageClient() {
                 </StaggerItem>
               ))}
             </StaggerChildren>
+          </div>
+        </section>
+      </FadeIn>
+
+      {/* AI Citation Generator */}
+      <FadeIn>
+        <section className="py-16 px-4">
+          <div className="container mx-auto max-w-3xl">
+            <AiCitationGenerator />
           </div>
         </section>
       </FadeIn>
