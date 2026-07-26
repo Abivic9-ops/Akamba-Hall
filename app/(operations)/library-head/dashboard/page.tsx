@@ -105,21 +105,21 @@ export default async function library_head_dashboard() {
         </div>
 
         {/* row 1 — today's snapshot */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { label: 'Active Loans', value: active_loans, icon: BookOpen, color: 'bg-blue-50 text-blue-500' },
-            { label: "Today's Bookings", value: today_bookings, icon: CalendarCheck, color: 'bg-emerald-50 text-emerald-500' },
-            { label: 'Overdue Loans', value: overdue_loans, icon: Clock, color: overdue_loans > 0 ? 'bg-red-50 text-red-500' : 'bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]' },
-            { label: 'Members', value: total_members, icon: Users, color: 'bg-sky-50 text-sky-500' },
+            { label: 'Active Loans', value: active_loans, icon: BookOpen, iconBg: 'bg-[#2155F5]/10 dark:bg-[#2155F5]/20', iconColor: 'text-[#2155F5] dark:text-[#5B8DEF]' },
+            { label: "Today's Bookings", value: today_bookings, icon: CalendarCheck, iconBg: 'bg-[#18A957]/10 dark:bg-[#18A957]/20', iconColor: 'text-[#18A957] dark:text-[#4ADE80]' },
+            { label: 'Overdue Loans', value: overdue_loans, icon: Clock, iconBg: overdue_loans > 0 ? 'bg-[#E53E3E]/10 dark:bg-[#E53E3E]/20' : 'bg-slate-100 dark:bg-white/[0.06]', iconColor: overdue_loans > 0 ? 'text-[#E53E3E] dark:text-[#F87171]' : 'text-slate-400 dark:text-[#6B7A99]' },
+            { label: 'Members', value: total_members, icon: Users, iconBg: 'bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20', iconColor: 'text-[#0EA5E9] dark:text-[#38BDF8]' },
           ].map((item) => (
-            <div key={item.label} className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-2xl p-5 border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none hover:shadow-md transition-shadow">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99]">{item.label}</span>
-                <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${item.color}`}>
-                  <item.icon className="h-4 w-4" />
+            <div key={item.label} className="bg-white dark:bg-[#13285A] rounded-2xl p-3 md:p-4 border border-slate-100 dark:border-white/[0.08] shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[11px] md:text-[13px] text-slate-400 dark:text-[#94A3B8]">{item.label}</span>
+                <div className={`h-8 w-8 md:h-9 md:w-9 rounded-lg md:rounded-xl flex items-center justify-center ${item.iconBg}`}>
+                  <item.icon className={`h-4 w-4 ${item.iconColor}`} />
                 </div>
               </div>
-              <div className="text-[28px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] leading-tight">
+              <div className="text-[22px] md:text-[28px] font-bold text-slate-900 dark:text-[#E2E8F0] leading-tight">
                 {item.value}
               </div>
             </div>

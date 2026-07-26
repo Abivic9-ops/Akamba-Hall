@@ -1,9 +1,28 @@
 'use client'
 
-import { Eye } from 'lucide-react'
+import { Eye, BookOpen, Calendar, ShieldCheck } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 
-export function AuditTrailsClient() {
+interface Activity {
+  id: string
+  type: 'LOAN' | 'BOOKING' | 'ROLE_REQUEST'
+  action: string
+  detail: string
+  userName: string
+  timestamp: string
+}
+
+interface AuditTrailsClientProps {
+  activities: Activity[]
+}
+
+const typeConfig: Record<string, { Icon: typeof BookOpen; color: string; bg: string }> = {
+  LOAN: { Icon: BookOpen, color: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-500/10' },
+  BOOKING: { Icon: Calendar, color: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-50 dark:bg-purple-500/10' },
+  ROLE_REQUEST: { Icon: ShieldCheck, color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-500/10' },
+}
+
+export function AuditTrailsClient({ activities }: AuditTrailsClientProps) {
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
       <div className="max-w-[1440px] mx-auto p-6 space-y-6">
@@ -17,16 +36,37 @@ export function AuditTrailsClient() {
           </div>
         </div>
 
-        <SectionCard title="Audit Log" icon={Eye}>
-          <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="h-16 w-16 rounded-2xl bg-slate-100 dark:bg-white/[0.06] flex items-center justify-center mb-4">
-              <Eye className="h-7 w-7 text-slate-300 dark:text-[#6B7A99]" />
+        <SectionCard title="Unified Activity Feed" icon={Eye}>
+          {activities.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <Eye className="h-10 w-10 text-slate-300 dark:text-[#6B7A99] mb-3" />
+              <p className="text-[14px] text-slate-500 dark:text-[#6B7A99]">No recent activity recorded.</p>
             </div>
-            <h3 className="text-[15px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1">Audit Trails</h3>
-            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] max-w-xs">
-              Comprehensive audit log of all user actions and system changes.
-            </p>
-          </div>
+          ) : (
+            <div className="space-y-1">
+              {activities.map((activity) => {
+                const tc = typeConfig[activity.type] ?? typeConfig.LOAN
+                const TIcon = tc.Icon
+                return (
+                  <div key={activity.id} className="flex items-start gap-3 py-3 px-2 rounded-lg hover:bg-slate-50 dark:hover:bg-white/[0.02] transition-colors">
+                    <div className={`h-8 w-8 rounded-lg ${tc.bg} flex items-center justify-center shrink-0 mt-0.5`}>
+                      <TIcon className={`h-4 w-4 ${tc.color}`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[13px] font-medium text-slate-800 dark:text-[#E2E8F0]">{activity.action}</span>
+                        <span className="text-[11px] text-slate-400 dark:text-[#6B7A99]">{activity.userName}</span>
+                      </div>
+                      <p className="text-[12px] text-slate-500 dark:text-[#6B7A99] truncate">{activity.detail}</p>
+                    </div>
+                    <span className="text-[11px] text-slate-400 dark:text-[#6B7A99] whitespace-nowrap shrink-0">
+                      {new Date(activity.timestamp).toLocaleString()}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </SectionCard>
       </div>
     </div>

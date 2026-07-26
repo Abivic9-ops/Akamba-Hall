@@ -1,8 +1,9 @@
 'use client'
 
-import { MessageSquare, Send } from 'lucide-react'
-import { useState } from 'react'
+import { MessageSquare, Send, CheckCircle2, Loader2 } from 'lucide-react'
+import { useState, useTransition } from 'react'
 import { SectionCard } from '@/components/ui/section-card'
+import { submit_feedback } from '@/lib/actions/feedback'
 
 interface Props {
   portal: string
@@ -13,15 +14,25 @@ export function FeedbackForm({ portal }: Props) {
   const [description, set_description] = useState('')
   const [category, set_category] = useState('GENERAL')
   const [submitted, set_submitted] = useState(false)
+  const [error, set_error] = useState('')
+  const [isPending, startTransition] = useTransition()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    set_submitted(true)
-    setTimeout(() => {
-      set_title('')
-      set_description('')
-      set_submitted(false)
-    }, 2000)
+    set_error('')
+    startTransition(async () => {
+      const result = await submit_feedback({ title, description, category, portal })
+      if (result.success) {
+        set_submitted(true)
+        setTimeout(() => {
+          set_title('')
+          set_description('')
+          set_submitted(false)
+        }, 3000)
+      } else {
+        set_error(result.error || 'Failed to submit feedback')
+      }
+    })
   }
 
   return (
@@ -40,14 +51,19 @@ export function FeedbackForm({ portal }: Props) {
         <SectionCard title="New Report" icon={MessageSquare}>
           {submitted ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
-              <div className="h-16 w-16 rounded-2xl bg-emerald-50 flex items-center justify-center mb-4">
-                <Send className="h-7 w-7 text-emerald-500" />
+              <div className="h-16 w-16 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center mb-4">
+                <CheckCircle2 className="h-7 w-7 text-emerald-500" />
               </div>
               <h3 className="text-[15px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1">Thank you!</h3>
-              <p className="text-[13px] text-slate-400 dark:text-[#6B7A99]">Your feedback has been submitted.</p>
+              <p className="text-[13px] text-slate-400 dark:text-[#6B7A99]">Your feedback has been submitted successfully.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/40 text-[13px] text-red-600 dark:text-red-400">
+                  {error}
+                </div>
+              )}
               <div>
                 <label className="block text-[13px] font-medium text-slate-700 dark:text-[#E2E8F0] mb-1.5">Title</label>
                 <input
@@ -71,6 +87,7 @@ export function FeedbackForm({ portal }: Props) {
                   <option value="FACILITY">Facility</option>
                   <option value="EQUIPMENT">Equipment</option>
                   <option value="MEMBER_CONDUCT">Member Conduct</option>
+                  <option value="LATE_RETURN">Late Return</option>
                 </select>
               </div>
               <div>
@@ -78,7 +95,7 @@ export function FeedbackForm({ portal }: Props) {
                 <textarea
                   value={description}
                   onChange={(e) => set_description(e.target.value)}
-                  placeholder="Provide details..."
+                  placeholder="Provide details about your feedback..."
                   rows={4}
                   className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-white/[0.05] text-[13px] text-slate-800 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:placeholder:text-[#6B7A99] focus:outline-none focus:ring-2 focus:ring-[#5B9BD5]/30 resize-none"
                   required
@@ -86,9 +103,11 @@ export function FeedbackForm({ portal }: Props) {
               </div>
               <button
                 type="submit"
-                className="h-9 px-6 rounded-lg bg-[#5B9BD5] text-white text-[13px] font-medium hover:bg-[#4A8AC4] transition-colors"
+                disabled={isPending}
+                className="h-9 px-6 rounded-lg bg-[#5B9BD5] text-white text-[13px] font-medium hover:bg-[#4A8AC4] transition-colors disabled:opacity-50 flex items-center gap-2"
               >
-                Submit Feedback
+                {isPending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
+                {isPending ? 'Submitting...' : 'Submit Feedback'}
               </button>
             </form>
           )}

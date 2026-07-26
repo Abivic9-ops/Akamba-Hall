@@ -3,15 +3,22 @@
 import { Shield, Users } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 
+interface PermissionsClientProps {
+  roleCounts: Record<string, number>
+}
+
 const permissions = [
   { role: 'STUDENT', access: ['Browse Catalogue', 'View E-Resources', 'Submit Feedback', 'View Announcements'] },
   { role: 'STAFF', access: ['All Student permissions', 'Checkout/Return Books', 'Manage Bookings', 'View Members'] },
   { role: 'EXECUTIVE', access: ['All Staff permissions', 'Approve Bookings', 'View Reports', 'Manage Announcements'] },
+  { role: 'ASSISTANT', access: ['All Staff permissions', 'Assist Members', 'Help with Bookings'] },
+  { role: 'CAPTAIN', access: ['All Staff permissions', 'Desk Supervision', 'Manage Shifts'] },
+  { role: 'PREFECT', access: ['All Staff permissions', 'Desk Support', 'Member Assistance'] },
   { role: 'LIBRARY_HEAD', access: ['All Executive permissions', 'Manage Inventory', 'Manage Staff', 'Manage Policies', 'View Charges'] },
   { role: 'SUPER_ADMIN', access: ['Full system access', 'Manage Users', 'System Settings', 'Audit Logs', 'Backups'] },
 ]
 
-export function PermissionsClient() {
+export function PermissionsClient({ roleCounts }: PermissionsClientProps) {
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
       <div className="max-w-[1440px] mx-auto p-6 space-y-6">
@@ -26,24 +33,33 @@ export function PermissionsClient() {
         </div>
 
         <div className="space-y-4">
-          {permissions.map((p) => (
-            <div key={p.role} className="bg-white dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] shadow-sm overflow-hidden">
-              <div className="px-6 py-4 border-b border-slate-50 flex items-center gap-2">
-                <Users className="h-4 w-4 text-slate-400 dark:text-[#6B7A99]" />
-                <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0]">{p.role.replace('_', ' ')}</h2>
-              </div>
-              <div className="p-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {p.access.map((a, i) => (
-                    <div key={i} className="flex items-center gap-2 text-[13px] text-slate-600 dark:text-[#E2E8F0]">
-                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
-                      {a}
-                    </div>
-                  ))}
+          {permissions.map((p) => {
+            const count = roleCounts[p.role] ?? 0
+            return (
+              <div key={p.role} className="bg-white dark:bg-[#0E1F3F] rounded-2xl border border-slate-100 dark:border-white/[0.08] shadow-sm overflow-hidden">
+                <div className="px-6 py-4 border-b border-slate-50 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-slate-400 dark:text-[#6B7A99]" />
+                    <h2 className="text-[15px] font-medium text-slate-900 dark:text-[#E2E8F0]">{p.role.replace('_', ' ')}</h2>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#5B9BD5]/10 text-[#5B9BD5] text-[12px] font-medium">
+                    <Users className="h-3 w-3" />
+                    {count} user{count !== 1 ? 's' : ''}
+                  </span>
+                </div>
+                <div className="p-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {p.access.map((a, i) => (
+                      <div key={i} className="flex items-center gap-2 text-[13px] text-slate-600 dark:text-[#E2E8F0]">
+                        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 shrink-0" />
+                        {a}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>

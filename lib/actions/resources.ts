@@ -109,3 +109,27 @@ export async function get_digital_resources() {
     category: r.category,
   }))
 }
+
+export async function create_digital_resource(data: { title: string; provider: string; description: string; url: string; category: string; addedById: string }) {
+  await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
+  const resource = await prisma.digitalResource.create({ data })
+  revalidatePath('/library-head/digital-resources')
+  revalidatePath('/super-admin/digital-resources')
+  return { success: true, id: resource.id }
+}
+
+export async function update_digital_resource(id: string, data: { title?: string; provider?: string; description?: string; url?: string; category?: string }) {
+  await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
+  await prisma.digitalResource.update({ where: { id }, data })
+  revalidatePath('/library-head/digital-resources')
+  revalidatePath('/super-admin/digital-resources')
+  return { success: true }
+}
+
+export async function delete_digital_resource(id: string) {
+  await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
+  await prisma.digitalResource.update({ where: { id }, data: { isActive: false } })
+  revalidatePath('/library-head/digital-resources')
+  revalidatePath('/super-admin/digital-resources')
+  return { success: true }
+}

@@ -300,6 +300,29 @@ async function main() {
   }
   console.log(`\x1b[32m✓ ${digitalResourcesData.length} digital resources created\x1b[0m`)
 
+  // ─── NEWSPAPERS ─────────────────────────────────
+  console.log('\n\x1b[36m→ Seeding newspapers...\x1b[0m')
+
+  const newspapersData = [
+    { title: 'Daily Nation', publisher: 'Nation Media Group', category: 'National', frequency: 'Daily', language: 'English', url: 'https://nation.africa', description: "Kenya's largest daily newspaper covering national and international news, business, sports, and opinion." },
+    { title: 'The Standard', publisher: 'Standard Group', category: 'National', frequency: 'Daily', language: 'English', description: "Kenya's second-largest daily newspaper with comprehensive coverage of politics, business, and lifestyle." },
+    { title: 'The Star', publisher: 'Radio Africa Group', category: 'National', frequency: 'Daily', language: 'English', url: 'https://www.the-star.co.ke', description: "A leading daily newspaper known for investigative journalism and in-depth political analysis." },
+    { title: 'Business Daily', publisher: 'Nation Media Group', category: 'Business', frequency: 'Daily', language: 'English', url: 'https://www.businessdailyafrica.com', description: "East Africa's leading business newspaper covering markets, economy, companies, and personal finance." },
+    { title: 'The East African', publisher: 'Nation Media Group', category: 'Regional', frequency: 'Weekly', language: 'English', url: 'https://www.theeastafrican.co.ke', description: "A weekly newspaper covering news and analysis from across the East African Community." },
+    { title: 'Taifa Leo', publisher: 'Nation Media Group', category: 'National', frequency: 'Daily', language: 'Kiswahili', description: "Kenya's leading Kiswahili daily newspaper." },
+    { title: 'The People', publisher: 'People Media Group', category: 'National', frequency: 'Daily', language: 'English', description: "A popular daily newspaper focusing on human interest stories and community news." },
+    { title: 'Kenya Gazette', publisher: 'Government of Kenya', category: 'Government', frequency: 'Weekly', language: 'English', url: 'https://www.kenyagazette.go.ke', description: "The official government gazette publishing legal notices, statutory appointments, and government announcements." },
+  ]
+
+  for (const newspaper of newspapersData) {
+    await prisma.newspaper.upsert({
+      where: { id: newspaper.title },
+      update: {},
+      create: newspaper,
+    })
+  }
+  console.log(`\x1b[32m✓ ${newspapersData.length} newspapers created\x1b[0m`)
+
   // ─── SUMMARY ───────────────────────────────────
   console.log('\n\x1b[36m══════════════════════════════════════════\x1b[0m')
   console.log('\x1b[32m✓ Seed complete!\x1b[0m')
@@ -312,8 +335,9 @@ async function main() {
   console.log(`    • ${eventsData.length} events`)
   console.log(`    • ${policiesData.length} policies`)
   console.log(`    • ${equipmentData.length} equipment items`)
-  console.log(`    • ${digitalResourcesData.length} digital resources`)
-  console.log('\x1b[36m  Login with your SUPER_ADMIN credentials to start.\x1b[0m\n')
+    console.log(`    • ${digitalResourcesData.length} digital resources`)
+    console.log(`    • ${newspapersData.length} newspapers`)
+    console.log('\x1b[36m  Login with your SUPER_ADMIN credentials to start.\x1b[0m\n')
 }
 
 main()

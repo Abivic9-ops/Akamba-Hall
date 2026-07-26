@@ -95,6 +95,8 @@ model Book {
   category    String?
   coverUrl    String?  // Cloudinary URL
   description String?
+  contentText String?  @db.Text  // Rich text content for in-portal reading
+  contentUrl  String?  // Cloudinary URL for PDF/document
   year        Int?
   copies      Copy[]
   holds       Hold[]
@@ -455,6 +457,23 @@ model DigitalResource {
   isActive    Boolean  @default(true)
   addedById   String?
   addedBy     User?    @relation(fields: [addedById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ─── NEWSPAPERS & PERIODICALS ──────────────────
+
+model Newspaper {
+  id          String   @id @default(uuid())
+  title       String
+  publisher   String
+  category    String   @default("NATIONAL")
+  frequency   String   @default("DAILY")
+  language    String   @default("English")
+  url         String?
+  coverUrl    String?
+  description String?
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

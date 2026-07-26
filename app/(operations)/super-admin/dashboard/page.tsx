@@ -84,7 +84,7 @@ export default async function super_admin_dashboard() {
         </div>
 
         {/* row 1 — primary metric cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {metric_keys.map((key, i) => {
             const Icon = metric_icon_map[i]
             return (
@@ -105,7 +105,7 @@ export default async function super_admin_dashboard() {
         </div>
 
         {/* row 2 — secondary metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { label: 'Active Users Today', value: metrics.active_users_today, icon: TrendingUp, color: 'text-emerald-500', trend: 'up' },
             { label: 'Total Staff', value: metrics.total_staff, icon: Shield, color: 'text-[#5B9BD5]', trend: 'up' },

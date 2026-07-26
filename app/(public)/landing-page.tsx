@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
+import { useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -236,7 +237,14 @@ function SatisfactionRing({ percentage, label }: { percentage: number; label: st
 /* ─── Page Component ─── */
 
 export default function PublicLandingPage() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
+
+  function handleSearch() {
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
 
   return (
     <>
@@ -250,7 +258,7 @@ export default function PublicLandingPage() {
         <section className="relative w-full min-h-[500px] md:min-h-[600px] flex items-center bg-[#0B1A3B] overflow-hidden">
           <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-bg.png')" }} />
           <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0B1A3B] via-[#0B1A3B]/90 to-[#0B1A3B]/30" />
-          <div className="container relative z-10 mx-auto px-5 md:px-6 pt-10 pb-12 md:pt-0 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+          <div className="container relative z-10 mx-auto px-5 md:px-6 pt-14 pb-12 md:pt-20 md:pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
             <div className="flex flex-col gap-5 max-w-2xl">
               <h1 className="text-[28px] sm:text-[34px] md:text-[42px] font-bold leading-[1.1] tracking-tight text-white">
                 The Heart of Learning at{' '}
@@ -300,9 +308,9 @@ export default function PublicLandingPage() {
                 <div className="flex gap-2 mb-6">
                   <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" aria-hidden="true" />
-                    <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search books, journals, authors, topics…" className="pl-9 h-11 bg-[#0B1A3B] border-white/10 text-white text-[13px] rounded-xl placeholder:text-white/30 focus-visible:ring-gold" aria-label="Search library catalogue" />
+                    <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} placeholder="Search books, journals, authors, topics…" className="pl-9 h-11 bg-[#0B1A3B] border-white/10 text-white text-[13px] rounded-xl placeholder:text-white/30 focus-visible:ring-gold" aria-label="Search library catalogue" />
                   </div>
-                  <Button className="h-11 px-5 rounded-xl font-bold text-[13px] bg-gold hover:bg-gold-hover text-navy shrink-0">Search</Button>
+                  <Button onClick={handleSearch} className="h-11 px-5 rounded-xl font-bold text-[13px] bg-gold hover:bg-gold-hover text-navy shrink-0">Search</Button>
                 </div>
                 <div className="grid grid-cols-3 gap-3 mb-6">
                   {heroStats.map((stat, i) => (
@@ -483,11 +491,11 @@ export default function PublicLandingPage() {
                   </motion.div>
                 ))}
               </div>
-              <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 h-10 w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all hidden md:flex" aria-label="Scroll books left" onClick={() => document.getElementById('book-scroll')?.scrollBy({ left: -300, behavior: 'smooth' })}>
-                <ChevronLeft className="h-5 w-5" />
+              <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 sm:-translate-x-3 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all" aria-label="Scroll books left" onClick={() => document.getElementById('book-scroll')?.scrollBy({ left: -300, behavior: 'smooth' })}>
+                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
-              <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 h-10 w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all hidden md:flex" aria-label="Scroll books right" onClick={() => document.getElementById('book-scroll')?.scrollBy({ left: 300, behavior: 'smooth' })}>
-                <ChevronRight className="h-5 w-5" />
+              <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 sm:translate-x-3 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all" aria-label="Scroll books right" onClick={() => document.getElementById('book-scroll')?.scrollBy({ left: 300, behavior: 'smooth' })}>
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
 
@@ -533,11 +541,11 @@ export default function PublicLandingPage() {
                   </motion.div>
                 ))}
               </div>
-              <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 h-10 w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all z-10 hidden md:flex" aria-label="Scroll spaces left" onClick={() => document.getElementById('space-scroll')?.scrollBy({ left: -300, behavior: 'smooth' })}>
-                <ChevronLeft className="h-5 w-5" />
+              <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 sm:-translate-x-3 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all z-10" aria-label="Scroll spaces left" onClick={() => document.getElementById('space-scroll')?.scrollBy({ left: -300, behavior: 'smooth' })}>
+                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
-              <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 h-10 w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all z-10 hidden md:flex" aria-label="Scroll spaces right" onClick={() => document.getElementById('space-scroll')?.scrollBy({ left: 300, behavior: 'smooth' })}>
-                <ChevronRight className="h-5 w-5" />
+              <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 sm:translate-x-3 h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-white shadow-lg border border-[#E4E7EE] flex items-center justify-center text-[#101828] hover:bg-slate-50 hover:scale-110 transition-all z-10" aria-label="Scroll spaces right" onClick={() => document.getElementById('space-scroll')?.scrollBy({ left: 300, behavior: 'smooth' })}>
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
 

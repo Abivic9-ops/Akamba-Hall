@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import {
   Search, BookMarked, DoorOpen, Armchair, Monitor,
   RefreshCw, BookPlus, MessageCircle, Bookmark,
@@ -7,15 +8,15 @@ import {
 import { SectionCard } from '@/components/ui/section-card'
 
 const actions = [
-  { label: 'Search Catalogue', icon: Search, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
-  { label: 'Reserve Book', icon: BookMarked, color: 'text-[#0D9488]', bg: 'bg-teal-50' },
-  { label: 'Book a Room', icon: DoorOpen, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
-  { label: 'Reading Seat', icon: Armchair, color: 'text-[#0EA5E9]', bg: 'bg-sky-50' },
-  { label: 'Equipment', icon: Monitor, color: 'text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]', bg: 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06]' },
-  { label: 'Renew Items', icon: RefreshCw, color: 'text-[#18A957]', bg: 'bg-emerald-50' },
-  { label: 'Request Book', icon: BookPlus, color: 'text-[#F97316]', bg: 'bg-orange-50' },
-  { label: 'Ask a Librarian', icon: MessageCircle, color: 'text-[#2563EB]', bg: 'bg-blue-50' },
-  { label: 'My Bookmarks', icon: Bookmark, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
+  { label: 'Search Catalogue', icon: Search, color: 'text-[#2563EB]', bg: 'bg-blue-50', href: '/search' },
+  { label: 'Reserve Book', icon: BookMarked, color: 'text-[#0D9488]', bg: 'bg-teal-50', href: '/catalogue' },
+  { label: 'Book a Room', icon: DoorOpen, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10', href: '/reservations' },
+  { label: 'Reading Seat', icon: Armchair, color: 'text-[#0EA5E9]', bg: 'bg-sky-50', href: '/reservations' },
+  { label: 'Equipment', icon: Monitor, color: 'text-slate-500 dark:text-[#6B7A99]', bg: 'bg-slate-100 dark:bg-white/[0.06]', href: '/resources' },
+  { label: 'Renew Items', icon: RefreshCw, color: 'text-[#18A957]', bg: 'bg-emerald-50', href: '/reservations' },
+  { label: 'Request Book', icon: BookPlus, color: 'text-[#F97316]', bg: 'bg-orange-50', href: '/catalogue' },
+  { label: 'Ask a Librarian', icon: MessageCircle, color: 'text-[#2563EB]', bg: 'bg-blue-50', href: '/feedback' },
+  { label: 'My Bookmarks', icon: Bookmark, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10', href: '/bookmarks' },
 ]
 
 export function StaffQuickActions() {
@@ -25,17 +26,18 @@ export function StaffQuickActions() {
         {actions.map((action) => {
           const Icon = action.icon
           return (
-            <button
+            <Link
               key={action.label}
-              className="flex flex-col items-center gap-2 p-3.5 rounded-xl bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224] hover:bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] dark:bg-white/[0.06] hover:shadow-sm dark:shadow-none dark:shadow-none active:scale-[0.97] transition-all cursor-pointer"
+              href={action.href}
+              className="flex flex-col items-center gap-2 p-3.5 rounded-xl bg-[#F8F9FB] dark:bg-[#071224] hover:bg-slate-100 dark:hover:bg-white/[0.06] hover:shadow-sm active:scale-[0.97] transition-all"
             >
               <div className={`h-9 w-9 rounded-lg flex items-center justify-center ${action.bg}`}>
                 <Icon className={`h-4 w-4 ${action.color}`} />
               </div>
-              <span className="text-[12px] font-normal text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8] text-center leading-tight">
+              <span className="text-[12px] font-normal text-slate-600 dark:text-[#94A3B8] text-center leading-tight">
                 {action.label}
               </span>
-            </button>
+            </Link>
           )
         })}
       </div>

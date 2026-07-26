@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/db/prisma'
 import { createClient } from '@/lib/supabase/server'
+import { requireRole } from '@/lib/auth/roleGuard'
 import { generateCardRef } from '@/lib/utils/id-generator'
 import { generateQRCodeDataURL } from '@/lib/utils/qr-code'
 
@@ -153,6 +154,116 @@ export async function get_qr_code_url(cardRef: string): Promise<string | null> {
   } catch {
     return null
   }
+}
+
+/* ─── Admin: Get All Users Without QR Cards ──────── */
+
+export async function get_users_without_qr_cards() {
+  await requireRole(['SUPER_ADMIN'])
+  const users = await prisma.user.findMany({
+    where: {
+      qrCards: { none: { status: 'ACTIVE' } },
+      status: 'ACTIVE',
+    },
+    select: { id: true, fullName: true, email: true, studentId: true, role: true },
+    orderBy: { fullName: 'asc' },
+  })
+  return users
+}
+
+/* ─── Admin: Issue QR Card to a User ─────────────── */
+
+export async function issue_qr_card_to_user(userId: string): Promise<QRCardResult> {
+  await requireRole(['SUPER_ADMIN'])
+
+  const existingActive = await prisma.qRCard.findFirst({
+    where: { userId, status: 'ACTIVE' },
+  })
+  if (existingActive) {
+    return { success: false, error: 'User already has an active QR card.' }
+  }
+
+  const profile = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { role: true, memberType: true, studentId: true },
+  })
+  if (!profile) {
+    return { success: false, error: 'User not found.' }
+  }
+
+  const isStudent = profile.role === 'STUDENT' || profile.memberType === 'STUDENT'
+  let cardRef: string
+  if (isStudent && profile.studentId) {
+    cardRef = profile.studentId
+  } else {
+    cardRef = await generateCardRef()
+  }
+
+  const card = await prisma.$transaction(async (tx) => {
+    const raceCheck = await tx.qRCard.findFirst({ where: { userId, status: 'ACTIVE' } })
+    if (raceCheck) return raceCheck
+    return tx.qRCard.create({ data: { userId, cardRef, status: 'ACTIVE' } })
+  })
+
+  const qrCodeUrl = await generateQRCodeDataURL(card.cardRef)
+  return {
+    success: true,
+    data: { cardRef: card.cardRef, qrCodeUrl, status: card.status, issuedAt: card.issuedAt.toISOString() },
+  }
+}
+
+/* ─── Admin: Suspend a QR Card ───────────────────── */
+
+export async function suspend_qr_card(cardId: string): Promise<{ success: boolean; error?: string }> {
+  await requireRole(['SUPER_ADMIN'])
+  const card = await prisma.qRCard.findUnique({ where: { id: cardId } })
+  if (!card) return { success: false, error: 'Card not found.' }
+  if (card.status !== 'ACTIVE') return { success: false, error: 'Only active cards can be suspended.' }
+
+  await prisma.qRCard.update({
+    where: { id: cardId },
+    data: { status: 'SUSPENDED', suspendedAt: new Date() },
+  })
+  return { success: true }
+}
+
+/* ─── Admin: Revoke a QR Card ────────────────────── */
+
+export async function revoke_qr_card(cardId: string): Promise<{ success: boolean; error?: string }> {
+  await requireRole(['SUPER_ADMIN'])
+  const card = await prisma.qRCard.findUnique({ where: { id: cardId } })
+  if (!card) return { success: false, error: 'Card not found.' }
+  if (card.status === 'REVOKED') return { success: false, error: 'Card is already revoked.' }
+
+  await prisma.qRCard.update({
+    where: { id: cardId },
+    data: { status: 'REVOKED', revokedAt: new Date() },
+  })
+  return { success: true }
+}
+
+/* ─── Admin: Reactivate a QR Card ────────────────── */
+
+export async function reactivate_qr_card(cardId: string): Promise<{ success: boolean; error?: string }> {
+  await requireRole(['SUPER_ADMIN'])
+  const card = await prisma.qRCard.findUnique({ where: { id: cardId } })
+  if (!card) return { success: false, error: 'Card not found.' }
+  if (card.status === 'ACTIVE') return { success: false, error: 'Card is already active.' }
+
+  await prisma.qRCard.update({
+    where: { id: cardId },
+    data: { status: 'ACTIVE', suspendedAt: null, revokedAt: null },
+  })
+  return { success: true }
+}
+
+/* ─── Admin: Get QR Code Image for Any Card ──────── */
+
+export async function get_card_qr_image(cardId: string): Promise<string | null> {
+  await requireRole(['SUPER_ADMIN'])
+  const card = await prisma.qRCard.findUnique({ where: { id: cardId } })
+  if (!card) return null
+  return generateQRCodeDataURL(card.cardRef)
 }
 
 /* ─── Staff Card (uses StaffDigitalCard component) ── */

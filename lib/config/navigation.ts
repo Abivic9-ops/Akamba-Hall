@@ -16,6 +16,13 @@ export interface NavSection {
 export const navigationRegistry: NavItem[] = [
   // ─── STUDENT ────────────────────────────────────
   {
+    label: 'Dashboard',
+    icon: 'LayoutDashboard',
+    path: '/student/dashboard',
+    section: 'Dashboard',
+    roles: ['STUDENT'],
+  },
+  {
     label: 'Catalogue Search',
     icon: 'Search',
     path: '/student/catalogue',
@@ -120,8 +127,29 @@ export const navigationRegistry: NavItem[] = [
     section: 'Support',
     roles: ['STUDENT'],
   },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/student/profile',
+    section: 'Account',
+    roles: ['STUDENT'],
+  },
+  {
+    label: 'Settings',
+    icon: 'Settings',
+    path: '/student/settings',
+    section: 'Account',
+    roles: ['STUDENT'],
+  },
 
   // ─── STAFF ──────────────────────────────────────
+  {
+    label: 'Dashboard',
+    icon: 'LayoutDashboard',
+    path: '/staff/dashboard',
+    section: 'Dashboard',
+    roles: ['STAFF'],
+  },
   {
     label: 'Catalogue Search',
     icon: 'Search',
@@ -232,6 +260,20 @@ export const navigationRegistry: NavItem[] = [
     icon: 'HelpCircle',
     path: '/staff/help',
     section: 'Support',
+    roles: ['STAFF'],
+  },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/staff/profile',
+    section: 'Account',
+    roles: ['STAFF'],
+  },
+  {
+    label: 'Settings',
+    icon: 'Settings',
+    path: '/staff/settings',
+    section: 'Account',
     roles: ['STAFF'],
   },
 
@@ -397,6 +439,20 @@ export const navigationRegistry: NavItem[] = [
     section: 'Support',
     roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
   },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/desk/profile',
+    section: 'Account',
+    roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
+  },
+  {
+    label: 'Settings',
+    icon: 'Settings',
+    path: '/desk/settings',
+    section: 'Account',
+    roles: ['ASSISTANT', 'CAPTAIN', 'PREFECT'],
+  },
 
   // ─── LIBRARY HEAD ───────────────────────────────
   {
@@ -532,8 +588,29 @@ export const navigationRegistry: NavItem[] = [
     section: 'Support',
     roles: ['LIBRARY_HEAD'],
   },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/library-head/profile',
+    section: 'Account',
+    roles: ['LIBRARY_HEAD'],
+  },
+  {
+    label: 'Settings',
+    icon: 'Settings',
+    path: '/library-head/settings',
+    section: 'Account',
+    roles: ['LIBRARY_HEAD'],
+  },
 
   // ─── EXECUTIVE ──────────────────────────────────
+  {
+    label: 'Dashboard',
+    icon: 'LayoutDashboard',
+    path: '/executive/dashboard',
+    section: 'Dashboard',
+    roles: ['EXECUTIVE'],
+  },
   {
     label: 'Reports & Analytics',
     icon: 'BarChart2',
@@ -665,6 +742,20 @@ export const navigationRegistry: NavItem[] = [
     icon: 'MessageSquare',
     path: '/executive/feedback',
     section: 'Support',
+    roles: ['EXECUTIVE'],
+  },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/executive/profile',
+    section: 'Account',
+    roles: ['EXECUTIVE'],
+  },
+  {
+    label: 'Settings',
+    icon: 'Settings',
+    path: '/executive/settings',
+    section: 'Account',
     roles: ['EXECUTIVE'],
   },
 
@@ -814,6 +905,20 @@ export const navigationRegistry: NavItem[] = [
     icon: 'FileCheck',
     path: '/super-admin/audit-trails',
     section: 'Maintenance',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'Profile',
+    icon: 'User',
+    path: '/super-admin/profile',
+    section: 'Account',
+    roles: ['SUPER_ADMIN'],
+  },
+  {
+    label: 'Settings',
+    icon: 'Settings',
+    path: '/super-admin/settings',
+    section: 'Account',
     roles: ['SUPER_ADMIN'],
   },
 ]

@@ -128,7 +128,7 @@ export function PublicNavbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
         scrolled
           ? 'bg-[#0B1A3B] shadow-lg shadow-black/15 py-2'
           : 'bg-[#0B1A3B] py-3'

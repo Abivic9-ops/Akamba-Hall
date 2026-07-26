@@ -3,6 +3,7 @@
 import prisma from '@/lib/db/prisma'
 import { requireRole } from '@/lib/auth/roleGuard'
 import { revalidatePath } from 'next/cache'
+import { uploadImage, uploadDocument } from '@/lib/cloudinary'
 
 export async function get_books(options?: { category?: string; search?: string; limit?: number }) {
   const where: Record<string, unknown> = {}
@@ -32,6 +33,8 @@ export async function get_books(options?: { category?: string; search?: string; 
     category: book.category,
     coverUrl: book.coverUrl,
     description: book.description,
+    contentText: book.contentText,
+    contentUrl: book.contentUrl,
     year: book.year,
     totalCopies: book.copies.length,
     availableCopies: book.copies.filter((c) => c.status === 'AVAILABLE').length,
@@ -75,7 +78,11 @@ export async function get_book_stats() {
   return { totalBooks, totalCopies, availableCopies, loanedCopies, lostCopies, damagedCopies }
 }
 
-export async function create_book(data: { title: string; author: string; isbn?: string; category?: string; description?: string; year?: number; coverUrl?: string; copies?: number }) {
+export async function create_book(data: {
+  title: string; author: string; isbn?: string; category?: string;
+  description?: string; year?: number; coverUrl?: string;
+  contentText?: string; contentUrl?: string; copies?: number;
+}) {
   await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
 
   const book = await prisma.book.create({
@@ -87,6 +94,8 @@ export async function create_book(data: { title: string; author: string; isbn?: 
       description: data.description,
       year: data.year,
       coverUrl: data.coverUrl,
+      contentText: data.contentText,
+      contentUrl: data.contentUrl,
     },
   })
 
@@ -107,20 +116,72 @@ export async function create_book(data: { title: string; author: string; isbn?: 
   return { success: true, bookId: book.id }
 }
 
-export async function update_book(bookId: string, data: { title?: string; author?: string; isbn?: string; category?: string; description?: string; year?: number; coverUrl?: string }) {
+export async function update_book(bookId: string, data: {
+  title?: string; author?: string; isbn?: string; category?: string;
+  description?: string; year?: number; coverUrl?: string;
+  contentText?: string; contentUrl?: string;
+}) {
   await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
-
   await prisma.book.update({ where: { id: bookId }, data })
   revalidatePath('/library-head/inventory')
   revalidatePath('/catalogue')
+  revalidatePath(`/item/${bookId}`)
   return { success: true }
 }
 
 export async function delete_book(bookId: string) {
   await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
-
   await prisma.book.delete({ where: { id: bookId } })
   revalidatePath('/library-head/inventory')
   revalidatePath('/catalogue')
   return { success: true }
+}
+
+export async function upload_book_cover(bookId: string, fileBase64: string, filename: string) {
+  await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
+  const result = await uploadImage(fileBase64, 'akamba/covers', { width: 400, height: 600, crop: 'fill' })
+  await prisma.book.update({ where: { id: bookId }, data: { coverUrl: result.url } })
+  revalidatePath(`/item/${bookId}`)
+  revalidatePath('/catalogue')
+  return { success: true, url: result.url }
+}
+
+export async function upload_book_content(bookId: string, fileBase64: string, filename: string) {
+  await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
+  const result = await uploadDocument(fileBase64, 'akamba/documents', filename)
+  await prisma.book.update({ where: { id: bookId }, data: { contentUrl: result.url } })
+  revalidatePath(`/item/${bookId}`)
+  return { success: true, url: result.url }
+}
+
+export async function search_books(query: string) {
+  if (!query || query.trim().length < 2) return []
+  const books = await prisma.book.findMany({
+    where: {
+      OR: [
+        { title: { contains: query, mode: 'insensitive' } },
+        { author: { contains: query, mode: 'insensitive' } },
+        { isbn: { contains: query, mode: 'insensitive' } },
+        { category: { contains: query, mode: 'insensitive' } },
+        { description: { contains: query, mode: 'insensitive' } },
+      ],
+    },
+    include: { copies: true },
+    orderBy: { title: 'asc' },
+    take: 20,
+  })
+
+  return books.map((book) => ({
+    id: book.id,
+    title: book.title,
+    author: book.author,
+    isbn: book.isbn,
+    category: book.category,
+    coverUrl: book.coverUrl,
+    description: book.description,
+    year: book.year,
+    totalCopies: book.copies.length,
+    availableCopies: book.copies.filter((c) => c.status === 'AVAILABLE').length,
+    status: book.copies.some((c) => c.status === 'AVAILABLE') ? 'available' : 'unavailable',
+  }))
 }

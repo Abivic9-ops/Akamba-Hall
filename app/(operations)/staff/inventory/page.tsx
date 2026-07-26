@@ -1,40 +1,26 @@
 import { requireRole } from '@/lib/auth/roleGuard'
-import { SectionCard } from '@/components/ui/section-card'
-import { Library } from 'lucide-react'
+import { get_books, get_book_stats } from '@/lib/actions/books'
+import { StaffInventoryClient } from '@/components/staff/staff-inventory-client'
+
+export const dynamic = 'force-dynamic'
 
 export default async function StaffInventoryPage() {
   await requireRole(['STAFF', 'SUPER_ADMIN'])
 
+  const [books, stats] = await Promise.all([
+    get_books({ limit: 100 }),
+    get_book_stats(),
+  ])
+
   return (
-    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
-      <div className="max-w-[1200px] mx-auto p-6 space-y-5">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
+      <div className="max-w-[1440px] mx-auto p-6 space-y-5">
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Inventory Management</h1>
-          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Manage the library collection, add new titles, and update records.</p>
+          <h1 className="text-2xl font-extrabold text-[#0B1B3D] dark:text-[#E2E8F0]">Inventory Management</h1>
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] mt-1">Manage the library collection, add new titles, and update records.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <SectionCard title="Total Books">
-            <p className="text-[32px] font-bold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">12,847</p>
-            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Across all categories</p>
-          </SectionCard>
-          <SectionCard title="Available Now">
-            <p className="text-[32px] font-bold text-[#18A957]">11,203</p>
-            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Currently on shelves</p>
-          </SectionCard>
-          <SectionCard title="On Loan">
-            <p className="text-[32px] font-bold text-[#2563EB]">1,644</p>
-            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Checked out by members</p>
-          </SectionCard>
-        </div>
-
-        <SectionCard title="Collection Overview" icon={Library}>
-          <div className="text-center py-8">
-            <Library className="h-12 w-12 text-slate-300 mx-auto mb-3" />
-            <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Full inventory management coming soon.</p>
-            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">You&apos;ll be able to search, add, edit, and remove books from the collection.</p>
-          </div>
-        </SectionCard>
+        <StaffInventoryClient books={books} stats={stats} />
       </div>
     </div>
   )

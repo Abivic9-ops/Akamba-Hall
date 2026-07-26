@@ -1,25 +1,34 @@
 import { requireRole } from '@/lib/auth/roleGuard'
-import { SectionCard } from '@/components/ui/section-card'
-import { Megaphone } from 'lucide-react'
+import { get_announcements } from '@/lib/actions/announcements'
+import { StaffAnnouncementsClient } from '@/components/staff/staff-announcements-client'
+
+export const dynamic = 'force-dynamic'
 
 export default async function StaffAnnouncementsPage() {
   await requireRole(['STAFF', 'SUPER_ADMIN'])
 
+  const raw = await get_announcements()
+
+  const announcements = raw.map((a) => ({
+    id: a.id,
+    title: a.title,
+    body: a.body,
+    category: a.category,
+    attachmentUrl: a.attachmentUrl,
+    isPinned: a.isPinned,
+    publishedAt: a.publishedAt,
+    createdAt: a.createdAt,
+  }))
+
   return (
-    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
-      <div className="max-w-[1200px] mx-auto p-6 space-y-5">
+    <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
+      <div className="max-w-[1440px] mx-auto p-6 space-y-5">
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Announcements</h1>
-          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Create and manage library announcements and alerts.</p>
+          <h1 className="text-2xl font-extrabold text-[#0B1B3D] dark:text-[#E2E8F0]">Announcements</h1>
+          <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] mt-1">Create and manage library announcements and alerts.</p>
         </div>
 
-        <SectionCard title="Create Announcement" icon={Megaphone}>
-          <div className="text-center py-8">
-            <Megaphone className="h-12 w-12 text-slate-300 mx-auto mb-3" />
-            <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Announcement management coming soon.</p>
-            <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">Create closures, acquisition notices, workshop announcements, and policy updates.</p>
-          </div>
-        </SectionCard>
+        <StaffAnnouncementsClient announcements={announcements} />
       </div>
     </div>
   )
