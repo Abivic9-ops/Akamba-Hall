@@ -96,15 +96,15 @@ export function MiniNavbar() {
 
   return (
     <div
-      className={`fixed top-[72px] left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-[72px] left-0 right-0 z-40 border-b border-white/[0.06] bg-[#0D1F42]/95 backdrop-blur-md transition-all duration-300 ${
         visible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 -translate-y-full pointer-events-none'
       }`}
     >
       {/* Desktop */}
-      <div className="hidden lg:flex items-center bg-[#0D1F42]/95 backdrop-blur-md border-b border-white/[0.06] px-8 h-12">
-        <div className="max-w-[1440px] mx-auto w-full flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+      <div className="hidden h-12 lg:flex items-center">
+        <div className="mx-auto flex w-full max-w-[1440px] items-center gap-1.5 overflow-x-auto px-4 sm:px-6 lg:px-8 scrollbar-none">
           {sections.map((s) => (
             <button
               key={s.hash}
@@ -122,8 +122,8 @@ export function MiniNavbar() {
       </div>
 
       {/* Mobile */}
-      <div className="lg:hidden bg-[#0D1F42]/95 backdrop-blur-md border-b border-white/[0.06] px-6 h-12">
-        <div className="flex items-center justify-between h-full">
+      <div className="h-12 px-4 sm:px-6 lg:hidden">
+        <div className="mx-auto flex h-full w-full max-w-[1440px] items-center justify-between">
           <span className="text-[12px] font-medium text-white/60">Sections</span>
           <button
             onClick={() => set_mobile_open((p) => !p)}
@@ -134,7 +134,7 @@ export function MiniNavbar() {
           </button>
         </div>
         {mobile_open && (
-          <div className="pb-4 flex flex-wrap gap-2 pt-3 border-t border-white/[0.06]">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-wrap gap-2 border-t border-white/[0.06] pb-4 pt-3">
             {sections.map((s) => (
               <button
                 key={s.hash}

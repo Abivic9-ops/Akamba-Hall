@@ -57,11 +57,11 @@ export default function AboutPageClient() {
       </section>
 
       {/* Separator */}
-      <div className="w-full border-t border-gold/30" />
+      <div className="mx-4 h-px bg-gradient-to-r from-gold/0 via-gold/35 to-gold/0 sm:mx-6 lg:mx-8" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-[72px] z-40 w-full bg-white/95 backdrop-blur-md border-b border-[#E4E7EE]">
-        <div className="max-w-5xl mx-auto px-6 py-3">
+      <div className="sticky top-[72px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
+        <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#mission', '#history', '#identity', '#who-we-serve', '#values', '#leadership'].map((id) => (
               <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[11px] sm:text-[12px] font-semibold text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize shrink-0">
