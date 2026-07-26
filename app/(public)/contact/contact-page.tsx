@@ -7,7 +7,7 @@ export default function ContactPageClient() {
   return (
     <div className="w-full bg-white">
       {/* Hero */}
-      <section className="bg-[#0B1A3B] py-20 px-4 pb-32">
+      <section className="bg-[#0B1A3B] py-20 px-4 pb-28">
         <FadeIn>
         <div className="container mx-auto max-w-4xl text-center">
           <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[11px] font-medium uppercase tracking-widest px-4 py-1.5 rounded-full">

@@ -27,7 +27,7 @@ export default function ResourcesPageClient() {
     <div className="w-full bg-white">
       {/* Hero */}
       <FadeIn>
-        <section className="bg-[#0B1A3B] py-20 px-4 pb-32">
+        <section className="bg-[#0B1A3B] py-20 px-4 pb-20">
           <div className="container mx-auto max-w-4xl text-center">
             <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[13px] font-medium uppercase tracking-widest px-4 py-1.5 rounded-full">
               <Library className="h-3 w-3" aria-hidden="true" />

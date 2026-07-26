@@ -13,6 +13,7 @@ import { LibraryHours } from './library-hours'
 import { CatalogueSearch } from './catalogue-search'
 import { Support } from './support'
 import { AiBookRecommendations } from '@/components/ai/ai-book-recommendations'
+import { AiStudyPlan } from '@/components/ai/ai-study-plan'
 
 interface Props {
   profile: {
@@ -93,6 +94,15 @@ export function StudentDashboardClient({
           </div>
           <div className="lg:col-span-2">
             <QuickActions />
+          </div>
+        </div>
+
+        {/* ── Study Plan ─────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
+          <div className="lg:col-span-2">
+            <AiStudyPlan />
+          </div>
+          <div className="lg:col-span-3">
           </div>
         </div>
 
