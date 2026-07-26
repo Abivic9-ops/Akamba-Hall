@@ -5,6 +5,7 @@ import { AuthProvider } from '@/lib/contexts/auth-context'
 import { DashboardSidebar } from './dashboard-sidebar'
 import { DashboardHeader } from './dashboard-header'
 import { MobileNav } from './mobile-nav'
+import { AiChatWidget } from '@/components/ai/ai-chat-widget'
 import type { UserProfile } from '@/lib/actions/auth'
 
 interface OperationsShellProps {
@@ -35,6 +36,8 @@ export function OperationsShell({ profile, children }: OperationsShellProps) {
             </div>
           </main>
         </div>
+
+        <AiChatWidget />
       </div>
     </AuthProvider>
   )

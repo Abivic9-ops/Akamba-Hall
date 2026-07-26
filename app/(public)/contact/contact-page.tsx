@@ -46,7 +46,7 @@ export default function ContactPageClient() {
 
       {/* Visit Us + Contact Info */}
       <section id="visit" className="py-24 px-4">
-        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           {/* Visit */}
           <FadeIn>
           <div>
@@ -158,7 +158,7 @@ export default function ContactPageClient() {
             Have a question about borrowing, resources, spaces, or the library system? Submit your request here and a member of the library team will respond during working hours. For urgent matters, visit the library desk directly — the help desk is staffed during all opening hours.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             {/* Form */}
             <FadeIn>
             <div className="bg-white border border-[#E4E7EE] rounded-[20px] p-8">

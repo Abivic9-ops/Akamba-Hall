@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
+import { AiSearchSuggestions } from '@/components/ai/ai-search-suggestions'
 
 const chips = ['Title', 'Author', 'Subject', 'Keyword', 'Available Now']
 
@@ -31,6 +32,7 @@ export function CatalogueSearch() {
             placeholder="Search by title, author, subject..."
             className="w-full h-10 pl-9 pr-3 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0E1F3F] text-[14px] text-slate-800 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:placeholder:text-[#6B7A99] focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all"
           />
+          <AiSearchSuggestions query={query} onSelect={(s) => { setQuery(s); router.push(`/search?q=${encodeURIComponent(s)}`) }} />
         </div>
         <button
           onClick={handleSearch}
