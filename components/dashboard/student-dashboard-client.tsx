@@ -14,6 +14,7 @@ import { CatalogueSearch } from './catalogue-search'
 import { Support } from './support'
 import { AiBookRecommendations } from '@/components/ai/ai-book-recommendations'
 import { AiStudyPlan } from '@/components/ai/ai-study-plan'
+import { AiBookSummary } from '@/components/ai/ai-book-summary'
 
 interface Props {
   profile: {
@@ -103,6 +104,7 @@ export function StudentDashboardClient({
             <AiStudyPlan />
           </div>
           <div className="lg:col-span-3">
+            <AiBookSummary />
           </div>
         </div>
 
