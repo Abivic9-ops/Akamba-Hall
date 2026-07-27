@@ -8,6 +8,7 @@ import {
   ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
   FileText, UserSearch, ArrowDownToLine, RefreshCw, Package,
   SearchCheck, Newspaper, UserPlus, CreditCard, AlertTriangle, X,
+  Sparkles,
 } from 'lucide-react'
 
 export const icon_map: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -20,6 +21,7 @@ export const icon_map: Record<string, React.ComponentType<{ className?: string }
   ClipboardCheck, ShieldCheck, BarChart2, FileSearch, Armchair,
   FileText, UserSearch, ArrowDownToLine, RefreshCw, Package,
   SearchCheck, Newspaper, UserPlus, CreditCard, AlertTriangle, X,
+  Sparkles,
 }
 
 export function resolve_icon(name: string) {

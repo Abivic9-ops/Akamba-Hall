@@ -9,6 +9,7 @@ import {
   Users, BookOpen, CalendarCheck, Clock, AlertTriangle,
   TrendingUp, Activity, Shield, ArrowUpRight, ArrowDownRight,
 } from 'lucide-react'
+import { SuperAdminBannerWrapper } from '@/components/ai/super-admin-banner-wrapper'
 
 export const dynamic = 'force-dynamic'
 
@@ -82,6 +83,8 @@ export default async function super_admin_dashboard() {
             Here is an overview of the library system
           </p>
         </div>
+
+        <SuperAdminBannerWrapper />
 
         {/* row 1 — primary metric cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -228,8 +231,8 @@ export default async function super_admin_dashboard() {
                 { label: 'Manage Users', href: '/super-admin/users', color: 'bg-blue-50 text-blue-600' },
                 { label: 'Manage Books', href: '/catalogue', color: 'bg-emerald-50 text-emerald-600' },
                 { label: 'View Loans', href: '/reservations', color: 'bg-amber-50 text-amber-600' },
+                { label: 'AI Tools Guide', href: '/student/ai-tools', color: 'bg-purple-50 text-purple-600' },
                 { label: 'Members', href: '/members', color: 'bg-sky-50 text-sky-600' },
-                { label: 'Reservations', href: '/reservations', color: 'bg-[#5B9BD5]/10 text-[#5B9BD5]' },
                 { label: 'System Settings', href: '/super-admin/settings', color: 'bg-slate-100 dark:bg-white/[0.06] dark:bg-white/[0.06] text-slate-600 dark:text-[#94A3B8] dark:text-[#94A3B8]' },
               ].map((action) => (
                 <a

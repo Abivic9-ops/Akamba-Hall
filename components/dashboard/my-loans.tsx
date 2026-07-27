@@ -4,6 +4,7 @@ import { BookOpen, RefreshCw } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 import { EmptyState } from '@/components/ui/empty-state'
+import { LoanAiActions } from '@/components/ai/loan-ai-actions'
 
 interface Loan {
   id: string
@@ -79,6 +80,7 @@ export function MyLoans({ loans }: MyLoansProps) {
                     Renew
                   </button>
                 )}
+                <LoanAiActions title={loan.title} author={loan.author} renewable={loan.renewable} />
               </div>
             </div>
           ))}

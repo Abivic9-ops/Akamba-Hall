@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { ExecutiveWelcomeHeader } from './executive-welcome-header'
 import { ExecutiveOverviewCards } from './executive-overview-cards'
 import { ExecutiveHeroBanner } from './executive-hero-banner'
+import { AiAnnouncementBanner } from '@/components/ai/ai-announcement-banner'
 
 const ApprovalQueueTable = dynamic(() => import('./approval-queue-table').then(m => ({ default: m.ApprovalQueueTable })), { ssr: false })
 const OversightReports = dynamic(() => import('./oversight-reports').then(m => ({ default: m.OversightReports })), { ssr: false })
@@ -64,6 +65,8 @@ export function ExecutiveDashboardClient({
         upcomingBookings={overview.upcomingBookings}
         holdsAwaiting={overview.holdsAwaiting}
       />
+
+      <AiAnnouncementBanner portal="executive" />
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
         <div className="lg:col-span-2">

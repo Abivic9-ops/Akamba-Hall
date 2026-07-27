@@ -2,6 +2,7 @@
 
 import { MapPin, Phone, Mail, Clock, MessageCircle, AlertTriangle, CreditCard, HelpCircle, Send, Navigation, BookOpen, Users, Shield } from 'lucide-react'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
+import { AiLibraryFaq } from '@/components/ai/ai-library-faq'
 
 export default function ContactPageClient() {
   return (
@@ -232,6 +233,10 @@ export default function ContactPageClient() {
               ))}
               </StaggerChildren>
             </div>
+          </div>
+
+          <div className="mt-12">
+            <AiLibraryFaq />
           </div>
         </div>
       </section>

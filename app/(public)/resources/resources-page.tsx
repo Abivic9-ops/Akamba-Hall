@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
 import { AiCitationGenerator } from '@/components/ai/ai-citation-generator'
 import { AiResearchAssistant } from '@/components/ai/ai-research-assistant'
+import { AiStudyPlan } from '@/components/ai/ai-study-plan'
+import { AiReadingList } from '@/components/ai/ai-reading-list'
 import { AiFeatureBanner } from '@/components/ai/ai-feature-banner'
 
 const featuredBooks = [
@@ -262,6 +264,10 @@ export default function ResourcesPageClient() {
             <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
               <AiCitationGenerator />
               <AiResearchAssistant />
+            </div>
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+              <AiStudyPlan />
+              <AiReadingList />
             </div>
           </div>
         </section>

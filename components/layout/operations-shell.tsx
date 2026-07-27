@@ -6,6 +6,7 @@ import { DashboardSidebar } from './dashboard-sidebar'
 import { DashboardHeader } from './dashboard-header'
 import { MobileNav } from './mobile-nav'
 import { AiChatWidget } from '@/components/ai/ai-chat-widget'
+import { PortalAiToolbar } from '@/components/ai/portal-ai-toolbar'
 import type { UserProfile } from '@/lib/actions/auth'
 
 interface OperationsShellProps {
@@ -38,6 +39,7 @@ export function OperationsShell({ profile, children }: OperationsShellProps) {
         </div>
 
         <AiChatWidget />
+        <PortalAiToolbar />
       </div>
     </AuthProvider>
   )
