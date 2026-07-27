@@ -2,6 +2,7 @@ import { requireRole } from '@/lib/auth/roleGuard'
 import prisma from '@/lib/db/prisma'
 import Link from 'next/link'
 import { SuperAdminBannerWrapper } from '@/components/ai/super-admin-banner-wrapper'
+import type { LucideIcon } from 'lucide-react'
 import {
   Users, BookOpen, ArrowDownToLine, CalendarCheck,
   AlertTriangle, Clock, CheckCircle2, Shield,
@@ -81,6 +82,15 @@ export default async function SuperAdminDashboard() {
 
   const totalUsersAll = totalStudents + totalStaff + totalDesk + totalExecutive + totalLibraryHead + totalSuperAdmin
 
+  type AlertSeverity = 'red' | 'amber' | 'green'
+
+  interface SystemAlert {
+    label: string
+    value: string | number
+    severity: AlertSeverity
+    icon: LucideIcon
+  }
+
   const primaryMetrics = [
     { label: 'Total Users', value: totalUsersAll, icon: Users, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-500/10' },
     { label: 'Total Books', value: totalBooks, icon: BookOpen, color: 'text-[#5B9BD5]', bg: 'bg-[#5B9BD5]/10' },
@@ -112,40 +122,40 @@ export default async function SuperAdminDashboard() {
     { label: 'Equipment', value: totalEquipment, icon: Settings },
   ]
 
-  const systemAlerts = [
+  const systemAlerts: SystemAlert[] = [
     {
       label: 'Overdue Loans',
       value: overdueLoans,
-      severity: overdueLoans > 0 ? 'red' : 'green' as const,
+      severity: overdueLoans > 0 ? 'red' : 'green',
       icon: AlertTriangle,
     },
     {
       label: 'Pending Role Requests',
       value: pendingRoleRequests,
-      severity: pendingRoleRequests > 0 ? 'amber' : 'green' as const,
+      severity: pendingRoleRequests > 0 ? 'amber' : 'green',
       icon: Shield,
     },
     {
       label: 'Pending Holds',
       value: pendingHolds,
-      severity: pendingHolds > 0 ? 'amber' : 'green' as const,
+      severity: pendingHolds > 0 ? 'amber' : 'green',
       icon: Clock,
     },
     {
       label: 'Unpaid Fines',
       value: `KES ${unpaidFines._sum.amount ?? 0}`,
-      severity: unpaidFines._count > 0 ? 'amber' : 'green' as const,
+      severity: unpaidFines._count > 0 ? 'amber' : 'green',
       icon: CreditCard,
     },
   ]
 
-  const severityStyles = {
+  const severityStyles: Record<'red' | 'amber' | 'green', string> = {
     red: 'text-red-500 bg-red-50 dark:bg-red-500/10 border-red-100 dark:border-red-500/20',
     amber: 'text-amber-500 bg-amber-50 dark:bg-amber-500/10 border-amber-100 dark:border-amber-500/20',
     green: 'text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 border-emerald-100 dark:border-emerald-500/20',
   }
 
-  const severityDot = {
+  const severityDot: Record<'red' | 'amber' | 'green', string> = {
     red: 'bg-red-500',
     amber: 'bg-amber-500',
     green: 'bg-emerald-500',
