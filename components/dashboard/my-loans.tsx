@@ -75,7 +75,7 @@ export function MyLoans({ loans }: MyLoansProps) {
               <div className="flex items-center gap-2 shrink-0">
                 {dueBadge(loan.dueDate)}
                 {loan.renewable && (
-                  <button className="text-[12px] font-medium text-[#2563EB] opacity-0 group-hover:opacity-100 transition-opacity hover:underline">
+                  <button className="text-[12px] font-medium text-[#2563EB] opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity hover:underline">
                     Renew
                   </button>
                 )}

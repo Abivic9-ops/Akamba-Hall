@@ -19,7 +19,7 @@ const actions = [
 export function QuickActions() {
   return (
     <SectionCard title="Quick Actions">
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         {actions.map((action) => {
           const Icon = action.icon
           return (

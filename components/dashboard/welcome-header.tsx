@@ -15,10 +15,10 @@ export function WelcomeHeader({ firstName }: WelcomeHeaderProps) {
   return (
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
       <div>
-        <h1 className="text-[32px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] font-[var(--font-poppins)]">
+        <h1 className="text-[24px] sm:text-[32px] font-medium text-slate-900 dark:text-[#E2E8F0] font-[var(--font-poppins)]">
           {greeting()}, {firstName}
         </h1>
-        <p className="text-[16px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">
+        <p className="text-[14px] sm:text-[16px] text-slate-500 dark:text-[#6B7A99] mt-1">
           Welcome back to <span className="font-medium text-[#2563EB]">Akamba Hall Library</span>
         </p>
       </div>

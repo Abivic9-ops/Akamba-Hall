@@ -10,9 +10,9 @@ export function ExecutiveWelcomeHeader({ fullName }: Props) {
   const firstName = fullName.split(' ').slice(1).join(' ')
 
   return (
-    <div className="flex items-start justify-between gap-6">
+    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6">
       <div>
-        <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">
+        <h1 className="text-[22px] sm:text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0]">
           Executive Governance Dashboard
         </h1>
         <div className="flex items-center gap-2 mt-2">

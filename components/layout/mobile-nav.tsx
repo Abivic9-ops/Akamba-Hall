@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Activity, X } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
-import { getNavigationForRole } from '@/lib/config/navigation'
+import { getNavigationSections } from '@/lib/config/navigation'
 import { role_short_names } from '@/lib/types/role'
 import { resolve_icon } from '@/lib/config/icon-map'
 import type { Role } from '@/lib/types/role'
@@ -38,7 +38,7 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
   const { user, role } = useAuth()
   const pathname = usePathname()
   const sidebarRole = getSidebarRole(pathname, (role as Role) ?? 'STUDENT')
-  const nav_items = getNavigationForRole(sidebarRole)
+  const sections = getNavigationSections(sidebarRole)
   const display_role = role_short_names[sidebarRole] ?? ''
   const viewingOther = role === 'SUPER_ADMIN' && sidebarRole !== role
   const user_name = user?.fullName ?? 'User'
@@ -57,7 +57,6 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  // Don't render anything when closed (avoids mounting hidden DOM)
   if (!open) return null
 
   return (
@@ -106,27 +105,36 @@ export function MobileNav({ open, on_close }: MobileNavProps) {
           </div>
         </div>
 
-        {/* nav items */}
+        {/* sectioned nav items */}
         <nav className="flex-1 overflow-y-auto px-3 py-4">
-          {nav_items.map((item) => {
-            const is_active = pathname === item.path
-            const Icon = resolve_icon(item.icon)
-            return (
-              <Link
-                key={item.path}
-                href={item.path}
-                onClick={on_close}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-normal transition-all mb-1 ${
-                  is_active
-                    ? 'bg-[#E8A63C] text-[#0B1A3B] font-medium'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <Icon className="h-[18px] w-[18px] shrink-0" />
-                <span className="truncate">{item.label}</span>
-              </Link>
-            )
-          })}
+          {sections.map((section) => (
+            <div key={section.label} className="mb-5">
+              <span className="text-[10px] font-semibold text-white/30 uppercase tracking-wider px-3 mb-1.5 block">
+                {section.label}
+              </span>
+              <div className="flex flex-col gap-0.5">
+                {section.items.map((item) => {
+                  const is_active = pathname === item.path
+                  const Icon = resolve_icon(item.icon)
+                  return (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      onClick={on_close}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-normal transition-all ${
+                        is_active
+                          ? 'bg-[#E8A63C] text-[#0B1A3B] font-medium'
+                          : 'text-white/60 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <Icon className="h-[18px] w-[18px] shrink-0" />
+                      <span className="truncate">{item.label}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
         {/* viewing-as indicator + back to admin */}

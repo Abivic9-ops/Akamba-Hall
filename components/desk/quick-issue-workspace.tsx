@@ -95,7 +95,7 @@ export function QuickIssueWorkspace() {
         </div>
       )}
 
-      <div className="relative z-[1] px-7 py-6">
+      <div className="relative z-[1] px-4 py-4 sm:px-7 sm:py-6">
         <div className="flex items-center justify-between mb-5">
           <div>
             <h3 className="text-[20px] font-bold text-white">Quick Issue</h3>

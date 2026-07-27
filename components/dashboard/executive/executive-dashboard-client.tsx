@@ -54,7 +54,7 @@ export function ExecutiveDashboardClient({
   performance,
 }: Props) {
   return (
-    <div className="space-y-7">
+    <div className="space-y-5 sm:space-y-7 px-4 sm:px-5 md:px-0">
       <ExecutiveWelcomeHeader fullName={profile.fullName} />
 
       <ExecutiveOverviewCards

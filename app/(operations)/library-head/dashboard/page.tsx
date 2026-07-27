@@ -93,10 +93,10 @@ export default async function library_head_dashboard() {
         </div>
       )}
 
-      <div className="max-w-[1440px] mx-auto p-6 space-y-6">
+      <div className="max-w-[1440px] mx-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-6">
         {/* greeting */}
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">
+          <h1 className="text-[22px] sm:text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0]">
             {greeting()}, Library Head
           </h1>
           <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-1">

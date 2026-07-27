@@ -33,9 +33,9 @@ export function CataloguePageClient({ books }: { books: CatalogueItem[] }) {
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
-      <div className="max-w-[1440px] mx-auto p-6 space-y-6">
+      <div className="max-w-[1440px] mx-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-6">
         <div>
-          <h1 className="text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0]">Catalogue</h1>
+          <h1 className="text-[22px] sm:text-[28px] font-medium text-slate-900 dark:text-[#E2E8F0]">Catalogue</h1>
           <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] mt-1">
             Browse the complete Akamba Hall Library collection.
           </p>

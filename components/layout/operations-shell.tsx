@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AuthProvider } from '@/lib/contexts/auth-context'
 import { DashboardSidebar } from './dashboard-sidebar'
 import { DashboardHeader } from './dashboard-header'
 import { MobileNav } from './mobile-nav'
+import { AiChatWidget } from '@/components/ai/ai-chat-widget'
 import type { UserProfile } from '@/lib/actions/auth'
 
 interface OperationsShellProps {
@@ -14,6 +15,12 @@ interface OperationsShellProps {
 
 export function OperationsShell({ profile, children }: OperationsShellProps) {
   const [mobile_open, set_mobile_open] = useState(false)
+  const [shell_ready, set_shell_ready] = useState(false)
+
+  useEffect(() => {
+    const t = setTimeout(() => set_shell_ready(true), 100)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
     <AuthProvider initialProfile={profile ?? undefined}>
@@ -30,12 +37,15 @@ export function OperationsShell({ profile, children }: OperationsShellProps) {
         <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
           <DashboardHeader on_menu_toggle={() => set_mobile_open(!mobile_open)} />
           <main className="flex-1 overflow-y-auto">
-            <div className="max-w-[1440px] mx-auto px-6 lg:px-10 py-6">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-4 sm:py-6">
               {children}
             </div>
           </main>
         </div>
       </div>
+
+      {/* AI chat — only mounts after shell finishes loading */}
+      {shell_ready && <AiChatWidget />}
     </AuthProvider>
   )
 }
