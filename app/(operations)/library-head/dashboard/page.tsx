@@ -4,6 +4,7 @@ import {
   Users, BookOpen, CalendarCheck, Clock, AlertTriangle,
   TrendingUp, Activity, BarChart3, CheckCircle2,
 } from 'lucide-react'
+import { LibraryHeadBannerWrapper } from '@/components/ai/library-head-banner-wrapper'
 
 export const dynamic = 'force-dynamic'
 
@@ -103,6 +104,8 @@ export default async function library_head_dashboard() {
             {day_name}, {date_str}
           </p>
         </div>
+
+        <LibraryHeadBannerWrapper />
 
         {/* row 1 — today's snapshot */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

@@ -20,41 +20,34 @@ export default async function all_access_dashboard() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const [
-    totalStudents,
-    totalStaff,
-    totalDesk,
-    totalExecutive,
-    totalLibraryHead,
-    totalSuperAdmin,
-    totalBooks,
-    totalCopies,
-    availableCopies,
-    loanedCopies,
-    overdueLoans,
-    todayLoans,
-    todayReturns,
-    todayBookings,
-    totalMembers,
-    recentActivity,
-    pendingHolds,
-    totalFinesOwed,
-  ] = await Promise.all([
+  const batch1 = await Promise.all([
     prisma.user.count({ where: { role: 'STUDENT' } }),
     prisma.user.count({ where: { role: 'STAFF' } }),
     prisma.user.count({ where: { role: { in: deskRoles } } }),
     prisma.user.count({ where: { role: 'EXECUTIVE' } }),
     prisma.user.count({ where: { role: 'LIBRARY_HEAD' } }),
+  ])
+  const [totalStudents, totalStaff, totalDesk, totalExecutive, totalLibraryHead] = batch1
+
+  const batch2 = await Promise.all([
     prisma.user.count({ where: { role: 'SUPER_ADMIN' } }),
     prisma.book.count(),
     prisma.copy.count(),
     prisma.copy.count({ where: { status: 'AVAILABLE' } }),
     prisma.copy.count({ where: { status: 'LOANED' } }),
+  ])
+  const [totalSuperAdmin, totalBooks, totalCopies, availableCopies, loanedCopies] = batch2
+
+  const batch3 = await Promise.all([
     prisma.loan.count({ where: { returnedAt: null, dueAt: { lt: new Date() } } }),
     prisma.loan.count({ where: { checkoutAt: { gte: today } } }),
     prisma.loan.count({ where: { returnedAt: { gte: today } } }),
     prisma.booking.count({ where: { createdAt: { gte: today } } }),
     prisma.user.count({ where: { status: 'ACTIVE' } }),
+  ])
+  const [overdueLoans, todayLoans, todayReturns, todayBookings, totalMembers] = batch3
+
+  const batch4 = await Promise.all([
     prisma.loan.findMany({
       take: 10,
       orderBy: { checkoutAt: 'desc' },
@@ -69,6 +62,7 @@ export default async function all_access_dashboard() {
       _sum: { amount: true },
     }),
   ])
+  const [recentActivity, pendingHolds, totalFinesOwed] = batch4
 
   const portals = [
     {

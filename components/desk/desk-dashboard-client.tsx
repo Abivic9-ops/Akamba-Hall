@@ -9,6 +9,7 @@ import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 import { OfflineBanner } from './offline-banner'
 import { DeskQuickActions } from './desk-quick-actions'
+import { AiAnnouncementBanner } from '@/components/ai/ai-announcement-banner'
 
 interface Transaction {
   id: string
@@ -112,6 +113,8 @@ export function DeskDashboardClient({
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5">
         <DeskWelcomeHeader firstName={firstName} />
+
+        <AiAnnouncementBanner portal="desk" />
 
         <KpiCards
           loansIssued={kpi.loansIssued}

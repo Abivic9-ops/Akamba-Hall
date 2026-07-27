@@ -117,18 +117,14 @@ export default function ServicesPageClient() {
       </FadeIn>
 
       {/* Separator */}
-      <div className="w-full bg-[#0B1A3B]">
-        <div className="container mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        </div>
-      </div>
+      <div className="mx-4 h-px bg-gradient-to-r from-gold/0 via-gold/35 to-gold/0 sm:mx-6 lg:mx-8" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-0 z-50 w-full bg-white py-3 border-b border-[#E4E7EE]">
-        <div className="flex items-center justify-center px-4">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+      <div className="sticky top-[80px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
+        <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {services.map((s) => (
-              <a key={s.id} href={`#${s.id}`} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[11px] sm:text-[12px] font-semibold text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all">
+              <a key={s.id} href={`#${s.id}`} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[11px] sm:text-[12px] font-semibold text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all shrink-0">
                 {s.title}
               </a>
             ))}

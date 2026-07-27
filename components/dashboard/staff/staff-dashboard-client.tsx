@@ -13,6 +13,7 @@ import { StaffAnnouncements } from './staff-announcements'
 import { StaffRecentActivity } from './staff-recent-activity'
 import { StaffUpcomingEvents } from './staff-upcoming-events'
 import { LibraryHours } from '@/components/dashboard/library-hours'
+import { AiAnnouncementBanner } from '@/components/ai/ai-announcement-banner'
 
 interface Props {
   profile: {
@@ -62,6 +63,8 @@ export function StaffDashboardClient({
 
         {/* ── Welcome Header ──────────────────────────── */}
         <StaffWelcomeHeader title={profile.title} surname={surname} />
+
+        <AiAnnouncementBanner portal="staff" />
 
         {/* ── Overview Cards (5-col) ──────────────────── */}
         <StaffOverviewCards

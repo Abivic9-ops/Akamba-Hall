@@ -1,5 +1,6 @@
 import { PublicNavbar } from '@/components/layout/PublicNavbar'
 import { Footer } from '@/components/layout/Footer'
+import { AiChatWidget } from '@/components/ai/ai-chat-widget'
 
 export default function PublicLayout({
   children,
@@ -11,6 +12,7 @@ export default function PublicLayout({
       <PublicNavbar />
       <main className="flex-1 w-full pt-[72px]">{children}</main>
       <Footer />
+      <AiChatWidget />
     </div>
   )
 }

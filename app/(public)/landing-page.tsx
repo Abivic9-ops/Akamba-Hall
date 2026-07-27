@@ -258,7 +258,7 @@ export default function PublicLandingPage() {
         <section className="relative w-full min-h-[500px] md:min-h-[600px] flex items-center bg-[#0B1A3B] overflow-hidden">
           <div className="absolute inset-0 z-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-bg.png')" }} />
           <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#0B1A3B] via-[#0B1A3B]/90 to-[#0B1A3B]/30" />
-          <div className="container relative z-10 mx-auto px-5 md:px-6 pt-14 pb-12 md:pt-20 md:pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+          <div className="container relative z-10 mx-auto px-5 md:px-6 pt-[96px] pb-12 md:pt-20 md:pb-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
             <div className="flex flex-col gap-5 max-w-2xl">
               <h1 className="text-[28px] sm:text-[34px] md:text-[42px] font-bold leading-[1.1] tracking-tight text-white">
                 The Heart of Learning at{' '}

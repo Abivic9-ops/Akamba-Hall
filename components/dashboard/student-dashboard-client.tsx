@@ -12,6 +12,7 @@ import { Announcements } from './announcements'
 import { LibraryHours } from './library-hours'
 import { CatalogueSearch } from './catalogue-search'
 import { Support } from './support'
+import { AiAnnouncementBanner } from '@/components/ai/ai-announcement-banner'
 
 interface Props {
   profile: {
@@ -54,6 +55,8 @@ export function StudentDashboardClient({
         {/* ── Welcome Header ──────────────────────────── */}
         <WelcomeHeader firstName={firstName} />
 
+        <AiAnnouncementBanner portal="student" />
+
         {/* ── Overview Cards ──────────────────────────── */}
         <OverviewCards
           activeLoans={loans.length}
@@ -95,7 +98,7 @@ export function StudentDashboardClient({
           </div>
         </div>
 
-        {/* ── Catalogue | Announcements + Hours + Support ─ */}
+        {/* ── Catalogue + Announcements + Hours + Support ─ */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
           <div className="lg:col-span-2">
             <CatalogueSearch />

@@ -2,12 +2,13 @@
 
 import { MapPin, Phone, Mail, Clock, MessageCircle, AlertTriangle, CreditCard, HelpCircle, Send, Navigation, BookOpen, Users, Shield } from 'lucide-react'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
+import { AiLibraryFaq } from '@/components/ai/ai-library-faq'
 
 export default function ContactPageClient() {
   return (
     <div className="w-full bg-white">
       {/* Hero */}
-      <section className="bg-[#0B1A3B] py-20 px-4 pb-32">
+      <section className="bg-[#0B1A3B] py-20 px-4 pb-28">
         <FadeIn>
         <div className="container mx-auto max-w-4xl text-center">
           <span className="inline-flex items-center gap-2 bg-gold/10 text-gold text-[11px] font-medium uppercase tracking-widest px-4 py-1.5 rounded-full">
@@ -25,18 +26,14 @@ export default function ContactPageClient() {
       </section>
 
       {/* Separator */}
-      <div className="w-full bg-[#0B1A3B]">
-        <div className="container mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        </div>
-      </div>
+      <div className="mx-4 h-px bg-gradient-to-r from-gold/0 via-gold/35 to-gold/0 sm:mx-6 lg:mx-8" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-0 z-50 w-full bg-white py-3 border-b border-[#E4E7EE]">
-        <div className="flex items-center justify-center px-4">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+      <div className="sticky top-[80px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
+        <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#visit', '#help-desk', '#feedback', '#lost-card', '#hours'].map((id) => (
-              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize">
+              <a key={id} href={id} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#E4E7EE] bg-[#F5F6FA] text-[12px] sm:text-[13px] font-medium text-[#5B6376] hover:bg-gold hover:text-navy hover:border-gold transition-all capitalize shrink-0">
                 {id.replace('#', '').replace('-', ' ')}
               </a>
             ))}
@@ -46,7 +43,7 @@ export default function ContactPageClient() {
 
       {/* Visit Us + Contact Info */}
       <section id="visit" className="py-24 px-4">
-        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="container mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           {/* Visit */}
           <FadeIn>
           <div>
@@ -158,7 +155,7 @@ export default function ContactPageClient() {
             Have a question about borrowing, resources, spaces, or the library system? Submit your request here and a member of the library team will respond during working hours. For urgent matters, visit the library desk directly — the help desk is staffed during all opening hours.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             {/* Form */}
             <FadeIn>
             <div className="bg-white border border-[#E4E7EE] rounded-[20px] p-8">
@@ -236,6 +233,10 @@ export default function ContactPageClient() {
               ))}
               </StaggerChildren>
             </div>
+          </div>
+
+          <div className="mt-12">
+            <AiLibraryFaq />
           </div>
         </div>
       </section>

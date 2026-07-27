@@ -5,6 +5,10 @@ import Link from 'next/link'
 import {
   Search, BookOpen, Grid3X3, List,
 } from 'lucide-react'
+import { AiBookRecommendations } from '@/components/ai/ai-book-recommendations'
+import { AiBookSummary } from '@/components/ai/ai-book-summary'
+import { AiRenewalAssistant } from '@/components/ai/ai-renewal-assistant'
+import { BookAiActions } from '@/components/ai/book-ai-actions'
 
 interface CatalogueItem {
   id: string
@@ -98,8 +102,11 @@ export function CataloguePageClient({ books }: { books: CatalogueItem[] }) {
               <Link
                 key={item.id}
                 href={`/item/${item.id}`}
-                className="bg-white dark:bg-[#13285A] rounded-xl border border-slate-100 dark:border-white/[0.08] overflow-hidden hover:shadow-md transition-all group"
+                className="bg-white dark:bg-[#13285A] rounded-xl border border-slate-100 dark:border-white/[0.08] overflow-hidden hover:shadow-md transition-all group relative"
               >
+                <div className="absolute top-2 right-2 z-10">
+                  <BookAiActions title={item.title} author={item.author} />
+                </div>
                 <div className="h-40 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0E1F3F] dark:to-[#13285A] flex items-center justify-center">
                   <BookOpen className="h-12 w-12 text-slate-300 dark:text-white/10" />
                 </div>
@@ -144,6 +151,15 @@ export function CataloguePageClient({ books }: { books: CatalogueItem[] }) {
             ))}
           </div>
         )}
+      </div>
+
+      {/* ── AI Tools ──────────────────────────────── */}
+      <div className="max-w-[1440px] mx-auto px-6 pb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+          <AiBookRecommendations />
+          <AiBookSummary />
+          <AiRenewalAssistant />
+        </div>
       </div>
     </div>
   )

@@ -7,13 +7,17 @@ export const dynamic = 'force-dynamic'
 export default async function SuperAdminQrCardsPage() {
   await requireRole(['SUPER_ADMIN'])
 
-  const [cards, total, active, suspended, revoked, usersWithoutCards] = await Promise.all([
+  const batch1 = await Promise.all([
     prisma.qRCard.findMany({
       include: { user: true },
       orderBy: { issuedAt: 'desc' },
     }),
     prisma.qRCard.count(),
     prisma.qRCard.count({ where: { status: 'ACTIVE' } }),
+  ])
+  const [cards, total, active] = batch1
+
+  const batch2 = await Promise.all([
     prisma.qRCard.count({ where: { status: 'SUSPENDED' } }),
     prisma.qRCard.count({ where: { status: 'REVOKED' } }),
     prisma.user.findMany({
@@ -25,6 +29,7 @@ export default async function SuperAdminQrCardsPage() {
       orderBy: { fullName: 'asc' },
     }),
   ])
+  const [suspended, revoked, usersWithoutCards] = batch2
 
   return (
     <QrCardsClient
