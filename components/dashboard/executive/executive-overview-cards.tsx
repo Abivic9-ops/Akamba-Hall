@@ -53,7 +53,7 @@ export function ExecutiveOverviewCards({
   ]
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 overflow-hidden">
       {cards.map((card) => {
         const Icon = card.icon
         return (

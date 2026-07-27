@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -33,14 +33,14 @@ export function BookManagementPageClient({ books }: { books: Book[] }) {
   const [newCopies, setNewCopies] = useState('1')
   const [newShelf, setNewShelf] = useState('')
 
-  const filteredBooks = books.filter((book) => {
+  const filteredBooks = useMemo(() => books.filter((book) => {
     const matchesSearch =
       book.title.toLowerCase().includes(search.toLowerCase()) ||
       book.author.toLowerCase().includes(search.toLowerCase()) ||
       book.isbn.toLowerCase().includes(search.toLowerCase())
     const matchesCategory = activeCategory === 'All' || book.category === activeCategory
     return matchesSearch && matchesCategory
-  })
+  }), [activeCategory, books, search])
 
   return (
     <div className="min-h-screen bg-[#F8F9FB]">

@@ -49,30 +49,30 @@ export function Announcements({ announcements }: AnnouncementsProps) {
       cta={{ label: 'See all', href: '#' }}
     >
       {announcements.length === 0 ? (
-        <p className="text-[15px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] text-center py-8">No announcements</p>
+        <p className="text-[15px] text-slate-400 dark:text-[#6B7A99] text-center py-8">No announcements</p>
       ) : (
-        <div className="space-y-0">
+        <div className="space-y-2.5">
           {announcements.map((ann) => {
             const cfg = type_config[ann.type] ?? type_config.policy
             const Icon = cfg.icon
             return (
               <div
                 key={ann.id}
-                className="flex items-start gap-3 py-2.5 border-b border-slate-50 last:border-0 hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] rounded-lg px-2 transition-colors cursor-pointer"
+                className="flex flex-col sm:flex-row sm:items-start gap-3 rounded-xl border border-slate-100/70 bg-white/70 px-3 py-3 hover:bg-slate-50 dark:border-white/[0.06] dark:bg-white/[0.03] dark:hover:bg-white/[0.05] transition-colors cursor-pointer"
               >
                 <div className="h-7 w-7 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04] flex items-center justify-center shrink-0 mt-0.5">
                   <Icon className={`h-3.5 w-3.5 ${cfg.color}`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0] truncate">{ann.title}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-[14px] font-medium text-slate-800 dark:text-[#E2E8F0]">{ann.title}</p>
                     {isNew(ann.createdAt) && (
                       <Badge variant="new" className="text-[10px] px-1.5 py-0">NEW</Badge>
                     )}
                   </div>
-                  <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] mt-0.5">{ann.subtitle}</p>
+                  <p className="text-[12px] text-slate-400 dark:text-[#6B7A99] mt-0.5">{ann.subtitle}</p>
                 </div>
-                <span className="text-[11px] text-slate-400 dark:text-[#6B7A99] dark:text-[#6B7A99] shrink-0 mt-1">
+                <span className="text-[11px] text-slate-400 dark:text-[#6B7A99] shrink-0 sm:mt-1">
                   {timeAgo(ann.createdAt)}
                 </span>
               </div>

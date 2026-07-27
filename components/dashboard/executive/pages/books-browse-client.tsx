@@ -36,7 +36,7 @@ export function BooksBrowseClient({ books }: { books: BookItem[] }) {
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
-      <div className="max-w-[1440px] mx-auto p-6 space-y-6">
+      <div className="max-w-[1440px] mx-auto p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-5 md:space-y-6">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-xl bg-[#5B9BD5]/10 text-[#5B9BD5] flex items-center justify-center">
             <BookOpen className="h-5 w-5" />
@@ -47,12 +47,12 @@ export function BooksBrowseClient({ books }: { books: BookItem[] }) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
           {categories.map((c) => (
             <button
               key={c}
               onClick={() => set_category(c)}
-              className={`px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors ${
+              className={`shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors ${
                 category === c
                   ? 'bg-[#5B9BD5] text-white'
                   : 'bg-white dark:bg-[#0E1F3F] text-slate-600 dark:text-[#6B7A99] border border-slate-200 dark:border-white/[0.08]'
@@ -75,7 +75,7 @@ export function BooksBrowseClient({ books }: { books: BookItem[] }) {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 overflow-hidden">
             {filtered.length === 0 ? (
               <p className="text-[13px] text-slate-400 dark:text-[#6B7A99] text-center py-8 col-span-3">No books found</p>
             ) : (

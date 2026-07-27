@@ -96,7 +96,7 @@ export function MiniNavbar() {
 
   return (
     <div
-      className={`fixed top-[80px] left-0 right-0 z-40 border-b border-white/[0.06] bg-[#0D1F42]/95 backdrop-blur-md transition-all duration-300 ${
+      className={`fixed top-[72px] left-0 right-0 z-40 border-b border-white/[0.06] bg-[#0D1F42]/95 backdrop-blur-md transition-all duration-300 ${
         visible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 -translate-y-full pointer-events-none'

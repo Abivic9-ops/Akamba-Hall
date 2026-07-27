@@ -2,7 +2,6 @@
 
 import { MapPin, Phone, Mail, Clock, MessageCircle, AlertTriangle, CreditCard, HelpCircle, Send, Navigation, BookOpen, Users, Shield } from 'lucide-react'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
-import { AiLibraryFaq } from '@/components/ai/ai-library-faq'
 
 export default function ContactPageClient() {
   return (
@@ -29,7 +28,7 @@ export default function ContactPageClient() {
       <div className="mx-4 h-px bg-gradient-to-r from-gold/0 via-gold/35 to-gold/0 sm:mx-6 lg:mx-8" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-[80px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
+      <div className="sticky top-[72px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
         <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#visit', '#help-desk', '#feedback', '#lost-card', '#hours'].map((id) => (
@@ -233,10 +232,6 @@ export default function ContactPageClient() {
               ))}
               </StaggerChildren>
             </div>
-          </div>
-
-          <div className="mt-12">
-            <AiLibraryFaq />
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Users, Search, Eye, Edit, Ban, RotateCcw, ChevronLeft, ChevronRight } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
@@ -24,14 +24,14 @@ export function MemberManagementPageClient({ members }: { members: Member[] }) {
   const [statusFilter, setStatusFilter] = useState('All')
   const [page, setPage] = useState(1)
 
-  const filtered = members.filter(m => {
+  const filtered = useMemo(() => members.filter(m => {
     const matchesSearch = m.name.toLowerCase().includes(search.toLowerCase()) ||
       m.studentId.toLowerCase().includes(search.toLowerCase()) ||
       m.email.toLowerCase().includes(search.toLowerCase())
     const matchesRole = roleFilter === 'All' || m.role === roleFilter
     const matchesStatus = statusFilter === 'All' || m.status === statusFilter
     return matchesSearch && matchesRole && matchesStatus
-  })
+  }), [members, roleFilter, search, statusFilter])
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE)
   const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE)

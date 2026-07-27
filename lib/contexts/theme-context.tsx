@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useCallback, useContext, useState, useEffect } from 'react'
+import { createContext, useCallback, useContext, useLayoutEffect, useState } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -14,15 +14,13 @@ const ThemeContext = createContext<theme_context_value | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, set_theme_state] = useState<Theme>('light')
-  const [hydrated, set_hydrated] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const saved = window.localStorage.getItem('theme') as Theme | null
     const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     const initial = saved ?? preferred
     document.documentElement.classList.toggle('dark', initial === 'dark')
     set_theme_state(initial)
-    set_hydrated(true)
   }, [])
 
   const apply_theme = useCallback((next: Theme) => {

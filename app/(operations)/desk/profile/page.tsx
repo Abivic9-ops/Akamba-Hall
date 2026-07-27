@@ -18,6 +18,7 @@ export default async function desk_profile_page() {
 
   return (
     <ProfilePageClient
+      userId={profile.id}
       profile={{
         fullName: profile.fullName ?? '',
         email: profile.email ?? '',

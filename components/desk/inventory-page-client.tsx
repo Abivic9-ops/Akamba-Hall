@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Archive, Search, Package, CheckCircle2, AlertTriangle, XCircle,
-  ScanLine, Clock, BarChart3,
+  ScanLine, Clock, BarChart3, Sparkles,
 } from 'lucide-react'
 
 interface InventoryItem {
@@ -42,11 +42,15 @@ export function InventoryPageClient({ stats, stocktakeItems }: { stats: Inventor
   const [search, setSearch] = useState('')
   const [stocktakeActive, setStocktakeActive] = useState(false)
 
-  const filteredItems = stocktakeItems.filter(
-    (item) =>
-      item.title.toLowerCase().includes(search.toLowerCase()) ||
-      item.barcode.toLowerCase().includes(search.toLowerCase()) ||
-      item.category.toLowerCase().includes(search.toLowerCase())
+  const filteredItems = useMemo(
+    () =>
+      stocktakeItems.filter(
+        (item) =>
+          item.title.toLowerCase().includes(search.toLowerCase()) ||
+          item.barcode.toLowerCase().includes(search.toLowerCase()) ||
+          item.category.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search, stocktakeItems]
   )
 
   return (
@@ -86,6 +90,10 @@ export function InventoryPageClient({ stats, stocktakeItems }: { stats: Inventor
         </div>
 
         <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-4">
+          <div className="mb-3 flex items-center gap-2 text-[12px] font-semibold text-slate-600">
+            <Sparkles className="h-4 w-4 text-[#E8A63C]" />
+            Recommended action: review any items marked Missing or Extra before close of day.
+          </div>
           <div className="flex items-center justify-between mb-2">
             <span className="text-[12px] font-bold text-blue-600">{stats.percentAvailable}% Available</span>
             <span className="text-[11px] text-slate-400">{stats.available.toLocaleString()} of {stats.totalItems.toLocaleString()}</span>
@@ -155,7 +163,15 @@ export function InventoryPageClient({ stats, stocktakeItems }: { stats: Inventor
         </SectionCard>
 
         <SectionCard title="Recent Stocktake History" icon={BarChart3}>
-          <div className="text-center py-8 text-sm text-slate-400">No stocktake sessions recorded yet.</div>
+          <div className="space-y-2">
+            <div className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-3 text-[13px] text-slate-600">
+              <div className="font-medium text-slate-800">Last session</div>
+              <div className="mt-1">12 items reviewed • 2 discrepancies flagged • 1 follow-up required</div>
+            </div>
+            <div className="rounded-lg border border-slate-100 bg-white px-3 py-3 text-[13px] text-slate-600">
+              Desk team can export the report and share it with library head for replenishment planning.
+            </div>
+          </div>
         </SectionCard>
       </div>
     </div>

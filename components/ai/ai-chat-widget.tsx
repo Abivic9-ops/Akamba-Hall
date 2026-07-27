@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Sparkles, ArrowUp, Send, X, MessageCircle, Loader2 } from 'lucide-react'
+import { Sparkles, ArrowUp, Send, X, Loader2, Pencil, Trash2, Copy, RotateCcw } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 
 interface Message {
@@ -44,6 +44,9 @@ export function AiChatWidget() {
   const input_ref = useRef<HTMLTextAreaElement>(null)
   const messages_end_ref = useRef<HTMLDivElement>(null)
   const [mounted, set_mounted] = useState(false)
+  const [editing_id, set_editing_id] = useState<string | null>(null)
+  const [edit_text, set_edit_text] = useState('')
+  const [copied_id, set_copied_id] = useState<string | null>(null)
 
   const is_authenticated = !!user
 
@@ -75,6 +78,54 @@ export function AiChatWidget() {
 
   const scroll_to_top = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
+  const handle_copy = useCallback((id: string, text: string) => {
+    navigator.clipboard.writeText(text)
+    set_copied_id(id)
+    setTimeout(() => set_copied_id(null), 1500)
+  }, [])
+
+  const handle_start_edit = useCallback((id: string, content: string) => {
+    set_editing_id(id)
+    set_edit_text(content)
+  }, [])
+
+  const handle_save_edit = useCallback((id: string) => {
+    if (!edit_text.trim()) return
+    set_messages((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, content: edit_text.trim() } : m))
+    )
+    set_editing_id(null)
+    set_edit_text('')
+  }, [edit_text])
+
+  const handle_cancel_edit = useCallback(() => {
+    set_editing_id(null)
+    set_edit_text('')
+  }, [])
+
+  const handle_delete = useCallback((id: string) => {
+    set_messages((prev) => {
+      const idx = prev.findIndex((m) => m.id === id)
+      if (idx === -1) return prev
+      if (prev[idx].role === 'user') {
+        if (idx + 1 < prev.length && prev[idx + 1].role === 'assistant') {
+          return prev.filter((_, i) => i !== idx && i !== idx + 1)
+        }
+        return prev.filter((_, i) => i !== idx)
+      }
+      return prev.filter((_, i) => i !== idx)
+    })
+  }, [])
+
+  const handle_unsend = useCallback((id: string) => {
+    set_messages((prev) => {
+      const idx = prev.findIndex((m) => m.id === id)
+      if (idx === -1) return prev
+      const pair = idx + 1 < prev.length && prev[idx + 1].role === 'assistant' ? [idx, idx + 1] : [idx]
+      return prev.filter((_, i) => !pair.includes(i))
+    })
   }, [])
 
   const handle_send = useCallback(async () => {
@@ -181,11 +232,11 @@ export function AiChatWidget() {
         </div>
       </div>
 
-      {/* Chat Panel — positioned to the left of the pill */}
+      {/* Chat Panel */}
       {open && (
         <div
           ref={panel_ref}
-          className="fixed bottom-20 right-[96px] z-[9998] w-[calc(100vw-48px)] max-w-[400px] h-[min(calc(100vh-120px),560px)] bg-white dark:bg-[#0E1F3F] rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/[0.08] flex flex-col overflow-hidden"
+          className="fixed bottom-20 right-4 z-[9998] w-[calc(100vw-32px)] max-w-[400px] h-[min(calc(100vh-100px),580px)] bg-white dark:bg-[#0E1F3F] rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/[0.08] flex flex-col overflow-hidden"
         >
           {/* Header */}
           <div className="shrink-0 px-5 py-4 bg-gradient-to-r from-[#0B1A3B] to-[#13285A] flex items-center gap-3">
@@ -208,18 +259,104 @@ export function AiChatWidget() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+          <div className="flex-1 overflow-y-auto px-4 pt-4 pb-12 space-y-4">
             {messages.map((msg) => (
-              <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div
-                  className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'bg-[#0B1A3B] dark:bg-gold/20 text-white dark:text-[#E2E8F0] rounded-br-sm'
-                      : 'bg-slate-100 dark:bg-white/[0.06] text-slate-800 dark:text-[#E2E8F0] rounded-bl-sm'
-                  }`}
-                >
-                  {msg.content}
-                </div>
+              <div key={msg.id} className={`group/msg flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                {msg.role === 'user' ? (
+                  <div className="relative max-w-[85%]">
+                    {editing_id === msg.id ? (
+                      <div className="bg-[#0B1A3B] dark:bg-gold/20 rounded-2xl rounded-br-sm p-2">
+                        <textarea
+                          value={edit_text}
+                          onChange={(e) => set_edit_text(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                              e.preventDefault()
+                              handle_save_edit(msg.id)
+                            }
+                            if (e.key === 'Escape') handle_cancel_edit()
+                          }}
+                          className="w-full resize-none bg-white/10 rounded-xl px-3 py-2 text-[13px] text-white placeholder:text-white/40 focus:outline-none border border-white/20"
+                          rows={3}
+                          autoFocus
+                        />
+                        <div className="flex gap-1.5 mt-1.5 justify-end">
+                          <button
+                            onClick={handle_cancel_edit}
+                            className="text-[11px] px-2.5 py-1 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={() => handle_save_edit(msg.id)}
+                            className="text-[11px] px-2.5 py-1 rounded-lg bg-gold text-[#0B1A3B] hover:bg-gold-hover transition-colors cursor-pointer font-medium"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="bg-[#0B1A3B] dark:bg-gold/20 text-white dark:text-[#E2E8F0] px-4 py-2.5 rounded-2xl rounded-br-sm text-[13px] leading-relaxed">
+                          {msg.content}
+                        </div>
+                        <div className="absolute -bottom-8 right-0 flex gap-0.5 opacity-0 group-hover/msg:opacity-100 transition-opacity z-10">
+                          <button
+                            onClick={() => handle_start_edit(msg.id, msg.content)}
+                            className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors cursor-pointer"
+                            title="Edit"
+                          >
+                            <Pencil className="h-3 w-3" />
+                          </button>
+                          <button
+                            onClick={() => handle_copy(msg.id, msg.content)}
+                            className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors cursor-pointer"
+                            title={copied_id === msg.id ? 'Copied!' : 'Copy'}
+                          >
+                            {copied_id === msg.id ? (
+                              <span className="text-[9px] font-medium text-emerald-400">✓</span>
+                            ) : (
+                              <Copy className="h-3 w-3" />
+                            )}
+                          </button>
+                          <button
+                            onClick={() => handle_unsend(msg.id)}
+                            className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-emerald-400 hover:bg-white/10 transition-colors cursor-pointer"
+                            title="Unsend"
+                          >
+                            <RotateCcw className="h-3 w-3" />
+                          </button>
+                          <button
+                            onClick={() => handle_delete(msg.id)}
+                            className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-red-400 hover:bg-white/10 transition-colors cursor-pointer"
+                            title="Delete"
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <div className="relative max-w-[85%]">
+                    <div className="bg-slate-100 dark:bg-white/[0.06] text-slate-800 dark:text-[#E2E8F0] px-4 py-2.5 rounded-2xl rounded-bl-sm text-[13px] leading-relaxed">
+                      {msg.content}
+                    </div>
+                    <div className="absolute -bottom-8 left-0 flex gap-0.5 opacity-0 group-hover/msg:opacity-100 transition-opacity z-10">
+                      <button
+                        onClick={() => handle_copy(msg.id, msg.content)}
+                        className="h-6 w-6 rounded-md flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                        title={copied_id === msg.id ? 'Copied!' : 'Copy'}
+                      >
+                        {copied_id === msg.id ? (
+                          <span className="text-[9px] font-medium text-emerald-500">✓</span>
+                        ) : (
+                          <Copy className="h-3 w-3" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
             {loading && (
@@ -267,6 +404,15 @@ export function AiChatWidget() {
               >
                 <Send className="h-4 w-4" />
               </button>
+              {input.trim() && (
+                <button
+                  onClick={() => set_input('')}
+                  className="h-10 w-10 rounded-xl bg-slate-100 dark:bg-white/[0.06] hover:bg-slate-200 dark:hover:bg-white/[0.1] flex items-center justify-center text-slate-400 dark:text-[#4B5775] hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer shrink-0"
+                  aria-label="Clear input"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
             </div>
             
           </div>

@@ -1,6 +1,7 @@
 'use client'
 
-import { Settings, ArrowRight, Bell, Shield, User, Globe } from 'lucide-react'
+import { useState } from 'react'
+import { Settings, ArrowRight, Bell, Shield, User, Globe, CheckCircle2 } from 'lucide-react'
 
 interface SettingsSection {
   title: string
@@ -13,6 +14,15 @@ interface SettingsPageClientProps {
 }
 
 export function SettingsPageClient({ role, sections }: SettingsPageClientProps) {
+  const [activeItem, setActiveItem] = useState<string | null>(null)
+  const [savedMessage, setSavedMessage] = useState<string | null>(null)
+
+  function handleSelect(item: string) {
+    const nextValue = activeItem === item ? null : item
+    setActiveItem(nextValue)
+    setSavedMessage(nextValue ? `Selected “${item}” for your ${role} portal preferences.` : 'Selection cleared.')
+  }
+
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224]">
       <div className="max-w-[1200px] mx-auto p-6 space-y-6">
@@ -22,6 +32,12 @@ export function SettingsPageClient({ role, sections }: SettingsPageClientProps) 
             Manage your {role} portal preferences and configuration.
           </p>
         </div>
+
+        {savedMessage && (
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-400">
+            {savedMessage}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {sections.map((section) => (
@@ -33,12 +49,23 @@ export function SettingsPageClient({ role, sections }: SettingsPageClientProps) 
                 <p className="text-[14px] font-semibold text-slate-800 dark:text-[#E2E8F0]">{section.title}</p>
               </div>
               <div className="space-y-1">
-                {section.items.map((item) => (
-                  <div key={item} className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors cursor-pointer group">
-                    <span className="text-[13px] text-slate-600 dark:text-[#94A3B8]">{item}</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-slate-300 group-hover:text-slate-500 dark:text-[#6B7A99] transition-colors" />
-                  </div>
-                ))}
+                {section.items.map((item) => {
+                  const isActive = activeItem === item
+                  return (
+                    <button
+                      key={item}
+                      onClick={() => handleSelect(item)}
+                      className={`flex items-center justify-between w-full py-2 px-3 rounded-lg transition-colors group ${isActive ? 'bg-slate-50 dark:bg-white/[0.06]' : 'hover:bg-slate-50 dark:hover:bg-white/[0.04]'}`}
+                    >
+                      <span className="text-[13px] text-slate-600 dark:text-[#94A3B8]">{item}</span>
+                      {isActive ? (
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                      ) : (
+                        <ArrowRight className="h-3.5 w-3.5 text-slate-300 group-hover:text-slate-500 dark:text-[#6B7A99] transition-colors" />
+                      )}
+                    </button>
+                  )
+                })}
               </div>
             </div>
           ))}

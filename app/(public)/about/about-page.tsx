@@ -60,7 +60,7 @@ export default function AboutPageClient() {
       <div className="mx-4 h-px bg-gradient-to-r from-gold/0 via-gold/35 to-gold/0 sm:mx-6 lg:mx-8" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-[80px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
+      <div className="sticky top-[72px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
         <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#mission', '#history', '#identity', '#who-we-serve', '#values', '#leadership'].map((id) => (

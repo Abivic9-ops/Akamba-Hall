@@ -61,7 +61,6 @@ export async function create_eresource(data: { title: string; provider: string; 
   await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
   const resource = await prisma.eResource.create({ data })
   revalidatePath('/library-head/eresources')
-  revalidatePath('/super-admin/eresources')
   return { success: true, id: resource.id }
 }
 
@@ -69,7 +68,6 @@ export async function update_eresource(id: string, data: { title?: string; provi
   await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
   await prisma.eResource.update({ where: { id }, data })
   revalidatePath('/library-head/eresources')
-  revalidatePath('/super-admin/eresources')
   return { success: true }
 }
 
@@ -77,7 +75,6 @@ export async function delete_eresource(id: string) {
   await requireRole(['LIBRARY_HEAD', 'SUPER_ADMIN'])
   await prisma.eResource.update({ where: { id }, data: { isActive: false } })
   revalidatePath('/library-head/eresources')
-  revalidatePath('/super-admin/eresources')
   return { success: true }
 }
 

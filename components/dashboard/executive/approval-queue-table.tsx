@@ -22,8 +22,8 @@ const type_badges: Record<string, { label: string; color: string }> = {
 
 export function ApprovalQueueTable({ items }: { items: ApprovalItem[] }) {
   return (
-    <div id="approval-queue" className="bg-white dark:bg-[#0E1F3F] dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08] shadow-sm dark:shadow-none dark:shadow-none overflow-hidden">
-      <div className="px-5 py-4 border-b border-slate-100 dark:border-white/[0.08] dark:border-white/[0.08]">
+    <div id="approval-queue" className="bg-white dark:bg-[#0E1F3F] rounded-xl border border-slate-100 dark:border-white/[0.08] shadow-sm dark:shadow-none overflow-hidden">
+      <div className="px-4 sm:px-5 py-4 border-b border-slate-100 dark:border-white/[0.08]">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-[15px] font-semibold text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">Approval Queue</h3>
@@ -38,7 +38,7 @@ export function ApprovalQueueTable({ items }: { items: ApprovalItem[] }) {
         {items.map((item) => {
           const badge = type_badges[item.type] ?? type_badges.general
           return (
-            <div key={item.id} className="flex items-center gap-4 px-5 py-3 hover:bg-slate-50/50 transition-colors">
+            <div key={item.id} className="flex items-center gap-3 sm:gap-4 px-4 sm:px-5 py-3 hover:bg-slate-50/50 transition-colors overflow-hidden">
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 <div className="h-9 w-9 rounded-full bg-amber-100 flex items-center justify-center shrink-0">
                   <MessageSquare className="h-4 w-4 text-amber-600" />

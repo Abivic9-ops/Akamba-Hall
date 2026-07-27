@@ -1,10 +1,11 @@
 'use client'
 
 import {
-  CreditCard, Camera, Edit3, Save, Star,
+  CreditCard, Camera, Edit3, Save, Star, Loader2, CheckCircle2,
 } from 'lucide-react'
 import { useState } from 'react'
 import { Badge } from '@/components/ui/badge'
+import { update_profile_action } from '@/lib/actions/auth'
 
 interface Profile {
   fullName: string
@@ -26,12 +27,41 @@ interface Profile {
   }
 }
 
-export function ProfilePageClient({ profile }: { profile: Profile }) {
+export function ProfilePageClient({ profile, userId }: { profile: Profile; userId: string }) {
   const [isEditing, setIsEditing] = useState(false)
   const [fullName, setFullName] = useState(profile.fullName)
   const [email, setEmail] = useState(profile.email)
+  const [studentId, setStudentId] = useState(profile.studentId)
+  const [loading, setLoading] = useState(false)
+  const [feedback, setFeedback] = useState<string | null>(null)
 
   const tierProgress = (profile.membership.points / profile.membership.nextTierPoints) * 100
+
+  async function handleSave() {
+    setLoading(true)
+    setFeedback(null)
+    const result = await update_profile_action(userId, {
+      fullName,
+      studentId,
+    })
+    if (result.success) {
+      setFeedback('Profile updated successfully.')
+      setIsEditing(false)
+    } else {
+      setFeedback(result.error ?? 'Unable to update profile right now.')
+    }
+    setLoading(false)
+  }
+
+  function handleEditToggle() {
+    if (isEditing) {
+      void handleSave()
+      return
+    }
+
+    setFeedback(null)
+    setIsEditing(true)
+  }
 
   return (
     <div className="min-h-screen bg-[#F8F9FB] dark:bg-[#071224] dark:bg-[#071224]">
@@ -46,11 +76,12 @@ export function ProfilePageClient({ profile }: { profile: Profile }) {
             </p>
           </div>
           <button
-            onClick={() => setIsEditing(!isEditing)}
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] font-normal text-slate-700 dark:text-[#E2E8F0] hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors shrink-0"
+            onClick={handleEditToggle}
+            disabled={loading}
+            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl border border-slate-200 dark:border-white/10 text-[14px] font-normal text-slate-700 dark:text-[#E2E8F0] hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors shrink-0 disabled:opacity-60"
           >
-            {isEditing ? <Save className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
-            {isEditing ? 'Save Changes' : 'Edit Profile'}
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : isEditing ? <Save className="h-4 w-4" /> : <Edit3 className="h-4 w-4" />}
+            {loading ? 'Saving...' : isEditing ? 'Save Changes' : 'Edit Profile'}
           </button>
         </div>
 
@@ -71,15 +102,22 @@ export function ProfilePageClient({ profile }: { profile: Profile }) {
               </div>
 
               <h2 className="text-[18px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0] mt-3">{profile.fullName}</h2>
-              <p className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">{profile.email}</p>
+              <p className="text-[13px] text-slate-500 dark:text-[#6B7A99]">{profile.email}</p>
               <Badge variant="info" className="mt-2">{profile.membership.tier}</Badge>
             </div>
+
+            {feedback && (
+              <div className={`mt-4 flex items-center gap-2 rounded-lg border px-3 py-2 text-[12px] ${feedback.includes('success') ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-red-200 bg-red-50 text-red-700'}`}>
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                <span>{feedback}</span>
+              </div>
+            )}
 
             {/* stats */}
             <div className="grid grid-cols-2 gap-3 mt-6">
               {Object.entries(profile.stats).map(([key, value]) => (
                 <div key={key} className="text-center p-3 rounded-lg bg-slate-50 dark:bg-white/[0.04] dark:bg-white/[0.04]">
-                  <p className="text-[20px] font-medium text-slate-900 dark:text-[#E2E8F0] dark:text-[#E2E8F0]">{value}</p>
+                  <p className="text-[20px] font-medium text-slate-900 dark:text-[#E2E8F0]">{value}</p>
                   <p className="text-[12px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</p>
                 </div>
               ))}
@@ -113,7 +151,8 @@ export function ProfilePageClient({ profile }: { profile: Profile }) {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[14px] text-slate-800 dark:text-[#E2E8F0] focus:outline-none focus:border-[#2563EB] transition-colors"
+                      disabled
+                      className="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-white/10 text-[14px] text-slate-800 dark:text-[#E2E8F0] bg-slate-50 dark:bg-white/[0.04]"
                     />
                   ) : (
                     <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.email}</p>
@@ -122,7 +161,16 @@ export function ProfilePageClient({ profile }: { profile: Profile }) {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mb-1 block">Student ID</label>
-                    <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.studentId}</p>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        value={studentId}
+                        onChange={(e) => setStudentId(e.target.value)}
+                        className="w-full h-10 px-3 rounded-lg border border-slate-200 dark:border-white/10 text-[14px] text-slate-800 dark:text-[#E2E8F0] focus:outline-none focus:border-[#2563EB] transition-colors"
+                      />
+                    ) : (
+                      <p className="text-[15px] text-slate-800 dark:text-[#E2E8F0]">{profile.studentId}</p>
+                    )}
                   </div>
                   <div>
                     <label className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99] mb-1 block">Member Since</label>
@@ -178,7 +226,7 @@ export function ProfilePageClient({ profile }: { profile: Profile }) {
                     <span className="text-[13px] text-slate-500 dark:text-[#6B7A99] dark:text-[#6B7A99]">Active — Use at library entrance</span>
                   </div>
                 </div>
-                <button className="h-9 px-4 rounded-lg border border-slate-200 dark:border-white/10 dark:border-white/10 text-[13px] text-slate-700 dark:text-[#E2E8F0] hover:bg-slate-50 dark:hover:bg-white/[0.04] dark:bg-white/[0.04] dark:hover:bg-white dark:bg-[#0E1F3F]/[0.04] dark:bg-white/[0.04] transition-colors">
+                <button className="h-9 px-4 rounded-lg border border-slate-200 dark:border-white/10 text-[13px] text-slate-700 dark:text-[#E2E8F0] hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors">
                   Download
                 </button>
               </div>

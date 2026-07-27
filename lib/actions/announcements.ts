@@ -35,7 +35,7 @@ export async function create_announcement(data: { title: string; body: string; c
   revalidatePath('/executive/announcements')
   revalidatePath('/executive/dashboard')
   revalidatePath('/library-head/announcements')
-  revalidatePath('/super-admin/announcements')
+  revalidatePath('/super-admin/system-announcements')
   return { success: true, id: announcement.id }
 }
 
@@ -44,6 +44,6 @@ export async function delete_announcement(id: string) {
   await prisma.announcement.delete({ where: { id } })
   revalidatePath('/executive/announcements')
   revalidatePath('/library-head/announcements')
-  revalidatePath('/super-admin/announcements')
+  revalidatePath('/super-admin/system-announcements')
   return { success: true }
 }

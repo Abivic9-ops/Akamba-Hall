@@ -15,7 +15,7 @@ export function LibraryHours({ isOpen, closesAt, opensTomorrow, schedule }: Libr
     <SectionCard
       title="Library Hours"
       icon={Clock}
-      cta={{ label: 'View full schedule', href: '#' }}
+      cta={{ label: 'View Schedule', href: '#' }}
     >
       {/* live status pill */}
       <div

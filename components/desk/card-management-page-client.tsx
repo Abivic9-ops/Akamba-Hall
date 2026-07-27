@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { CreditCard, Search, Ban, RotateCcw, Plus } from 'lucide-react'
 import { SectionCard } from '@/components/ui/section-card'
 import { Badge } from '@/components/ui/badge'
@@ -24,7 +24,7 @@ export function CardManagementPageClient({ cards }: { cards: CardData[] }) {
   const [issueSuccess, setIssueSuccess] = useState(false)
   const [issuedCardReference, setIssuedCardReference] = useState('')
 
-  const filtered = activeFilter === 'All' ? cards : cards.filter(c => c.status === activeFilter)
+  const filtered = useMemo(() => activeFilter === 'All' ? cards : cards.filter(c => c.status === activeFilter), [activeFilter, cards])
 
   const handleIssue = () => {
     if (!memberId.trim()) return

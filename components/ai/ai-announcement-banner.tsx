@@ -56,24 +56,26 @@ export function AiAnnouncementBanner({ portal }: AiAnnouncementBannerProps) {
   if (dismissed) return null
 
   return (
-    <div className="bg-gradient-to-r from-[#0B1A3B] via-[#13285A] to-[#1A3A6E] rounded-xl p-4 flex items-center gap-4">
-      <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
-        <Sparkles className="h-5 w-5 text-gold" />
+    <div className="bg-gradient-to-r from-[#0B1A3B] via-[#13285A] to-[#1A3A6E] rounded-xl p-4 flex flex-col gap-3">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
+          <Sparkles className="h-5 w-5 text-gold" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[14px] font-semibold text-white">{msg.title}</p>
+          <p className="text-[13px] text-white/60 mt-0.5">{msg.desc}</p>
+        </div>
+        <button onClick={handle_dismiss} className="text-white/40 hover:text-white/70 transition-colors cursor-pointer p-1 shrink-0">
+          <X className="h-4 w-4" />
+        </button>
       </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-[14px] font-semibold text-white">{msg.title}</p>
-        <p className="text-[13px] text-white/60 mt-0.5">{msg.desc}</p>
-      </div>
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-2">
         <Link
           href={msg.link}
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-[#0B1A3B] text-[13px] font-medium transition-all"
         >
           Explore <ArrowRight className="h-3.5 w-3.5" />
         </Link>
-        <button onClick={handle_dismiss} className="text-white/40 hover:text-white/70 transition-colors cursor-pointer p-1">
-          <X className="h-4 w-4" />
-        </button>
       </div>
     </div>
   )

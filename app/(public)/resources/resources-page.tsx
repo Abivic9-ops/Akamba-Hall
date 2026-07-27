@@ -4,9 +4,6 @@ import { Search, BookOpen, Globe, Lightbulb, Wrench, BookMarked, Star, ArrowRigh
 import Link from 'next/link'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
 import { AiCitationGenerator } from '@/components/ai/ai-citation-generator'
-import { AiResearchAssistant } from '@/components/ai/ai-research-assistant'
-import { AiStudyPlan } from '@/components/ai/ai-study-plan'
-import { AiReadingList } from '@/components/ai/ai-reading-list'
 import { AiFeatureBanner } from '@/components/ai/ai-feature-banner'
 
 const featuredBooks = [
@@ -50,7 +47,7 @@ export default function ResourcesPageClient() {
       <div className="mx-4 h-px bg-gradient-to-r from-gold/0 via-gold/35 to-gold/0 sm:mx-6 lg:mx-8" />
 
       {/* Quick anchor nav - mini navbar */}
-      <div className="sticky top-[80px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
+      <div className="sticky top-[72px] z-40 w-full border-b border-[#E4E7EE] bg-white/95 backdrop-blur-md">
         <div className="mx-auto max-w-5xl px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none">
             {['#catalogue', '#physical', '#digital', '#study-help', '#suggested'].map((id) => (
@@ -261,13 +258,8 @@ export default function ResourcesPageClient() {
               ))}
             </StaggerChildren>
 
-            <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            <div className="mt-12">
               <AiCitationGenerator />
-              <AiResearchAssistant />
-            </div>
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-              <AiStudyPlan />
-              <AiReadingList />
             </div>
           </div>
         </section>

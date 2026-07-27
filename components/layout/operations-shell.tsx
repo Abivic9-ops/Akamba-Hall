@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { AuthProvider } from '@/lib/contexts/auth-context'
 import { DashboardSidebar } from './dashboard-sidebar'
 import { DashboardHeader } from './dashboard-header'
@@ -16,12 +17,15 @@ interface OperationsShellProps {
 
 export function OperationsShell({ profile, children }: OperationsShellProps) {
   const [mobile_open, set_mobile_open] = useState(false)
-  const [shell_ready, set_shell_ready] = useState(false)
+  const [widget_ready, set_widget_ready] = useState(false)
+  const pathname = usePathname()
 
+  // Hide the widget during navigation, re-show after the page content loads
   useEffect(() => {
-    const t = setTimeout(() => set_shell_ready(true), 100)
+    set_widget_ready(false)
+    const t = setTimeout(() => set_widget_ready(true), 500)
     return () => clearTimeout(t)
-  }, [])
+  }, [pathname])
 
   return (
     <AuthProvider initialProfile={profile ?? undefined}>
@@ -44,12 +48,10 @@ export function OperationsShell({ profile, children }: OperationsShellProps) {
           </main>
         </div>
 
-        <AiChatWidget />
+        {/* Only show widget after page content has loaded */}
+        {widget_ready && <AiChatWidget />}
         <PortalAiToolbar />
       </div>
-
-      {/* AI chat — only mounts after shell finishes loading */}
-      {shell_ready && <AiChatWidget />}
     </AuthProvider>
   )
 }

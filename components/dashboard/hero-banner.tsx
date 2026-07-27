@@ -53,7 +53,7 @@ export function HeroBanner() {
   const slide = slides[current]
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden bg-navy shadow-lg min-h-[220px] sm:min-h-[315px]">
+    <div className="relative w-full rounded-2xl overflow-hidden bg-navy shadow-lg min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]">
       {/* background image placeholder — gradient fallback */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy-mid" />
 
@@ -61,13 +61,13 @@ export function HeroBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14]/90 via-[#0B0D14]/60 to-transparent" />
 
       {/* content */}
-      <div className="relative z-10 flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-8 sm:py-10 lg:py-14 min-h-[220px] sm:min-h-[315px]">
+      <div className="relative z-10 flex flex-col justify-center px-5 sm:px-8 lg:px-10 py-8 sm:py-10 lg:py-14 min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]">
         <div className="max-w-lg">
           <span className="inline-block text-[13px] font-medium uppercase tracking-widest text-[#F4B63D] mb-3">
             {slide.eyebrow}
           </span>
 
-          <h2 className="text-[28px] sm:text-[38px] lg:text-[52px] font-medium text-white leading-[1.1] mb-4 font-serif">
+          <h2 className="text-[26px] sm:text-[36px] lg:text-[48px] font-medium text-white leading-[1.08] mb-4 font-serif">
             {slide.headline.map((line, i) => (
               <span key={i}>
                 {line}

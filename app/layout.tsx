@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { Poppins, Inter } from 'next/font/google'
 import { ThemeProvider } from '@/lib/contexts/theme-context'
 import { PWAInstallPrompt } from '@/components/pwa/PWAInstallPrompt'
@@ -49,13 +48,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#0B1A3B" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}})()`,
-          }}
-        />
       </head>
       <body className="font-poppins antialiased overflow-x-hidden max-w-[100vw]">
         <ThemeProvider>
