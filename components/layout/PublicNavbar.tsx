@@ -136,8 +136,8 @@ export function PublicNavbar() {
     >
       <div className="mx-auto flex h-full w-full max-w-[1440px] items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="relative h-14 w-11 shrink-0">
+        <Link href="/" className="flex items-center gap-3 shrink-0 py-3">
+          <div className="relative h-[46px] w-[36px] shrink-0">
             <Image src="/images/starehe-logo.png" alt="Starehe Boys' Centre Crest" fill className="object-contain" />
           </div>
           <div className="flex flex-col leading-tight">
@@ -167,7 +167,7 @@ export function PublicNavbar() {
         </nav>
 
         {/* RIGHT ACTIONS */}
-        <div className="hidden xl:flex items-center gap-5">
+        <div className="hidden xl:flex items-center gap-5 py-3">
           <div className="flex items-center gap-2.5 bg-gold/10 border border-gold/20 rounded-full px-4 py-2 hover:bg-gold/20 transition-colors cursor-default">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
