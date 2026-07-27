@@ -30,7 +30,8 @@ export async function get_or_create_qr_card(): Promise<QRCardResult> {
       return { success: false, error: 'Authentication service is not configured.' }
     }
 
-    const { data: { user } } = await supabase.auth.getUser()
+    const { data: { session } } = await supabase.auth.getSession()
+    const user = session?.user ?? null
     if (!user) {
       return { success: false, error: 'Not authenticated.' }
     }
@@ -275,7 +276,8 @@ export async function get_or_create_staff_card(): Promise<QRCardResult> {
       return { success: false, error: 'Authentication service is not configured.' }
     }
 
-    const { data: { user } } = await supabase.auth.getUser()
+    const { data: { session } } = await supabase.auth.getSession()
+    const user = session?.user ?? null
     if (!user) {
       return { success: false, error: 'Not authenticated.' }
     }

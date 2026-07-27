@@ -11,8 +11,8 @@ import type { Role, RequestStatus } from '@prisma/client'
 async function getAuthUserId() {
   const supabase = await createClient()
   if (!supabase) return null
-  const { data: { user } } = await supabase.auth.getUser()
-  return user?.id ?? null
+  const { data: { session } } = await supabase.auth.getSession()
+  return session?.user?.id ?? null
 }
 
 /* ─── Submit a role request (student / staff) ─────── */

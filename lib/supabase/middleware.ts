@@ -85,7 +85,10 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // Use getSession() instead of getUser() to avoid 429 rate limit errors.
+  // getSession() reads the JWT from cookies locally without hitting Supabase auth server.
+  const { data: { session } } = await supabase.auth.getSession()
+  const user = session?.user ?? null
 
   const pathname = request.nextUrl.pathname
   const role = await getRoleFromUser(user)

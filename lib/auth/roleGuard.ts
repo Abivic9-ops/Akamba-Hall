@@ -18,11 +18,14 @@ export async function getAuthUser() {
   const supabase = await createClient()
   if (!supabase) return null
 
+  // Use getSession() instead of getUser() to avoid hitting Supabase auth server
+  // on every request (which causes 429 over_request_rate_limit errors).
+  // getSession() reads the JWT from cookies and decodes it locally.
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: { session },
+  } = await supabase.auth.getSession()
 
-  return user
+  return session?.user ?? null
 }
 
 export async function getUserProfile() {
