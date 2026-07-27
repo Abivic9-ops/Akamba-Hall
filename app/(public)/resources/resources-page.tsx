@@ -4,6 +4,7 @@ import { Search, BookOpen, Globe, Lightbulb, Wrench, BookMarked, Star, ArrowRigh
 import Link from 'next/link'
 import { FadeIn, StaggerChildren, StaggerItem, ScaleOnHover } from '@/components/motion'
 import { AiCitationGenerator } from '@/components/ai/ai-citation-generator'
+import { AiResearchAssistant } from '@/components/ai/ai-research-assistant'
 import { AiFeatureBanner } from '@/components/ai/ai-feature-banner'
 
 const featuredBooks = [
@@ -258,8 +259,9 @@ export default function ResourcesPageClient() {
               ))}
             </StaggerChildren>
 
-            <div className="mt-12">
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
               <AiCitationGenerator />
+              <AiResearchAssistant />
             </div>
           </div>
         </section>
