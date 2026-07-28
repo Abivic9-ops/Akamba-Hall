@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Sparkles, ArrowUp, Send, X, Loader2, Pencil, Trash2, Copy, RotateCcw } from 'lucide-react'
+import { Sparkles, ArrowUp, Send, X, Loader2, Pencil, Trash2, Copy, RotateCcw, Reply } from 'lucide-react'
 import { useAuth } from '@/lib/contexts/auth-context'
 
 interface Message {
@@ -47,11 +47,16 @@ export function AiChatWidget() {
   const [editing_id, set_editing_id] = useState<string | null>(null)
   const [edit_text, set_edit_text] = useState('')
   const [copied_id, set_copied_id] = useState<string | null>(null)
+  const [is_mobile, set_is_mobile] = useState(false)
 
   const is_authenticated = !!user
 
   useEffect(() => {
     set_mounted(true)
+    const check = () => set_is_mobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
   useEffect(() => {
@@ -128,6 +133,11 @@ export function AiChatWidget() {
     })
   }, [])
 
+  const handle_reply = useCallback((content: string) => {
+    set_input(content)
+    input_ref.current?.focus()
+  }, [])
+
   const handle_send = useCallback(async () => {
     const text = input.trim()
     if (!text || loading) return
@@ -198,9 +208,11 @@ export function AiChatWidget() {
 
   return (
     <>
-      {/* Floating Cylinder — vertical pill container */}
-      <div className="fixed bottom-24 right-6 z-[9999] flex flex-col items-center p-1.5 gap-1.5 rounded-full bg-white/90 dark:bg-[#13285A]/90 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-lg shadow-slate-200/50 dark:shadow-black/30 group/cyl">
-        {scroll_visible && (
+      {/* Floating Cylinder */}
+      <div className={`fixed z-[9999] flex flex-col items-center p-1.5 gap-1.5 rounded-full bg-white/90 dark:bg-[#13285A]/90 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-lg shadow-slate-200/50 dark:shadow-black/30 group/cyl ${
+        is_mobile ? 'bottom-6 right-4' : 'bottom-24 right-6'
+      }`}>
+        {scroll_visible && !is_mobile && (
           <div className="relative">
             <button
               onClick={scroll_to_top}
@@ -217,18 +229,22 @@ export function AiChatWidget() {
         <div className="relative">
           <button
             onClick={() => set_open((prev) => !prev)}
-            className={`h-11 w-11 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
+            className={`rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
+              is_mobile ? 'h-12 w-12' : 'h-11 w-11'
+            } ${
               open
                 ? 'bg-slate-800 dark:bg-[#0E1F3F] text-white shadow-inner'
                 : 'bg-gradient-to-br from-[#E8A63C] to-[#D4922A] text-[#0B1A3B] hover:scale-105 shadow-md shadow-gold/20'
             }`}
             aria-label={open ? 'Close AI assistant' : 'Open AI assistant'}
           >
-            {open ? <X className="h-3.5 w-3.5" /> : <Sparkles className="h-3.5 w-3.5" />}
+            {open ? <X className={is_mobile ? 'h-4 w-4' : 'h-3.5 w-3.5'} /> : <Sparkles className={is_mobile ? 'h-4 w-4' : 'h-3.5 w-3.5'} />}
           </button>
-          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-2 rounded-xl bg-[#0B1A3B] dark:bg-[#1A3368] text-white text-[11px] font-medium whitespace-nowrap opacity-0 pointer-events-none group-hover/cyl:opacity-100 transition-opacity duration-200 shadow-lg z-[10000]">
-            {open ? 'Close chat' : 'Chat with Akamba AI Assistant'}
-          </span>
+          {!is_mobile && (
+            <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 px-2.5 py-2 rounded-xl bg-[#0B1A3B] dark:bg-[#1A3368] text-white text-[11px] font-medium whitespace-nowrap opacity-0 pointer-events-none group-hover/cyl:opacity-100 transition-opacity duration-200 shadow-lg z-[10000]">
+              {open ? 'Close chat' : 'Chat with Akamba AI Assistant'}
+            </span>
+          )}
         </div>
       </div>
 
@@ -236,7 +252,11 @@ export function AiChatWidget() {
       {open && (
         <div
           ref={panel_ref}
-          className="fixed bottom-20 right-4 z-[9998] w-[calc(100vw-32px)] max-w-[400px] h-[min(calc(100vh-100px),580px)] bg-white dark:bg-[#0E1F3F] rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/[0.08] flex flex-col overflow-hidden"
+          className={`fixed z-[9998] bg-white dark:bg-[#0E1F3F] flex flex-col overflow-hidden ${
+            is_mobile
+              ? 'inset-0 rounded-none'
+              : 'bottom-20 right-4 w-[calc(100vw-32px)] max-w-[400px] h-[min(calc(100vh-100px),580px)] rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.5)] border border-slate-200 dark:border-white/[0.08]'
+          }`}
         >
           {/* Header */}
           <div className="shrink-0 px-5 py-4 bg-gradient-to-r from-[#0B1A3B] to-[#13285A] flex items-center gap-3">
@@ -249,17 +269,28 @@ export function AiChatWidget() {
                 {is_authenticated ? `Hi ${user?.fullName?.split(' ')[0] ?? 'there'}` : 'Library Assistant'}
               </p>
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="text-[10px] text-emerald-400 font-medium">Online</span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="text-[10px] text-emerald-400 font-medium">Online</span>
+              </div>
+              {is_mobile && (
+                <button
+                  onClick={() => set_open(false)}
+                  className="h-8 w-8 rounded-lg flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  aria-label="Close chat"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
             </div>
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 pt-4 pb-12 space-y-4">
+          <div className="flex-1 overflow-y-auto px-4 pt-4 pb-4 space-y-4">
             {messages.map((msg) => (
               <div key={msg.id} className={`group/msg flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'user' ? (
@@ -300,7 +331,12 @@ export function AiChatWidget() {
                         <div className="bg-[#0B1A3B] dark:bg-gold/20 text-white dark:text-[#E2E8F0] px-4 py-2.5 rounded-2xl rounded-br-sm text-[13px] leading-relaxed">
                           {msg.content}
                         </div>
-                        <div className="absolute -bottom-8 right-0 flex gap-0.5 opacity-0 group-hover/msg:opacity-100 transition-opacity z-10">
+                        {/* Action buttons: always visible on mobile, hover on desktop */}
+                        <div className={`flex gap-0.5 mt-1 ${
+                          is_mobile
+                            ? 'justify-end opacity-100'
+                            : 'absolute -bottom-8 right-0 opacity-0 group-hover/msg:opacity-100 transition-opacity z-10'
+                        }`}>
                           <button
                             onClick={() => handle_start_edit(msg.id, msg.content)}
                             className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors cursor-pointer"
@@ -309,12 +345,19 @@ export function AiChatWidget() {
                             <Pencil className="h-3 w-3" />
                           </button>
                           <button
+                            onClick={() => handle_reply(msg.content)}
+                            className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-sky-400 hover:bg-white/10 transition-colors cursor-pointer"
+                            title="Reply"
+                          >
+                            <Reply className="h-3 w-3" />
+                          </button>
+                          <button
                             onClick={() => handle_copy(msg.id, msg.content)}
                             className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors cursor-pointer"
                             title={copied_id === msg.id ? 'Copied!' : 'Copy'}
                           >
                             {copied_id === msg.id ? (
-                              <span className="text-[9px] font-medium text-emerald-400">✓</span>
+                              <span className="text-[9px] font-medium text-emerald-400">&#10003;</span>
                             ) : (
                               <Copy className="h-3 w-3" />
                             )}
@@ -322,7 +365,7 @@ export function AiChatWidget() {
                           <button
                             onClick={() => handle_unsend(msg.id)}
                             className="h-6 w-6 rounded-md flex items-center justify-center text-white/40 hover:text-emerald-400 hover:bg-white/10 transition-colors cursor-pointer"
-                            title="Unsend"
+                            title="Resend"
                           >
                             <RotateCcw className="h-3 w-3" />
                           </button>
@@ -342,14 +385,26 @@ export function AiChatWidget() {
                     <div className="bg-slate-100 dark:bg-white/[0.06] text-slate-800 dark:text-[#E2E8F0] px-4 py-2.5 rounded-2xl rounded-bl-sm text-[13px] leading-relaxed">
                       {msg.content}
                     </div>
-                    <div className="absolute -bottom-8 left-0 flex gap-0.5 opacity-0 group-hover/msg:opacity-100 transition-opacity z-10">
+                    {/* Action buttons for assistant messages: always visible on mobile, hover on desktop */}
+                    <div className={`flex gap-0.5 mt-1 ${
+                      is_mobile
+                        ? 'justify-start opacity-100'
+                        : 'absolute -bottom-8 left-0 opacity-0 group-hover/msg:opacity-100 transition-opacity z-10'
+                    }`}>
+                      <button
+                        onClick={() => handle_reply(msg.content)}
+                        className="h-6 w-6 rounded-md flex items-center justify-center text-slate-400 hover:text-sky-500 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                        title="Reply"
+                      >
+                        <Reply className="h-3 w-3" />
+                      </button>
                       <button
                         onClick={() => handle_copy(msg.id, msg.content)}
                         className="h-6 w-6 rounded-md flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
                         title={copied_id === msg.id ? 'Copied!' : 'Copy'}
                       >
                         {copied_id === msg.id ? (
-                          <span className="text-[9px] font-medium text-emerald-500">✓</span>
+                          <span className="text-[9px] font-medium text-emerald-500">&#10003;</span>
                         ) : (
                           <Copy className="h-3 w-3" />
                         )}
@@ -386,7 +441,7 @@ export function AiChatWidget() {
 
           {/* Input */}
           <div className="shrink-0 px-4 pb-4 pt-2 border-t border-slate-100 dark:border-white/[0.06]">
-            <div className="flex items-end gap-2">
+            <div className="flex items-end gap-2.5">
               <textarea
                 ref={input_ref}
                 value={input}
@@ -394,7 +449,9 @@ export function AiChatWidget() {
                 onKeyDown={handle_keydown}
                 placeholder="Ask me anything about the library..."
                 rows={1}
-                className="flex-1 resize-none bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-[13px] text-slate-800 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:placeholder:text-[#4B5775] focus:outline-none focus:border-gold/40 transition-colors max-h-20"
+                className={`flex-1 min-w-0 resize-none bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-[13px] text-slate-800 dark:text-[#E2E8F0] placeholder:text-slate-400 dark:placeholder:text-[#4B5775] focus:outline-none focus:border-gold/40 transition-colors max-h-20 ${
+                  is_mobile ? 'text-[15px]' : ''
+                }`}
               />
               <button
                 onClick={handle_send}
@@ -414,7 +471,6 @@ export function AiChatWidget() {
                 </button>
               )}
             </div>
-            
           </div>
         </div>
       )}

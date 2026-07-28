@@ -33,6 +33,7 @@ model User {
   lostFoundItems    LostFoundItem[]
   equipmentItems    Equipment[]
   digitalResources  DigitalResource[]
+  settings          UserSettings?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -489,4 +490,37 @@ model Fine {
   paid     Boolean   @default(false)
   paidAt   DateTime?
   createdAt DateTime @default(now())
+}
+
+// ─── USER SETTINGS ──────────────────────────────
+
+model UserSettings {
+  id        String @id @default(uuid())
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Notification preferences
+  emailNotifications  Boolean @default(true)
+  pushNotifications   Boolean @default(true)
+  smsAlerts           Boolean @default(false)
+  digestFrequency     String  @default("daily")
+
+  // Display preferences
+  theme               String  @default("system")
+  language            String  @default("en")
+  fontSize            String  @default("medium")
+  compactMode         Boolean @default(false)
+
+  // Privacy preferences
+  profileVisibility   String  @default("members")
+  readingHistory      String  @default("private")
+  bookmarksPrivacy    String  @default("private")
+  dataSharing         Boolean @default(false)
+
+  // Account preferences
+  twoFactorAuth       Boolean @default(false)
+  sessionTimeout      Int     @default(30)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
