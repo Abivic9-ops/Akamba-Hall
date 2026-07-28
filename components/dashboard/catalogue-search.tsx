@@ -20,7 +20,7 @@ export function CatalogueSearch() {
   }
 
   return (
-    <SectionCard title="Search the Catalogue" icon={Search}>
+    <SectionCard title="Search the Catalogue" icon={Search} contentClassName="p-5 sm:p-6">
       <div className="flex mb-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-[#6B7A99]" />

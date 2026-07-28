@@ -1,14 +1,5 @@
 import QRCode from 'qrcode'
-
-/**
- * Base URL for the application — used to construct QR code login URLs.
- */
-function getBaseUrl(): string {
-  if (typeof window !== 'undefined') return window.location.origin
-  if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-  return 'http://localhost:3000'
-}
+import { getBaseUrl } from '@/lib/utils/base-url'
 
 /**
  * Generates the login URL encoded in a QR code.

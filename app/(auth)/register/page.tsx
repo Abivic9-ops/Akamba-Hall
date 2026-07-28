@@ -92,11 +92,11 @@ export default function RegisterPage() {
         </div>
         <div className="w-full lg:w-[62%] flex flex-col items-center justify-center px-8 py-10">
           <div className="w-full max-w-[440px] text-center">
-            <div className="h-16 w-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-6">
+            <div className="h-16 w-16 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="h-8 w-8 text-emerald-500" />
             </div>
             <h2 className="text-[28px] font-light text-[#0B1A3B] dark:text-white tracking-tight">Account Created</h2>
-            <p className="text-slate-400 text-[14px] font-light mt-3 leading-relaxed">
+            <p className="text-white/50 text-[14px] font-light mt-3 leading-relaxed">
               {is_preview
                 ? 'Preview mode — registration simulated. You can now sign in.'
                 : 'We sent a confirmation email to your inbox. Verify your email, then sign in to start using the library.'}
@@ -182,7 +182,7 @@ export default function RegisterPage() {
               </div>
               <div>
                 <p className="text-[#0B1A3B] dark:text-white font-medium text-[13px]">STAREHE BOYS&apos; CENTRE</p>
-                <p className="text-slate-400 text-[11px] font-light">Akamba Hall Library</p>
+                <p className="text-slate-400 dark:text-white/50 text-[11px] font-light">Akamba Hall Library</p>
               </div>
             </div>
 
@@ -190,7 +190,7 @@ export default function RegisterPage() {
             <div className="flex items-center justify-between mb-6">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 text-[13px] text-slate-500 dark:text-slate-400 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/20 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 dark:border-white/15 text-[13px] text-slate-500 dark:text-white/50 font-medium hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-300 dark:hover:border-white/25 transition-all"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
                 Back to Sign In
@@ -201,35 +201,35 @@ export default function RegisterPage() {
             {/* header */}
             <div className="mb-6">
               <h2 className="text-[30px] font-light text-[#0B1A3B] dark:text-white tracking-tight">Create Account</h2>
-              <p className="text-slate-400 dark:text-slate-300 text-[14px] font-light mt-1.5">
+              <p className="text-slate-400 dark:text-white/50 text-[14px] font-light mt-1.5">
                 Fill in your details below. It only takes a moment.
               </p>
             </div>
 
             {/* ── Form Card ───────────────────────── */}
-            <div className="rounded-2xl border border-slate-100 bg-white p-6 mb-4">
-              <div className="flex items-start gap-2.5 bg-blue-50 border border-blue-100 rounded-xl px-3.5 py-3 mb-4">
-                <QrCode className="h-3.5 w-3.5 text-blue-500 mt-0.5 shrink-0" />
-                <p className="text-[11px] text-blue-700 font-light leading-snug">
-                  Your <span className="font-medium">QR Access Card</span> will be generated automatically upon registration.
+            <div className="rounded-2xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/[0.04] p-6 mb-4">
+              <div className="flex items-start gap-2.5 bg-[#D4A017]/10 border border-[#D4A017]/20 rounded-xl px-3.5 py-3 mb-4">
+                <QrCode className="h-3.5 w-3.5 text-[#D4A017] mt-0.5 shrink-0" />
+                <p className="text-[11px] text-slate-600 dark:text-white/70 font-light leading-snug">
+                  Your <span className="font-medium text-slate-800 dark:text-white/90">QR Access Card</span> will be generated automatically upon registration.
                 </p>
               </div>
               <form onSubmit={handle_submit} className="flex flex-col gap-4">
                 {/* personal info section */}
                 <div>
-                  <p className="text-[11px] font-medium text-slate-400 tracking-[0.1em] uppercase mb-3">Personal Information</p>
+                  <p className="text-[11px] font-medium text-slate-400 dark:text-white/40 tracking-[0.1em] uppercase mb-3">Personal Information</p>
                   <div className="flex flex-col gap-3">
                     {/* user type toggle */}
                     <div className="flex flex-col gap-1.5">
-                      <Label className="text-[13px] font-light text-slate-600">I am a</Label>
+                      <Label className="text-[13px] font-light text-slate-600 dark:text-white/70">I am a</Label>
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           type="button"
                           onClick={() => set_user_type('student')}
                           className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-medium transition-all cursor-pointer ${
                             user_type === 'student'
-                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B] dark:text-white'
-                              : 'border-slate-200 bg-slate-50/80 text-slate-400 hover:border-slate-300 hover:text-slate-500'
+                              ? 'border-[#D4A017] bg-[#D4A017]/10 text-[#0B1A3B] dark:text-white'
+                              : 'border-slate-200 dark:border-white/15 bg-slate-50/80 dark:bg-transparent text-slate-400 dark:text-white/40 hover:border-slate-300 dark:hover:border-white/25 hover:text-slate-500 dark:hover:text-white/60'
                           }`}
                         >
                           <GraduationCap className="h-4 w-4" />
@@ -240,8 +240,8 @@ export default function RegisterPage() {
                           onClick={() => set_user_type('staff')}
                           className={`flex items-center justify-center gap-2 h-11 rounded-xl border text-[13px] font-medium transition-all cursor-pointer ${
                             user_type === 'staff'
-                              ? 'border-[#D4A017] bg-[#D4A017]/5 text-[#0B1A3B] dark:text-white'
-                              : 'border-slate-200 bg-slate-50/80 text-slate-400 hover:border-slate-300 hover:text-slate-500'
+                              ? 'border-[#D4A017] bg-[#D4A017]/10 text-[#0B1A3B] dark:text-white'
+                              : 'border-slate-200 dark:border-white/15 bg-slate-50/80 dark:bg-transparent text-slate-400 dark:text-white/40 hover:border-slate-300 dark:hover:border-white/25 hover:text-slate-500 dark:hover:text-white/60'
                           }`}
                         >
                           <Briefcase className="h-4 w-4" />
@@ -250,39 +250,39 @@ export default function RegisterPage() {
                       </div>
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="reg-name" className="text-[13px] font-light text-slate-600">Full Name</Label>
+                      <Label htmlFor="reg-name" className="text-[13px] font-light text-slate-600 dark:text-white/70">Full Name</Label>
                       <Input
                         id="reg-name"
                         placeholder="e.g. John Kamau"
                         value={full_name}
                         onChange={(e) => set_full_name(e.target.value)}
-                        className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+                        className="h-12 bg-slate-50/80 dark:bg-transparent border-slate-200 dark:border-white/15 rounded-xl text-[14px] font-light text-slate-800 dark:text-white placeholder:text-slate-300 dark:placeholder:text-white/30 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
                         required
                         autoComplete="name"
                       />
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="reg-email" className="text-[13px] font-light text-slate-600">Email Address</Label>
+                      <Label htmlFor="reg-email" className="text-[13px] font-light text-slate-600 dark:text-white/70">Email Address</Label>
                       <Input
                         id="reg-email"
                         type="email"
                         placeholder="john@starehe.org"
                         value={email}
                         onChange={(e) => set_email(e.target.value)}
-                        className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+                        className="h-12 bg-slate-50/80 dark:bg-transparent border-slate-200 dark:border-white/15 rounded-xl text-[14px] font-light text-slate-800 dark:text-white placeholder:text-slate-300 dark:placeholder:text-white/30 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
                         required
                         autoComplete="email"
                       />
                     </div>
                     {user_type === 'student' && (
                       <div className="flex flex-col gap-1.5">
-                        <Label htmlFor="reg-sid" className="text-[13px] font-light text-slate-600">Admission Number</Label>
+                        <Label htmlFor="reg-sid" className="text-[13px] font-light text-slate-600 dark:text-white/70">Admission Number</Label>
                         <Input
                           id="reg-sid"
                           placeholder="e.g. 11876"
                           value={admission_number}
                           onChange={(e) => set_admission_number(e.target.value)}
-                          className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+                          className="h-12 bg-slate-50/80 dark:bg-transparent border-slate-200 dark:border-white/15 rounded-xl text-[14px] font-light text-slate-800 dark:text-white placeholder:text-slate-300 dark:placeholder:text-white/30 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
                           required
                           autoComplete="off"
                         />
@@ -292,14 +292,14 @@ export default function RegisterPage() {
                 </div>
 
                 {/* divider */}
-                <div className="h-px bg-slate-100" />
+                <div className="h-px bg-slate-100 dark:bg-white/10" />
 
                 {/* security section */}
                 <div>
-                  <p className="text-[11px] font-medium text-slate-400 tracking-[0.1em] uppercase mb-3">Security</p>
+                  <p className="text-[11px] font-medium text-slate-400 dark:text-white/40 tracking-[0.1em] uppercase mb-3">Security</p>
                   <div className="flex flex-col gap-3">
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="reg-pw" className="text-[13px] font-light text-slate-600">Password</Label>
+                      <Label htmlFor="reg-pw" className="text-[13px] font-light text-slate-600 dark:text-white/70">Password</Label>
                       <div className="relative">
                         <Input
                           id="reg-pw"
@@ -307,7 +307,7 @@ export default function RegisterPage() {
                           placeholder="At least 6 characters"
                           value={password}
                           onChange={(e) => set_password(e.target.value)}
-                          className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 pr-11 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+                          className="h-12 bg-slate-50/80 dark:bg-transparent border-slate-200 dark:border-white/15 rounded-xl text-[14px] font-light text-slate-800 dark:text-white placeholder:text-slate-300 dark:placeholder:text-white/30 pr-11 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
                           required
                           minLength={6}
                           autoComplete="new-password"
@@ -315,21 +315,21 @@ export default function RegisterPage() {
                         <button
                           type="button"
                           onClick={() => set_show_password(!show_password)}
-                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500 transition-colors cursor-pointer"
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-300 dark:text-white/30 hover:text-slate-500 dark:hover:text-white/60 transition-colors cursor-pointer"
                         >
                           {show_password ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                         </button>
                       </div>
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <Label htmlFor="reg-cpw" className="text-[13px] font-light text-slate-600">Confirm Password</Label>
+                      <Label htmlFor="reg-cpw" className="text-[13px] font-light text-slate-600 dark:text-white/70">Confirm Password</Label>
                       <Input
                         id="reg-cpw"
                         type={show_password ? 'text' : 'password'}
                         placeholder="Repeat your password"
                         value={confirm_password}
                         onChange={(e) => set_confirm_password(e.target.value)}
-                        className="h-12 bg-slate-50/80 border-slate-200 rounded-xl text-[14px] font-light placeholder:text-slate-300 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
+                        className="h-12 bg-slate-50/80 dark:bg-transparent border-slate-200 dark:border-white/15 rounded-xl text-[14px] font-light text-slate-800 dark:text-white placeholder:text-slate-300 dark:placeholder:text-white/30 focus:border-[#D4A017] focus:ring-[#D4A017]/20 transition-colors"
                         required
                         minLength={6}
                         autoComplete="new-password"
@@ -343,7 +343,7 @@ export default function RegisterPage() {
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
-                    className="flex items-center gap-2 text-red-500 bg-red-50 border border-red-100 rounded-xl px-3.5 py-2.5"
+                    className="flex items-center gap-2 text-red-500 bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/20 rounded-xl px-3.5 py-2.5"
                   >
                     <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
                     <p className="text-[12px] font-light">{error}</p>
@@ -356,13 +356,13 @@ export default function RegisterPage() {
                     type="checkbox"
                     checked={agreed}
                     onChange={(e) => set_agreed(e.target.checked)}
-                    className="h-4 w-4 rounded border-slate-300 accent-[#D4A017] cursor-pointer mt-0.5"
+                    className="h-4 w-4 rounded border-slate-300 dark:border-white/20 accent-[#D4A017] cursor-pointer mt-0.5"
                   />
-                  <span className="text-[11px] text-slate-400 font-light leading-relaxed group-hover:text-slate-600 transition-colors">
+                  <span className="text-[11px] text-slate-400 dark:text-white/40 font-light leading-relaxed group-hover:text-slate-600 dark:group-hover:text-white/60 transition-colors">
                     I agree to the{' '}
-                    <a href="#" className="font-medium text-blue-500 hover:underline">Terms of Service</a>
+                    <a href="#" className="font-medium text-[#D4A017] hover:underline">Terms of Service</a>
                     {' '}and{' '}
-                    <a href="#" className="font-medium text-blue-500 hover:underline">Privacy Policy</a>
+                    <a href="#" className="font-medium text-[#D4A017] hover:underline">Privacy Policy</a>
                   </span>
                 </label>
 
@@ -389,9 +389,9 @@ export default function RegisterPage() {
 
             {/* sign in link */}
             <div className="text-center">
-              <p className="text-[13px] text-slate-400 font-light">
+              <p className="text-[13px] text-slate-400 dark:text-white/40 font-light">
                 Already have an account?{' '}
-                <Link href="/login" className="font-medium text-[#0B1A3B] dark:text-[#E8A63C] hover:text-[#D4A017] transition-colors">
+                <Link href="/login" className="font-medium text-[#D4A017] hover:text-[#E8A63C] transition-colors">
                   Sign In
                 </Link>
               </p>
@@ -400,14 +400,14 @@ export default function RegisterPage() {
         </div>
 
         {/* footer */}
-        <div className="shrink-0 border-t border-slate-100 dark:border-white/[0.06] px-6 sm:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-slate-400 dark:text-slate-500 text-[11px] font-light text-center sm:text-left">
+        <div className="shrink-0 border-t border-slate-100 dark:border-white/10 px-6 sm:px-8 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <p className="text-slate-400 dark:text-white/30 text-[11px] font-light text-center sm:text-left">
             Starehe Boys&apos; Centre · General Waruinge Street, Nairobi
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-slate-500 font-light">
-            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Terms</a>
-            <a href="#" className="hover:text-slate-600 dark:hover:text-slate-300 transition-colors">Help</a>
+          <div className="flex items-center gap-4 text-[11px] text-slate-400 dark:text-white/30 font-light">
+            <a href="#" className="hover:text-slate-600 dark:hover:text-white/60 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-slate-600 dark:hover:text-white/60 transition-colors">Terms</a>
+            <a href="#" className="hover:text-slate-600 dark:hover:text-white/60 transition-colors">Help</a>
           </div>
         </div>
       </div>

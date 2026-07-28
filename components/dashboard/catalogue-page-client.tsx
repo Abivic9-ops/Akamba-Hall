@@ -45,7 +45,7 @@ export function CataloguePageClient({ books }: { books: CatalogueItem[] }) {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-[#13285A] rounded-xl border border-slate-100 dark:border-white/[0.08] p-4">
+        <div className="bg-white dark:bg-[#13285A] rounded-xl border border-slate-100 dark:border-white/[0.08] p-5 sm:p-6">
           <div className="flex gap-3">
             <div className="relative flex-1">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 dark:text-[#6B7A99]" />
@@ -73,7 +73,7 @@ export function CataloguePageClient({ books }: { books: CatalogueItem[] }) {
             </div>
           </div>
 
-          <div className="flex gap-2 mt-3 overflow-x-auto pb-1">
+          <div className="flex gap-2 mt-4 overflow-x-auto pb-1">
             {categories.map((cat) => (
               <button
                 key={cat}

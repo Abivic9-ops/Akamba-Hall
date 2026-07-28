@@ -50,7 +50,7 @@ export function CataloguePageClient({ books }: { books: CatalogueBook[] }) {
           </div>
         </div>
 
-        <SectionCard title="Search Collection" icon={Search}>
+        <SectionCard title="Search Collection" icon={Search} contentClassName="p-5 sm:p-6">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col md:flex-row gap-3">
               <div className="relative flex-1">

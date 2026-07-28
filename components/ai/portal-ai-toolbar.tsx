@@ -89,7 +89,7 @@ export function PortalAiToolbar() {
       )}
 
       {!expanded && (
-        <div className="flex justify-end p-4">
+        <div className="flex justify-end pr-4 pb-20 sm:pb-20">
           <button
             onClick={() => set_expanded(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gold hover:bg-gold-hover text-[#0B1A3B] text-[13px] font-medium shadow-lg shadow-gold/30 transition-all cursor-pointer"

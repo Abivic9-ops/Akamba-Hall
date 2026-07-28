@@ -4,6 +4,7 @@ import prisma from '@/lib/db/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { getAdminClient } from '@/lib/supabase/admin'
 import { generateCardRef } from '@/lib/utils/id-generator'
+import { getBaseUrl } from '@/lib/utils/base-url'
 
 /* ─── Types ─────────────────────────────────────── */
 
@@ -100,6 +101,7 @@ export async function sign_up_action(formData: {
     email: email.toLowerCase(),
     password,
     options: {
+      emailRedirectTo: getBaseUrl(),
       data: {
         full_name: fullName,
         student_id: studentId || null,
@@ -355,7 +357,7 @@ export async function reset_password_action(email: string): Promise<auth_result>
   }
 
   const { error } = await supabase.auth.resetPasswordForEmail(email.toLowerCase(), {
-    redirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_URL ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).origin : 'http://localhost:3000'}/reset-password`,
+    redirectTo: `${getBaseUrl()}/reset-password`,
   })
 
   if (error) {

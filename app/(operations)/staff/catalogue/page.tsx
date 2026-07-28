@@ -24,7 +24,7 @@ export default async function StaffCataloguePage() {
           <p className="text-[15px] text-slate-500 dark:text-[#6B7A99] mt-1">Search the library collection by title, author, subject, or ISBN.</p>
         </div>
 
-        <SectionCard title="Search" icon={Search}>
+        <SectionCard title="Search" icon={Search} contentClassName="p-5 sm:p-6">
           <div className="flex gap-3 mb-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-[#6B7A99]" />
